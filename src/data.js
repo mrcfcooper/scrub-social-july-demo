@@ -323,7 +323,7 @@ export const FEED = {
     sub: "2 are dog people. You'd get along.",
   },
   erin: {
-    text: "You've got 2 years of ICU and your license is compact. Sunrise Regional in Las Vegas pays $3,600/wk and 27 Society members have worked there — want the inside scoop before you apply?",
+    text: "You've got 2 years of ICU and your license is compact. Pacific View in San Diego pays $3,480/wk, 42 Society members have worked there, and 11 of your questions are already answered — want the inside scoop before you apply?",
     actions: ["Show me the facility intel", "Ask someone who worked there"],
   },
 };
