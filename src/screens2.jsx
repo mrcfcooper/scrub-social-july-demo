@@ -285,22 +285,39 @@ export function Recruiter() {
   const r = RECRUITER;
   return (
     <div>
-      <div className="card">
-        <div className="row">
+      {/* Identity hero — recruiter-profile reference, kit-ified; sky = human recruiter */}
+      <div className="card plum" style={{ textAlign: "center", paddingBottom: 30 }}>
+        <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
+        <span style={{ position: "relative", display: "inline-block", marginTop: 6 }}>
           <Avatar initials="AH" color="#82ABF4" size="lg" />
-          <div className="grow">
-            <div style={{ fontSize: 16 }}>{r.name}</div>
-            <div className="muted">{r.agency} · {r.years} years</div>
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <div className="row" style={{ gap: 3, justifyContent: "center", fontSize: 18, letterSpacing: "-0.02em", color: "var(--plum)" }}>
-              {r.rating}
-              <Icon name="star" size={14} style={{ fill: "var(--lavender)", stroke: "var(--lavender)" }} />
-            </div>
-            <div className="muted">{r.reviews} reviews</div>
-          </div>
+          <span className="vbadge" aria-label="Verified recruiter">
+            <Icon name="check" size={11} strokeWidth={3} />
+          </span>
+        </span>
+        <div style={{ fontSize: 21, letterSpacing: "-0.03em", marginTop: 10 }}>{r.name}</div>
+        <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.78)", marginTop: 2 }}>
+          recruiter · {r.years} years in travel staffing
         </div>
-        <p className="small" style={{ marginTop: 10, lineHeight: 1.45 }}>“{r.bio}”</p>
+        <div style={{ marginTop: 10 }}>
+          <span className="hero-pill"><Icon name="building" size={13} /> {r.agency}</span>
+        </div>
+      </div>
+
+      {/* Stats strip overlapping the hero */}
+      <div className="mstats">
+        <div><b>{r.years}</b><span>yrs tenure</span></div>
+        <div><b>{r.booked}</b><span>booked</span></div>
+        <div>
+          <b className="row" style={{ gap: 3, justifyContent: "center" }}>
+            {r.rating}
+            <Icon name="star" size={13} style={{ fill: "var(--lavender)", stroke: "var(--lavender)" }} />
+          </b>
+          <span>{r.reviews} reviews</span>
+        </div>
+      </div>
+
+      <div className="card">
+        <p className="small" style={{ lineHeight: 1.5 }}>“{r.bio}”</p>
         <div className="wrap" style={{ marginTop: 10 }}>
           <span className="pill sky"><Icon name="users" size={13} /> booked {r.booked} travelers</span>
           <span className="pill"><Icon name="compass" size={13} /> Recommended by {r.recommendedBy.join(", ")}</span>
@@ -311,22 +328,22 @@ export function Recruiter() {
 
       <Sect title="Reviews" />
       {r.reviewsList.map((rv, i) => (
-        <div key={i} className="card">
-          <div className="between">
-            <span className="small">{rv.by}</span>
-            <Stars n={rv.stars} />
+        <div key={i} className="card dew">
+          <p className="small" style={{ fontStyle: "italic", lineHeight: 1.5 }}>“{rv.text}”</p>
+          <div className="between" style={{ marginTop: 8 }}>
+            <span className="subtext">{rv.by.toLowerCase()} · placed traveler</span>
+            <Stars n={rv.stars} size={12} />
           </div>
-          <p className="small" style={{ marginTop: 6, lineHeight: 1.45 }}>{rv.text}</p>
         </div>
       ))}
       <div className="stack"><Attrib id="ashleyReviews" /></div>
 
       <Sect title="My hottest jobs" sub="posted to followers" />
       {r.hotJobs.map((h, i) => (
-        <div key={i} className="card dew between">
+        <div key={i} className="card between">
           <div>
             <div className="small">{h.title}</div>
-            <div className="muted row" style={{ gap: 5 }}><Icon name="flame" size={13} /> {h.tag}</div>
+            <div className="muted row" style={{ gap: 5, marginTop: 3 }}><Icon name="flame" size={13} /> {h.tag}</div>
           </div>
           <div className="money" style={{ fontSize: 17 }}>{h.pay}</div>
         </div>
@@ -365,11 +382,16 @@ export function Mentor() {
   return (
     <div>
       <div className="card plum">
+        <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
         <div className="row">
           <Avatar initials="BP" color="#F9F2E8" size="lg" />
           <div className="grow">
-            <div style={{ fontSize: 16 }}>{m.name} <span className="verified"><Icon name="check" size={13} /></span></div>
-            <div style={{ fontSize: 12, color: "var(--dew)" }}>{m.title} · {m.years}</div>
+            <div style={{ fontSize: 18, letterSpacing: "-0.02em" }}>
+              {m.name} <span className="verified"><Icon name="check" size={13} /></span>
+            </div>
+            <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.78)", marginTop: 2 }}>
+              {m.title.toLowerCase()} · {m.years.toLowerCase()}
+            </div>
           </div>
         </div>
         <p className="small" style={{ marginTop: 10, lineHeight: 1.5 }}>“{m.bio}”</p>
@@ -383,10 +405,11 @@ export function Mentor() {
 
       <Sect title="Contribution history" sub="public — trust signal" />
       {m.history.map((h, i) => (
-        <div key={i} className="card between">
-          <div>
+        <div key={i} className="card row" style={{ alignItems: "flex-start", gap: 10 }}>
+          <span className="icon-well sm"><Icon name="message-circle" size={14} /></span>
+          <div className="grow">
             <div className="small">{h.text}</div>
-            <div className="muted">{h.where}</div>
+            <div className="subtext" style={{ marginTop: 2 }}>{h.where}</div>
           </div>
           <span className="muted">{h.when}</span>
         </div>
