@@ -357,7 +357,7 @@ export function Guide() {
         <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
         <div className="eyebrow" style={{ color: "var(--lavender)" }}>The one-line demo script</div>
         <h2 style={{ fontSize: 18, marginTop: 6, lineHeight: 1.35 }}>
-          “Everything you're about to see, you asked for on May 11.”
+          “Everything you're about to see, you asked for.”
         </h2>
         <p className="small" style={{ marginTop: 8, color: "var(--dew)" }}>
           Every feature carries a chip citing who asked for it on the workshop call. Walk the loop: Feed → Job → Facility hub → Q&A → Diary → switch personas.

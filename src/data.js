@@ -1,7 +1,7 @@
 // ─── Scrub Society Social — seeded demo data ────────────────────────────────
 // All people, facilities, and content are fictional demo data except the
 // named internal personas (swap in PERSONAS below if you want them fictional).
-// Content is seeded from the May 11 social workshop call.
+// Content is seeded from the team's social workshop call.
 
 // ─── Photo manifest ──────────────────────────────────────────────────────────
 // Semantic key -> filename in src/assets/photos/. PhotoFrame renders the image

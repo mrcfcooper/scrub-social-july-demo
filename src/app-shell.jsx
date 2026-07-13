@@ -86,7 +86,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="shell">
-        <div className="demo-note">Prototype · seeded demo data · everything here came from the May 11 call</div>
+        <div className="demo-note">Prototype · seeded demo data · every feature here was asked for by this team</div>
         <Header persona={persona} setPersona={setPersona} />
         <main className="screen">
           <Routes>

@@ -27,7 +27,7 @@ export function Attrib({ id, full }) {
         <span className="attrib-badge" aria-hidden="true">“</span>
         <p className="attrib-quote">“{a.quote}”</p>
         <div className="attrib-meta subtext">
-          <b>{a.who}</b> asked for this · may 11
+          <b>{a.who}</b> asked for this
         </div>
       </aside>
     );
@@ -49,7 +49,7 @@ export function Attrib({ id, full }) {
           <span className="attrib-pop" role="dialog">
             <span className="attrib-quote">“{a.quote}”</span>
             <span className="attrib-meta subtext">
-              <b>{a.who}</b> asked for this · may 11
+              <b>{a.who}</b> asked for this, in their words
             </span>
           </span>
         </>
