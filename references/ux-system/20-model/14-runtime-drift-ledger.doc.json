@@ -1,0 +1,54 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.14-runtime-drift-ledger",
+  "title": "Runtime Alignment And Drift Reports",
+  "content": [
+    {
+      "id": "runtime-alignment-and-drift-reports-body-1",
+      "body": "This document defines how agents record UX/runtime mismatches without stopping momentum. Runtime drift rows should live under the relevant behavior-thread parent container when the behavior is thread-modeled. Standalone runtime drift rows remain compatibility or cross-row exceptions. They let scripts and future agents find mismatches between documented current behavior, observed runtime behavior, and intended or governing UX."
+    },
+    {
+      "id": "drift-definition",
+      "title": "Drift Definition",
+      "body": "Runtime drift exists when observed runtime behavior differs from documented current UX, intended UX, desired UX, governing UX, or test-proven behavior. Drift may be a regression, stale docs, undocumented runtime behavior, unclear authority, or a missing behavior-thread relationship mapping."
+    },
+    {
+      "id": "non-blocking-capture-rule",
+      "title": "Non-Blocking Capture Rule",
+      "body": "If drift is not a true blocker, record or update the affected App Behavior row's `runtimeAlignment` field and continue the clear work. Use standalone `uxRuntimeDrift` rows only for compatibility or cross-row/generated-report exceptions. Do not let drift disappear into chat only. Do not silently change runtime or App Behavior docs to match the easier path."
+    },
+    {
+      "id": "drift-is-not-final-authority",
+      "title": "Drift Is Not Final Authority",
+      "body": [
+        "Runtime drift rows are routing and triage surfaces, not final behavior authority.",
+        "Each drift row should identify the App Behavior row, behavior-thread container, pending decision, or bounded gap that owns final reconciliation.",
+        "When drift is resolved by proof or product/user authority, update the governing App Behavior location and retain drift history only as evidence."
+      ]
+    },
+    {
+      "id": "core-parity-mismatch-routing",
+      "title": "`.core.parity` Mismatch Routing",
+      "body": [
+        "When `.core.parity` or a behavior preservation recheck finds a non-blocking mismatch between runtime/source behavior and captured App Behavior, record it through runtime alignment or a runtime drift row rather than leaving it only in the recheck matrix or chat.",
+        "",
+        "Blocking mismatches still follow the blocking drift rule and should stop advancement when continuing would risk behavior drift, invalid proof, unsafe cutover, data loss, security/privacy issues, or unresolved product authority."
+      ]
+    },
+    {
+      "id": "blocking-drift",
+      "title": "Blocking Drift",
+      "body": "Stop only when continuing would risk user-visible behavior drift in the current scope, invalid proof, incompatible implementation choices, data loss, security or privacy issues, or unresolved product authority."
+    },
+    {
+      "id": "required-closeout",
+      "title": "Required Closeout",
+      "body": "Closeout should list drift discovered during the turn, blocker status, user-visible impact, recommendation, App Behavior location updated or still needing reconciliation, and whether runtime alignment or UX-doc update is recommended. If follow-up is required, the affected row's runtimeAlignment field should say who owns it, where the next decision belongs, and what would force re-verification."
+    },
+    {
+      "id": "query-targets",
+      "title": "Query Targets",
+      "body": "The UX tooling should support generated reports for open drift, blocking drift, unreported drift, drift requiring user decision, observed current without intended or desired relation, intended or desired behavior without runtime alignment, and broken mapping refs."
+    }
+  ]
+}

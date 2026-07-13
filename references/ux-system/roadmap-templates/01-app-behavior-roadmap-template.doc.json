@@ -1,0 +1,59 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.01-app-behavior-roadmap-template",
+  "title": "App Behavior Roadmap Template",
+  "content": [
+    {
+      "id": "non-authority-warning",
+      "title": "Non-Authority Warning",
+      "body": "This roadmap is a derived planning guide. Governing App Behavior specs remain the source of truth for what runtime must do."
+    },
+    {
+      "id": "identity",
+      "title": "Identity",
+      "body": "Fields: roadmap_id, title, status, parent_roadmap, child_roadmaps, scope, behavior_package, last_updated."
+    },
+    {
+      "id": "review-before-moving-forward",
+      "title": "Review Before Moving Forward",
+      "body": [
+        "Each phase or meaningful subphase should populate `review_before_moving_forward` before moving on.",
+        "",
+        "Field shape:",
+        "- core_workflow: applicable `.core.*` workflow from `agent/core-workflows.doc.json`.",
+        "- standard_review: use the ordered review ladder from `agent/core-workflows.doc.json`.",
+        "- specific_review: active workstream docs, governing specs, source evidence, or local artifacts for this roadmap.",
+        "- stop_condition: what must be true before the next phase or subphase begins."
+      ]
+    },
+    {
+      "id": "ordered-steps",
+      "title": "Ordered Steps",
+      "body": [
+        "1. Confirm App Behavior mission and behavior package boundary.",
+        "2. Identify current, desired, intended, governing, pending, and superseded behavior state.",
+        "3. Identify behavior-thread parent containers, relationship mappings, reusable defaults, and shared specs.",
+        "4. Record runtime drift, quality observations, and pending product decisions.",
+        "5. Confirm proof implications and downstream architecture/implementation readiness.",
+        "6. Ask the user to confirm high-level App Behavior closure before downstream planning treats it as ready."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- mission",
+        "- pillars/core concepts",
+        "- authority inputs",
+        "- derived summary",
+        "- ordered steps and status",
+        "- confirmation gates",
+        "- reopened items",
+        "- open decisions",
+        "- next recommended step",
+        "- stop condition",
+        "- review_before_moving_forward"
+      ]
+    }
+  ]
+}

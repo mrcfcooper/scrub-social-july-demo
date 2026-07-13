@@ -1,0 +1,15 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.08-scenario-acceptance-roadmap-template-placeholder",
+  "title": "Scenario Acceptance Roadmap Template Placeholder",
+  "content": [
+    { "id": "status", "title": "Status", "body": "placeholder" },
+    { "id": "purpose", "title": "Purpose", "body": "Would guide scenario and acceptance-criteria planning for App Behavior specs." },
+    { "id": "already-decision-complete", "title": "Already Decision-Complete", "body": "The UX system identifies scenarios and acceptance criteria as part of detailed behavior refinement." },
+    { "id": "needs-clarity", "title": "Needs Clarity", "body": "Needs exact relationship to proof rows and App Behavior schema fields before becoming a full template." },
+    { "id": "authority-to-review", "title": "Authority To Review", "body": "Review ux-system model, schema, examples, and testing proof matrix docs." },
+    { "id": "promotion-criteria", "title": "Promotion Criteria", "body": "Promote when the template can define acceptance roadmap fields without duplicating proof planning templates." },
+    { "id": "possible-outcomes", "title": "Possible Outcomes", "body": "Promote, merge, keep as appendix, or delete." },
+    { "id": "non-authority-warning", "title": "Non-Authority Warning", "body": "This placeholder is not authority." }
+  ]
+}

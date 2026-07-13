@@ -1,0 +1,110 @@
+{
+  "schema": "tgn.ux-spec-package.v1",
+  "packageId": "jobs.filters.refactor-preservation",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Refactor Preservation UX Package",
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "specProfile": "refactor-preservation-spec",
+  "depthTarget": "L4-acceptance-criteria-and-proof",
+  "uxModes": ["current", "confirmed-current", "desired", "intermediate"],
+  "includedFacets": [
+    "journeys",
+    "flows",
+    "subflows",
+    "requirements",
+    "observableScenarios",
+    "validation",
+    "recovery",
+    "emptyLoadingError",
+    "persistence",
+    "navigation",
+    "edgeCases",
+    "acceptanceCriteria",
+    "currentDesiredMappings",
+    "pendingDecisions"
+  ],
+  "excludedFacets": [
+    "pixelLayout",
+    "analytics",
+    "implementationArchitecture",
+    "controllerOwnership",
+    "storeDesign"
+  ],
+  "completionStandard": "refactor-ready",
+  "governingArtifacts": [
+    {
+      "artifactType": "current-requirements",
+      "path": "current/requirements.ux.json",
+      "mode": "current",
+      "notesMd": "Observed current UX used only as discovery and mapping input."
+    },
+    {
+      "artifactType": "desired-requirements",
+      "path": "desired/requirements.ux.json",
+      "mode": "desired",
+      "notesMd": "Desired UX is the implementation target after confirmation."
+    },
+    {
+      "artifactType": "current-desired-mappings",
+      "path": "mappings/current-to-desired.ux-mappings.json",
+      "mode": "intermediate",
+      "notesMd": "Mappings explain preservation, changes, pending decisions, and implementation gates."
+    }
+  ],
+  "rationale": {
+    "summary": "Jobs filters refactor work needs enough UX specificity to preserve existing behavior while allowing confirmed improvements.",
+    "whyThisProfile": "The work touches existing behavior and must distinguish current, preserved, desired, and temporary refactor states.",
+    "whyThisDepth": "Acceptance criteria are required so implementation can prove preserved and desired behavior before closeout.",
+    "riskNotesMd": "The main risk is treating observed current behavior as desired UX without confirmation or losing behavior during refactor."
+  },
+  "allowedOmissions": [
+    {
+      "facet": "copy",
+      "reason": "Exact copy is included only where wording is governing or behavior-changing.",
+      "revisitWhen": "A label, confirmation, or error message affects user understanding or tests."
+    },
+    {
+      "facet": "layoutSemantics",
+      "reason": "Pixel-level layout is not needed for this refactor preservation package.",
+      "revisitWhen": "Responsive or hierarchy behavior becomes part of the refactor risk."
+    },
+    {
+      "facet": "accessibility",
+      "reason": "Detailed accessibility can be added in a focused minute-detail pass unless the refactor touches keyboard, focus, or assistive behavior.",
+      "revisitWhen": "The implementation changes modal focus, keyboard behavior, disabled controls, or error announcement."
+    }
+  ],
+  "blockedAreas": [
+    {
+      "area": "Unconfirmed Clear Filters behavior change",
+      "reason": "Current-to-desired mapping marks this as pending confirmation.",
+      "unblocksWhen": "The user confirms whether Clear Filters should reset active browse filters."
+    }
+  ],
+  "pendingDecisions": [
+    {
+      "id": "jobs.filters.pending.clear-confirmation-copy",
+      "mode": "pending-confirmation",
+      "itemType": "uxPendingDecision",
+      "title": "Confirm exact Clear Filters confirmation copy"
+    }
+  ],
+  "generatedRefs": {
+    "markdown": "generated/jobs.filters.refactor-preservation.manifest.md"
+  },
+  "db": {
+    "collection": "uxSpecPackages",
+    "documentId": "jobs.filters.refactor-preservation",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "specProfile": "refactor-preservation-spec"
+    }
+  },
+  "custom": {}
+}

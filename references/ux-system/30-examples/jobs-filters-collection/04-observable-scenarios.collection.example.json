@@ -1,0 +1,121 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "observable-scenario",
+  "artifactType": "runtime-scenarios",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Observable Scenario Collection",
+  "uxModes": [
+    "desired"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "Observable scenarios describe what the user sees and can do in meaningful runtime situations."
+  },
+  "sourceFile": "04-observable-scenarios.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.observable-scenarios.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-runtime-scenario.v1",
+      "itemType": "uxRuntimeScenario",
+      "id": "jobs.filters.scenario.apply-invalid",
+      "title": "Apply is relevant but invalid input blocks execution",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "scenario": {
+        "scenarioType": "invalid",
+        "situation": "The user creates an invalid filter draft that would otherwise affect browsing.",
+        "userSees": [
+          "Apply remains visible.",
+          "Apply is disabled.",
+          "The invalid input is identifiable."
+        ],
+        "userCanDo": [
+          "fix invalid input",
+          "cancel or discard edits"
+        ],
+        "userCannotDo": [
+          "apply invalid filters",
+          "bypass the invalid state through Apply"
+        ],
+        "systemFeedback": [
+          "The invalid input is identifiable.",
+          "The blocked Apply state communicates that applying is relevant but unavailable."
+        ],
+        "recoveryPath": [
+          "Fix the invalid input.",
+          "Cancel or discard modal edits."
+        ],
+        "settledOutcome": "Apply becomes enabled only after the invalid input is corrected, or the user exits the modal without applying.",
+        "mustNotHappen": [
+          "Apply disappears while invalid input is blocking execution.",
+          "Invalid filters are applied."
+        ]
+      },
+      "relationships": {
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ],
+        "acceptanceCriterionIds": [
+          "jobs.filters.acceptance.modal-apply-invalid"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.scenario.apply-invalid.md"
+      },
+      "db": {
+        "collection": "uxObservableScenarios",
+        "documentId": "jobs.filters.scenario.apply-invalid"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

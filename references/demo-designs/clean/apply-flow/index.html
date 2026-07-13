@@ -1,0 +1,442 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ss-apply-flow">
+  <style>
+    .ss-apply-flow {
+      --plum: #421A31;
+      --plum-soft: #6b3a52;
+      --open-air: #F9F2E8;
+      --lavender: #BBAFEF;
+      --clear-sky: #82ABF4;
+      --morning-dew: #CEDBFE;
+      --cloud: #FFFFFF;
+      --ink: #2c1320;
+      --muted: #8a7480;
+      --good: #6fc78a;
+      --error: #d94f4f;
+      --error-bg: #fdf0f0;
+      --error-border: #f0b8b8;
+      --warn: #e6b35a;
+      --line: #efe7dd;
+      --star: #e8b54a;
+
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(110% 70% at 50% -8%, rgba(187,175,239,0.20), transparent 55%),
+        radial-gradient(90% 60% at 100% 110%, rgba(130,171,244,0.15), transparent 50%),
+        var(--open-air);
+      padding: 38px 18px 50px; min-height: 100vh; box-sizing: border-box;
+    }
+    .ss-apply-flow *,
+    .ss-apply-flow *::before,
+    .ss-apply-flow *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ---------- intro ---------- */
+    .ss-apply-flow .intro { max-width: 1080px; margin: 0 auto 30px; text-align: center; }
+    .ss-apply-flow .intro .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--plum-soft); margin-bottom: 8px; }
+    .ss-apply-flow .intro h2 { font-size: 26px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+    .ss-apply-flow .intro p { font-size: 14px; font-weight: 300; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+
+    /* ---------- rail ---------- */
+    .ss-apply-flow .rail { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; max-width: 1080px; margin: 0 auto; align-items: flex-start; }
+    .ss-apply-flow .step { display: flex; flex-direction: column; align-items: center; }
+    .ss-apply-flow .step .caption { margin-top: 16px; text-align: center; }
+    .ss-apply-flow .step .caption .n { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lavender); }
+    .ss-apply-flow .step .caption .t { font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+    .ss-apply-flow .step .caption .s { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 2px; }
+
+    /* ---------- phone frame ---------- */
+    .ss-apply-flow .phone {
+      width: 340px; max-width: 100%; background: var(--plum);
+      border-radius: 46px; padding: 12px;
+      box-shadow: 0 2px 4px rgba(66,26,49,0.18), 0 22px 52px rgba(66,26,49,0.40), inset 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .ss-apply-flow .screen {
+      background: var(--open-air); border-radius: 36px; overflow: hidden;
+      position: relative; display: flex; flex-direction: column;
+    }
+    .ss-apply-flow .notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 112px; height: 26px; background: var(--plum); border-radius: 15px; z-index: 40; }
+    .ss-apply-flow .home-ind { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 120px; height: 5px; border-radius: 999px; background: rgba(66,26,49,0.22); z-index: 40; }
+    .ss-apply-flow .statusbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px 6px; font-size: 13px; font-weight: 600; color: var(--plum); flex-shrink: 0; }
+    .ss-apply-flow .statusbar svg { display: block; }
+
+    /* ---------- shared sub ---------- */
+    .ss-apply-flow .sub { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+    /* ============================================================
+       FRAME 1 — JOB CARD + APPLY CTA
+       ============================================================ */
+    .ss-apply-flow .f1 .screen { height: 680px; }
+
+    .ss-apply-flow .f1 .nav { display: flex; align-items: center; gap: 11px; padding: 4px 18px 10px; }
+    .ss-apply-flow .f1 .nav .back { width: 34px; height: 34px; border-radius: 50%; background: var(--cloud); display: flex; align-items: center; justify-content: center; }
+    .ss-apply-flow .f1 .nav .back svg { width: 17px; height: 17px; stroke: var(--plum); }
+    .ss-apply-flow .f1 .nav .nt { font-size: 13px; font-weight: 600; color: var(--plum); }
+
+    .ss-apply-flow .f1 .job-hero {
+      background: radial-gradient(120% 110% at 80% 0%, rgba(187,175,239,0.30), transparent 60%), var(--plum);
+      padding: 18px 20px 22px; color: var(--open-air);
+    }
+    .ss-apply-flow .f1 .job-hero .jtag { font-size: 10px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--lavender); margin-bottom: 7px; }
+    .ss-apply-flow .f1 .job-hero .jrole { font-size: 20px; font-weight: 500; line-height: 1.2; }
+    .ss-apply-flow .f1 .job-hero .jfac { font-size: 12.5px; font-weight: 300; color: rgba(249,242,232,0.78); margin-top: 5px; display: flex; align-items: center; gap: 5px; }
+    .ss-apply-flow .f1 .job-hero .jfac svg { width: 12px; height: 12px; stroke: var(--lavender); }
+    .ss-apply-flow .f1 .job-hero .jpay { display: flex; gap: 14px; margin-top: 16px; }
+    .ss-apply-flow .f1 .job-hero .pchip { background: rgba(249,242,232,0.12); padding: 7px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 500; }
+
+    .ss-apply-flow .f1 .jbody { flex: 1; overflow-y: auto; padding: 20px; }
+    .ss-apply-flow .f1 .jbody::-webkit-scrollbar { width: 0; }
+
+    .ss-apply-flow .f1 .detail-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .ss-apply-flow .f1 .dchip {
+      flex: 1; background: var(--cloud); border-radius: 14px; padding: 12px;
+      box-shadow: 0 2px 8px rgba(66,26,49,0.06); text-align: center;
+    }
+    .ss-apply-flow .f1 .dchip .dl { font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .ss-apply-flow .f1 .dchip .dv { font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 3px; }
+
+    .ss-apply-flow .f1 .highlights { display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; }
+    .ss-apply-flow .f1 .hl { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 400; color: var(--ink); }
+    .ss-apply-flow .f1 .hl .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lavender); flex-shrink: 0; }
+
+    .ss-apply-flow .f1 .sticky-bar {
+      border-top: 1px solid var(--line); background: var(--open-air);
+      padding: 12px 20px 14px; display: flex; gap: 10px; flex-shrink: 0;
+    }
+    .ss-apply-flow .f1 .save-btn { width: 48px; height: 48px; border-radius: 13px; background: var(--morning-dew); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+    .ss-apply-flow .f1 .save-btn svg { width: 20px; height: 20px; stroke: var(--plum); }
+    .ss-apply-flow .f1 .apply-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: var(--plum); color: var(--open-air); border-radius: 13px;
+      font-size: 15px; font-weight: 500; cursor: pointer; height: 48px;
+      box-shadow: 0 8px 16px rgba(66,26,49,0.24); transition: transform .15s ease;
+    }
+    .ss-apply-flow .f1 .apply-btn:hover { transform: translateY(-2px); }
+    .ss-apply-flow .f1 .apply-btn svg { width: 17px; height: 17px; stroke: var(--open-air); }
+
+    /* ============================================================
+       FRAME 2 — PROFILE COMPLETION POPUP (error state)
+       ============================================================ */
+    .ss-apply-flow .f2 .screen { height: 760px; }
+
+    /* dimmed bg showing job behind */
+    .ss-apply-flow .f2 .bg-dim {
+      flex: 1; background:
+        linear-gradient(180deg, rgba(66,26,49,0.0) 0%, rgba(66,26,49,0.52) 100%),
+        radial-gradient(120% 110% at 80% 0%, rgba(187,175,239,0.30), transparent 60%), var(--plum);
+      padding: 18px 20px; color: var(--open-air); opacity: 0.72;
+    }
+    .ss-apply-flow .f2 .bg-dim .jtag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lavender); margin-bottom: 6px; }
+    .ss-apply-flow .f2 .bg-dim .jrole { font-size: 18px; font-weight: 500; line-height: 1.2; }
+    .ss-apply-flow .f2 .bg-dim .jfac { font-size: 12px; font-weight: 300; color: rgba(249,242,232,0.75); margin-top: 4px; }
+
+    /* bottom sheet */
+    .ss-apply-flow .f2 .sheet {
+      background: var(--cloud); border-radius: 28px 28px 0 0;
+      padding: 0 0 20px; flex-shrink: 0;
+      box-shadow: 0 -10px 40px rgba(66,26,49,0.22);
+      animation: ss-sheet-up 0.5s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes ss-sheet-up { from { transform: translateY(30px); opacity: 0.6; } to { transform: translateY(0); opacity: 1; } }
+    .ss-apply-flow .f2 .handle { width: 36px; height: 5px; border-radius: 999px; background: var(--line); margin: 10px auto 16px; }
+
+    .ss-apply-flow .f2 .sheet-head { padding: 0 20px 14px; border-bottom: 1px solid var(--line); }
+    .ss-apply-flow .f2 .sheet-head .sh-row { display: flex; align-items: flex-start; gap: 12px; }
+    .ss-apply-flow .f2 .sheet-head .warn-ic {
+      width: 40px; height: 40px; border-radius: 12px; background: #fff5e6; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-apply-flow .f2 .sheet-head .warn-ic svg { width: 22px; height: 22px; stroke: var(--warn); }
+    .ss-apply-flow .f2 .sheet-head .sh-title { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .ss-apply-flow .f2 .sheet-head .sh-sub { font-size: 12.5px; font-weight: 300; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    .ss-apply-flow .f2 .scroll { overflow-y: auto; max-height: 380px; padding: 0 20px; }
+    .ss-apply-flow .f2 .scroll::-webkit-scrollbar { width: 0; }
+
+    /* missing fields */
+    .ss-apply-flow .f2 .section-lbl { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 16px 0 9px; }
+    .ss-apply-flow .f2 .field {
+      border-radius: 14px; padding: 13px 14px; margin-bottom: 9px; display: flex; align-items: flex-start; gap: 11px;
+    }
+    .ss-apply-flow .f2 .field.err { background: var(--error-bg); border: 1.5px solid var(--error-border); }
+    .ss-apply-flow .f2 .field.ok { background: rgba(111,199,138,0.08); border: 1.5px solid rgba(111,199,138,0.28); }
+    .ss-apply-flow .f2 .field .fic { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .ss-apply-flow .f2 .field.err .fic { background: #fde8e8; }
+    .ss-apply-flow .f2 .field.err .fic svg { width: 17px; height: 17px; stroke: var(--error); }
+    .ss-apply-flow .f2 .field.ok .fic { background: rgba(111,199,138,0.2); }
+    .ss-apply-flow .f2 .field.ok .fic svg { width: 17px; height: 17px; stroke: #4a9d65; }
+    .ss-apply-flow .f2 .field .fmeta { flex: 1; }
+    .ss-apply-flow .f2 .field .fn { font-size: 13.5px; font-weight: 500; }
+    .ss-apply-flow .f2 .field.err .fn { color: var(--error); }
+    .ss-apply-flow .f2 .field.ok .fn { color: #3a7d52; }
+    .ss-apply-flow .f2 .field .fs { font-size: 12px; font-weight: 300; margin-top: 2px; line-height: 1.4; }
+    .ss-apply-flow .f2 .field.err .fs { color: #b84444; }
+    .ss-apply-flow .f2 .field.ok .fs { color: #5a9470; }
+    .ss-apply-flow .f2 .field .faction {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; cursor: pointer;
+      font-size: 12px; font-weight: 600; color: var(--plum);
+    }
+    .ss-apply-flow .f2 .field .faction svg { width: 13px; height: 13px; stroke: var(--plum); }
+
+    /* auto-scroll callout */
+    .ss-apply-flow .f2 .scroll-note {
+      display: flex; align-items: center; gap: 8px; margin: 12px 0 0;
+      background: var(--morning-dew); border-radius: 10px; padding: 9px 12px;
+      font-size: 11px; font-weight: 500; color: var(--plum);
+    }
+    .ss-apply-flow .f2 .scroll-note svg { width: 14px; height: 14px; stroke: var(--clear-sky); flex-shrink: 0; }
+
+    .ss-apply-flow .f2 .sheet-footer { padding: 14px 20px 0; }
+    .ss-apply-flow .f2 .submit-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--plum); color: var(--open-air); padding: 15px; border-radius: 14px;
+      font-size: 15px; font-weight: 500; cursor: pointer; box-shadow: 0 8px 16px rgba(66,26,49,0.24);
+    }
+    .ss-apply-flow .f2 .submit-btn.disabled { background: #c8b8c2; box-shadow: none; cursor: default; }
+    .ss-apply-flow .f2 .submit-btn svg { width: 16px; height: 16px; stroke: var(--open-air); }
+    .ss-apply-flow .f2 .later { text-align: center; font-size: 12.5px; font-weight: 500; color: var(--muted); margin-top: 12px; cursor: pointer; }
+
+    /* ============================================================
+       FRAME 3 — SUCCESS / CONFIRMATION
+       ============================================================ */
+    .ss-apply-flow .f3 .screen { height: 680px; }
+    .ss-apply-flow .f3 .done {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 30px; text-align: center;
+    }
+    .ss-apply-flow .f3 .seal {
+      width: 92px; height: 92px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--clear-sky), var(--lavender));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 30px rgba(130,171,244,0.4);
+      animation: ss-pop .6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes ss-pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .ss-apply-flow .f3 .seal svg { width: 44px; height: 44px; stroke: var(--cloud); stroke-width: 2.4; }
+    .ss-apply-flow .f3 h3 { font-size: 24px; font-weight: 500; color: var(--ink); margin-top: 22px; }
+    .ss-apply-flow .f3 .dsub { font-size: 13.5px; font-weight: 300; color: var(--plum-soft); margin-top: 10px; line-height: 1.5; }
+
+    .ss-apply-flow .f3 .recap {
+      background: var(--cloud); border-radius: 18px; padding: 16px; margin-top: 24px; width: 100%;
+      box-shadow: 0 4px 16px rgba(66,26,49,0.08); text-align: left;
+    }
+    .ss-apply-flow .f3 .recap .rtop { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .ss-apply-flow .f3 .recap .ric { width: 36px; height: 36px; border-radius: 10px; background: var(--morning-dew); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ss-apply-flow .f3 .recap .ric svg { width: 18px; height: 18px; stroke: var(--clear-sky); }
+    .ss-apply-flow .f3 .recap .rr { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+    .ss-apply-flow .f3 .recap .rs { font-size: 11.5px; font-weight: 300; color: var(--muted); margin-top: 1px; }
+    .ss-apply-flow .f3 .recap .divider { border: none; border-top: 1px solid var(--line); margin: 0 0 12px; }
+    .ss-apply-flow .f3 .recap .ritem { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 400; color: var(--plum-soft); margin-bottom: 7px; }
+    .ss-apply-flow .f3 .recap .ritem:last-child { margin-bottom: 0; }
+    .ss-apply-flow .f3 .recap .ritem svg { width: 14px; height: 14px; stroke: var(--good); flex-shrink: 0; }
+
+    .ss-apply-flow .f3 .next {
+      margin-top: 22px; font-size: 13px; font-weight: 500; color: var(--plum);
+      display: flex; align-items: center; gap: 7px; cursor: pointer;
+    }
+    .ss-apply-flow .f3 .next svg { width: 16px; height: 16px; stroke: var(--plum); }
+  </style>
+
+  <div class="intro">
+    <div class="eyebrow">Apply flow &middot; TSS-1107 &middot; Blocker for TSS-920</div>
+    <h2>Apply should take one tap, not ten minutes.</h2>
+    <p>Show what's missing, explain why it matters, and get out of the way.</p>
+  </div>
+
+  <div class="rail">
+
+    <!-- ========== FRAME 1: JOB CARD + APPLY CTA ========== -->
+    <div class="step f1">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="statusbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+            </span>
+          </div>
+          <div class="nav">
+            <span class="back"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></span>
+            <span class="nt">ICU Travel RN &middot; Denver</span>
+          </div>
+          <div class="job-hero">
+            <div class="jtag">Travel contract &middot; 13 weeks</div>
+            <div class="jrole">ICU Travel RN</div>
+            <div class="jfac"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rose Medical Center &middot; Denver, CO</div>
+            <div class="jpay">
+              <span class="pchip">$2,980/wk</span>
+              <span class="pchip">Nights</span>
+              <span class="pchip">Starts May 12</span>
+            </div>
+          </div>
+          <div class="jbody">
+            <div class="detail-row">
+              <div class="dchip"><div class="dl">Hours</div><div class="dv">36/wk</div></div>
+              <div class="dchip"><div class="dl">Housing</div><div class="dv">$1,200</div></div>
+              <div class="dchip"><div class="dl">M&amp;I</div><div class="dv">$450</div></div>
+            </div>
+            <div class="sub">What to know</div>
+            <div class="highlights">
+              <div class="hl"><span class="dot"></span>Epic charting — same system you know</div>
+              <div class="hl"><span class="dot"></span>Free parking on-site, night shift spots guaranteed</div>
+              <div class="hl"><span class="dot"></span>Float policy: rarely, within ICU only</div>
+              <div class="hl"><span class="dot"></span>Strong charge nurses, collaborative team per recent reviews</div>
+            </div>
+          </div>
+          <div class="sticky-bar">
+            <span class="save-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+            <span class="apply-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Apply now
+            </span>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 1</div>
+        <div class="t">Job detail</div>
+        <div class="s">Candidate taps Apply</div>
+      </div>
+    </div>
+
+    <!-- ========== FRAME 2: PROFILE COMPLETION POPUP ========== -->
+    <div class="step f2">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="statusbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+            </span>
+          </div>
+          <!-- dimmed job behind sheet -->
+          <div class="bg-dim">
+            <div class="jtag">Travel contract &middot; Rose Medical Center</div>
+            <div class="jrole">ICU Travel RN &middot; Denver, CO</div>
+          </div>
+          <!-- bottom sheet -->
+          <div class="sheet">
+            <div class="handle"></div>
+            <div class="sheet-head">
+              <div class="sh-row">
+                <span class="warn-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                <div>
+                  <div class="sh-title">Two things before you apply</div>
+                  <div class="sh-sub">Recruiters need these to act on your application.</div>
+                </div>
+              </div>
+            </div>
+            <div class="scroll">
+              <div class="section-lbl">Required &mdash; missing</div>
+
+              <div class="field err">
+                <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></span>
+                <div class="fmeta">
+                  <div class="fn">Resume</div>
+                  <div class="fs">Upload your resume to continue — this is what gets sent to the recruiter.</div>
+                  <span class="faction"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Upload resume</span>
+                </div>
+              </div>
+
+              <div class="field err">
+                <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                <div class="fmeta">
+                  <div class="fn">Mobile number</div>
+                  <div class="fs">Recruiters need a number to reach you — calls and texts only, no spam.</div>
+                  <span class="faction"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Add phone number</span>
+                </div>
+              </div>
+
+              <div class="scroll-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                Scrolled to your first missing field automatically
+              </div>
+
+              <div class="section-lbl" style="margin-top:16px;">Already complete</div>
+
+              <div class="field ok">
+                <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <div class="fmeta"><div class="fn">Name &amp; email</div><div class="fs">Jordan Reyes &middot; jordan@email.com</div></div>
+              </div>
+
+              <div class="field ok">
+                <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <div class="fmeta"><div class="fn">Specialty &amp; experience</div><div class="fs">ICU RN &middot; 4 years experience</div></div>
+              </div>
+
+            </div>
+            <div class="sheet-footer">
+              <div class="submit-btn disabled">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Complete and apply
+              </div>
+              <div class="later">Save and finish later</div>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 2</div>
+        <div class="t">Profile completion popup</div>
+        <div class="s">Inline error states + auto-scroll</div>
+      </div>
+    </div>
+
+    <!-- ========== FRAME 3: SUCCESS ========== -->
+    <div class="step f3">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="statusbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+            </span>
+          </div>
+          <div class="done">
+            <div class="seal">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3>Application sent.</h3>
+            <div class="dsub">Rose Medical Center will get your details shortly. We'll let you know when the recruiter responds.</div>
+            <div class="recap">
+              <div class="rtop">
+                <span class="ric"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span>
+                <div>
+                  <div class="rr">ICU Travel RN &middot; Denver</div>
+                  <div class="rs">Applied 9:41 AM &middot; Medical Solutions</div>
+                </div>
+              </div>
+              <hr class="divider">
+              <div class="ritem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Resume sent</div>
+              <div class="ritem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Profile included: name, contact, specialty, experience</div>
+              <div class="ritem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Recruiter notified by email</div>
+            </div>
+            <div class="next">
+              Track this application
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 3</div>
+        <div class="t">Applied</div>
+        <div class="s">Profile complete, sent</div>
+      </div>
+    </div>
+
+  </div>
+</div>

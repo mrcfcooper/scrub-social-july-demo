@@ -1,0 +1,113 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.public-drawer-workflow",
+  "title": "Jobs Public Drawer Workflow",
+  "module": "jobs",
+  "proposedSubmodule": "drawer-workflow",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/drawer-workflow/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Public jobs drawer workflow builds/parses /jobs/job URLs, opens delegated JobDetail, preserves browse context, locks/restores body scroll, and closes back to /jobs state.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.public-drawer-workflow",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "handoff": "/jobs opens job detail through drawer URL state and delegates full detail/apply behavior to JobDetail. Route-owned behavior includes open/close, from=jobs handoff, close fallback, browse context restoration, and body scroll lock/restoration.",
+        "delegatedBoundary": "Full JobDetail content and apply workflow are delegated; /jobs implementation readiness depends only on documented handoff and accepted delegated boundary unless route wants full workflow readiness."
+      },
+      "sourceRefs": [
+        "frontend/src-legacy/components/JobDetailDrawer.tsx",
+        "frontend/src-legacy/utils/publicJobDrawerRoute.ts",
+        "frontend/src-legacy/hooks/usePublicJobDrawer.ts",
+        "frontend/src-legacy/hooks/jobs/page/useJobsDrawerHistory.ts",
+        "frontend/src-legacy/pages/JobDetail.tsx"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/01-trigger-inventory.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-drawer-and-map-runtime.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/07-browser-runtime-inventory.json"
+      ],
+      "proofRefs": [
+        "frontend/src-legacy/hooks/usePublicJobDrawer.test.tsx",
+        "frontend/app/(public)/jobs/page.test.tsx"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "follow-up:route.jobs.runtime-browser-proof"
+      ],
+      "proofStatus": "source and hook proof mapped; browser proof gap remains for full runtime scroll/history effects"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "delegated-consumer",
+      "routeSpecificRefs": [
+        "user-action:route.jobs.open-close-drawer",
+        "current-ux-requirement:route.jobs.drawer-continuity",
+        "behavior-branch:route.jobs.drawer-scroll-lock",
+        "observable-scenario:route.jobs.drawer"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/src-legacy/hooks/usePublicJobDrawer.test.tsx",
+        "frontend/app/(public)/jobs/page.test.tsx"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/src-legacy/components/JobDetailDrawer.tsx",
+    "frontend/src-legacy/utils/publicJobDrawerRoute.ts",
+    "frontend/src-legacy/hooks/usePublicJobDrawer.ts",
+    "frontend/src-legacy/hooks/jobs/page/useJobsDrawerHistory.ts",
+    "frontend/src-legacy/pages/JobDetail.tsx"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/01-trigger-inventory.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-drawer-and-map-runtime.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/07-browser-runtime-inventory.json"
+  ],
+  "proofRefs": [
+    "frontend/src-legacy/hooks/usePublicJobDrawer.test.tsx",
+    "frontend/app/(public)/jobs/page.test.tsx"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "follow-up:route.jobs.runtime-browser-proof"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

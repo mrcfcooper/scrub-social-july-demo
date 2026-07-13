@@ -1,0 +1,52 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.04-runtime-drift-roadmap-template",
+  "title": "Runtime Drift Roadmap Template",
+  "content": [
+    {
+      "id": "non-authority-warning",
+      "title": "Non-Authority Warning",
+      "body": "This roadmap tracks drift handling. Runtime evidence is evidence only and does not replace governing App Behavior authority."
+    },
+    {
+      "id": "ordered-steps",
+      "title": "Ordered Steps",
+      "body": [
+        "1. Identify governing behavior.",
+        "2. Identify observed runtime behavior and evidence.",
+        "3. Classify mismatch as runtime drift, bad-but-not-drift UX, pending product decision, or out-of-scope finding.",
+        "4. Record recommended routing and proof implication.",
+        "5. Confirm whether drift blocks downstream planning or is a non-blocking follow-up."
+      ]
+    },
+    {
+      "id": "review-before-moving-forward",
+      "title": "Review Before Moving Forward",
+      "body": [
+        "Each phase or meaningful subphase should populate `review_before_moving_forward` before moving on.",
+        "",
+        "Field shape:",
+        "- core_workflow: applicable `.core.*` workflow from `agent/core-workflows.doc.json`.",
+        "- standard_review: use the ordered review ladder from `agent/core-workflows.doc.json`.",
+        "- specific_review: active workstream docs, governing specs, source evidence, or local artifacts for this roadmap.",
+        "- stop_condition: what must be true before the next phase or subphase begins."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- drift item",
+        "- governing behavior reference",
+        "- runtime evidence",
+        "- classification",
+        "- user impact",
+        "- proof implication",
+        "- recommendation",
+        "- confirmation gate",
+        "- stop condition",
+        "- review_before_moving_forward"
+      ]
+    }
+  ]
+}

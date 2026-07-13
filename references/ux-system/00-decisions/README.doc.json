@@ -1,0 +1,56 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.00-decisions.README",
+  "title": "Decisions",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for durable UX schema system decisions and rationale.",
+        "Audience: Agents and engineers evaluating or revising the UX schema system.",
+        "Keep In Sync With: UX schema files, model docs, examples, and open questions.",
+        "Update When: A schema decision changes, a new durable decision is made, or rationale becomes stale.",
+        "Does Not Cover: Detailed field-by-field schema reference or generator implementation.",
+        "-->"
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Decisions",
+      "depth": 1,
+      "body": [
+        "This folder records why the UX schema system exists, what it governs, what it excludes, and which decisions should remain stable unless intentionally revised.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [UX Schema System Decision Record](00-ux-schema-system-decision-record.md)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when a UX-system decision record may govern schema, model, generation, storage, or App Behavior artifact handling.",
+        "",
+        "Does not own new product behavior by itself; it records durable UX-system decisions that must still be applied within their stated authority boundary.",
+        "",
+        "Stop when the agent can state the relevant decision record, what it governs, what it does not govern, and which downstream README or artifact should be read next."
+      ]
+    }
+  ]
+}

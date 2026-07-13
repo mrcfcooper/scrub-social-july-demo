@@ -1,0 +1,172 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.README",
+  "title": "UX System",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Entry point for the production App Behavior spec schema system and its durable decisions, schemas, examples, generation rules, and storage guidance.",
+        "Audience: Agents and engineers creating, validating, generating, storing, or implementing from App Behavior specs.",
+        "Keep In Sync With: agent/20-authoring UX standards, schema files under this directory, example JSON files, and generated Markdown/storage guidance.",
+        "Update When: UX schema decisions, required fields, artifact layout, generation rules, storage assumptions, or current/desired mapping behavior changes.",
+        "Does Not Cover: Architecture ownership, controller design, store design, code paths, implementation plans, or runtime conformance results.",
+        "-->"
+      ]
+    },
+    {
+      "id": "ux-system",
+      "title": "UX System",
+      "depth": 1,
+      "body": ""
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this corpus when creating, validating, generating, storing, or interpreting JSON-first App Behavior and UX-system artifacts. Route by task intent, not by scanning every folder.",
+        "",
+        "Does not own:",
+        "- product decisions outside recorded App Behavior authority",
+        "- implementation plans",
+        "- runtime source truth",
+        "- proof sufficiency by itself",
+        "",
+        "Read first:",
+        "- this README",
+        "- `00-decisions/README.doc.json` when a stored UX-system decision may govern the task",
+        "- `10-schemas/README.doc.json` when validating schema or interpreting generated artifact shape",
+        "",
+        "Route deeper by task:",
+        "- Durable UX-system decisions: read `00-decisions/README.doc.json` first.",
+        "- Schema validation or schema interpretation: read `10-schemas/README.doc.json` first.",
+        "- App Behavior model, lifecycle, defaults, or shared specs: read `20-model/README.doc.json` first.",
+        "- Example usage or reference corpuses: read `30-examples/README.doc.json` first.",
+        "- Markdown generation, storage, DB/admin compatibility, or generated companion rules: read `40-generation-and-storage/README.doc.json` first.",
+        "- UX-system tooling: read `tools/README.doc.json` first.",
+        "- Unresolved future questions: read `90-open-questions/README.doc.json` first and do not treat open questions as authority.",
+        "- App Behavior roadmap template work: read `roadmap-templates/README.doc.json` first.",
+        "",
+        "`.core.*` route relationship:",
+        "- `.core.behavior` and `.core.ux` use this corpus for durable App Behavior schema, model, storage, and generation grounding.",
+        "- `.core.docs`, `.core.audit`, and `.core.proof` should cross-route here when App Behavior artifact shape, generated companions, or behavior-to-proof records are material.",
+        "",
+        "Stop when the agent can state the UX-system task, selected child README, relevant schema/model/example/generation branch, authority boundary, and next artifact to inspect."
+      ]
+    },
+    {
+      "id": "stop-condition",
+      "title": "Stop Condition",
+      "body": [
+        "Stop when:",
+        "- the agent can state the UX-system task, selected child README, relevant schema/model/example/generation branch, authority boundary, and next artifact to inspect",
+        "",
+        "This is a routing-readiness stop condition. It does not mean the agent has mastered the UX System corpus or created App Behavior authority."
+      ]
+    },
+    {
+      "id": "legacy-folder-name",
+      "title": "Legacy Folder Name",
+      "body": [
+        "The `agent/ux-system/` folder name is retained for compatibility. Conceptually, this system stores, validates, renders, and reports on App Behavior specs: the governing behavior artifacts that define what runtime must match. Existing schema names, item names, generated reports, and packet paths may still use UX terminology until a separate explicit migration changes them.",
+        "",
+        "This corpus defines the production App Behavior spec schema system. It exists so agents can capture current app behavior, observed runtime behavior, intended and desired app behavior, behavior-thread parent containers, relationship mappings, runtime drift, UX quality observations and assessments, generated reports, and implementation-grade App Behavior truth without making runtime code, controllers, stores, or state management the authority.",
+        "",
+        "Use [UX Guidance](../35-ux/README.doc.json) for UX principles, product-experience judgment, behavior modeling, documentation governance, and UX-to-proof alignment before applying this schema/tooling corpus.",
+        "",
+        "App Behavior specs are the primary source of truth for development. JSON is the governing format, generated Markdown is review-only, and every item must be portable enough for scripts to split, compose, validate, render, seed a database, or power an admin UI.",
+        "",
+        "App Behavior specs are durable decision records, not reference notes. They exist so future agents can know intended behavior, observed runtime alignment, ownership, relationships, proof needs, accepted gaps, and closeout state without re-deciding app behavior during implementation.",
+        "",
+        "App Behavior is updated incrementally across planning, implementation, proof, and closeout. Discovered source/runtime behavior, intended target behavior, ideal/future behavior, runtime drift, pending behavior decisions, and proven runtime behavior should be recorded in this corpus with explicit status or routed to a bounded gap.",
+        "",
+        "When App Behavior authoring starts from UX planning, follow the root highest-level-first planning rule and UX guidance before detailed behavior rows. Capture north star, ideal experience, current mission, user journeys, UX pillars, and scope before descending into screen, form, filter, copy, state, or interaction mechanics.",
+        "",
+        "Lower-level behavior details raised early must be recorded as deferred details, candidate requirements, ideal/future behavior, out-of-scope candidates, pending decisions, or bounded gaps rather than being lost or silently promoted into current scope.",
+        "",
+        "Mature App Behavior specs should capture meaningful behavior down to the last implementation-relevant detail through explicit rows, reusable governed defaults, shared specs, backend/API authority references, observed runtime and alignment fields, and confirmed product decisions. They should be precise enough that a future implementation agent does not need to ask what should happen for any non-human decision.",
+        "",
+        "Runtime must match confirmed App Behavior specs. When runtime differs, record observed behavior and alignment or drift on the relevant behavior row or thread; do not let source code, screenshots, logs, or existing tests silently redefine intended behavior.",
+        "",
+        "Implementation plans, runtime inventories, proof matrices, ledgers, and closeout reports may reference behavior, but they must name the App Behavior owner or record that App Behavior reconciliation remains a bounded gap.",
+        "",
+        "Core, UX, and architecture principles help agents author or repair App Behavior specs. Runtime implementation must not use broad principles to fill missing behavior silently; if concrete behavior authority is missing, record or route the gap before treating the work as implementation-ready.",
+        "",
+        "The system supports large-feature progressive refinement from feature overview to subfeature, journey, flow, subflow, requirement, observable scenario, and acceptance criteria.",
+        "",
+        "Before detailed authoring, an App Behavior package should declare its spec profile, depth target, UX mode set, included facets, excluded facets, and allowed omissions so agents do not over-specify or under-specify the work.",
+        "",
+        "For large, risky, minute-detail, or refactor-preservation UX corpuses, agents should use both a package manifest and a coverage index so missing, pending, intentionally omitted, and proof-needed branches are visible.",
+        "",
+        "Agents creating production App Behavior specs should follow the corpus authoring procedure in [Model](20-model/README.md) before writing detailed items.",
+        "",
+        "Use [Full App Behavior Coverage Taxonomy](20-model/17-full-app-behavior-coverage-taxonomy.doc.json) when deciding whether route packets are sufficient or companion route, module, frontend API interaction, workflow, integration, security/privacy, migration/parity, proof/closeout, or future backend behavior specs are required. Use [App Behavior Shared Specs](20-model/app-behavior-shared-specs/README.doc.json) when reused frontend behavior needs a durable shared owner that route packets can reference. Use [App Behavior Defaults](20-model/app-behavior-defaults/README.doc.json) when repeated frontend basics should be governed once and referenced instead of restated. Frontend App Behavior specs may reference backend DTOs and endpoint contracts as evidence, but they do not document backend internals.",
+        "",
+        "JSON-only current app-behavior investigation packages should follow the investigation guidance in [Investigation](50-investigation/00-investigation-system.doc.json). Existing UX audits start from deterministic route/source inventory, then runtime observation, then source traversal for hidden branches."
+      ]
+    },
+    {
+      "id": "core-rules",
+      "title": "Core Rules",
+      "body": [
+        "- Frontend App Behavior first: describe frontend product/runtime behavior and frontend/API interaction, not backend internals or implementation mechanics.",
+        "- Apply the root App Behavior documentation lifecycle in `agent/README.doc.json` whenever behavior is discovered, changed, proven, reconciled, or closed out.",
+        "- Runtime and code may help discover current app behavior, but they are not governing App Behavior authority.",
+        "- Use the root behavior status vocabulary when behavior is discovered or reconciled: `observed_runtime`, `documented_current`, `verified_current`, `intended_target`, `intended_change`, `ideal_future`, `out_of_scope_candidate`, `runtime_drift`, and `pending_decision`.",
+        "- Ideal or future behavior discovered during planning must be marked non-current and out of current scope unless explicit user/product authority expands scope.",
+        "- Highest-level UX planning comes before interaction-level behavior rows: north star and ideal experience, then mission, journeys, pillars, scope, and only then screen/control mechanics.",
+        "- Interaction-level details raised before their layer is active must be recorded as deferred details or bounded gaps and revisited at the correct layer.",
+        "- Current app behavior and desired app behavior are separate; current behavior is not automatically desired behavior.",
+        "- Current-to-desired mappings are first-class objects so databases and admin UIs can compare rows directly.",
+        "- App Behavior updates promoted from runtime evidence should include evidence freshness and re-verification triggers.",
+        "- UX quality observations and assessments are first-class for bad-but-not-drift UX that should be addressed later without stopping current work; generated reports act as the quality-debt ledger view.",
+        "- Use the same schema shape everywhere; file layout is an implementation detail.",
+        "- Prefer collection files for authoring, while keeping each item self-contained for split/compose workflows.",
+        "- Exact copy is governing only when explicitly marked.",
+        "- UX requirements may group related assertions when that improves readability."
+      ]
+    },
+    {
+      "id": "reading-order",
+      "title": "Reading Order",
+      "body": [
+        "1. [UX Guidance](../35-ux/README.doc.json) when UX judgment or behavior modeling decisions are needed",
+        "2. [Decisions](00-decisions/README.md)",
+        "3. [Schemas](10-schemas/README.md)",
+        "4. [Model](20-model/README.md)",
+        "5. [Examples](30-examples/README.md)",
+        "6. [Generation And Storage](40-generation-and-storage/README.md)",
+        "7. [Investigation](50-investigation/00-investigation-system.doc.json)",
+        "8. [Tools](tools/README.md)",
+        "9. [Roadmap Templates](roadmap-templates/README.doc.json)",
+        "10. [Open Questions](90-open-questions/README.md)"
+      ]
+    },
+    {
+      "id": "confirmation-baselines",
+      "title": "Confirmation Baselines",
+      "body": [
+        "App Behavior rows carry `confirmationBaseline` to record the commit where the row was last confirmed for audit purposes. This field is provenance only; governing authority still comes from UX mode, status, authority, behavior-thread parent placement, relationship mappings, pending decisions, and runtime drift rows.",
+        "",
+        "- Read `20-model/15-confirmation-baseline.doc.json` when adding, backfilling, or refreshing row confirmation commits.",
+        "- Use `tools/backfill-confirmation-baseline.cjs --check` before any bulk baseline write.",
+        "- Update runtime drift rows and generated drift reports when confirmation discovers a mismatch; do not use the baseline field to hide drift."
+      ]
+    }
+  ]
+}

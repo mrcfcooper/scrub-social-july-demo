@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-current-desired-mapping.schema.json",
+  "title": "TGN UX Current Desired Mapping",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "corpusId",
+    "currentRefs",
+    "desiredRefs",
+    "mappingType",
+    "decisionStatus",
+    "summary",
+    "recommendation",
+    "confirmation",
+    "implementationGate",
+    "testGate",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-current-desired-mapping.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxCurrentDesiredMapping"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpusId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "currentRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "desiredRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "mappingType": {
+      "type": "string",
+      "enum": [
+        "same",
+        "preserved-with-clarification",
+        "changed",
+        "added",
+        "removed",
+        "split",
+        "merged",
+        "replaced",
+        "missing-current",
+        "missing-desired",
+        "pending-decision",
+        "not-comparable"
+      ]
+    },
+    "decisionStatus": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "pending-confirmation",
+        "recommended",
+        "deferred",
+        "blocked",
+        "not-required"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "behaviorDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preserved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "added": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknown": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "recommendation": {
+      "$ref": "shared-definitions.schema.json#/$defs/recommendation"
+    },
+    "confirmation": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmation"
+    },
+    "implementationGate": {
+      "type": "object",
+      "required": [
+        "canImplement"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "canImplement": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "blockedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "testGate": {
+      "type": "object",
+      "required": [
+        "required"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "desiredRequirementRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assertionRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    }
+  }
+}

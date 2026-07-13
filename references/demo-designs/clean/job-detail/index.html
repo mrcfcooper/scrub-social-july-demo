@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job detail — Scrub Society</title>
+
+<style>
+  @font-face {
+    font-family: "Outfit";
+    src: url("/demo/assets/job-detail-c35b0ffa.bin") format("truetype-variations"),
+         url("/demo/assets/job-detail-c35b0ffa.bin") format("truetype");
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+  :root {
+    --plum: #421A31; --open: #fff; --lav: #BBAFEF; --dew: #CEDBFE;
+    --cloud: #F9F2E8; --canvas: #ECE7EE;
+    --line: rgba(66,26,49,0.12); --fg2: rgba(66,26,49,0.72); --fg3: rgba(66,26,49,0.5);
+    --font: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--font);
+    background:
+      radial-gradient(900px 600px at 12% -8%, color-mix(in srgb, var(--lav) 34%, var(--canvas)), transparent 60%),
+      var(--canvas);
+    color: var(--plum);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1960px; margin: 0 auto; padding: 40px 40px 80px; }
+
+  /* ── rationale header ── */
+  .head { max-width: 920px; margin-bottom: 34px; }
+  .eyebrow {
+    font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 12px; color: var(--fg2); display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 26px; border-radius: 9999px 9999px 9999px 0; background: var(--plum); display: inline-block; }
+  h1.title { font-weight: 400; letter-spacing: -0.04em; line-height: 1.02; font-size: 52px; margin: 16px 0 14px; text-wrap: balance; }
+  h1.title .ac { color: color-mix(in srgb, var(--plum) 58%, var(--lav)); }
+  .lede { font-weight: 300; font-size: 17px; line-height: 1.55; color: var(--fg2); max-width: 760px; text-wrap: pretty; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .pill {
+    font-size: 12.5px; font-weight: 400; padding: 7px 13px; border-radius: 9999px;
+    background: var(--open); color: var(--plum); box-shadow: inset 0 0 0 1px var(--line);
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .pill.dark { background: var(--plum); color: var(--open); box-shadow: none; }
+  .pill.acc { background: var(--lav); box-shadow: none; }
+
+  /* ── frames row ── */
+  .frames { display: flex; gap: 56px; align-items: flex-start; flex-wrap: wrap; }
+  .frame-col { display: flex; flex-direction: column; gap: 16px; }
+  .frame-label { display: flex; align-items: baseline; gap: 12px; }
+  .frame-label .n {
+    width: 24px; height: 24px; border-radius: 9999px; background: var(--plum); color: var(--open);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 400; flex: 0 0 auto;
+  }
+  .frame-label h2 { font-weight: 400; letter-spacing: -0.03em; font-size: 21px; margin: 0; }
+  .frame-label .sub { font-weight: 300; font-size: 13px; color: var(--fg3); }
+  .desktop-host { width: 1320px; }
+  .mobile-host { width: 402px; }
+
+  /* ── flags callout ── */
+  .flags { margin-top: 56px; max-width: 1040px; background: var(--open); border-radius: 24px; box-shadow: inset 0 0 0 1px var(--line); padding: 30px 32px; }
+  .flags h3 { font-weight: 400; letter-spacing: -0.03em; font-size: 22px; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+  .flags .note { font-weight: 300; font-size: 14px; color: var(--fg2); margin: 0 0 20px; }
+  .flags ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .flags li { display: grid; grid-template-columns: 26px 1fr; gap: 14px; align-items: start; }
+  .flags li .dot { width: 26px; height: 26px; border-radius: 9999px 9999px 9999px 0; background: var(--dew); color: var(--plum); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; flex: 0 0 auto; }
+  .flags li b { font-weight: 400; letter-spacing: -0.01em; }
+  .flags li p { margin: 3px 0 0; font-weight: 300; font-size: 14px; line-height: 1.5; color: var(--fg2); }
+  .loading { padding: 60px; text-align: center; color: var(--fg3); font-weight: 300; }
+</style>
+</head>
+<body>
+  
+
+  <div id="root"><div class="loading">Loading Scrub Society…</div></div>
+
+  <script src="src/ef470c38.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="vendor/57121c5b.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="vendor/9de02607.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="src/cf00f4f7.js"></script>
+  <script type="text/babel" src="src/2e76551c.jsx"></script>
+  <script type="text/babel" src="src/6bc08348.jsx"></script>
+  <script type="text/babel" src="src/dc2bf6f4.js"></script>
+
+  <script type="text/babel">
+    function App() {
+      return (
+        <div className="frames">
+          {/* DESKTOP */}
+          <div className="frame-col">
+            <div className="frame-label">
+              <span className="n">1</span>
+              <h2>Desktop · web</h2>
+              <span className="sub">1320 × 880 · two-column, sticky pay rail</span>
+            </div>
+            <div className="desktop-host">
+              <ChromeWindow
+                width={1320} height={880}
+                url="scrubsociety.com/jobs/icu-travel-rn-denver-co"
+                tabs={[{ title: 'ICU Travel RN · Denver, CO' }, { title: 'Jobs feed' }]}
+                activeIndex={0}
+              >
+                <DesktopJobDetail />
+              </ChromeWindow>
+            </div>
+          </div>
+
+          {/* MOBILE */}
+          <div className="frame-col">
+            <div className="frame-label">
+              <span className="n">2</span>
+              <h2>Mobile · app</h2>
+              <span className="sub">402 × 874 · single scroll, bottom tab bar kept</span>
+            </div>
+            <div className="mobile-host">
+              <IOSDevice width={402} height={874}>
+                <MobileJobDetail />
+              </IOSDevice>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function Page() {
+      return (
+        <div className="wrap">
+          <header className="head">
+            <span className="eyebrow">Scrub Society · component rebuild</span>
+            <h1 className="title">Job detail, rebuilt on the <span className="ac">clean components.</span></h1>
+            <p className="lede">
+              The live Job detail page, re-composed from the mobile kit primitives only — type roles, chips, cards,
+              buttons, the speech-bubble photo frame, and the bottom tab bar. Same information architecture as production
+              (photo header · pay summary · overview grid · facility), now honoring the tokens end to end.
+            </p>
+            <div className="meta">
+              <span className="pill dark">2 frames</span>
+              <span className="pill acc">Plum / Lavender / Open Air</span>
+              <span className="pill">Outfit · Light + Regular</span>
+              <span className="pill">Tokens only — no new hues</span>
+              <span className="pill">Tab bar kept on mobile</span>
+            </div>
+          </header>
+
+          <App />
+
+          <section className="flags">
+            <h3><span style={{width:26,height:26,borderRadius:'9999px 9999px 9999px 0',background:'#421A31',color:'#fff',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:14}}>!</span> What fights the primitives</h3>
+            <p className="note">Where the live layout asked for something the kit doesn't ship, and how this rebuild resolved it.</p>
+            <ul>
+              <li><span className="dot">1</span><div><b>Like / dislike + share + compare icons were missing.</b><p>The kit's bundled Lucide subset had no thumbs-up/down, share, or compare glyph. I added those four from the same canonical Lucide set (on-system) rather than inventing marks. Worth folding back into <code>components.jsx</code>.</p></div></li>
+              <li><span className="dot">2</span><div><b>Mobile sticky apply bar vs. the bottom tab bar.</b><p>Production swaps the 5-tab nav for a sticky apply bar at the bottom. The brief says keep the tab bar — so the apply CTA became an inline Plum card in the scroll flow, with the tab bar always present. The kit has no primitive for two stacked bottom bars; flagging the collision.</p></div></li>
+              <li><span className="dot">3</span><div><b>Glassy floating action buttons on the photo.</b><p>The live header uses blurred white glass buttons. The kit's <code>IconButton</code> is paper-flat (no glass tier). I reused <code>IconButton onDark</code> with a light tint + hairline, which reads warmer and on-brand — but it's a deliberate departure from the production glass treatment.</p></div></li>
+              <li><span className="dot">4</span><div><b>Six section tabs.</b><p>The kit has <code>TabBar</code> (bottom nav) but no in-page tab/segmented primitive. I composed a chip-style scroll strip from the chip language. A real <code>SectionTabs</code> primitive would be a good addition.</p></div></li>
+              <li><span className="dot">5</span><div><b>Detail tiles &amp; pay rows.</b><p>No stat-tile or key-value-row primitive exists. Both are composed from <code>Subhead</code> + value + <code>Subtext</code> inside the standard hairline card — candidates to promote into the kit since job, profile, and compare all need them.</p></div></li>
+            </ul>
+          </section>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Page />);
+  </script>
+
+
+</body></html>

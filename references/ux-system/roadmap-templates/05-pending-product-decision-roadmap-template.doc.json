@@ -1,0 +1,51 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.05-pending-product-decision-roadmap-template",
+  "title": "Pending Product Decision Roadmap Template",
+  "content": [
+    {
+      "id": "non-authority-warning",
+      "title": "Non-Authority Warning",
+      "body": "This roadmap tracks true product decisions. It does not decide product intent without user confirmation."
+    },
+    {
+      "id": "ordered-steps",
+      "title": "Ordered Steps",
+      "body": [
+        "1. State the unresolved product decision.",
+        "2. Separate discoverable facts from true human intent.",
+        "3. Provide recommended default, alternatives, confidence, and consequence.",
+        "4. Record user confirmation, correction, deferral, or rejection.",
+        "5. Route confirmed decision back to governing App Behavior authority."
+      ]
+    },
+    {
+      "id": "review-before-moving-forward",
+      "title": "Review Before Moving Forward",
+      "body": [
+        "Each phase or meaningful subphase should populate `review_before_moving_forward` before moving on.",
+        "",
+        "Field shape:",
+        "- core_workflow: applicable `.core.*` workflow from `agent/core-workflows.doc.json`.",
+        "- standard_review: use the ordered review ladder from `agent/core-workflows.doc.json`.",
+        "- specific_review: active workstream docs, governing specs, source evidence, or local artifacts for this roadmap.",
+        "- stop_condition: what must be true before the next phase or subphase begins."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- decision",
+        "- context",
+        "- recommendation",
+        "- alternatives",
+        "- consequence of not deciding",
+        "- confirmation state",
+        "- downstream affected roadmaps",
+        "- stop condition",
+        "- review_before_moving_forward"
+      ]
+    }
+  ]
+}

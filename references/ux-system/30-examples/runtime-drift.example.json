@@ -1,0 +1,130 @@
+{
+  "schema": "tgn.ux-runtime-drift.v1",
+  "itemType": "uxRuntimeDrift",
+  "id": "jobs.filters.runtime-drift.modal-clear-local-only",
+  "title": "Runtime clear action differs from documented intended reset behavior",
+  "corpusId": "jobs.filters",
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "surface": "filter-modal"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.return-to-broad-results"
+    ],
+    "flowIds": [
+      "clear-reset-recovery"
+    ],
+    "subflowIds": [
+      "clear-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "discoveredAt": "2026-05-04",
+  "discoveredDuring": "example UX/runtime comparison",
+  "driftType": "runtime-differs-from-current-doc",
+  "severity": "moderate",
+  "userVisible": true,
+  "blocksCurrentWork": false,
+  "status": "recorded",
+  "documentedCurrentRefs": [
+    {
+      "id": "jobs.filters.current.modal-clear",
+      "mode": "current",
+      "itemType": "uxRequirement",
+      "title": "Documented current modal clear behavior"
+    }
+  ],
+  "observedCurrentRefs": [
+    {
+      "id": "jobs.filters.observed.modal-clear.with-relations",
+      "mode": "current",
+      "itemType": "uxRequirement",
+      "title": "Observed modal clear behavior"
+    }
+  ],
+  "intendedRefs": [],
+  "desiredRefs": [
+    {
+      "id": "jobs.filters.desired.modal-clear",
+      "mode": "desired",
+      "itemType": "uxRequirement",
+      "title": "Clear Filters resets active browse filters"
+    }
+  ],
+  "governingRefs": [],
+  "mappingRefs": [
+    {
+      "id": "jobs.filters.behavior-mapping.observed-to-desired.modal-clear",
+      "itemType": "uxBehaviorMapping",
+      "title": "Observed modal clear behavior maps to desired active reset behavior"
+    }
+  ],
+  "pendingDecisionRefs": [],
+  "evidenceRefs": [],
+  "codeLocators": [
+    {
+      "path": "frontend/app/jobs",
+      "notes": "Example locator only."
+    }
+  ],
+  "summary": "Observed runtime scope for Clear Filters is narrower than documented intended behavior.",
+  "observedRuntimeSummary": "The action clears local modal controls without proving active browse constraints are reset.",
+  "documentedCurrentSummary": "The prior current UX row suggested the clear action represented reset behavior.",
+  "intendedOrDesiredSummary": "Desired UX expects visible active browse filter reset after confirmation.",
+  "recommendation": {
+    "summary": "Record observed runtime and decide whether to align runtime to desired reset behavior.",
+    "confidence": 80,
+    "rationaleMd": "The mismatch is user-visible but non-blocking for unrelated clear work.",
+    "alternatives": [
+      {
+        "summary": "Update UX intent to match modal-local clear behavior.",
+        "tradeoffsMd": "Avoids runtime change but keeps a potentially misleading label."
+      }
+    ],
+    "consequencesMd": "Closeout should surface this to the user."
+  },
+  "reportedToUser": {
+    "status": "not-reported",
+    "reportedAt": null,
+    "notesMd": null
+  },
+  "followUp": {
+    "required": true,
+    "owner": "jobs.filters",
+    "nextStep": "Ask user whether runtime should align to desired reset behavior or UX intent should be updated.",
+    "targetArtifact": "jobs.filters.pending-decisions",
+    "due": null
+  },
+  "implementationGate": {
+    "canContinue": true,
+    "reason": "Non-blocking drift recorded for user decision after current work.",
+    "blockedBy": []
+  },
+  "generatedRefs": {
+    "markdown": "generated/drift/jobs.filters.runtime-drift.modal-clear-local-only.md"
+  },
+  "db": {
+    "collection": "uxRuntimeDrift",
+    "documentId": "jobs.filters.runtime-drift.modal-clear-local-only",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "status": "recorded"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

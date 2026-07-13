@@ -1,0 +1,63 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.01-artifact-envelope",
+  "title": "Artifact Envelope",
+  "content": [
+    {
+      "id": "artifact-envelope-body-1",
+      "body": "This document exists to define the shared JSON wrapper around App Behavior spec collections. Use it when creating collection files, manifests, generated review inputs, or import/export payloads."
+    },
+    {
+      "id": "purpose",
+      "title": "Purpose",
+      "body": [
+        "The artifact envelope gives every UX JSON file predictable metadata without forcing every file to contain the same item type. It allows scripts and DB importers to answer:",
+        "",
+        "- what corpus this belongs to",
+        "- which UX modes are represented by the artifact",
+        "- which artifact role the file serves",
+        "- what kind of artifact the file contains",
+        "- which JSON file governs",
+        "- where generated Markdown should be written",
+        "- whether items are portable and stable"
+      ]
+    },
+    {
+      "id": "required-envelope-fields",
+      "title": "Required Envelope Fields",
+      "body": [
+        "- `schema`: envelope schema version, usually `tgn.ux-artifact.v1`",
+        "- `artifactType`: collection type, such as `requirements`, `flows`, or `current-desired-mappings`",
+        "- `corpusId`: stable corpus identifier",
+        "- `owner`: module/submodule/surface owner",
+        "- `artifactRole`: object or artifact kind, such as `requirement`, `mapping`, or `mixed`",
+        "- `uxModes`: product behavior modes represented by the artifact, such as `current`, `desired`, or `intermediate`",
+        "- `governing`: JSON governance flags",
+        "- `items`: portable item array"
+      ]
+    },
+    {
+      "id": "governance-rule",
+      "title": "Governance Rule",
+      "body": [
+        "Every production UX artifact should make this explicit:",
+        "",
+        "```json",
+        "{",
+        "  \"governing\": {",
+        "    \"jsonIsGoverning\": true,",
+        "    \"markdownIsReviewOnly\": true",
+        "  }",
+        "}",
+        "```",
+        "",
+        "Markdown review files may summarize or format UX data, but the JSON envelope and items remain the source of truth."
+      ]
+    },
+    {
+      "id": "split-and-compose-rule",
+      "title": "Split And Compose Rule",
+      "body": "Envelope-level metadata may help scripts split or compose files, but item meaning must not depend on file location alone. Every item should carry enough `id`, `mode`, `owner`, `scope`, and status data to remain meaningful after being moved."
+    }
+  ]
+}

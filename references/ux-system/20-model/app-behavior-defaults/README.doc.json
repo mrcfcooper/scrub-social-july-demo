@@ -1,0 +1,80 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-defaults.README",
+  "title": "App Behavior Defaults",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Entry point for reusable App Behavior defaults that repeated rows can reference instead of restating.",
+        "Audience: Agents and engineers authoring, auditing, implementing from, or testing App Behavior specs.",
+        "Keep In Sync With: Full App Behavior coverage taxonomy, UX principles, testing proof guidance, and implementation-planning source-of-truth guidance.",
+        "Update When: A repeated frontend behavior default becomes governed, changes meaning, or needs a route/module override rule.",
+        "Does Not Cover: Backend internals, route-specific product decisions, schema definitions, generated reports, or runtime implementation details.",
+        "-->"
+      ]
+    },
+    {
+      "id": "app-behavior-defaults",
+      "title": "App Behavior Defaults",
+      "depth": 1,
+      "body": [
+        "This folder is the home for reusable governed App Behavior defaults. Defaults let repeated behavior be governed once and referenced from route, module, workflow, or feature rows without copying the same behavior into every row.",
+        "",
+        "Reusable defaults are App Behavior authority, not loose UX advice. UX principles explain why defaults should exist; default specs define what runtime must match when no route/module override is present."
+      ]
+    },
+    {
+      "id": "scope",
+      "title": "Scope",
+      "body": [
+        "Use this folder for frontend App Behavior defaults such as loading, empty, recoverable error, disabled submit, basic validation display, stale state, retry, cancel/close, responsive containment, and focus/accessibility baseline behavior.",
+        "",
+        "Do not use this folder to document backend internals, database behavior, server-side domain execution, queues, or integration implementation mechanics. Backend behavior defaults need their own backend behavior spec authority when that system exists."
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when deciding whether behavior can be represented as a reusable App Behavior default rather than route-specific or shared product behavior.",
+        "",
+        "Route by task:",
+        "- Default maturity model: read the maturity/default rules before promoting a behavior into defaults.",
+        "- Frontend default behavior catalog: read catalog docs when checking whether a repeated low-risk frontend behavior already has a default home.",
+        "",
+        "Does not own route-specific product behavior, shared product contracts, or final proof. Defaults must not override source authority or explicit App Behavior specs.",
+        "",
+        "Stop when the agent can state the candidate default, why it is low-risk/reusable, which source authority supports it, and whether it belongs here or in route/shared specs."
+      ]
+    },
+    {
+      "id": "reading-order",
+      "title": "Reading Order",
+      "body": [
+        "1. [Default Behavior Maturity Model](00-default-behavior-maturity-model.doc.json)",
+        "2. [Frontend Default Behavior Catalog](01-frontend-default-behavior-catalog.doc.json)"
+      ]
+    },
+    {
+      "id": "authoring-rule",
+      "title": "Authoring Rule",
+      "body": "During the current App Behavior expansion pass, agents may derive safe expected basics from core and UX principles when explicit defaults are missing. In the mature target state, every meaningful frontend behavior should be governed either by a specific App Behavior row or by a reusable App Behavior default, with route/module overrides documented when they differ."
+    }
+  ]
+}

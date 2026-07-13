@@ -1,0 +1,57 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.13-behavior-relationship-graph",
+  "title": "Behavior Relationship Graph",
+  "content": [
+    {
+      "id": "behavior-relationship-graph-body-1",
+      "body": "This document defines the script-queryable relationship model between documented current, observed current, intended, desired, governing, pending, superseded, and drifted UX behavior. Use it when agents need deterministic traversal instead of prose interpretation."
+    },
+    {
+      "id": "core-model",
+      "title": "Core Model",
+      "body": [
+        "App Behavior row items are behavior nodes. Row-inline behaviorRelations fields are the preferred relationship edges for normal row-to-row traversal. Standalone behavior mapping items remain compatibility, cross-row, or generated-report exceptions when the relationship itself needs a separate object with alignment, recommendation, or gate data.",
+        "",
+        "Do not rely on generated Markdown, file location, or narrative notes as the only connection between behavior states. The JSON refs are the source of truth for traversal."
+      ]
+    },
+    {
+      "id": "behavior-kinds",
+      "title": "Behavior Kinds",
+      "body": [
+        "- `documented-current`: what App Behavior docs previously said exists now.",
+        "- `observed-current`: what runtime investigation or tests show now.",
+        "- `intended`: behavior believed to be the target but not necessarily governing yet.",
+        "- `desired`: behavior being designed or requested as the target UX.",
+        "- `governing`: confirmed behavior runtime must match.",
+        "- `pending-confirmation`: behavior waiting for user or product decision.",
+        "- `superseded`: behavior no longer governing but retained for traceability."
+      ]
+    },
+    {
+      "id": "relationship-edges",
+      "title": "Relationship Edges",
+      "body": [
+        "Use `uxBehaviorMapping` items for deterministic edges between behavior nodes. Use `fromRefs` and `toRefs` for all relationships, even one-to-one relationships, so split and merge cases remain queryable.",
+        "",
+        "Use `behaviorRelations` on `uxRequirement` on App Behavior row items as the durable local index back to related mappings, runtimeAlignment drift, pending decisions, and adjacent behavior nodes. Standalone mapping items are reserved for compatibility or relationships that genuinely need a separate cross-row object."
+      ]
+    },
+    {
+      "id": "runtime-alignment",
+      "title": "Runtime Alignment",
+      "body": "`runtimeAlignmentStatus` remains valid on standalone behavior mapping compatibility rows. New row-local work should prefer `runtimeAlignment` on the affected App Behavior row so scripts can find desired or governing behavior that is not yet matched by runtime without a manually maintained ledger."
+    },
+    {
+      "id": "compatibility",
+      "title": "Compatibility",
+      "body": "Existing `uxCurrentDesiredMapping` remains valid for current-to-desired comparison. New work that needs documented-current, observed-current, intended, desired, governing, pending, or drift traversal should prefer `uxBehaviorMapping` only when a separate cross-row mapping object is necessary. Otherwise, prefer sibling rows inside the relevant behavior-thread parent container."
+    },
+    {
+      "id": "agent-rule",
+      "title": "Agent Rule",
+      "body": "When an agent discovers a relationship that affects behavior truth, it should add or update the affected row's behaviorRelations rather than leaving the relationship only in prose. If the relationship is non-blocking and not part of the current task, record the relationship inline and continue clear work."
+    }
+  ]
+}

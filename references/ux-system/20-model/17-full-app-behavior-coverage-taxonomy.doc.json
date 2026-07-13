@@ -1,0 +1,649 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.17-full-app-behavior-coverage-taxonomy",
+  "title": "Full App Behavior Coverage Taxonomy",
+  "content": [
+    {
+      "id": "reason-for-this-document",
+      "title": "Reason For This Document",
+      "body": [
+        "App Behavior specs are now the source of truth for runtime behavior. To make that true, agents need a complete taxonomy of behavior categories that may require documentation.",
+        "",
+        "Existing route packets should be understood as route-scoped App Behavior specs, not complete whole-app behavior authority by themselves. They cover important visible and hidden route behavior, but they do not by themselves govern all backend, domain, workflow, integration, security, persistence, and closeout behavior.",
+        "",
+        "This guide helps agents identify when companion route, module, frontend API interaction, workflow, integration, security/privacy, migration/parity, proof/closeout, or future backend behavior specs are needed."
+      ]
+    },
+    {
+      "id": "frontend-and-backend-scope-boundary",
+      "title": "Frontend And Backend Scope Boundary",
+      "body": [
+        "Current route packets and frontend App Behavior specs govern frontend runtime behavior. They define what the frontend shows, sends, expects, interprets, maps, blocks, retries, recovers from, and proves.",
+        "",
+        "Frontend App Behavior specs may document frontend API usage, request construction, DTO fields consumed by the frontend, endpoint purpose from the frontend perspective, response and error interpretation, state projection, user-visible results, recovery behavior, and frontend proof obligations.",
+        "",
+        "Frontend App Behavior specs must not document backend internals, database writes, queues, server-side domain execution, email or webhook internals, or backend implementation mechanics. Backend source-of-truth docs may be referenced for API DTOs, endpoint purpose, and contract evidence, but frontend specs must not duplicate or redefine backend behavior.",
+        "",
+        "Backend behavior specs are future companion authority. Until they exist, backend source and backend contract docs remain backend evidence or backend authority, while frontend App Behavior specs govern only frontend behavior and frontend/API interaction."
+      ]
+    },
+    {
+      "id": "runtime-discovery-versus-defaultable-behavior",
+      "title": "Runtime Discovery Versus Defaultable Behavior",
+      "body": [
+        "Agents must classify missing or weak App Behavior before filling gaps. Core and UX principles may guide safe repeated basics, but they cannot invent contracts, ownership, state shape, permissions, side effects, existing runtime branches, or backend/API authority.",
+        "",
+        "Classification states:",
+        "",
+        "- Runtime Discovery Required: source, runtime, API, or test inspection is required because the fact already exists somewhere in the system. Principles cannot invent it.",
+        "- Reusable Default Eligible: a safe, ordinary, low-risk frontend basic can be governed once as a reusable default and referenced by rows.",
+        "- Explicit Override Required: a reusable default exists or can be derived, but the route, module, workflow, role, platform, proof need, or product meaning differs.",
+        "- Backend Authority Reference: frontend behavior depends on backend DTOs, endpoint purpose, or API contract evidence; frontend specs may reference the backend authority but must not redefine backend internals.",
+        "- True Product Decision: behavior cannot be discovered or safely derived and needs user confirmation before it becomes governing truth.",
+        "",
+        "During the current App Behavior expansion pass, agents may use core and UX principles only for safe, ordinary, low-risk basics that are Reusable Default Eligible. Mature App Behavior coverage should replace principle-derived stopgaps with reusable defaults or explicit rows."
+      ]
+    },
+    {
+      "id": "derivable-from-existing-authority",
+      "title": "Derivable From Existing Authority",
+      "depth": 3,
+      "body": [
+        "Use Derivable From Existing Authority when a behavior does not require runtime discovery because it follows from a cited authority chain: App Behavior specs, reusable App Behavior defaults, UX/core principles, architecture standards, user journeys, already-inventoried parent behavior, or proof expectations.",
+        "",
+        "- Required fields when recording a derivable item: classification, derivedFrom, rationale, and runtimeDiscoveryRequired: false.",
+        "- Derivable does not mean guessed. If the agent cannot cite the authority chain, classify the item as Runtime Discovery Required, Explicit Override Required, Backend Authority Reference, or True Product Decision.",
+        "- During refactor work, derivation is appropriate for safe basics, visual-only responsive containment with no behavior difference, ordinary recovery expectations, obvious API-backed route hydration, and consequences already implied by a higher-level governed behavior or parent inventory.",
+        "- Derivation is not allowed for exact API/DTO fields, URL/query/storage keys, command payloads and result semantics, permissions/access/admission, side effects, platform-specific branches that change execution, compatibility behavior, surprising legacy behavior, or anything with product/security/privacy/proof risk."
+      ]
+    },
+    {
+      "id": "refactor-behavior-preservation-scope",
+      "title": "Refactor Behavior Preservation Scope",
+      "depth": 3,
+      "body": [
+        "The long-term mission target is full explicit App Behavior coverage. During refactor work, however, coverage should focus on meaningful behavior that must be preserved or safely normalized, not full UI audit completeness.",
+        "",
+        "In scope for refactor coverage: commands, state ownership/projection, API/DTO/query construction, routing, permissions/access, auth intent, persistence/cache/storage, side effects, failure/recovery, availability, platform/native/browser API behavior, delegated workflows, and UI differences that change what users can do or what runtime executes.",
+        "",
+        "Out of scope for this refactor pass: visual-only styling, spacing, colors, typography, decorative layout, animation polish, button sizing, and responsive containment when they have no behavior, accessibility, comprehension, proof, or execution impact.",
+        "",
+        "Derivable behavior should not create runtime-inventory noise during refactor work. If behavior follows from higher-level App Behavior specs, reusable defaults, UX/core principles, architecture principles, user journeys, proof expectations, or already documented parent behavior, record the authority chain when needed and do not reopen runtime source solely to restate the obvious.",
+        "",
+        "This refactor boundary does not weaken the mature target. As agents implement or materially change runtime behavior, they should document the touched behavior so the corpus moves toward full explicit coverage over time."
+      ]
+    },
+    {
+      "id": "default-normalization-during-refactors",
+      "title": "Default-Normalization During Refactors",
+      "depth": 3,
+      "body": [
+        "Runtime discovery remains required for mechanics, product behavior, API interaction, ownership, contracts, permissions, persistence, side effects, security/privacy, route/query semantics, cross-route workflows, and explicit governed behavior.",
+        "",
+        "Broad refactors and fragmentation cleanup may classify fragmented, incidental, low-risk basics as default-normalization work when those basics do not affect product intent or runtime-critical mechanics. Examples include inconsistent loading presentation, hydration acknowledgement, generic empty state, recoverable error display, disabled/pending state, basic validation display, focus/accessibility baseline, safe retry, cancel/close for ephemeral UI, and responsive containment.",
+        "",
+        "Default-normalization must be recorded with rationale, the reusable or principle-derived default used, proof impact, closeout note, and any accepted old-variant gaps. It must not be used to hide behavior changes that need runtime discovery or product confirmation."
+      ]
+    },
+    {
+      "id": "deterministic-inventory-and-artifact-homes",
+      "title": "Deterministic Inventory And Artifact Homes",
+      "body": ""
+    },
+    {
+      "id": "route-discovery-spine-versus-artifact-ownership",
+      "title": "Route Discovery Spine Versus Artifact Ownership",
+      "depth": 3,
+      "body": [
+        "Route passes are the discovery spine, not the ownership boundary. A route pass must discover every behavior and runtime mechanic involved in the route, even when the route does not own that behavior. Ownership assignment happens after discovery through the smallest durable owner rule.",
+        "",
+        "- Inventory every route-involved source owner, trigger, API/DTO, command, store, helper, listener, browser API, and proof claim, or explicitly classify why runtime/source inventory is not required.",
+        "- Keep route-local behavior in the route packet; keep supporting mechanics in companion inventories; route shared-owned behavior to an existing shared spec or a new shared-spec candidate.",
+        "- Do not skip behavior because it is shared-owned, adapter-owned, or delegated. The route still records its participation, inputs, overrides, proof, accepted gaps, or shared reference.",
+        "- Later routes that encounter the same shared behavior should reference the existing shared spec or shared-spec candidate and move on unless they introduce a route-specific override or new evidence."
+      ]
+    },
+    {
+      "id": "source-owner-closure-states",
+      "title": "Source-Owner Closure States",
+      "depth": 3,
+      "body": [
+        "Every route-involved source owner or sourceTrace row must close with exactly one primary inventory state. Closure means the route-involved behavior or mechanic is captured and routed; it does not require the route agent to perform final shared-owner reconciliation.",
+        "",
+        "- \\`route-owned-behavior\\`: route-scoped behavior documented in the route packet.",
+        "- \\`route-companion-inventory\\`: supporting non-behavior mechanics documented in route-adjacent companion inventory files.",
+        "- \\`existing-shared-spec-reference\\`: shared-owned behavior already governed elsewhere; the route records only participation, input, override, proof, or accepted gap.",
+        "- \\`new-shared-spec-needed\\`: shared-owned behavior discovered by this route but not yet governed; record a shared spec candidate for a later shared reconciliation pass.",
+        "- \\`shared-candidate-unresolved\\`: route-involved behavior looks shared, but the route pass should not spend time proving final shared ownership; record source refs, route participation, proof impact, and proposed home, then move on.",
+        "- \\`backend-authority-reference\\`: frontend behavior depends on backend/API authority evidence, but frontend specs do not redefine backend internals.",
+        "- \\`delegated-route-or-workflow\\`: behavior belongs to another route packet or shared workflow; this route records the handoff boundary.",
+        "- \\`derivable-from-existing-authority\\`: runtime discovery is unnecessary because a cited App Behavior spec, shared default, UX/core principle, architecture standard, user journey, parent inventory, or proof expectation makes the behavior safe and obvious.",
+        "- \\`out-of-scope-visual-only\\`: visual-only styling/layout with no behavior, proof, access, comprehension, recovery, platform, or accessibility impact.",
+        "- \\`accepted-proof-gap\\`: behavior and inventory are source-grounded, but browser/manual/runtime proof remains explicitly routed and non-blocking.",
+        "- \\`support-only-nonbehavior\\`: source or dependency is implementation support only and does not affect App Behavior, proof, contract, data/state, access, side effect, browser/runtime mechanics, user meaning, or closeout."
+      ]
+    },
+    {
+      "id": "sourcetrace-closure-is-necessary-but-not-sufficient",
+      "title": "SourceTrace Closure Is Necessary But Not Sufficient",
+      "depth": 3,
+      "body": [
+        "A route can close every packet \\`sourceTrace\\` row and still be incomplete if behavior-affecting helpers, display contracts, shared adapters, delegated workflows, and trigger paths remain implicit. Packet sourceTrace closure proves the first layer of discovery; it does not prove that a future implementation agent can rebuild non-derivable behavior without reopening source.",
+        "",
+        "Closure levels:",
+        "",
+        "- \\`packet-sourceTrace-closure\\`: every packet \\`sourceTrace\\` row has a closure state and artifact home.",
+        "- \\`source-dependency-closure\\`: behavior-affecting imports, helpers, adapters, stores, components, and called modules reachable from those source owners are inventoried or classified.",
+        "- \\`trigger-to-terminal-closure\\`: each route trigger is followed through command/read, state touched, API/DTO, side effect, projection, error/recovery, cleanup, and proof.",
+        "- \\`implementation-ready-closure\\`: no non-derivable behavior requires reopening source except accepted gaps with owner, risk, and follow-up.",
+        "",
+        "Route coverage must not claim implementation-ready completion when only packet-sourceTrace closure is satisfied. Implementation-ready closure requires dependency closure, trigger-to-terminal closure, shared-candidate routing, delegated-workflow boundaries, and proof closure."
+      ]
+    },
+    {
+      "id": "category-coverage-is-not-closure",
+      "title": "Category Coverage Is Not Closure",
+      "depth": 3,
+      "body": [
+        "Broad categories such as DTO inventory, command inventory, proof inventory, browser inventory, or state inventory are not complete merely because the category exists. Category coverage is not closure. Source-owner inventory closure is closure.",
+        "",
+        "- A category inventory is complete only when every route-involved source owner in that category has a closure state and artifact home.",
+        "- A source owner listed in route sourceTrace cannot be left implicit inside a broad rollup; it must be route-owned, companion-inventoried, shared-referenced, recorded as a shared candidate, delegated, derivable, out-of-scope, or accepted proof debt.",
+        "- This rule prevents a route pass from documenting obvious route surfaces while missing shared controllers, compatibility hosts, UI-controller behavior, DTO adapters, proof assets, or state owners that the route actually uses.",
+        "- A category inventory is also incomplete when behavior-affecting dependencies of closed source owners are not classified. The closure question is not only 'did every sourceTrace row close?' but also 'did every non-derivable route-involved dependency close or route to an accepted gap?'",
+        "",
+        "Core rule: document behavior at the smallest durable owner. Route packets are the discovery spine and preferred home for route-scoped behavior. Shared behavior should be documented once and referenced from routes.",
+        "",
+        "Artifact-home classifications:",
+        "",
+        "- route-packet: route entry, route-local triggers, route params/query semantics, route-local commands/forms/states, route-specific overrides, and route-specific proof expectations.",
+        "- shared-default: reusable default behavior such as loading, empty, recoverable error, disabled/pending, focus/accessibility, safe retry, cancel/close, responsive containment, or other governed basics.",
+        "- shared-api-interaction: frontend API calls, DTO consumption, request construction, response/error mapping, frontend adapter behavior, API fixtures, and frontend proof of API interaction.",
+        "- shared-access: reused auth, role, capability, public-token, impersonation, delegated-access, route guard, action visibility, and forbidden/unauthorized behavior.",
+        "- shared-state-lifecycle: app startup, providers, storage/cache keys, persistence, invalidation, restore/reset, session/account cleanup, and state lifetime behavior.",
+        "- shared-workflow: cross-route flows, stored intent, return paths, parent/list/detail patching, refresh-on-return, multi-step workflows, and route-to-route handoffs.",
+        "- shared-integration: frontend-visible external channel behavior such as import/export, email trigger/result, provider interactions, delivery status, and integration recovery.",
+        "- shared-security-privacy: redaction, token exposure, private data visibility, download/export privacy, sensitive state cleanup, and shared safety gates.",
+        "- backend-authority-reference: backend DTO, endpoint, validation, auth, or contract evidence that frontend behavior depends on but frontend specs must not redefine.",
+        "- future-backend-spec: backend-only behavior that needs future backend behavior spec authority.",
+        "- product-decision: behavior that cannot be discovered or safely derived and needs user confirmation."
+      ]
+    },
+    {
+      "id": "deterministic-inventory-method",
+      "title": "Deterministic Inventory Method",
+      "depth": 3,
+      "body": [
+        "Route trigger inventory must enumerate route entry, params/query/hash changes, user interactions, forms, modals/drawers, file inputs, API responses, auth/session/profile changes, timers/debounces/listeners, resize/scroll/focus, and unmount/cleanup. Each trigger should record source evidence, user-visible behavior, hidden state/data effect, API/DTO touched, command/read involved, permission or validation gate, failure/recovery branch, proof requirement, and artifact home.",
+        "",
+        "Dependency inventory must start from each route packet \\`sourceTrace\\` owner and inspect behavior-affecting imports, helpers, adapters, stores, components, called modules, and proof assets. Classify each dependency as route-owned, companion-inventoried, shared-referenced, shared-candidate, backend-authority, delegated, derivable, visual-only out of scope, accepted proof gap, or support-only nonbehavior. Do not inventory dependency internals when the dependency is clearly support-only or derivable from existing authority, but record the classification and rationale when that decision matters for closeout.",
+        "",
+        "Trigger-to-terminal inventory must follow each route trigger until the terminal user/runtime outcome. Record trigger source, input payload, command or read invoked, state owner touched, API/DTO/query/storage touched, side effects, visible projection, hidden/runtime consequence, failure/recovery branch, cleanup or unmount behavior, and proof asset or accepted gap. Naming the trigger without following this path is not trigger closure.",
+        "",
+        "Shared surface inventory must scan API clients and DTO normalizers, URL helpers, storage/cache keys, auth/role/capability helpers, command or mutation functions, validators, timers/listeners/streams, file/browser APIs, global providers/toasts/modals/error boundaries, and tests/fixtures/mocks.",
+        "",
+        "Deduplication and ownership pass:",
+        "",
+        "- Route-local behavior stays in the route packet.",
+        "- Already documented shared behavior is referenced, not restated.",
+        "- Reused undocumented behavior gets a shared spec home before other routes depend on it.",
+        "- Backend-owned behavior becomes a backend authority reference or future backend spec item, not frontend behavior truth.",
+        "- Uncertain ownership is routed as an ownership or product decision gap instead of duplicated."
+      ]
+    },
+    {
+      "id": "helper-display-contract-inventory",
+      "title": "Helper And Display Contract Inventory",
+      "depth": 3,
+      "body": [
+        "Helpers and UI support modules are App Behavior inputs when they change user meaning, command availability, projection, recovery, proof, or data interpretation. Do not dismiss them as implementation details merely because they are not route owners.",
+        "",
+        "Inventory helper/display contracts when they govern labels and titles, salary/pay/date/status formatting, fallback images or fallback content, field visibility/defaults, summary field selection, user-facing status or error labels, copy variants that change action meaning, API/DTO normalization, query construction, permission/admission decisions, persistence keys, browser adapter behavior, or proof/mock equivalence.",
+        "",
+        "Do not inventory visual-only styling helpers when they affect only spacing, color, typography, polish, or layout containment and do not change behavior, accessibility, comprehension, proof, platform execution, or recovery. Classify those as out-of-scope visual-only or support-only nonbehavior."
+      ]
+    },
+    {
+      "id": "runtime-discovery-required-list",
+      "title": "Runtime Discovery Required List",
+      "depth": 3,
+      "body": [
+        "- Route and entry behavior: actual routes, params, query/hash handling, redirects, auth gates, token gates, not-found states, and hydration/client-only behavior must be inspected because principles cannot know which entry paths exist.",
+        "- Frontend API interaction and DTO consumption: endpoints, request shape, DTO fields read, response/error mapping, retry/abort/cache behavior, and frontend proof obligations must be inspected because principles cannot invent API contracts.",
+        "- State ownership and projection: component, hook, store, provider, URL, cache, persisted, derived, parent/list/detail, badge/count/status, and precedence behavior must be inspected because principles cannot know current owners or projection rules.",
+        "- Commands, mutations, and side effects: command admission, payload construction, success/failure/partial states, duplicate handling, toasts, navigation, state patching, downloads, uploads, emails, or external effects must be inspected because they change outcomes.",
+        "- Permissions, identity, roles, and access: roles, capabilities, auth loading, account switch, logout cleanup, public-token behavior, admin/delegated behavior, and stored intent must be inspected because safe access cannot be inferred generically.",
+        "- Validation and admission rules: required, optional, conditional, server-returned, cross-field, dirty-state, confirmation, and blocked-submit rules must be inspected because generic validation display does not define product rules.",
+        "- Async and concurrency mechanics: loading branches, stale suppression, abort-on-unmount, polling, refetch, optimistic rollback, concurrent edits, and readiness gates must be inspected because they affect correctness and proof.",
+        "- Failure, recovery, and fallback branches: API, network, permission, token, file, browser, external provider, partial-success, retry, cancel, return, and support paths must be inspected because exact branches determine user recovery.",
+        "- Persistence, draft, cache, and lifecycle: reload, navigation, session, local storage, cache invalidation, draft/commit/discard, identity cleanup, timers, listeners, and object URL cleanup must be inspected because hidden lifecycle behavior changes trust and data safety.",
+        "- Files, uploads, downloads, and browser APIs: picker, drag/drop, MIME/size rules, FormData, Blob, object URL, signed URL, preview, download, unsupported browser, and permission behavior must be inspected because browser mechanics are runtime-specific.",
+        "- External-channel behavior from the frontend view: frontend-triggered email, webhook, import, export, provider, delivery-status, retry, confirmation, and result behavior must be inspected because external effects cannot be inferred safely.",
+        "- Security, privacy, and safety behavior: redaction, token display/storage/logging, private data exposure, download/export contents, session-sensitive cleanup, and safety gates must be inspected because the actual exposure boundary is concrete.",
+        "- Responsive, platform, and environment-specific runtime: breakpoints, table/card conversion, sticky controls, mobile drawers, native/Capacitor behavior, browser differences, environment flags, and feature flags must be inspected because alternate behavior may differ by runtime.",
+        "- Observed runtime drift: mismatches between runtime and App Behavior specs must be recorded from observation or source evidence; principles can recommend alignment but cannot erase the observed fact.",
+        "- Existing tests and proof coverage: current tests, fixtures, mocks, assertions, and proof gaps must be inspected because proof coverage cannot be assumed from intent.",
+        "- Backend/API authority references: backend DTO definitions, endpoint purposes, response/error contracts, auth requirements, and server-side validation exposed through API contracts must be located in backend authority or evidence, then referenced without redefining backend internals."
+      ]
+    },
+    {
+      "id": "high-level-list",
+      "title": "High-Level List",
+      "body": [
+        "1. User-Facing Experience Behavior",
+        "2. Route, Navigation, And Entry Behavior",
+        "3. State, Data, And Projection Behavior",
+        "4. Command, Mutation, And Side-Effect Behavior",
+        "5. Read, Query, Search, And Filtering Behavior",
+        "6. Permissions, Identity, Roles, And Access Behavior",
+        "7. Validation, Admission, And Blocking Behavior",
+        "8. Async, Loading, Stale, And Concurrency Behavior",
+        "9. Failure, Recovery, And Fallback Behavior",
+        "10. Persistence, Draft, Cache, And Lifecycle Behavior",
+        "11. External Channel And Integration Behavior",
+        "12. Files, Uploads, Downloads, And Browser API Behavior",
+        "13. Frontend API Interaction, DTO Consumption, And Contract Behavior",
+        "14. Cross-Owner, Cross-Route, And Workflow Behavior",
+        "15. Security, Privacy, Safety, And Compliance Behavior",
+        "16. Observability, Audit, Logging, And Admin Operational Behavior",
+        "17. Performance, Responsiveness, And Resource Behavior",
+        "18. Platform, Device, Responsive, And Environment Behavior",
+        "19. Migration, Compatibility, Parity, And Deprecation Behavior",
+        "20. Testing, Proof, And Closeout Behavior"
+      ]
+    },
+    {
+      "id": "detailed-breakdown",
+      "title": "Detailed Breakdown",
+      "body": ""
+    },
+    {
+      "id": "1-user-facing-experience-behavior",
+      "title": "1\\. User-Facing Experience Behavior",
+      "depth": 3,
+      "body": [
+        "- Screens, pages, panels, modals, drawers, tabs, cards, tables, and forms.",
+        "- User-visible copy, labels, helper text, empty states, error text, success text, warning text.",
+        "- Interaction behavior: click, tap, hover, keyboard, focus, drag/drop, scroll, resize.",
+        "- Visual state behavior: selected, disabled, active, dirty, pending, complete, unavailable.",
+        "- Accessibility behavior: keyboard reachability, focus order, announcements, labels, contrast-relevant states.",
+        "- User attention behavior: confirmations, prompts, toasts, banners, badges, indicators.",
+        "- Recovery UX: retry, cancel, undo, reset, discard, restore, return, continue.",
+        "- Trust cues: status clarity, ownership clarity, irreversible-action clarity, result clarity."
+      ]
+    },
+    {
+      "id": "2-route-navigation-and-entry-behavior",
+      "title": "2\\. Route, Navigation, And Entry Behavior",
+      "depth": 3,
+      "body": [
+        "- Route availability and route ownership.",
+        "- Public, private, admin, role-gated, token-gated, and deep-link routes.",
+        "- Entry conditions: direct navigation, internal navigation, external links, redirects, email links.",
+        "- Query param, hash, path param, and URL-backed state behavior.",
+        "- Back, close, cancel, return, redirect, resume, and stored-intent behavior.",
+        "- Invalid route, missing param, malformed param, not-found, expired-link behavior.",
+        "- Cross-route handoff behavior: return to previous view, refresh-on-return, parent state patching.",
+        "- SSR/client-only/hydration route behavior where applicable."
+      ]
+    },
+    {
+      "id": "3-state-data-and-projection-behavior",
+      "title": "3\\. State, Data, And Projection Behavior",
+      "depth": 3,
+      "body": [
+        "- Canonical state owners and derived state.",
+        "- UI-local state versus persisted state.",
+        "- Server state versus client state.",
+        "- Projection behavior: how domain data becomes visible UI state.",
+        "- Sorting, grouping, aggregation, summaries, counts, badges, and computed status.",
+        "- Parent/list/detail consistency.",
+        "- Optimistic, pessimistic, and confirmed update behavior.",
+        "- Stale data indicators and stale suppression.",
+        "- Empty, partial, inconsistent, missing, or malformed data behavior.",
+        "- Data normalization and display precedence."
+      ]
+    },
+    {
+      "id": "4-command-mutation-and-side-effect-behavior",
+      "title": "4\\. Command, Mutation, And Side-Effect Behavior",
+      "depth": 3,
+      "body": [
+        "- User commands: submit, save, delete, upload, assign, approve, resend, distribute, import, export.",
+        "- Command admission: when command is allowed, blocked, disabled, queued, retried, or rejected.",
+        "- Mutation payload rules and source of payload truth.",
+        "- Side effects: emails, notifications, webhook calls, status changes, audit events, downloads.",
+        "- Command result behavior: success, failure, partial success, duplicate, already done, expired.",
+        "- Idempotency and duplicate-submit handling.",
+        "- In-flight behavior: disabled controls, spinners, cancellation, stale response handling.",
+        "- Post-command projection updates: detail refresh, list patch, toast, navigation, cache invalidation."
+      ]
+    },
+    {
+      "id": "5-read-query-search-and-filtering-behavior",
+      "title": "5\\. Read, Query, Search, And Filtering Behavior",
+      "depth": 3,
+      "body": [
+        "- Data read source and ownership.",
+        "- Initial load behavior.",
+        "- Query parameters and query serialization.",
+        "- Search input behavior, debouncing, clearing, persistence.",
+        "- Filter behavior, filter combinations, reset behavior.",
+        "- Sort and pagination behavior.",
+        "- URL-backed list state.",
+        "- Refresh behavior and refresh-on-return.",
+        "- Empty results, too many results, invalid filter, unavailable source.",
+        "- Permission-filtered reads and hidden data rules."
+      ]
+    },
+    {
+      "id": "6-permissions-identity-roles-and-access-behavior",
+      "title": "6\\. Permissions, Identity, Roles, And Access Behavior",
+      "depth": 3,
+      "body": [
+        "- Logged-out, logged-in, anonymous, guest, admin, vendor, recruiter, professional, lead-distributor behavior.",
+        "- Auth loading and unknown identity behavior.",
+        "- Role-based route access.",
+        "- Capability-based action access.",
+        "- Public-token behavior.",
+        "- Session refresh and profile refresh behavior.",
+        "- Impersonation, delegated access, and admin acting-on-behalf behavior.",
+        "- Permission failure behavior: redirect, forbidden, disabled, hidden, error.",
+        "- Identity-sensitive state cleanup on logout/account switch.",
+        "- Auth-dependent stored intent and post-login resume."
+      ]
+    },
+    {
+      "id": "7-validation-admission-and-blocking-behavior",
+      "title": "7\\. Validation, Admission, And Blocking Behavior",
+      "depth": 3,
+      "body": [
+        "- Field validation and form validation.",
+        "- Required, optional, conditional, and derived-required fields.",
+        "- Client validation versus server validation.",
+        "- Submit admission and blocked-submit behavior.",
+        "- Error placement, timing, copy, and recovery.",
+        "- Dirty-state and unsaved-change blocking.",
+        "- Confirmation gates for irreversible or external-effect actions.",
+        "- Capability gates and prerequisite checks.",
+        "- Invalid data imported, uploaded, pasted, or returned from API."
+      ]
+    },
+    {
+      "id": "8-async-loading-stale-and-concurrency-behavior",
+      "title": "8\\. Async, Loading, Stale, And Concurrency Behavior",
+      "depth": 3,
+      "body": [
+        "- Initial loading, incremental loading, background refresh.",
+        "- In-flight command state.",
+        "- Multiple simultaneous requests.",
+        "- Race handling and stale result suppression.",
+        "- Abort-on-unmount and route change cancellation.",
+        "- Retry, refetch, polling, and timeout behavior.",
+        "- Concurrent edits or conflicting updates.",
+        "- Optimistic update rollback.",
+        "- Partial hydration or client-only behavior.",
+        "- Readiness gates used by tests and runtime."
+      ]
+    },
+    {
+      "id": "9-failure-recovery-and-fallback-behavior",
+      "title": "9\\. Failure, Recovery, And Fallback Behavior",
+      "depth": 3,
+      "body": [
+        "- API failure, network failure, validation failure, permission failure, token failure.",
+        "- Partial failure and mixed success.",
+        "- External provider failure.",
+        "- File provider failure.",
+        "- Browser API unsupported behavior.",
+        "- Fallback copy, fallback UI, fallback source.",
+        "- Retry paths and manual recovery.",
+        "- Safe degraded behavior.",
+        "- Escalation/contact-support behavior.",
+        "- Failure logging and user-safe error messages."
+      ]
+    },
+    {
+      "id": "10-persistence-draft-cache-and-lifecycle-behavior",
+      "title": "10\\. Persistence, Draft, Cache, And Lifecycle Behavior",
+      "depth": 3,
+      "body": [
+        "- Draft creation, save, autosave, discard, restore.",
+        "- Local storage, session storage, IndexedDB, cookies.",
+        "- Cache source precedence.",
+        "- Cache invalidation and refresh triggers.",
+        "- State preservation across navigation, reload, close, return, and app restart.",
+        "- Dirty-state lifecycle.",
+        "- Temporary state cleanup.",
+        "- Expiration and retention.",
+        "- Migration of persisted data shape.",
+        "- Long-lived workspace behavior."
+      ]
+    },
+    {
+      "id": "11-external-channel-and-integration-behavior",
+      "title": "11\\. External Channel And Integration Behavior",
+      "depth": 3,
+      "body": [
+        "- Email send/resend behavior.",
+        "- SMS, push, webhook, third-party API, CRM, vendor, AI, or analytics integration behavior.",
+        "- External link open behavior.",
+        "- Import/export with external tools.",
+        "- Retry and failure behavior for integrations.",
+        "- User-visible status of external effects.",
+        "- Idempotency and duplicate external effects.",
+        "- Privacy boundaries for external data sharing.",
+        "- Confirmation before irreversible external effects."
+      ]
+    },
+    {
+      "id": "12-files-uploads-downloads-and-browser-api-behavior",
+      "title": "12\\. Files, Uploads, Downloads, And Browser API Behavior",
+      "depth": 3,
+      "body": [
+        "- File selection, drag/drop, paste, cancel selection.",
+        "- File type, size, count, and validation.",
+        "- Upload progress, failure, retry, and success.",
+        "- Existing file versus new file source.",
+        "- Preview, open, download, remove, replace.",
+        "- Blob, object URL, revocation, temporary anchor behavior.",
+        "- Signed URL behavior, expiration, fallback, and unavailable link.",
+        "- CSV/import parsing and result reporting.",
+        "- Browser permissions and unsupported API fallback."
+      ]
+    },
+    {
+      "id": "13-frontend-api-interaction-dto-consumption-and-contract-behavior",
+      "title": "13\\. Frontend API Interaction, DTO Consumption, And Contract Behavior",
+      "depth": 3,
+      "body": [
+        "- Endpoint purpose as consumed by the frontend.",
+        "- Frontend request construction, including path params, query params, headers, body shape, multipart payloads, and command admission.",
+        "- DTO fields read by the frontend and how absent, null, malformed, legacy, or permission-filtered fields are handled.",
+        "- Response interpretation: success, empty, partial, duplicate, already-done, expired, validation error, permission error, server error, and network failure.",
+        "- Error mapping from API/backend result to frontend state, copy intent, toast/banner/card behavior, retry behavior, and closeout proof.",
+        "- Frontend state projection from API results into route state, list/detail state, cache, local form state, badges, counts, and user-visible status.",
+        "- API loading, empty, stale, refresh, retry, cancellation, and stale-response suppression behavior from the frontend perspective.",
+        "- API client, adapter, normalizer, selector, and fixture contracts owned by frontend code.",
+        "- Frontend proof obligations for API interaction: request shape, response mapping, error mapping, state projection, and browser-visible result.",
+        "- Backend source-of-truth references for DTO and endpoint evidence, without duplicating or redefining backend internals.",
+        "",
+        "Explicit exclusions:",
+        "",
+        "- Server-side domain execution, repository behavior, database writes, transaction boundaries, queues, scheduled jobs, email/webhook internals, and backend implementation mechanics.",
+        "- Backend idempotency, retry, deduplication, event publication, persistence, and compatibility behavior except as observed through frontend-consumed API contracts or documented backend authority references."
+      ]
+    },
+    {
+      "id": "14-cross-owner-cross-route-and-workflow-behavior",
+      "title": "14\\. Cross-Owner, Cross-Route, And Workflow Behavior",
+      "depth": 3,
+      "body": [
+        "- Multi-step workflows.",
+        "- Cross-route state handoff.",
+        "- Parent/list/detail projection updates.",
+        "- Shared screen with role-specific adapters.",
+        "- Shared component behavior across owners.",
+        "- Workflow ownership and boundary contracts.",
+        "- Stored intent and continuation.",
+        "- Return paths and resume after interruption.",
+        "- Cross-owner command orchestration.",
+        "- Multi-module behavior dependencies."
+      ]
+    },
+    {
+      "id": "15-security-privacy-safety-and-compliance-behavior",
+      "title": "15\\. Security, Privacy, Safety, And Compliance Behavior",
+      "depth": 3,
+      "body": [
+        "- Sensitive data visibility and redaction.",
+        "- Public token exposure and token lifecycle.",
+        "- Authentication and authorization boundaries.",
+        "- Data export privacy.",
+        "- Uploaded file safety.",
+        "- Audit trails for sensitive actions.",
+        "- PII handling.",
+        "- Role-specific data minimization.",
+        "- Safe defaults.",
+        "- Confirmation for destructive/external/private actions.",
+        "- Compliance retention/deletion behavior where relevant."
+      ]
+    },
+    {
+      "id": "16-observability-audit-logging-and-admin-operational-behavior",
+      "title": "16\\. Observability, Audit, Logging, And Admin Operational Behavior",
+      "depth": 3,
+      "body": [
+        "- Audit log creation.",
+        "- Admin status, health, diagnostics, and operational panels.",
+        "- User-visible versus internal-only logging.",
+        "- Debug logging and console behavior if user/security relevant.",
+        "- Monitoring and alert behavior.",
+        "- Analytics event behavior where it affects product decisions.",
+        "- Operational retry, repair, and manual intervention behavior.",
+        "- Evidence needed for closeout and incident follow-up."
+      ]
+    },
+    {
+      "id": "17-performance-responsiveness-and-resource-behavior",
+      "title": "17\\. Performance, Responsiveness, And Resource Behavior",
+      "depth": 3,
+      "body": [
+        "- Input responsiveness and perceived latency.",
+        "- Debounce/throttle behavior.",
+        "- Slow network and slow API behavior.",
+        "- Large data set behavior.",
+        "- Pagination/windowing/virtualization behavior.",
+        "- Memory/resource cleanup.",
+        "- Object URL cleanup.",
+        "- Long-running task progress.",
+        "- Blocking versus background work.",
+        "- Performance-related fallback or degradation."
+      ]
+    },
+    {
+      "id": "18-platform-device-responsive-and-environment-behavior",
+      "title": "18\\. Platform, Device, Responsive, And Environment Behavior",
+      "depth": 3,
+      "body": [
+        "- Desktop, mobile, tablet, responsive breakpoints.",
+        "- Capacitor/native app behavior if applicable.",
+        "- Browser differences when meaningful.",
+        "- Touch versus mouse versus keyboard behavior.",
+        "- Safe area, viewport, orientation.",
+        "- Offline/poor network behavior.",
+        "- Environment-specific behavior: local, staging, production.",
+        "- Feature flag or configuration behavior.",
+        "- SSR/client/hydration differences."
+      ]
+    },
+    {
+      "id": "19-migration-compatibility-parity-and-deprecation-behavior",
+      "title": "19\\. Migration, Compatibility, Parity, And Deprecation Behavior",
+      "depth": 3,
+      "body": [
+        "- Current behavior versus intended behavior.",
+        "- Preserved behavior during refactor.",
+        "- Intentional behavior changes.",
+        "- Runtime drift and observed current behavior.",
+        "- Backward compatibility.",
+        "- Legacy route/API/data compatibility.",
+        "- Temporary bridge behavior.",
+        "- Feature flags and phased rollout.",
+        "- Hardcut behavior.",
+        "- Old behavior removal and closeout.",
+        "- Parity proof requirements."
+      ]
+    },
+    {
+      "id": "20-testing-proof-and-closeout-behavior",
+      "title": "20\\. Testing, Proof, And Closeout Behavior",
+      "depth": 3,
+      "body": [
+        "- Behavior-to-proof mapping.",
+        "- Proof rows per governed behavior.",
+        "- Test type selection.",
+        "- Manual proof expectations.",
+        "- Accepted proof gaps.",
+        "- Runtime drift reporting.",
+        "- Quality observations.",
+        "- Closeout report requirements.",
+        "- User decision reporting.",
+        "- Living spec reconciliation.",
+        "- Final \"runtime matches App Behavior specs\" claim."
+      ]
+    },
+    {
+      "id": "future-backend-behavior-spec-taxonomy",
+      "title": "Future Backend Behavior Spec Taxonomy",
+      "body": [
+        "This section is roadmap guidance only until backend behavior specs are created. Current frontend route packets do not govern these backend-only behaviors.",
+        "",
+        "Future backend behavior specs should cover:",
+        "",
+        "- Endpoint contract and request/response behavior: methods, paths, auth requirements, accepted payloads, response envelopes, error envelopes, and versioning.",
+        "- Server-side validation and admission: required fields, conditional rules, capability gates, rejection reasons, public-safe errors, and validation precedence.",
+        "- Domain rules and invariants: lifecycle states, allowed transitions, business constraints, idempotency, duplicate handling, and domain ownership.",
+        "- Persistence and transaction behavior: database writes, consistency boundaries, rollback behavior, uniqueness, concurrency, and data retention.",
+        "- Background jobs, queues, retries, and scheduling: enqueue rules, retry policy, deduplication, timeout behavior, dead-letter behavior, and observable job status.",
+        "- Outbound email, webhook, and integration behavior: template selection, recipient rules, provider payloads, delivery/failure handling, and external side effects.",
+        "- Auth middleware, permissions, and server-side access: authentication requirements, role/capability checks, delegated access, token parsing, impersonation, and forbidden responses.",
+        "- Audit, logging, observability, and admin operational behavior: audit records, diagnostic events, metrics, alerts, operational repair paths, and incident evidence.",
+        "- Backend migration, compatibility, and deprecation behavior: old endpoint support, compatibility bridges, data migrations, hardcuts, and removal gates.",
+        "- Backend proof and closeout behavior: contract tests, integration tests, migration proof, security/privacy proof, operational proof, accepted gaps, and final runtime alignment claims.",
+        "",
+        "Frontend App Behavior specs may reference these backend specs once they exist, but they should still govern only frontend behavior and frontend/API interaction."
+      ]
+    },
+    {
+      "id": "final-takeaway",
+      "title": "Final Takeaway",
+      "body": [
+        "To truly capture all app behavior, App Behavior specs cannot be only route packets. App Behavior specs need multiple scopes:",
+        "",
+        "- Route specs",
+        "- Module specs",
+        "- Frontend API interaction and contract-consumption specs",
+        "- Future backend/domain specs when backend behavior is in scope",
+        "- Workflow specs",
+        "- Integration specs",
+        "- Security/privacy specs",
+        "- Migration/parity specs",
+        "- Proof/closeout specs",
+        "",
+        "Current route packets cover a strong subset: route-level UX, hidden route behavior, role/session behavior, frontend/API interaction branches, matrices, proof gaps, and source evidence. They are not enough by themselves to govern all frontend app behavior across modules and shared workflows, and they do not govern backend internals. Backend behavior needs separate backend behavior specs or backend source-of-truth authority."
+      ]
+    },
+    {
+      "id": "refactor-time-ui-and-platform-boundary",
+      "title": "Refactor-Time UI And Platform Boundary",
+      "body": [
+        "Responsive, platform, and environment behavior is Runtime Discovery Required only when behavior differs by viewport, platform, native runtime, browser capability, environment flag, or feature flag. Purely visual styling is not App Behavior coverage for refactor work unless it affects comprehension, accessibility, availability, execution, recovery, privacy, or proof.",
+        "",
+        "- In scope: screen-size or platform differences that change command availability, rendered data, route entry/handoff, permission/access behavior, recovery, storage, browser/native API use, or proof obligations.",
+        "- Out of scope for refactor coverage: spacing, color, typography, button size, decorative layout, animation polish, visual-only responsive containment, and other UI-only details already governed by shared defaults or derivable principles.",
+        "- Platform/runtime labels do not automatically imply browser proof. Choose source-only, Vitest logic, Vitest component/platform-runtime, Playwright/browser-real, manual, or accepted proof gap according to the meaningful behavior claim."
+      ]
+    }
+  ]
+}

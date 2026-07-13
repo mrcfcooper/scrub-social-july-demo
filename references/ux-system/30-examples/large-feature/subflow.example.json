@@ -1,0 +1,94 @@
+{
+  "schema": "tgn.ux-subflow.v1",
+  "itemType": "uxSubflow",
+  "id": "jobs.filters.apply-filters",
+  "title": "Apply filters",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 100,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "subflowIds": [
+      "jobs.filters.apply-filters"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "subflow": {
+    "purpose": "Convert valid provisional filter edits into the active Jobs browsing context.",
+    "trigger": "The user invokes Apply while filter edits are valid and applying would affect browsing.",
+    "userIntent": "Commit the current filter choices and return to results.",
+    "visibleSteps": [
+      "User reviews edited filters.",
+      "Apply is visible when applying matters.",
+      "Apply is enabled only when the edited filters are valid.",
+      "User invokes Apply.",
+      "Modal closes and results reflect the selected filters."
+    ],
+    "expectedResult": "The Jobs results experience reflects the applied filters and the modal is closed.",
+    "alternateResults": [
+      "If the edited filters are invalid, Apply remains visible but disabled until the user fixes the problem.",
+      "If applying would not change browsing, Apply is not shown as a meaningful action."
+    ],
+    "edgeCases": [
+      "User edits then restores values back to the active browsing context.",
+      "User creates invalid input after Apply was previously available.",
+      "User attempts to apply while a blocking condition is present."
+    ],
+    "mustNotHappen": [
+      "Apply must not silently save a reusable filter definition.",
+      "Apply must not close the modal without updating visible browsing when it reports success.",
+      "Apply must not be hidden merely because the user needs to correct invalid input."
+    ]
+  },
+  "relationships": {
+    "parentFlowId": "jobs.filters.advanced-filter-authoring",
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply"
+    ],
+    "scenarioIds": [
+      "jobs.filters.scenario.apply-invalid"
+    ],
+    "acceptanceCriterionIds": [
+      "jobs.filters.acceptance.modal-apply-success"
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.apply-filters.subflow.md"
+  },
+  "db": {
+    "collection": "uxSubflows",
+    "documentId": "jobs.filters.apply-filters",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

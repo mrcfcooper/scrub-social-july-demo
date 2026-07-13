@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jobs list — Scrub Society</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/demo/assets/jobs-list-cd58505a.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/demo/assets/jobs-list-030b0a3e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/demo/assets/jobs-list-cd58505a.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/demo/assets/jobs-list-030b0a3e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  :root { --ss-ease-standard: cubic-bezier(0.4, 0, 0.2, 1); }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #ECE5DB;
+    font-family: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+    color: #421A31;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 44px 36px 80px; }
+  .page-head { margin-bottom: 36px; }
+  .page-title { font-weight: 400; letter-spacing: -0.04em; font-size: 34px; margin: 0; line-height: 1.05; }
+  .page-sub { font-weight: 300; font-size: 16px; color: rgba(66,26,49,0.72); margin: 8px 0 0; max-width: 720px; }
+  .frame-label {
+    font-weight: 400; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(66,26,49,0.72); margin: 0 0 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .frame-label .dot { width: 7px; height: 7px; border-radius: 9999px; background: #BBAFEF; }
+  .section { margin-bottom: 48px; }
+  .row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .desktop-frame { width: 1180px; max-width: 100%; }
+  #root { display: block; }
+</style>
+</head>
+<body>
+  <script src="src/07d68f37.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="vendor/4cbdc13a.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="vendor/78428903.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  
+
+  <div id="root"></div>
+
+  <!-- kit primitives + frames -->
+  <script type="text/babel" src="src/e810ac21.js"></script>
+  <script type="text/babel" src="src/604fdb6c.js"></script>
+  <script type="text/babel" src="src/2121b812.js"></script>
+  <script type="text/babel" src="src/63e0ab83.jsx"></script>
+  <script type="text/babel" src="src/84e1e5ef.jsx"></script>
+  <!-- jobs list compositions -->
+  <script type="text/babel" src="src/ee4610b0.js"></script>
+  <script type="text/babel" src="src/a3e0deb2.js"></script>
+  <script type="text/babel" src="src/e163fefd.js"></script>
+
+  <script type="text/babel">
+    const FLAGS = [
+      {
+        t: 'Grid & map views have no primitive',
+        b: "The live page offers grid / list / map. The kit only defines a horizontal job-row card, so this rebuilds the list view faithfully. Grid (vertical multi-column cards) and the map view need net-new components — the toggle is shown but only list is backed.",
+      },
+      {
+        t: 'Off-palette status colors',
+        b: "Live verified / compact / workflow badges use sky, teal, emerald, amber and rose. Only six brand colors exist and there are no semantic status tokens. Rebuilt verified→Clear Sky chip, compact→Soft Cloud chip; the application-status set (pending/accepted/rejected) needs a palette decision.",
+      },
+      {
+        t: 'Cold grays & a gradient page',
+        b: "Live leans on gray-200/300 borders, gray body text, and a from-gray-50 background gradient. Brand hairlines are Plum Grove at 12% and backgrounds are solid blocks (no gradients). Swapped to --ss-line over Soft Cloud.",
+      },
+      {
+        t: 'Title-case headings & a red status dot',
+        b: '\u201CYour Next Shift Starts Here\u201D and \u201CActive Filter:\u201D are Title Case; brand headlines are sentence case. The results count is marked with a red dot (red isn\u2019t a brand color) — moved to Lavender Field.',
+      },
+      {
+        t: 'Compare has no primitive',
+        b: "The compare-jobs control + count bubble isn't in the kit. Approximated with a ghost control + a Plum Grove count badge; worth promoting to a real primitive if it stays.",
+      },
+    ];
+
+    function FlagsPanel() {
+      return (
+        <Card padding={28} style={{ width: 420, maxWidth: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+            <div style={{ width: 34, height: 34, borderRadius: '10px 10px 10px 0', background: SS.lav, color: SS.plum, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
+              <Icon name="sliders" size={18} />
+            </div>
+            <H3 style={{ fontSize: 18 }}>What fights the primitives</H3>
+          </div>
+          <Body size={13} style={{ color: SS.fg2, marginBottom: 6 }}>
+            Five spots where the live layout reaches past the clean system — flagged, not silently corrected.
+          </Body>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {FLAGS.map((f, i) => (
+              <div key={i} style={{ padding: '14px 0', borderTop: `1px solid ${SS.lineSoft}` }}>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'baseline' }}>
+                  <span style={{ fontFamily: SS.font, fontWeight: 400, fontSize: 13, color: SS.lav, lineHeight: 1.4, flex: '0 0 auto' }}>{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <div style={{ fontFamily: SS.font, fontWeight: 400, fontSize: 15, letterSpacing: '-0.01em', color: SS.plum }}>{f.t}</div>
+                    <Body size={13} style={{ color: SS.fg2, marginTop: 3 }}>{f.b}</Body>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      );
+    }
+
+    function Page() {
+      return (
+        <div className="wrap">
+          <div className="page-head">
+            <h1 className="page-title">Jobs list, rebuilt on clean primitives</h1>
+            <p className="page-sub">The live Jobs list — controls, active filters, results bar, and feed — recomposed for web and the mobile app using only Scrub Society components and tokens.</p>
+          </div>
+
+          <div className="section">
+            <p className="frame-label"><span className="dot"></span>Web · desktop · list view</p>
+            <div className="desktop-frame">
+              <ChromeWindow width={1180} height={880} url="scrubsociety.com/jobs"
+                tabs={[{ title: 'Jobs · Scrub Society' }, { title: 'Erin' }]} activeIndex={0}>
+                <WebJobsList />
+              </ChromeWindow>
+            </div>
+          </div>
+
+          <div className="section">
+            <div className="row">
+              <div>
+                <p className="frame-label"><span className="dot"></span>Mobile app · iOS</p>
+                <MobileJobsApp />
+              </div>
+              <div style={{ flex: 1, minWidth: 360 }}>
+                <p className="frame-label"><span className="dot"></span>Notes</p>
+                <FlagsPanel />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Page />);
+  </script>
+
+
+</body></html>

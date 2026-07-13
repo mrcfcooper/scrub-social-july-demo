@@ -1,0 +1,212 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .pc { padding: 2rem 0; font-family: var(--font-sans); }
+  .pc-header { margin-bottom: 1.75rem; }
+  .pc-header h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .pc-header p { font-size: 14px; color: var(--color-text-secondary); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 0.75rem; padding-left: 2px; }
+  .matrix-wrap { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { text-align: center; padding: 0; }
+  thead tr { background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  thead th:first-child { text-align: left; width: 160px; padding: 10px 14px; }
+  thead th { padding: 10px 8px; }
+  .ch-head { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .ch-head i { font-size: 17px; color: #421A31; }
+  .ch-head span { font-size: 11px; font-weight: 500; color: var(--color-text-primary); }
+  tbody tr { border-bottom: 0.5px solid var(--color-border-tertiary); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--color-background-secondary); }
+  .row-label { text-align: left; padding: 10px 14px; }
+  .row-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .row-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 1px; line-height: 1.4; }
+  .row-badge { font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 99px; background: #F3EEF1; color: #421A31; display: inline-block; margin-top: 3px; }
+  td.cell { padding: 8px 6px; vertical-align: middle; }
+  .cell-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .toggle { position: relative; width: 34px; height: 19px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: var(--color-border-tertiary); border-radius: 99px; cursor: pointer; transition: background 0.2s; border: 0.5px solid var(--color-border-secondary); }
+  .slider:before { content: ''; position: absolute; height: 13px; width: 13px; left: 3px; top: 2.5px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.18); }
+  .toggle input:checked + .slider { background: #421A31; border-color: #421A31; }
+  .toggle input:checked + .slider:before { transform: translateX(14px); }
+  .toggle input:disabled + .slider { opacity: 0.35; cursor: not-allowed; }
+  select.freq { font-size: 10px; border: 0.5px solid var(--color-border-secondary); border-radius: 4px; padding: 2px 4px; color: var(--color-text-secondary); background: var(--color-background-primary); max-width: 72px; display: none; }
+  select.freq.visible { display: block; }
+  .na { font-size: 11px; color: var(--color-text-tertiary); }
+  .sms-note { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-bottom: 1.5rem; }
+  .sms-note p { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px; }
+  .sms-note a { color: #421A31; text-decoration: underline; }
+  .sms-check { display: flex; align-items: flex-start; gap: 8px; }
+  .sms-check input { margin-top: 2px; accent-color: #421A31; width: 14px; height: 14px; flex-shrink: 0; }
+  .sms-check label { font-size: 12px; color: var(--color-text-primary); line-height: 1.5; }
+  .actions { display: flex; gap: 10px; margin-top: 0.5rem; }
+  .btn-primary { font-size: 14px; font-weight: 500; padding: 9px 20px; border-radius: var(--border-radius-md); background: #421A31; color: white; border: none; cursor: pointer; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost { font-size: 14px; font-weight: 500; padding: 9px 20px; border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); border: 0.5px solid var(--color-border-secondary); cursor: pointer; }
+  .toast { display: none; background: #421A31; color: white; font-size: 13px; padding: 9px 14px; border-radius: var(--border-radius-md); margin-top: 1rem; align-items: center; gap: 7px; }
+  .toast.show { display: flex; }
+  .unsub-link { font-size: 12px; color: var(--color-text-secondary); text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 1rem; }
+  .legend { display: flex; gap: 14px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-text-secondary); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+</style>
+
+<h2 class="sr-only">Preference center matrix — manage notification channels and frequency per topic</h2>
+
+<div class="pc">
+  <div class="pc-header">
+    <h1>Notification preferences</h1>
+    <p>Control how and when we reach you — for each topic, pick your channel and cadence.</p>
+  </div>
+
+  <p class="section-label">Notification matrix</p>
+  <div class="legend">
+    <div class="legend-item"><i class="ti ti-toggle-right" style="font-size:14px;color:#421A31" aria-hidden="true"></i> Toggle on/off</div>
+    <div class="legend-item"><i class="ti ti-clock" style="font-size:14px;color:var(--color-text-secondary)" aria-hidden="true"></i> Frequency when on</div>
+    <div class="legend-item"><span class="na" style="font-size:13px">—</span> Not available</div>
+  </div>
+
+  <div class="matrix-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            <div class="ch-head"><i class="ti ti-device-mobile" aria-hidden="true"></i><span>Push</span></div>
+          </th>
+          <th>
+            <div class="ch-head"><i class="ti ti-mail" aria-hidden="true"></i><span>Email</span></div>
+          </th>
+          <th>
+            <div class="ch-head"><i class="ti ti-message" aria-hidden="true"></i><span>SMS</span></div>
+          </th>
+          <th>
+            <div class="ch-head"><i class="ti ti-bell" aria-hidden="true"></i><span>In-app</span></div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">New job matches</div>
+            <div class="row-desc">Jobs matching your profile</div>
+            <span class="row-badge">Recommended</span>
+          </td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Push frequency for new job matches"><option>Instant</option><option>Daily</option><option>Weekly</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Email frequency for new job matches"><option>Instant</option><option selected>Daily</option><option>Weekly</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" id="sms1" onchange="toggleFreq(this); checkSms()"><span class="slider"></span></label><select class="freq" aria-label="SMS frequency for new job matches"><option>Instant</option><option>Daily</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="In-app frequency for new job matches"><option>Instant</option><option>Daily</option></select></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Saved job updates</div>
+            <div class="row-desc">Pay changes, start date, status</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Push frequency for saved job updates"><option>Instant</option><option>Daily</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq" aria-label="Email frequency for saved job updates"><option>Instant</option><option selected>Daily</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" id="sms2" onchange="toggleFreq(this); checkSms()"><span class="slider"></span></label><select class="freq" aria-label="SMS frequency for saved job updates"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="In-app frequency for saved job updates"><option>Instant</option></select></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Application activity</div>
+            <div class="row-desc">Submitted, recruiter views, follow-up</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Push frequency for application activity"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Email frequency for application activity"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" id="sms3" onchange="toggleFreq(this); checkSms()"><span class="slider"></span></label><select class="freq" aria-label="SMS frequency for application activity"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="In-app frequency for application activity"><option>Instant</option></select></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Recruiter outreach</div>
+            <div class="row-desc">When a recruiter contacts you via Erin</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Push frequency for recruiter outreach"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq" aria-label="Email frequency for recruiter outreach"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" id="sms4" onchange="toggleFreq(this); checkSms()"><span class="slider"></span></label><select class="freq" aria-label="SMS frequency for recruiter outreach"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="In-app frequency for recruiter outreach"><option>Instant</option></select></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Community newsletter</div>
+            <div class="row-desc">Facility intel, community picks</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq" aria-label="Email frequency for community newsletter"><option>Weekly</option><option>Monthly</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Platform announcements</div>
+            <div class="row-desc">New features, important notices</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Push frequency for platform announcements"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="Email frequency for platform announcements"><option>Instant</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" checked onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq visible" aria-label="In-app frequency for platform announcements"><option>Instant</option></select></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">
+            <div class="row-title">Sponsored content</div>
+            <div class="row-desc">From Scrub Society partner agencies</div>
+          </td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+          <td class="cell"><div class="cell-inner"><label class="toggle"><input type="checkbox" onchange="toggleFreq(this)"><span class="slider"></span></label><select class="freq" aria-label="Email frequency for sponsored content"><option>Weekly</option><option>Monthly</option></select></div></td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+          <td class="cell"><div class="cell-inner"><span class="na" aria-label="Not available">—</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sms-note" id="smsNote">
+    <p>SMS requires your explicit consent under TCPA. Standard message and data rates apply. You can reply STOP at any time to opt out. View our <a href="#">privacy policy</a>.</p>
+    <div class="sms-check">
+      <input type="checkbox" id="smsConsent" onchange="updateSmsToggles()">
+      <label for="smsConsent">I consent to receive text messages from Scrub Society. Consent is not required to use the platform.</label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="savePrefs()">Save preferences</button>
+    <button class="btn-ghost">Cancel</button>
+  </div>
+
+  <div id="toast" class="toast" role="status"><i class="ti ti-check" aria-hidden="true"></i> Preferences saved</div>
+  <p><a class="unsub-link" href="#">Unsubscribe from all Scrub Society emails</a></p>
+</div>
+
+<script>
+function toggleFreq(input) {
+  const cell = input.closest('.cell-inner');
+  const sel = cell.querySelector('select.freq');
+  if (sel) sel.classList.toggle('visible', input.checked);
+}
+const smsIds = ['sms1','sms2','sms3','sms4'];
+function checkSms() {
+  const anyOn = smsIds.some(id => document.getElementById(id)?.checked);
+  const consent = document.getElementById('smsConsent');
+  if (anyOn && !consent.checked) {
+    smsIds.forEach(id => { const el = document.getElementById(id); if(el) el.checked = false; });
+    smsIds.forEach(id => { const el = document.getElementById(id); if(el) toggleFreq(el); });
+    consent.closest('.sms-note').style.border = '1.5px solid #421A31';
+    setTimeout(() => { consent.closest('.sms-note').style.border = '0.5px solid var(--color-border-tertiary)'; }, 2000);
+  }
+}
+function updateSmsToggles() {
+  const consent = document.getElementById('smsConsent').checked;
+  smsIds.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.disabled = !consent;
+  });
+}
+function savePrefs() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+updateSmsToggles();
+</script>

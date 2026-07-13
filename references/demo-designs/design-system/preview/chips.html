@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .chip { display:inline-flex; align-items:center; gap:6px; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 400; letter-spacing: -0.005em; border: 1px solid transparent; }
+  .chip.ink { background: var(--plum-grove); color: var(--morning-dew); }
+  .chip.sky { background: var(--clear-sky); color: var(--plum-grove); }
+  .chip.lav { background: var(--lavender-field); color: var(--plum-grove); }
+  .chip.dew { background: var(--morning-dew); color: var(--plum-grove); border-color: var(--plum-grove); }
+  .chip.out { background: transparent; color: var(--plum-grove); border-color: var(--border); }
+  .row { display:flex; gap:8px; flex-wrap:wrap; }
+</style></head>
+<body><div class="card">
+  <div class="row">
+    <span class="chip ink">Travel</span>
+    <span class="chip sky">ICU</span>
+    <span class="chip lav">Peds</span>
+    <span class="chip dew">OT · 4yr</span>
+    <span class="chip out">+ add specialty</span>
+  </div>
+  <div class="row">
+    <span class="chip sky">Find a job</span>
+    <span class="chip lav">Find housing</span>
+    <span class="chip dew">Mentor</span>
+    <span class="chip out">Journey</span>
+  </div>
+  <div style="font-size:11px; color:var(--fg-muted); text-transform:lowercase;">full-pill · sentence case · never all caps</div>
+</div></body></html>

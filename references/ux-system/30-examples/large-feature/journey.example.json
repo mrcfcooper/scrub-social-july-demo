@@ -1,0 +1,100 @@
+{
+  "schema": "tgn.ux-journey.v1",
+  "itemType": "uxJourney",
+  "id": "jobs.filters.narrow-results",
+  "title": "User narrows Jobs results with filters",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 95,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "featureIds": [
+      "jobs.search"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal",
+      "filter-summary"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "journey": {
+    "userGoal": "Narrow a broad set of Jobs results into a more relevant list.",
+    "userContext": "The user is browsing jobs and has enough intent to add filter constraints, but may still need to revise or clear them.",
+    "trigger": "The user opens filter controls or lands on Jobs with filters already active.",
+    "startingState": "Jobs search is visible with either broad results, active filters, or a restorable filtered context.",
+    "successOutcome": "The user sees results that reflect the intended filter constraints and understands how to revise or clear them.",
+    "happyPath": [
+      "Open advanced filters.",
+      "Review current filter context.",
+      "Choose or edit filter values.",
+      "Apply filters.",
+      "Return to Jobs results with visible confirmation of active filters."
+    ],
+    "alternatePaths": [
+      "Dismiss without applying and keep the previous browsing state.",
+      "Clear filters to return to broad browsing.",
+      "Correct invalid filter input before applying.",
+      "Use existing active filters as the starting point for refinement."
+    ],
+    "hesitationOrFailurePoints": [
+      "The user cannot tell whether edits are pending or active.",
+      "The user cannot recover from too-narrow filters.",
+      "The user fears clearing will remove more than intended.",
+      "The user sees no results and lacks a clear recovery action."
+    ],
+    "recoveryExpectations": [
+      "Cancel and discard paths should not surprise-apply edits.",
+      "Clear paths should communicate their scope.",
+      "Invalid input should explain what must change.",
+      "Empty results should provide a way to broaden or clear filters."
+    ],
+    "nonGoals": [
+      "Specify how filters are persisted internally.",
+      "Specify API query structure.",
+      "Specify visual styling beyond behavior-relevant hierarchy."
+    ]
+  },
+  "relationships": {
+    "featureIds": [
+      "jobs.search"
+    ],
+    "subfeatureIds": [
+      "jobs.search.filters"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply",
+      "jobs.filters.desired.modal-clear"
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.narrow-results.journey.md"
+  },
+  "db": {
+    "collection": "uxJourneys",
+    "documentId": "jobs.filters.narrow-results",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

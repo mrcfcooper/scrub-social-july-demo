@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-coverage-index.schema.json",
+  "title": "TGN UX Coverage Index",
+  "type": "object",
+  "required": [
+    "schema",
+    "coverageIndexId",
+    "corpusId",
+    "title",
+    "owner",
+    "specProfile",
+    "depthTarget",
+    "coverageRows"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-coverage-index.v1"
+    },
+    "coverageIndexId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpusId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "specProfile": {
+      "$ref": "shared-definitions.schema.json#/$defs/specProfile"
+    },
+    "depthTarget": {
+      "$ref": "shared-definitions.schema.json#/$defs/depthTarget"
+    },
+    "coverageRows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "artifactRole",
+          "itemRef",
+          "requiredByProfile",
+          "coverageStatus",
+          "confirmationBaseline"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifactRole": {
+            "$ref": "shared-definitions.schema.json#/$defs/artifactRole"
+          },
+          "itemRef": {
+            "$ref": "shared-definitions.schema.json#/$defs/ref"
+          },
+          "parentRef": {
+            "$ref": "shared-definitions.schema.json#/$defs/ref"
+          },
+          "requiredByProfile": {
+            "type": "boolean"
+          },
+          "coverageStatus": {
+            "type": "string",
+            "enum": [
+              "covered",
+              "missing",
+              "pending",
+              "intentionally-omitted",
+              "out-of-scope",
+              "needs-confirmation",
+              "needs-proof"
+            ]
+          },
+          "modeCoverage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "mode",
+                "status"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "$ref": "shared-definitions.schema.json#/$defs/mode"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "covered",
+                    "missing",
+                    "pending",
+                    "not-required"
+                  ]
+                }
+              }
+            }
+          },
+          "facetCoverage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "facet",
+                "status"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "facet": {
+                  "$ref": "shared-definitions.schema.json#/$defs/facet"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "covered",
+                    "missing",
+                    "pending",
+                    "intentionally-omitted",
+                    "not-required"
+                  ]
+                }
+              }
+            }
+          },
+          "missingChildren": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pendingDecisionRefs": {
+            "type": "array",
+            "items": {
+              "$ref": "shared-definitions.schema.json#/$defs/ref"
+            }
+          },
+          "acceptanceCriterionRefs": {
+            "type": "array",
+            "items": {
+              "$ref": "shared-definitions.schema.json#/$defs/ref"
+            }
+          },
+          "notesMd": {
+            "type": "string"
+          },
+          "confirmationBaseline": {
+            "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+          }
+        }
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    }
+  }
+}

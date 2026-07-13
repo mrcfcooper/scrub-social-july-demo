@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-subflow-item.schema.json",
+  "title": "TGN UX Subflow Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "mode",
+    "status",
+    "authority",
+    "confidence",
+    "owner",
+    "scope",
+    "subflow",
+    "relationships",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-subflow.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxSubflow"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "$ref": "shared-definitions.schema.json#/$defs/mode"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/status"
+    },
+    "authority": {
+      "$ref": "shared-definitions.schema.json#/$defs/authority"
+    },
+    "confidence": {
+      "$ref": "shared-definitions.schema.json#/$defs/confidence"
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "subflow": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "trigger",
+        "userIntent",
+        "visibleSteps",
+        "expectedResult",
+        "alternateResults",
+        "edgeCases",
+        "mustNotHappen"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "userIntent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibleSteps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expectedResult": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alternateResults": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edgeCases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mustNotHappen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": [
+        "parentFlowId",
+        "requirementIds",
+        "scenarioIds",
+        "acceptanceCriterionIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "parentFlowId": {
+          "type": "string"
+        },
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scenarioIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acceptanceCriterionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    }
+  }
+}

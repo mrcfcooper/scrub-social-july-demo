@@ -1,0 +1,63 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.40-generation-and-storage.00-generated-markdown-companions",
+  "title": "Generated Markdown Companions",
+  "content": [
+    {
+      "id": "generated-markdown-companions-body-1",
+      "body": "This document exists to define how JSON App Behavior specs should produce Markdown review artifacts. Use it when creating or validating generators, checking stale generated output, or reviewing App Behavior specs in a human-friendly format."
+    },
+    {
+      "id": "source-rule",
+      "title": "Source Rule",
+      "body": [
+        "JSON is governing. Generated Markdown is review-only.",
+        "",
+        "Every generated Markdown file should include a header that says:",
+        "",
+        "```md",
+        "<!-- Generated from <source>. Do not edit by hand. -->",
+        "```",
+        "",
+        "Manual edits belong in the JSON source, not in the generated Markdown companion."
+      ]
+    },
+    {
+      "id": "rendering-rules",
+      "title": "Rendering Rules",
+      "body": [
+        "Generators should:",
+        "",
+        "- discover known UX JSON files by schema or suffix",
+        "- render `*Md` fields as Markdown",
+        "- treat non-`*Md` fields as structured values",
+        "- preserve stable item order",
+        "- avoid timestamps by default",
+        "- avoid absolute paths by default",
+        "- include source JSON path and schema version",
+        "- include item IDs visibly",
+        "- make current, desired, and mapping artifacts visually distinct"
+      ]
+    },
+    {
+      "id": "failure-rules",
+      "title": "Failure Rules",
+      "body": [
+        "Generation or check mode should fail when:",
+        "",
+        "- JSON is invalid",
+        "- schema version is unsupported",
+        "- required fields are missing",
+        "- item IDs are duplicated inside a collection",
+        "- a mapping references missing current or desired IDs",
+        "- generated Markdown is stale in check mode",
+        "- generated output would reorder rows without an explicit stable ordering rule"
+      ]
+    },
+    {
+      "id": "review-role",
+      "title": "Review Role",
+      "body": "Generated Markdown should help humans review behavior. It should not become a parallel spec, a place for pending decisions to hide, or the only place a behavior appears."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Scrub Society — Web (Print)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="../../assets/logo/favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Print-friendly overrides */
+    html, body { background: #F9F2E8 !important; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    /* Disable sticky nav so full content prints */
+    .w-nav { position: static !important; }
+    /* Kill all hover/animation/transitions */
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+
+    @page {
+      size: 1280px 1800px;
+      margin: 0;
+    }
+
+    @media print {
+      html, body { margin: 0; padding: 0; }
+      section, .w-nav, .w-footer { break-inside: avoid-page; }
+      .w-hero { break-after: page; }
+      .w-strip { break-after: page; }
+      .w-pillars { break-after: page; }
+      .w-spotlight { break-after: page; }
+      .w-join { break-after: page; }
+      /* No box shadows in print (gray fringe) */
+      .w-pillar, .w-sp-card, .w-signup { box-shadow: none !important; }
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel">
+    const App = () => {
+      React.useEffect(() => { window.lucide && window.lucide.createIcons(); });
+      return (
+        <>
+          <Nav />
+          <Hero />
+          <Strip />
+          <Pillars />
+          <Spotlight />
+          <Join />
+          <Footer />
+        </>
+      );
+    };
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    // Wait for fonts + render, then auto-print
+    (async () => {
+      try { await document.fonts.ready; } catch (e) {}
+      setTimeout(() => window.print(), 900);
+    })();
+  </script>
+</body>
+</html>

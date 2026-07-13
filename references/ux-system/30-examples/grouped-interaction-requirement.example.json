@@ -1,0 +1,245 @@
+{
+  "schema": "tgn.ux-requirement.v1",
+  "itemType": "uxRequirement",
+  "id": "jobs.filters.desired.modal-apply",
+  "title": "Apply commits a valid filter draft",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 100,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.author-filter-query"
+    ],
+    "flowIds": [
+      "advanced-filters"
+    ],
+    "subflowIds": [
+      "apply-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "requirement": {
+    "summary": "Apply commits the current valid filter draft to live Jobs browsing and closes the modal.",
+    "detailsMd": "This grouped interaction requirement keeps Apply visibility, enabled state, result, and must-not behavior together because they are one user-facing action contract.",
+    "userGoal": "Apply filter changes and return to updated Jobs results.",
+    "productMeaning": "Apply is the user's explicit transition from provisional filter editing to live browsing.",
+    "nonGoals": [
+      "Do not save a reusable filter definition.",
+      "Do not update a saved filter unless the user chose a separate save/update action."
+    ]
+  },
+  "requirementSource": {
+    "origin": "user-confirmed",
+    "confirmation": "confirmed",
+    "confirmedBy": "user",
+    "confirmedAt": null,
+    "notesMd": null
+  },
+  "changeControl": {
+    "changePolicy": "frozen",
+    "materialBehaviorChange": false,
+    "pendingChangeIds": [],
+    "supersedesRequirementIds": [],
+    "supersededByRequirementId": null
+  },
+  "conditions": {
+    "appliesWhen": [
+      "the user is editing filters in the modal"
+    ],
+    "doesNotApplyWhen": [
+      "the modal is not open"
+    ],
+    "preconditions": [
+      "a filter draft exists"
+    ],
+    "blockedWhen": [],
+    "variants": [
+      {
+        "id": "apply-only",
+        "summary": "Apply filter changes without saving a reusable definition."
+      }
+    ]
+  },
+  "visibility": {
+    "specified": true,
+    "visibleWhen": [
+      "the current filter draft would change live browsing"
+    ],
+    "hiddenWhen": [
+      "the current filter draft would not change live browsing"
+    ],
+    "displayMode": "hide-when-not-relevant",
+    "notesMd": null
+  },
+  "enabledState": {
+    "specified": true,
+    "enabledWhen": [
+      "the draft can be applied"
+    ],
+    "disabledWhen": [
+      "the draft is invalid",
+      "a required operation is blocked"
+    ],
+    "disabledBehavior": "remain visible but disabled",
+    "notesMd": "Disabled state is user-facing because it explains that Apply is relevant but temporarily unavailable."
+  },
+  "interaction": {
+    "specified": true,
+    "triggers": [
+      {
+        "type": "click",
+        "target": "Apply"
+      }
+    ],
+    "primaryAction": "apply filters",
+    "interactionResult": "live Jobs browsing updates and the modal closes"
+  },
+  "confirmation": {
+    "specified": true,
+    "required": false,
+    "requiredWhen": [],
+    "confirmationType": null,
+    "cancelBehavior": null,
+    "confirmBehavior": null
+  },
+  "effects": {
+    "immediate": [
+      "live Jobs browsing reflects the applied filters",
+      "the modal closes"
+    ],
+    "deferred": [],
+    "sideEffects": [
+      "filter summary reflects the new active filters"
+    ],
+    "mustNot": [
+      "create a saved filter",
+      "update a saved filter",
+      "leave unapplied filter edits behind"
+    ]
+  },
+  "observableScenarios": [
+    {
+      "scenario": "Draft is valid and changes browsing",
+      "userSees": "Apply is visible and enabled.",
+      "userCanDo": [
+        "click Apply"
+      ],
+      "expectedOutcome": "Filters are applied and the modal closes."
+    },
+    {
+      "scenario": "Draft is invalid but would change browsing",
+      "userSees": "Apply is visible but disabled.",
+      "userCanDo": [
+        "fix the invalid input"
+      ],
+      "expectedOutcome": "Apply becomes enabled after the invalid input is corrected."
+    }
+  ],
+  "contentCopy": {
+    "specified": true,
+    "governing": true,
+    "labels": [
+      {
+        "id": "apply-label",
+        "text": "Apply",
+        "appliesTo": "filter modal primary action"
+      }
+    ],
+    "bodyCopy": [],
+    "notesMd": "The label is governing because it distinguishes this action from save/update actions."
+  },
+  "relationships": {
+    "relatedRequirementIds": [
+      "jobs.filters.desired.modal-cancel",
+      "jobs.filters.desired.modal-discard"
+    ],
+    "dependsOnRequirementIds": [],
+    "parentRequirementId": "jobs.filters.desired.advanced-filter-modal",
+    "childRequirementIds": []
+  },
+  "implementationGate": {
+    "required": true,
+    "gateType": "hard",
+    "canImplement": true,
+    "acceptanceCriteria": [
+      "Apply is visible only when applying would change live browsing.",
+      "Apply remains visible but disabled when the draft is invalid.",
+      "Successful Apply updates live browsing and closes the modal.",
+      "Successful Apply does not create or update a saved filter."
+    ]
+  },
+  "testGate": {
+    "required": true,
+    "proofLevel": "behavior-test",
+    "assertions": [
+      {
+        "id": "jobs.filters.desired.modal-apply.assertion.visible",
+        "summary": "Apply is visible when the draft would change live browsing."
+      },
+      {
+        "id": "jobs.filters.desired.modal-apply.assertion.disabled",
+        "summary": "Apply remains visible but disabled when the draft is invalid."
+      },
+      {
+        "id": "jobs.filters.desired.modal-apply.assertion.effect",
+        "summary": "Successful Apply updates live browsing and closes the modal."
+      },
+      {
+        "id": "jobs.filters.desired.modal-apply.assertion.must-not-save",
+        "summary": "Successful Apply does not create or update a saved filter."
+      }
+    ],
+    "manualProofAllowed": false,
+    "testRefs": []
+  },
+  "risk": {
+    "level": "high",
+    "categories": [
+      "behavior-critical",
+      "user-commit-action"
+    ],
+    "failureModes": [
+      "Apply is hidden when the user needs to fix invalid input.",
+      "Apply silently saves or updates a reusable filter definition.",
+      "Apply appears to succeed but browsing does not update."
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.desired.modal-apply.md"
+  },
+  "db": {
+    "collection": "uxRequirements",
+    "documentId": "jobs.filters.desired.modal-apply",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

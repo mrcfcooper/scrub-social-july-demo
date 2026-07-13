@@ -1,0 +1,89 @@
+{
+  "schema": "tgn.ux-acceptance-criterion.v1",
+  "itemType": "uxAcceptanceCriterion",
+  "id": "jobs.filters.acceptance.modal-apply-success",
+  "title": "Apply commits filters and closes the modal",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 100,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "subflowIds": [
+      "jobs.filters.apply-filters"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "criterion": {
+    "given": [
+      "The advanced filter modal is open.",
+      "The user has made valid filter edits.",
+      "Applying the edits would change Jobs browsing."
+    ],
+    "when": [
+      "The user invokes Apply."
+    ],
+    "then": [
+      "The modal closes.",
+      "The Jobs results reflect the applied filters.",
+      "The active filter summary reflects the applied filters."
+    ],
+    "and": [
+      "No reusable saved filter is created.",
+      "No existing saved filter is updated.",
+      "No unapplied filter edits remain visible as pending."
+    ],
+    "proofPriority": "critical",
+    "automationExpectation": "automated-required",
+    "manualProofAllowed": false,
+    "failureMeaning": "The primary filter commit path is not trustworthy enough for implementation closeout."
+  },
+  "relationships": {
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply"
+    ],
+    "scenarioIds": [],
+    "subflowIds": [
+      "jobs.filters.apply-filters"
+    ],
+    "testRefs": []
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.acceptance.modal-apply-success.md"
+  },
+  "db": {
+    "collection": "uxAcceptanceCriteria",
+    "documentId": "jobs.filters.acceptance.modal-apply-success",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

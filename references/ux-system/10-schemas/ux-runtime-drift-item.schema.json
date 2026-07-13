@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-runtime-drift-item.schema.json",
+  "title": "TGN UX Runtime Drift Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "corpusId",
+    "owner",
+    "scope",
+    "discoveredAt",
+    "discoveredDuring",
+    "driftType",
+    "severity",
+    "userVisible",
+    "blocksCurrentWork",
+    "status",
+    "documentedCurrentRefs",
+    "observedCurrentRefs",
+    "intendedRefs",
+    "desiredRefs",
+    "governingRefs",
+    "mappingRefs",
+    "evidenceRefs",
+    "summary",
+    "recommendation",
+    "reportedToUser",
+    "followUp",
+    "implementationGate",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-runtime-drift.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxRuntimeDrift"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpusId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "discoveredAt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discoveredDuring": {
+      "type": "string",
+      "minLength": 1
+    },
+    "driftType": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeDriftType"
+    },
+    "severity": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeDriftSeverity"
+    },
+    "userVisible": {
+      "type": "boolean"
+    },
+    "blocksCurrentWork": {
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeDriftStatus"
+    },
+    "documentedCurrentRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "observedCurrentRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "intendedRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "desiredRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "governingRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "mappingRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "pendingDecisionRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "codeLocators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observedRuntimeSummary": {
+      "type": "string"
+    },
+    "documentedCurrentSummary": {
+      "type": "string"
+    },
+    "intendedOrDesiredSummary": {
+      "type": "string"
+    },
+    "recommendation": {
+      "$ref": "shared-definitions.schema.json#/$defs/recommendation"
+    },
+    "reportedToUser": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not-reported",
+            "reported",
+            "not-required"
+          ]
+        },
+        "reportedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "followUp": {
+      "type": "object",
+      "required": [
+        "required",
+        "owner",
+        "nextStep"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "nextStep": {
+          "type": "string"
+        },
+        "targetArtifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "due": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolvedBy": {
+          "type": "string"
+        },
+        "resolvedAt": {
+          "type": "string"
+        },
+        "resolutionType": {
+          "type": "string",
+          "enum": [
+            "runtime-aligned",
+            "ux-updated",
+            "accepted",
+            "superseded"
+          ]
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "implementationGate": {
+      "type": "object",
+      "required": [
+        "canContinue"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "canContinue": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "blockedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    }
+  }
+}

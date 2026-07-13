@@ -1,0 +1,115 @@
+{
+  "schema": "tgn.ux-current-desired-mapping.v1",
+  "itemType": "uxCurrentDesiredMapping",
+  "id": "jobs.filters.mapping.modal-clear",
+  "corpusId": "jobs.filters",
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.return-to-broad-results"
+    ],
+    "flowIds": [
+      "clear-reset-recovery"
+    ],
+    "subflowIds": [
+      "clear-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "currentRefs": [
+    {
+      "id": "jobs.filters.current.modal-clear",
+      "mode": "current",
+      "itemType": "uxRequirement",
+      "title": "Current modal clear behavior"
+    }
+  ],
+  "desiredRefs": [
+    {
+      "id": "jobs.filters.desired.modal-clear",
+      "mode": "desired",
+      "itemType": "uxRequirement",
+      "title": "Clear Filters resets active browse filters"
+    }
+  ],
+  "mappingType": "changed",
+  "decisionStatus": "pending-confirmation",
+  "summary": "Current modal clear behavior appears local to the modal, while desired UX makes Clear Filters an active browse reset.",
+  "behaviorDelta": {
+    "preserved": [
+      "The user retains an explicit way to clear filters."
+    ],
+    "changed": [
+      "Clear Filters changes from modal-local cleanup to confirmed active browse reset."
+    ],
+    "added": [
+      "Confirmation is required before active filter constraints are reset."
+    ],
+    "removed": [
+      "Clear Filters should not be treated as local-only cleanup in desired UX."
+    ],
+    "unknown": [],
+    "notesMd": "This mapping is the decision surface; neither current nor desired rows should point to implementation files as governing authority."
+  },
+  "recommendation": {
+    "summary": "Use the desired active-browse reset behavior after confirmation.",
+    "confidence": 85,
+    "rationaleMd": "The label `Clear Filters` most naturally means clearing active filter constraints from the user's perspective.",
+    "alternatives": [
+      {
+        "summary": "Keep Clear Filters modal-local and introduce a separate active reset action.",
+        "tradeoffsMd": "This preserves current semantics but risks two similar actions and more user confusion."
+      }
+    ],
+    "consequencesMd": "This is a material behavior change and should not become governing until confirmed."
+  },
+  "confirmation": {
+    "required": true,
+    "status": "pending",
+    "confirmedBy": null,
+    "confirmedAt": null,
+    "notesMd": "User confirmation is required before implementation can treat the desired row as governing."
+  },
+  "implementationGate": {
+    "canImplement": false,
+    "reason": "Desired behavior change needs confirmation.",
+    "blockedBy": [
+      "jobs.filters.desired.modal-clear"
+    ]
+  },
+  "testGate": {
+    "required": true,
+    "desiredRequirementRefs": [
+      "jobs.filters.desired.modal-clear"
+    ],
+    "assertionRefs": [
+      "jobs.filters.desired.modal-clear.assertion.visibility",
+      "jobs.filters.desired.modal-clear.assertion.confirmation",
+      "jobs.filters.desired.modal-clear.assertion.result"
+    ]
+  },
+  "generatedRefs": {
+    "markdown": "generated/mappings/jobs.filters.mapping.modal-clear.md"
+  },
+  "db": {
+    "collection": "uxCurrentDesiredMappings",
+    "documentId": "jobs.filters.mapping.modal-clear",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mappingType": "changed"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

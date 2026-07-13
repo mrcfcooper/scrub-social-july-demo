@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-artifact-envelope.schema.json",
+  "title": "TGN UX Artifact Envelope",
+  "type": "object",
+  "required": [
+    "schema",
+    "artifactRole",
+    "artifactType",
+    "corpusId",
+    "owner",
+    "uxModes",
+    "governing",
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-artifact.v1"
+    },
+    "artifactRole": {
+      "$ref": "shared-definitions.schema.json#/$defs/artifactRole"
+    },
+    "artifactType": {
+      "type": "string",
+      "enum": [
+        "features",
+        "subfeatures",
+        "journeys",
+        "flows",
+        "subflows",
+        "feature-behaviors",
+        "requirements",
+        "runtime-scenarios",
+        "validation-recovery",
+        "acceptance-criteria",
+        "current-desired-mappings",
+        "pending-decisions",
+        "mixed",
+        "behavior-mappings",
+        "runtime-drift",
+        "behavior-threads"
+      ]
+    },
+    "corpusId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "uxModes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/mode"
+      }
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "governing": {
+      "type": "object",
+      "required": [
+        "jsonIsGoverning",
+        "markdownIsReviewOnly"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "jsonIsGoverning": {
+          "type": "boolean",
+          "const": true
+        },
+        "markdownIsReviewOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "sourceFile": {
+      "type": "string"
+    },
+    "generatedMarkdown": {
+      "type": "string"
+    },
+    "splitCompose": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "portableItems": {
+          "type": "boolean"
+        },
+        "stableItemOrder": {
+          "type": "boolean"
+        },
+        "preferredSplitKey": {
+          "type": "string"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    }
+  }
+}

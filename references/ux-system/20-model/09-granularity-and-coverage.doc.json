@@ -1,0 +1,100 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.09-granularity-and-coverage",
+  "title": "Granularity And Coverage",
+  "content": [
+    {
+      "id": "granularity-and-coverage-body-1",
+      "body": "This document exists to help agents choose the right UX object granularity and prove coverage for large or risky App Behavior corpuses. Use it when deciding whether to create a feature, subfeature, journey, flow, subflow, requirement, observable scenario, acceptance criterion, or pending decision."
+    },
+    {
+      "id": "granularity-rules",
+      "title": "Granularity Rules",
+      "body": [
+        "Create a `feature` when the behavior belongs to a broad product area with multiple surfaces, journeys, or subfeatures.",
+        "",
+        "Create a `subfeature` when a coherent UX surface or workflow needs its own owner, journeys, flows, or requirements.",
+        "",
+        "Create a `journey` when user goal, context, starting state, success, failure, or recovery materially shapes the work.",
+        "",
+        "Create a `flow` when the user path has a meaningful start, end, happy path, alternate path, blocked path, or recovery path.",
+        "",
+        "Create a `subflow` when a flow contains stable behavioral units that need separate requirements or proof.",
+        "",
+        "Create a `requirement` for one coherent UX behavior concept.",
+        "",
+        "Create an `observable scenario` when a state or situation changes what the user sees, can do, cannot do, or how the experience settles.",
+        "",
+        "Create an `acceptance criterion` when a behavior needs proof.",
+        "",
+        "Create a `pending decision` when product intent, behavior change, exact copy, confirmation, or scope cannot be safely decided."
+      ]
+    },
+    {
+      "id": "atomicity-rules",
+      "title": "Atomicity Rules",
+      "body": [
+        "Group behavior when users experience it as one coherent action or concept.",
+        "",
+        "Split behavior when confirmation, validation, visibility, recovery, UX mode, risk, exact copy governance, or proof differs.",
+        "",
+        "Split behavior when one part can be confirmed and another remains pending.",
+        "",
+        "Split behavior when one part is desired, another is intermediate, and another is deprecated.",
+        "",
+        "Do not split purely because implementation might use separate components or helpers.",
+        "",
+        "Do not group unrelated behavior just to reduce item count."
+      ]
+    },
+    {
+      "id": "coverage-index-usage",
+      "title": "Coverage Index Usage",
+      "body": [
+        "A coverage index is required for:",
+        "",
+        "- full product App Behavior specs",
+        "- refactor preservation specs",
+        "- minute-detail specs",
+        "- large or risky App Behavior corpuses",
+        "- corpuses with multiple modes such as current, confirmed-current, desired, ideal, or intermediate",
+        "",
+        "A coverage index is optional for lightweight specs when the manifest clearly limits scope and omitted facets."
+      ]
+    },
+    {
+      "id": "coverage-statuses",
+      "title": "Coverage Statuses",
+      "body": [
+        "`covered` means the item or branch exists at the required depth.",
+        "",
+        "`missing` means the item or branch is required but absent.",
+        "",
+        "`pending` means the item exists but is not complete or confirmed.",
+        "",
+        "`intentionally-omitted` means the manifest allows the omission and explains why.",
+        "",
+        "`out-of-scope` means the branch belongs outside this UX package.",
+        "",
+        "`needs-confirmation` means product/user confirmation is needed.",
+        "",
+        "`needs-proof` means the behavior is defined but lacks acceptance coverage or proof planning."
+      ]
+    },
+    {
+      "id": "agent-use",
+      "title": "Agent Use",
+      "body": [
+        "Agents should use the coverage index to avoid hidden omissions. If a profile requires journeys, flows, requirements, scenarios, and acceptance criteria, the coverage index should show which branches satisfy each requirement and which branches are missing, pending, intentionally omitted, or blocked.",
+        "",
+        "Coverage rows should link parent and child items so a reviewer can trace:",
+        "",
+        "```text",
+        "feature -> subfeature -> journey -> flow -> subflow -> requirement -> scenario -> acceptance criterion",
+        "```",
+        "",
+        "Do not treat a App Behavior corpus as refactor-ready or minute-detail-complete while required coverage rows are `missing`, `pending`, `needs-confirmation`, or `needs-proof`."
+      ]
+    }
+  ]
+}

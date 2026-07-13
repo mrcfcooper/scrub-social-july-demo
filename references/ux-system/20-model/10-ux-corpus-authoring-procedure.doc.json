@@ -1,0 +1,248 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.10-ux-corpus-authoring-procedure",
+  "title": "UX Corpus Authoring Procedure",
+  "content": [
+    {
+      "id": "ux-corpus-authoring-procedure-body-1",
+      "body": [
+        "This document exists to give agents the ordered workflow for creating or updating production App Behavior corpuses. Use it before writing detailed UX JSON so the corpus has the right scope, depth, ownership, coverage, and pending-decision routing.",
+        "",
+        "The procedure is UX-only. It does not define architecture ownership, controller design, store design, code paths, implementation phases, or state-management mechanics.",
+        "",
+        "For exhaustive current UX audits, start with the JSON-only investigation method in [Investigation System](../50-investigation/00-investigation-system.doc.json) before authoring desired UX. Current UX investigation should proceed from deterministic route/source inventory, to runtime observation, to source traversal for hidden branches, and only then into durable current App Behavior requirement and observable scenario rows."
+      ]
+    },
+    {
+      "id": "1-choose-the-package-manifest-controls",
+      "title": "1\\. Choose The Package Manifest Controls",
+      "body": [
+        "Start with a package manifest for every meaningful App Behavior corpus.",
+        "",
+        "Select:",
+        "",
+        "- `specProfile`",
+        "- `depthTarget`",
+        "- `uxModes`",
+        "- `includedFacets`",
+        "- `excludedFacets`",
+        "- `completionStandard`",
+        "- `governingArtifacts`",
+        "- `allowedOmissions`",
+        "",
+        "Do not start by writing low-level requirements until the manifest explains why the package exists and how much detail is required."
+      ]
+    },
+    {
+      "id": "2-define-corpus-owner-and-boundaries",
+      "title": "2\\. Define Corpus Owner And Boundaries",
+      "body": [
+        "Choose the smallest coherent UX owner.",
+        "",
+        "Prefer:",
+        "",
+        "- subfeature or implied-subfeature owner when the UX surface has its own journey, flow, validation, persistence, or proof needs",
+        "- parent feature owner only when behavior is truly feature-wide or too small to split",
+        "- shared UX owner only when no clear module, feature, subfeature, or implied subfeature owns the behavior",
+        "",
+        "Record in-scope behavior, out-of-scope behavior, adjacent features, and ownership uncertainty. If ownership cannot be decided safely, create a pending decision instead of duplicating the corpus."
+      ]
+    },
+    {
+      "id": "3-inventory-runtime-triggers-and-assign-artifact-homes",
+      "title": "3\\. Inventory Runtime Triggers And Assign Artifact Homes",
+      "body": [
+        "For route-scoped corpuses, perform route trigger inventory before writing detailed behavior rows. Enumerate route entry, params/query/hash changes, user interactions, forms, modals/drawers, file inputs, API responses, auth/session/profile changes, timers/debounces/listeners, resize/scroll/focus, and unmount/cleanup.",
+        "",
+        "For cross-cutting behavior, perform targeted shared-surface inventory. Search API clients and DTO normalizers, URL helpers, storage/cache keys, auth/role/capability helpers, command or mutation functions, validators, timers/listeners/streams, file/browser APIs, global providers/toasts/modals/error boundaries, and tests/fixtures/mocks.",
+        "",
+        "Assign an artifact home for every must-preserve finding: route-packet, shared-default, shared-api-interaction, shared-access, shared-state-lifecycle, shared-workflow, shared-integration, shared-security-privacy, backend-authority-reference, future-backend-spec, or product-decision.",
+        "",
+        "Document route-local behavior in the route packet. Do not duplicate shared behavior in every route packet; create or reference the shared owner and document only route-specific use or override."
+      ]
+    },
+    {
+      "id": "4-create-or-update-feature-overview",
+      "title": "4\\. Create Or Update Feature Overview",
+      "body": [
+        "Create a feature item when the corpus covers a broad product area or needs product context.",
+        "",
+        "The feature overview should define purpose, user value, primary goals, included subfeatures, excluded behavior, surfaces, entry points, exit points, outcomes, hesitation points, recovery expectations, constraints, and non-goals.",
+        "",
+        "Do not create a feature overview only to mirror a code folder."
+      ]
+    },
+    {
+      "id": "5-define-journeys-flows-and-subflows",
+      "title": "5\\. Define Journeys, Flows, And Subflows",
+      "body": [
+        "Define user journeys before detailed requirements when user intent, context, or recovery affects the behavior.",
+        "",
+        "Use:",
+        "",
+        "- journeys for user goals across one or more flows",
+        "- flows for coherent paths with starts, ends, alternates, blocked paths, and recovery paths",
+        "- subflows for stable behavioral units that need their own requirements or proof",
+        "",
+        "Avoid documenting every click target. Capture only behavior that affects user meaning, decisions, constraints, recovery, proof, or future implementation."
+      ]
+    },
+    {
+      "id": "6-create-requirements",
+      "title": "6\\. Create Requirements",
+      "body": [
+        "Create requirements for coherent UX behavior concepts.",
+        "",
+        "Each requirement should include:",
+        "",
+        "- summary",
+        "- user goal or product meaning when relevant",
+        "- mode",
+        "- status",
+        "- authority",
+        "- confidence",
+        "- source or confirmation state",
+        "- change control",
+        "- implementation gate",
+        "- test gate",
+        "",
+        "Requirements may group related assertions when users experience them as one action or concept. Split them when confirmation, validation, visibility, recovery, mode, risk, exact copy governance, or proof differs."
+      ]
+    },
+    {
+      "id": "7-add-observable-scenarios",
+      "title": "7\\. Add Observable Scenarios",
+      "body": [
+        "Add observable scenarios when the user-visible situation changes what users see, can do, cannot do, recover from, or wait for.",
+        "",
+        "Common observable scenarios include:",
+        "",
+        "- loading",
+        "- empty",
+        "- error",
+        "- invalid",
+        "- dirty",
+        "- stale",
+        "- unauthenticated",
+        "- unauthorized",
+        "- success",
+        "- restore",
+        "- recovery",
+        "",
+        "Use the `observableScenarios` field on requirements for requirement-local scenarios. Use standalone observable scenario items when scenarios need their own relationships, proof, coverage, or reuse across multiple requirements."
+      ]
+    },
+    {
+      "id": "8-add-acceptance-criteria",
+      "title": "8\\. Add Acceptance Criteria",
+      "body": [
+        "Add acceptance criteria when behavior must be proven.",
+        "",
+        "Acceptance criteria should make proof concrete without duplicating the full requirement. They should identify given/when/then behavior, proof priority, automation expectation, and what failure means.",
+        "",
+        "For implementation-grade specs, acceptance criteria should link back to requirements, observable scenarios, flows, or subflows."
+      ]
+    },
+    {
+      "id": "9-add-current-desired-mappings-and-behavior-relationship-edges-when-relevant",
+      "title": "9\\. Add Current/Desired Mappings And Behavior Relationship Edges When Relevant",
+      "body": [
+        "Create mappings when the corpus includes both current and desired UX, or when refactor, migration, audit, extension, or behavior-change work needs traceability.",
+        "",
+        "Mappings must support many-to-many relationships. Use them to record:",
+        "",
+        "- same behavior",
+        "- preserved behavior with clarification",
+        "- changed behavior",
+        "- added behavior",
+        "- removed behavior",
+        "- split behavior",
+        "- merged behavior",
+        "- replacement behavior",
+        "- missing current behavior",
+        "- missing desired behavior",
+        "- pending decisions",
+        "- non-comparable items",
+        "",
+        "Do not let current UX silently become desired UX. Desired UX needs governing authority or explicit confirmation."
+      ]
+    },
+    {
+      "id": "10-add-pending-decisions",
+      "title": "10\\. Add Pending Decisions",
+      "body": [
+        "Create pending decision items when product intent, behavior change, exact copy, confirmation, ownership, scope, or proof cannot be safely derived.",
+        "",
+        "Pending decisions should include:",
+        "",
+        "- decision question",
+        "- recommendation",
+        "- confidence",
+        "- alternatives",
+        "- consequences",
+        "- confirmation state",
+        "- affected refs",
+        "- implementation gate impact",
+        "",
+        "Do not hide unresolved decisions in notes fields."
+      ]
+    },
+    {
+      "id": "10-create-or-update-coverage-index",
+      "title": "10\\. Create Or Update Coverage Index",
+      "body": [
+        "Use a coverage index for full product specs, refactor preservation specs, minute-detail specs, large/risky corpuses, or any corpus with multiple UX modes.",
+        "",
+        "Coverage rows should expose which feature, subfeature, journey, flow, subflow, requirement, observable scenario, acceptance criterion, mapping, or pending decision branches are:",
+        "",
+        "- covered",
+        "- missing",
+        "- pending",
+        "- intentionally omitted",
+        "- out of scope",
+        "- needing confirmation",
+        "- needing proof",
+        "",
+        "Do not treat a corpus as implementation-ready, refactor-ready, test-ready, or minute-detail-complete while required coverage rows remain unresolved."
+      ]
+    },
+    {
+      "id": "11-verify-completion-standard",
+      "title": "11\\. Verify Completion Standard",
+      "body": [
+        "Before treating the corpus as ready, verify it satisfies the manifest's completion standard.",
+        "",
+        "At minimum, the agent should be able to name:",
+        "",
+        "- governing package manifest",
+        "- corpus owner",
+        "- governing feature or subfeature",
+        "- required modes",
+        "- required facets",
+        "- desired UX artifacts",
+        "- current UX artifacts, if relevant",
+        "- mappings, if relevant",
+        "- pending decisions",
+        "- coverage index, if required",
+        "- acceptance/proof expectations",
+        "- allowed omissions"
+      ]
+    },
+    {
+      "id": "stop-and-route-conditions",
+      "title": "Stop And Route Conditions",
+      "body": [
+        "Stop authoring governing UX and route a pending decision when the next required behavior depends on:",
+        "",
+        "- product, user, or business intent that is not confirmed or derivable",
+        "- a material existing behavior change",
+        "- unclear UX ownership that would create duplicate governing corpuses",
+        "- exact copy that is behaviorally important but unconfirmed",
+        "- accessibility, permission, persistence, or recovery behavior where guessing would create product risk",
+        "- conflicting current, desired, or source evidence",
+        "",
+        "Agents should continue authoring safe, separable parts of the corpus when possible, but unresolved product decisions must remain visible and non-governing until confirmed."
+      ]
+    }
+  ]
+}

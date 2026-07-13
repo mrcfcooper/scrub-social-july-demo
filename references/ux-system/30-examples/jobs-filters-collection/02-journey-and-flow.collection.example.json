@@ -1,0 +1,295 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "mixed",
+  "artifactType": "mixed",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Journey And Flow Collection",
+  "uxModes": [
+    "desired"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "Journeys and flows define UX behavior paths before low-level requirements."
+  },
+  "sourceFile": "02-journey-and-flow.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.journeys-and-flows.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-journey.v1",
+      "itemType": "uxJourney",
+      "id": "jobs.filters.narrow-results",
+      "title": "User narrows Jobs results with filters",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "featureIds": [
+          "jobs.search"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "journey": {
+        "userGoal": "Narrow Jobs results to a set of opportunities that match the user's intent.",
+        "userContext": "The user is browsing Jobs and wants more precise results than the current broad list.",
+        "trigger": "The user opens search or advanced filter controls.",
+        "startingState": "Jobs browsing is available and may already contain active filters.",
+        "successOutcome": "The user sees updated Jobs results that reflect the intended filter constraints.",
+        "happyPath": [
+          "Open advanced filters.",
+          "Edit filter constraints.",
+          "Resolve validation issues if present.",
+          "Apply filters.",
+          "Review updated results."
+        ],
+        "alternatePaths": [
+          "Cancel without committing edits.",
+          "Clear filters to broaden results.",
+          "Dismiss modal and keep prior browsing context."
+        ],
+        "hesitationOrFailurePoints": [
+          "The user is unsure whether edits are live or pending.",
+          "Invalid input blocks apply.",
+          "Clearing filters could remove more context than expected."
+        ],
+        "recoveryExpectations": [
+          "Invalid input explains what must be fixed.",
+          "Cancel/discard avoids surprise commits.",
+          "Clear/reset behavior is explicit."
+        ],
+        "nonGoals": [
+          "Define result ranking or backend query behavior."
+        ]
+      },
+      "relationships": {
+        "featureIds": [
+          "jobs.search"
+        ],
+        "subfeatureIds": [
+          "jobs.search.filters"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply",
+          "jobs.filters.desired.modal-clear"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.narrow-results.journey.md"
+      },
+      "db": {
+        "collection": "uxJourneys",
+        "documentId": "jobs.filters.narrow-results"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "schema": "tgn.ux-flow.v1",
+      "itemType": "uxFlow",
+      "id": "jobs.filters.advanced-filter-authoring",
+      "title": "Advanced filter authoring",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "flow": {
+        "purpose": "Let users edit advanced filters before committing them to live Jobs browsing.",
+        "startsWhen": "The user opens advanced filters from Jobs search or arrives with filter-editing context.",
+        "endsWhen": "The user applies, cancels, discards, clears, or dismisses the filter modal.",
+        "happyPath": [
+          "Modal opens with current browsing context represented.",
+          "User edits filter controls.",
+          "Apply becomes available when edits can affect browsing.",
+          "User applies valid edits.",
+          "Modal closes and Jobs browsing reflects the applied filters."
+        ],
+        "alternatePaths": [
+          "User cancels and returns to prior browsing context.",
+          "User clears filters.",
+          "User fixes invalid input before applying."
+        ],
+        "blockedPaths": [
+          "Invalid filter input blocks Apply.",
+          "Apply is not meaningful when no browse-impacting edits exist."
+        ],
+        "recoveryPaths": [
+          "Validation guidance lets user fix blocked input.",
+          "Cancel/discard returns user to prior browsing context."
+        ],
+        "expectedOutcomes": [
+          "Committed filters are visible in browsing.",
+          "Uncommitted edits are not silently applied.",
+          "Clear/reset behavior is explicit."
+        ],
+        "nonGoals": [
+          "Define how filter state is stored internally."
+        ]
+      },
+      "relationships": {
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters",
+          "jobs.filters.clear-filters"
+        ],
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply",
+          "jobs.filters.desired.modal-clear"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.advanced-filter-authoring.flow.md"
+      },
+      "db": {
+        "collection": "uxFlows",
+        "documentId": "jobs.filters.advanced-filter-authoring"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "schema": "tgn.ux-subflow.v1",
+      "itemType": "uxSubflow",
+      "id": "jobs.filters.apply-filters",
+      "title": "Apply filters",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ]
+      },
+      "subflow": {
+        "purpose": "Commit valid modal filter edits to live Jobs browsing.",
+        "trigger": "The user invokes Apply while filter edits are valid and applying would affect browsing.",
+        "userIntent": "Apply filter changes and return to updated results.",
+        "visibleSteps": [
+          "Apply is visible when applying matters.",
+          "Apply is enabled only when the edited filters are valid.",
+          "User invokes Apply.",
+          "Modal closes after successful apply."
+        ],
+        "expectedResult": "Live Jobs browsing reflects the applied filters.",
+        "alternateResults": [
+          "If invalid, Apply remains visible but disabled until the user fixes the problem.",
+          "If applying would not change browsing, Apply is not shown as a meaningful action."
+        ],
+        "edgeCases": [
+          "User creates invalid input after Apply was previously available."
+        ],
+        "mustNotHappen": [
+          "Apply must not silently save a reusable filter definition.",
+          "Apply must not close the modal without updating visible browsing when it reports success."
+        ]
+      },
+      "relationships": {
+        "parentFlowId": "jobs.filters.advanced-filter-authoring",
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply"
+        ],
+        "scenarioIds": [
+          "jobs.filters.scenario.apply-invalid"
+        ],
+        "acceptanceCriterionIds": [
+          "jobs.filters.acceptance.modal-apply-success"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.apply-filters.subflow.md"
+      },
+      "db": {
+        "collection": "uxSubflows",
+        "documentId": "jobs.filters.apply-filters"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

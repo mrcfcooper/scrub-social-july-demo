@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-flow-item.schema.json",
+  "title": "TGN UX Flow Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "mode",
+    "status",
+    "authority",
+    "confidence",
+    "owner",
+    "scope",
+    "flow",
+    "relationships",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-flow.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxFlow"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "$ref": "shared-definitions.schema.json#/$defs/mode"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/status"
+    },
+    "authority": {
+      "$ref": "shared-definitions.schema.json#/$defs/authority"
+    },
+    "confidence": {
+      "$ref": "shared-definitions.schema.json#/$defs/confidence"
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "flow": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "startsWhen",
+        "endsWhen",
+        "happyPath",
+        "alternatePaths",
+        "blockedPaths",
+        "recoveryPaths",
+        "expectedOutcomes",
+        "nonGoals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startsWhen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endsWhen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "happyPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternatePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blockedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recoveryPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expectedOutcomes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nonGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": [
+        "journeyIds",
+        "subflowIds",
+        "requirementIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "journeyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subflowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relatedFlowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    }
+  }
+}

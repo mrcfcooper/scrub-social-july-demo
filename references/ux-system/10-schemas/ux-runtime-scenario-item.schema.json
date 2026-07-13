@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-runtime-scenario-item.schema.json",
+  "title": "TGN UX Observable Scenario Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "mode",
+    "status",
+    "authority",
+    "confidence",
+    "owner",
+    "scope",
+    "scenario",
+    "relationships",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-runtime-scenario.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxRuntimeScenario"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "$ref": "shared-definitions.schema.json#/$defs/mode"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/status"
+    },
+    "authority": {
+      "$ref": "shared-definitions.schema.json#/$defs/authority"
+    },
+    "confidence": {
+      "$ref": "shared-definitions.schema.json#/$defs/confidence"
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "scenario": {
+      "type": "object",
+      "required": [
+        "scenarioType",
+        "situation",
+        "userSees",
+        "userCanDo",
+        "userCannotDo",
+        "systemFeedback",
+        "recoveryPath",
+        "settledOutcome",
+        "mustNotHappen"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scenarioType": {
+          "type": "string"
+        },
+        "situation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "userSees": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userCanDo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userCannotDo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "systemFeedback": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recoveryPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "settledOutcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mustNotHappen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": [
+        "requirementIds",
+        "subflowIds",
+        "acceptanceCriterionIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subflowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acceptanceCriterionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "currentUxAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/currentUxAssessment"
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    }
+  }
+}

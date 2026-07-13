@@ -1,0 +1,66 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.30-examples.jobs-filters-collection.README",
+  "title": "Jobs Filters Collection Example",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for the Jobs filters collection-style App Behavior corpus example.",
+        "Audience: Agents and engineers learning how portable UX items compose into collection files.",
+        "Keep In Sync With: UX schemas, model docs, and single-item Jobs filters examples.",
+        "Update When: Collection layout, envelope rules, required UX artifact types, or Jobs filters examples change.",
+        "Does Not Cover: Runtime implementation, controller ownership, store design, or generated Markdown output.",
+        "-->"
+      ]
+    },
+    {
+      "id": "jobs-filters-collection-example",
+      "title": "Jobs Filters Collection Example",
+      "depth": 1,
+      "body": [
+        "This folder shows how the UX system can represent a Jobs filters corpus as collection files while preserving the same portable item schema used by split files and database documents.",
+        "",
+        "The example is intentionally UX-only. It uses Jobs filters as the reference domain, but JSON rows do not treat runtime files, controllers, stores, or code paths as governing UX authority.",
+        "",
+        "Files are grouped in a representative authoring order.",
+        "",
+        "1. [Package Manifest](00-package-manifest.example.json)",
+        "2. [Feature And Subfeature Collection](01-feature-and-subfeature.collection.example.json)",
+        "3. [Journey And Flow Collection](02-journey-and-flow.collection.example.json)",
+        "4. [Requirement Collection](03-requirements.collection.example.json)",
+        "5. [Observable Scenario Collection](04-observable-scenarios.collection.example.json)",
+        "6. [Acceptance Criteria Collection](05-acceptance-criteria.collection.example.json)",
+        "7. [Current Desired Mapping Collection](06-current-desired-mappings.collection.example.json)",
+        "8. [Pending Decision Collection](07-pending-decisions.collection.example.json)",
+        "9. [Coverage Index](08-coverage-index.example.json)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this example area when the current task needs a concrete reference for a jobs-filters collection App Behavior example pattern.",
+        "",
+        "Does not own target behavior, source authority, implementation details, or proof. Example facts must not be copied into a target corpus unless separately supported by that target authority.",
+        "",
+        "Stop when the agent can state the example pattern being borrowed, the target artifact it informs, and the target source authority that must govern real behavior."
+      ]
+    }
+  ]
+}

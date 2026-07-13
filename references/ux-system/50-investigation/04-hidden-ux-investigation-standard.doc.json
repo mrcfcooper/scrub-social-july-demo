@@ -1,0 +1,52 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.hidden-ux-standard",
+  "title": "Hidden UX Investigation Standard",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines hidden and supporting UX lanes agents must investigate because they can materially affect user experience without appearing as obvious route content.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "hiddenLaneTypes": [
+    "auth-readiness",
+    "protected-redirect",
+    "role-gate",
+    "dashboard-routing",
+    "session-expiration",
+    "deep-link",
+    "app-shell-readiness",
+    "background-user-visible-effect",
+    "error-recovery",
+    "permission-denial",
+    "feature-availability",
+    "native-platform-bridge",
+    "push-notification-entry",
+    "external-return-entry"
+  ],
+  "requiredLaneFields": [
+    "hiddenLaneId",
+    "laneType",
+    "trigger",
+    "userVisibleEffect",
+    "routeRefs",
+    "surfaceRefs",
+    "roleAuthConditions",
+    "observableStates",
+    "evidenceRefs",
+    "coverageStatus",
+    "pendingDecisionRefs"
+  ],
+  "rules": [
+    "Investigate hidden lanes after route inventory exists and before declaring route coverage complete.",
+    "Capture hidden behavior when it changes what users can see, do, access, recover from, or understand.",
+    "Do not model implementation providers, stores, or hooks as UX authority; model their user-visible effects.",
+    "If a hidden lane is suspected but not observable, mark it pending or needs-proof rather than omitting it.",
+    "Hidden lanes may link to multiple routes and surfaces."
+  ]
+}

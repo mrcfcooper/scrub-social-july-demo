@@ -1,0 +1,1100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/shared-definitions.schema.json",
+  "title": "TGN UX Shared Definitions",
+  "type": "object",
+  "$defs": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "current",
+        "confirmed-current",
+        "desired",
+        "ideal",
+        "intermediate",
+        "proposed",
+        "pending-confirmation",
+        "deprecated",
+        "rejected",
+        "unknown"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "confirmed-governing",
+        "existing-behavior",
+        "observed-current",
+        "documented-current",
+        "uncertain-current",
+        "suspected-accidental",
+        "new-requested",
+        "approved-change",
+        "pending-confirmation",
+        "intent-gap",
+        "future-target",
+        "deprecated",
+        "do-not-preserve",
+        "needs-proof",
+        "out-of-scope"
+      ]
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "governing",
+        "supporting",
+        "observed-current",
+        "documented-current",
+        "legacy-baseline",
+        "pending-confirmation",
+        "suspected-accidental",
+        "non-governing"
+      ]
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "artifactRole": {
+      "type": "string",
+      "enum": [
+        "manifest",
+        "feature",
+        "subfeature",
+        "journey",
+        "flow",
+        "subflow",
+        "requirement",
+        "observable-scenario",
+        "acceptance-criterion",
+        "mapping",
+        "pending-decision",
+        "generated-review",
+        "mixed",
+        "behavior-mapping",
+        "runtime-drift",
+        "behavior-thread"
+      ]
+    },
+    "specProfile": {
+      "type": "string",
+      "enum": [
+        "full-product-ux-spec",
+        "refactor-preservation-spec",
+        "new-feature-spec",
+        "feature-extension-spec",
+        "ux-audit-spec",
+        "test-contract-spec",
+        "minute-detail-spec",
+        "lightweight-spec"
+      ]
+    },
+    "depthTarget": {
+      "type": "string",
+      "enum": [
+        "L0-feature-overview",
+        "L1-journey-and-flow",
+        "L2-requirement",
+        "L3-runtime-scenario-and-edge-case",
+        "L4-acceptance-criteria-and-proof",
+        "L5-minute-detail"
+      ]
+    },
+    "facet": {
+      "type": "string",
+      "enum": [
+        "features",
+        "subfeatures",
+        "journeys",
+        "flows",
+        "subflows",
+        "requirements",
+        "observableScenarios",
+        "validation",
+        "recovery",
+        "emptyLoadingError",
+        "copy",
+        "layoutSemantics",
+        "accessibility",
+        "permissions",
+        "persistence",
+        "navigation",
+        "edgeCases",
+        "acceptanceCriteria",
+        "currentDesiredMappings",
+        "pendingDecisions",
+        "behaviorMappings",
+        "runtimeDrift",
+        "behaviorThreads"
+      ]
+    },
+    "owner": {
+      "type": "object",
+      "required": [
+        "module"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submodule": {
+          "type": "string"
+        },
+        "impliedSubmodule": {
+          "type": "string"
+        },
+        "surface": {
+          "type": "string"
+        },
+        "primaryUxOwner": {
+          "type": "string"
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "corpusId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "corpusId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "journeyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subflowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featureIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "surfaceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "screenIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "personaIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "breakpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ref": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "$ref": "#/$defs/mode"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "required": [
+        "summary",
+        "confidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "rationaleMd": {
+          "type": "string"
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "summary"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "summary": {
+                "type": "string"
+              },
+              "tradeoffsMd": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "consequencesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "currentUxAssessment": {
+      "type": "object",
+      "required": [
+        "status",
+        "severity",
+        "reasonTypes",
+        "summary",
+        "userImpact",
+        "evidenceRefs",
+        "improvementOpportunity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not-reviewed",
+            "acceptable",
+            "improvable",
+            "questionable",
+            "problematic",
+            "broken",
+            "unknown"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "none",
+            "minor",
+            "moderate",
+            "major",
+            "critical"
+          ]
+        },
+        "reasonTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "confusing",
+              "missing-feedback",
+              "missing-recovery",
+              "missing-loading-state",
+              "missing-empty-state",
+              "missing-error-state",
+              "unclear-validation",
+              "unclear-navigation",
+              "unclear-persistence",
+              "auth-role-confusing",
+              "accessibility-risk",
+              "trust-risk",
+              "inconsistent-pattern",
+              "copy-ambiguity",
+              "dead-end",
+              "likely-accidental",
+              "source-inconclusive",
+              "needs-runtime-proof"
+            ]
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "userImpact": {
+          "type": "string"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "codeLocators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "improvementOpportunity": {
+          "type": "object",
+          "required": [
+            "exists",
+            "type",
+            "quickRecommendation",
+            "confidence",
+            "nonGoverning",
+            "createsDesiredUx",
+            "routeTo"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "exists": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "clarify-copy",
+                "add-feedback",
+                "add-recovery",
+                "add-empty-state",
+                "add-loading-state",
+                "add-error-state",
+                "improve-validation",
+                "improve-navigation",
+                "improve-accessibility",
+                "reduce-confusion",
+                "standardize-pattern",
+                "confirm-product-intent",
+                "requires-later-design"
+              ]
+            },
+            "quickRecommendation": {
+              "type": "string"
+            },
+            "confidence": {
+              "$ref": "#/$defs/confidence"
+            },
+            "nonGoverning": {
+              "type": "boolean",
+              "const": true
+            },
+            "createsDesiredUx": {
+              "type": "boolean",
+              "const": false
+            },
+            "routeTo": {
+              "type": "string",
+              "enum": [
+                "post-audit-recommendations",
+                "pending-decision",
+                "needs-proof",
+                "none"
+              ]
+            },
+            "notesMd": {
+              "type": "string"
+            }
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "required": [
+        "required",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not-required",
+            "pending",
+            "confirmed",
+            "rejected",
+            "deferred"
+          ]
+        },
+        "confirmedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confirmedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "baseUxItem": {
+      "type": "object",
+      "required": [
+        "schema",
+        "itemType",
+        "id",
+        "title",
+        "mode",
+        "status",
+        "authority",
+        "confidence",
+        "owner",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "$ref": "#/$defs/mode"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "authority": {
+          "$ref": "#/$defs/authority"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "openQuestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "generatedRefs": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "db": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "custom": {
+          "$ref": "#/$defs/custom"
+        }
+      }
+    },
+    "behaviorKind": {
+      "type": "string",
+      "enum": [
+        "documented-current",
+        "observed-current",
+        "confirmed-current",
+        "intended",
+        "desired",
+        "governing",
+        "proposed",
+        "pending-confirmation",
+        "ideal",
+        "deprecated",
+        "superseded",
+        "unknown"
+      ]
+    },
+    "behaviorMappingType": {
+      "type": "string",
+      "enum": [
+        "same",
+        "documented-current-to-observed-current",
+        "observed-current-to-intended",
+        "observed-current-to-desired",
+        "observed-current-to-governing",
+        "documented-current-to-intended",
+        "documented-current-to-desired",
+        "intended-to-desired",
+        "desired-to-governing",
+        "preserved-with-clarification",
+        "changed",
+        "added",
+        "removed",
+        "split",
+        "merged",
+        "replaced",
+        "supersedes",
+        "superseded-by",
+        "drift-related",
+        "pending-decision",
+        "not-comparable"
+      ]
+    },
+    "runtimeAlignmentStatus": {
+      "type": "string",
+      "enum": [
+        "aligned",
+        "not-aligned",
+        "partially-aligned",
+        "not-observed",
+        "not-applicable",
+        "pending-runtime-alignment",
+        "pending-ux-update",
+        "pending-user-decision",
+        "unknown"
+      ]
+    },
+    "runtimeDriftType": {
+      "type": "string",
+      "enum": [
+        "runtime-differs-from-current-doc",
+        "runtime-missing-intended-behavior",
+        "runtime-has-undocumented-behavior",
+        "runtime-regression-against-desired",
+        "docs-stale-vs-runtime",
+        "unclear-authority",
+        "test-exposes-drift",
+        "mapping-missing",
+        "reference-broken"
+      ]
+    },
+    "runtimeDriftSeverity": {
+      "type": "string",
+      "enum": [
+        "none",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ]
+    },
+    "runtimeDriftStatus": {
+      "type": "string",
+      "enum": [
+        "recorded",
+        "triage-needed",
+        "pending-user-decision",
+        "planned-runtime-alignment",
+        "planned-ux-doc-update",
+        "resolved-runtime-aligned",
+        "resolved-ux-updated",
+        "accepted-drift",
+        "superseded"
+      ]
+    },
+    "confirmationBaseline": {
+      "type": "object",
+      "required": [
+        "lastConfirmedCommit",
+        "lastConfirmedAt",
+        "method",
+        "scope"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "lastConfirmedCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "lastConfirmedAt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "user-confirmed",
+            "agent-confirmed",
+            "bulk-backfill",
+            "runtime-audit",
+            "migration",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "uxReportedToUserStatus": {
+      "type": "string",
+      "enum": [
+        "not-reported",
+        "reported",
+        "not-required"
+      ]
+    },
+    "blockerStatus": {
+      "type": "string",
+      "enum": [
+        "non-blocking",
+        "blocks-current-work",
+        "blocks-implementation-ready",
+        "blocks-proof",
+        "blocks-release"
+      ]
+    },
+    "reportedToUser": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/uxReportedToUserStatus"
+        },
+        "reportedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "channel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "followUp": {
+      "type": "object",
+      "required": [
+        "required",
+        "owner",
+        "nextStep"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "nextStep": {
+          "type": "string"
+        },
+        "targetArtifact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "due": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "productDecision": {
+      "type": "object",
+      "required": [
+        "required",
+        "reason",
+        "recommendedDecision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "recommendedDecision": {
+          "type": "string"
+        },
+        "alternativesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "uxQualityAssessmentCategory": {
+      "type": "string",
+      "enum": [
+        "none",
+        "confusing-flow",
+        "inefficient-workflow",
+        "missing-feedback",
+        "missing-recovery",
+        "accessibility-risk",
+        "trust-risk",
+        "privacy-safety-risk",
+        "inconsistent-pattern",
+        "copy-ambiguity",
+        "attention-noise",
+        "continuity-gap",
+        "unclear-consequence",
+        "operational-risk",
+        "other"
+      ]
+    },
+    "uxQualityAssessmentSeverity": {
+      "type": "string",
+      "enum": [
+        "none",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ]
+    },
+    "uxQualityAssessmentStatus": {
+      "type": "string",
+      "enum": [
+        "acceptable",
+        "debt-recorded",
+        "triage-needed",
+        "planned-improvement",
+        "accepted",
+        "resolved",
+        "superseded"
+      ]
+    },
+    "uxQualityAssessment": {
+      "type": "object",
+      "required": [
+        "status",
+        "severity",
+        "category",
+        "blockerStatus",
+        "observedIssue",
+        "violatedUxPrinciples",
+        "userImpact",
+        "recommendation",
+        "productDecision",
+        "reportedToUser",
+        "followUp",
+        "implementationGate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/uxQualityAssessmentStatus"
+        },
+        "severity": {
+          "$ref": "#/$defs/uxQualityAssessmentSeverity"
+        },
+        "category": {
+          "$ref": "#/$defs/uxQualityAssessmentCategory"
+        },
+        "blockerStatus": {
+          "$ref": "#/$defs/blockerStatus"
+        },
+        "observedIssue": {
+          "type": "string"
+        },
+        "violatedUxPrinciples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userImpact": {
+          "type": "string"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "recommendation": {
+          "$ref": "#/$defs/recommendation"
+        },
+        "productDecision": {
+          "$ref": "#/$defs/productDecision"
+        },
+        "reportedToUser": {
+          "$ref": "#/$defs/reportedToUser"
+        },
+        "followUp": {
+          "$ref": "#/$defs/followUp"
+        },
+        "implementationGate": {
+          "type": "object",
+          "required": [
+            "canContinue",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "canContinue": {
+              "type": "boolean"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "blockedBy": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "runtimeAlignment": {
+      "type": "object",
+      "required": [
+        "status",
+        "observed",
+        "driftStatus",
+        "blockerStatus",
+        "evidenceRefs",
+        "summary",
+        "recommendation",
+        "reportedToUser",
+        "followUp"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/runtimeAlignmentStatus"
+        },
+        "observed": {
+          "type": "boolean"
+        },
+        "driftStatus": {
+          "type": "string",
+          "enum": [
+            "none",
+            "drift-recorded",
+            "triage-needed",
+            "pending-user-decision",
+            "planned-runtime-alignment",
+            "planned-ux-doc-update",
+            "accepted-drift",
+            "resolved",
+            "superseded"
+          ]
+        },
+        "driftTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/runtimeDriftType"
+          }
+        },
+        "severity": {
+          "$ref": "#/$defs/runtimeDriftSeverity"
+        },
+        "blockerStatus": {
+          "$ref": "#/$defs/blockerStatus"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "recommendation": {
+          "$ref": "#/$defs/recommendation"
+        },
+        "reportedToUser": {
+          "$ref": "#/$defs/reportedToUser"
+        },
+        "followUp": {
+          "$ref": "#/$defs/followUp"
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "behaviorRelations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "documentedCurrentRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "observedCurrentRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "confirmedCurrentRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "intendedRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "desiredRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "governingRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "proposedRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "pendingConfirmationRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "supersedesRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "supersededByRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "relatedBehaviorRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "pendingDecisionRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "mappingRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "driftRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

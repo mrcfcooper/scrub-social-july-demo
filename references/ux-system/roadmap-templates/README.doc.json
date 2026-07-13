@@ -1,0 +1,73 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.README",
+  "title": "App Behavior Roadmap Templates",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "living-document",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Routing and maintenance entrypoint for App Behavior Roadmap Templates roadmap templates.",
+        "Audience: Agents and engineers selecting, maintaining, or auditing roadmap templates.",
+        "Keep In Sync With: agent/ux-system/README.doc.json, local sibling docs, child README files, and changes to this folder's routing role.",
+        "Update When: README routing, local files, child folders, template/example status, tool behavior, authority boundaries, or corpus purpose changes.",
+        "Does Not Cover: Completed roadmaps, product decisions, App Behavior truth, architecture authority, implementation plans, proof results, or source facts.",
+        "-->"
+      ]
+    },
+    {
+      "id": "purpose",
+      "body": [
+        "Purpose: provide derived roadmap templates for planning App Behavior authority without replacing the governing App Behavior specs, schemas, model docs, or user-confirmed product decisions.",
+        "",
+        "Use these templates when a human and agent need to see whether App Behavior planning is ordered, confirmed, reopened, blocked, or ready to hand off to architecture, implementation planning, or proof."
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Read `01-app-behavior-roadmap-template.doc.json` for the top-level App Behavior flow.",
+        "Use `02` through `05` for behavior package, current/desired/governing, runtime drift, and pending product-decision sub-roadmaps.",
+        "Files with `.placeholder.doc.json` are intentional placeholders and are not complete roadmap templates."
+      ]
+    },
+    {
+      "id": "authority-boundary-and-stop-condition",
+      "title": "Authority Boundary And Stop Condition",
+      "body": [
+        "App Behavior roadmap templates are starting shapes for later App Behavior corpus work. They do not create behavior truth, replace source tickets/runtime evidence, or substitute for final App Behavior authority.",
+        "",
+        "Stop when the agent can choose the App Behavior roadmap template, name the future behavior artifact it will seed, and state which source authority or evidence must still be used."
+      ]
+    },
+    {
+      "id": "template-rules",
+      "title": "Template Rules",
+      "body": [
+        "Every full roadmap template in this folder uses or inherits these fields: identity, status, parent roadmap, child roadmaps, mission, pillars/core concepts, authority inputs, derived summary, ordered steps, confirmation gates, reopened items, open decisions, next recommended step, stop condition, and non-authority warning.",
+        "",
+        "Every placeholder roadmap template should include status `placeholder`, purpose, why the template likely belongs, what is already decision-complete, what needs clarity, authority to review before completion, promotion criteria, possible outcomes, and non-authority warning.",
+        "Roadmap phases and meaningful subphases should include `review_before_moving_forward`.",
+        "Use `agent/core-workflows.doc.json` for standard `.core.*` review ladders, and use `specific_review` for active local docs, artifacts, specs, source evidence, or workstream files.",
+        "When a roadmap phase or meaningful subphase appears complete, run `.core.audit` before moving forward.",
+        "After `.core.audit`, offer another `.core.audit` pass before advancing.",
+        "The audit gate confirms phase readiness; it does not replace the phase’s own `review_before_moving_forward`."
+      ]
+    }
+  ]
+}

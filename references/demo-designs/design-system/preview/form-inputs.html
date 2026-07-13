@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .fld { display: flex; flex-direction: column; gap: 6px; }
+  .lab { font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: -0.005em; }
+  .inp { font-family: var(--font-sans); font-weight: 300; font-size: 15px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--soft-cloud); color: var(--fg); outline: none; }
+  .inp:focus { border-color: var(--plum-grove); box-shadow: 0 0 0 3px rgba(66,26,49,0.08); }
+  .inp::placeholder { color: var(--fg-subtle); }
+  .hint { font-size: 11px; color: var(--fg-muted); text-transform: lowercase; }
+</style></head>
+<body><div class="card">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="fld">
+      <label class="lab">First name</label>
+      <input class="inp" value="Kiara" />
+    </div>
+    <div class="fld">
+      <label class="lab">Specialty</label>
+      <input class="inp" placeholder="e.g. ICU, Peds, OT" />
+    </div>
+    <div class="fld" style="grid-column: span 2;">
+      <label class="lab">Where to next?</label>
+      <input class="inp" placeholder="Search cities, hospitals, or travel agencies" />
+      <span class="hint">we'll match you with openings that fit your license</span>
+    </div>
+  </div>
+</div></body></html>

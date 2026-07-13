@@ -1,0 +1,233 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "mapping",
+  "artifactType": "current-desired-mappings",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Current Desired Mapping Collection",
+  "uxModes": [
+    "current",
+    "desired",
+    "pending-confirmation"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "Mappings are the governing comparison surface between current and desired UX."
+  },
+  "sourceFile": "06-current-desired-mappings.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.current-desired-mappings.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-current-desired-mapping.v1",
+      "itemType": "uxCurrentDesiredMapping",
+      "id": "jobs.filters.mapping.modal-clear",
+      "corpusId": "jobs.filters",
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.clear-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "currentRefs": [
+        {
+          "id": "jobs.filters.current.modal-clear",
+          "mode": "current",
+          "itemType": "uxRequirement",
+          "title": "Current Clear Filters behavior"
+        }
+      ],
+      "desiredRefs": [
+        {
+          "id": "jobs.filters.desired.modal-clear",
+          "mode": "desired",
+          "itemType": "uxRequirement",
+          "title": "Clear Filters resets active browse filters"
+        }
+      ],
+      "mappingType": "changed",
+      "decisionStatus": "pending-confirmation",
+      "summary": "Current Clear Filters behavior is being clarified into a desired broad reset behavior, but confirmation is required before implementation.",
+      "behaviorDelta": {
+        "preserved": [
+          "Clear remains the user's reset action."
+        ],
+        "changed": [
+          "Desired behavior explicitly resets active browse filters and may require explicit confirmation copy."
+        ],
+        "added": [
+          "Confirmation and test gates are made explicit."
+        ],
+        "removed": [],
+        "notesMd": "This mapping is the decision surface; implementation cannot treat the desired row as governing until confirmation is resolved."
+      },
+      "recommendation": {
+        "summary": "Confirm Clear Filters as an explicit broad reset with clear copy.",
+        "confidence": 78,
+        "rationaleMd": "Clear/reset actions are high-risk because users can lose context; explicit confirmation reduces surprise.",
+        "alternatives": [
+          {
+            "summary": "Preserve current behavior exactly.",
+            "tradeoffsMd": "Lower behavior-change risk, but ambiguity remains."
+          },
+          {
+            "summary": "Split Clear Draft and Clear Active Filters into separate actions.",
+            "tradeoffsMd": "More precise, but adds UX complexity and requires a larger design decision."
+          }
+        ],
+        "consequencesMd": "If confirmed, implementation and tests must prove broad reset and cancellation behavior."
+      },
+      "confirmation": {
+        "required": true,
+        "status": "pending",
+        "confirmedBy": null,
+        "confirmedAt": null,
+        "notesMd": "User confirmation required because this may change existing reset semantics."
+      },
+      "implementationGate": {
+        "required": true,
+        "canImplement": false,
+        "blockedReason": "Desired behavior remains pending confirmation."
+      },
+      "testGate": {
+        "required": true,
+        "proofLevel": "behavior-test",
+        "assertions": [
+          {
+            "id": "jobs.filters.mapping.modal-clear.assertion.confirmed-reset",
+            "summary": "Confirmed clear behavior resets active filters and visibly broadens results."
+          },
+          {
+            "id": "jobs.filters.mapping.modal-clear.assertion.cancel-preserves",
+            "summary": "Canceling the clear confirmation preserves active filters."
+          }
+        ],
+        "manualProofAllowed": false
+      },
+      "generatedRefs": {
+        "markdown": "generated/mappings/jobs.filters.mapping.modal-clear.md"
+      },
+      "db": {
+        "collection": "uxCurrentDesiredMappings",
+        "documentId": "jobs.filters.mapping.modal-clear"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "schema": "tgn.ux-current-desired-mapping.v1",
+      "itemType": "uxCurrentDesiredMapping",
+      "id": "jobs.filters.mapping.modal-apply",
+      "corpusId": "jobs.filters",
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "currentRefs": [],
+      "desiredRefs": [
+        {
+          "id": "jobs.filters.desired.modal-apply",
+          "mode": "desired",
+          "itemType": "uxRequirement",
+          "title": "Apply commits a valid filter draft"
+        }
+      ],
+      "mappingType": "preserved-with-clarification",
+      "decisionStatus": "confirmed",
+      "summary": "Apply behavior is treated as preserved and clarified by desired UX requirements.",
+      "behaviorDelta": {
+        "preserved": [
+          "Apply commits valid filter edits to live browsing."
+        ],
+        "changed": [],
+        "added": [
+          "Visibility, disabled state, and must-not-save behavior are explicitly specified."
+        ],
+        "removed": [],
+        "notesMd": "The empty current side shows the same mapping shape can represent evidence stored elsewhere."
+      },
+      "recommendation": {
+        "summary": "Use desired Apply behavior as governing implementation truth.",
+        "confidence": 95,
+        "rationaleMd": "The behavior is confirmed and high-value for refactor preservation.",
+        "alternatives": [],
+        "consequencesMd": "Implementation must satisfy Apply visibility, enabled state, effects, and proof assertions."
+      },
+      "confirmation": {
+        "required": false,
+        "status": "not-required",
+        "confirmedBy": null,
+        "confirmedAt": null,
+        "notesMd": null
+      },
+      "implementationGate": {
+        "required": true,
+        "canImplement": true
+      },
+      "testGate": {
+        "required": true,
+        "proofLevel": "behavior-test",
+        "assertions": [
+          {
+            "id": "jobs.filters.mapping.modal-apply.assertion.apply-commit",
+            "summary": "Apply commits valid edits and closes the modal."
+          }
+        ],
+        "manualProofAllowed": false
+      },
+      "generatedRefs": {
+        "markdown": "generated/mappings/jobs.filters.mapping.modal-apply.md"
+      },
+      "db": {
+        "collection": "uxCurrentDesiredMappings",
+        "documentId": "jobs.filters.mapping.modal-apply"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

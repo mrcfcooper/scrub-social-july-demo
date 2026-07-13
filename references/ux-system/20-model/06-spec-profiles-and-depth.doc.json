@@ -1,0 +1,226 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.06-spec-profiles-and-depth",
+  "title": "Spec Profiles And Depth",
+  "content": [
+    {
+      "id": "spec-profiles-and-depth-body-1",
+      "body": "This document exists to help agents choose how much UX detail to create for a given work type. Use it before authoring detailed UX items so the package declares its profile, target depth, required facets, optional facets, and allowed omissions."
+    },
+    {
+      "id": "package-manifest-first",
+      "title": "Package Manifest First",
+      "body": [
+        "Every meaningful UX package should start with a manifest. The manifest records:",
+        "",
+        "- spec profile",
+        "- depth target",
+        "- UX modes",
+        "- included facets",
+        "- excluded facets",
+        "- allowed omissions",
+        "- completion standard",
+        "- governing artifacts",
+        "",
+        "The manifest prevents agents from treating every UX task as a full minute-detail spec."
+      ]
+    },
+    {
+      "id": "depth-levels",
+      "title": "Depth Levels",
+      "body": [
+        "`L0: Feature Overview` covers feature purpose, user value, major surfaces, entry/exit points, outcomes, constraints, and non-goals.",
+        "",
+        "`L1: Journey And Flow` covers journeys, flows, subflows, happy paths, alternate paths, blocked paths, and recovery paths.",
+        "",
+        "`L2: Requirement` covers governing App Behavior requirements for meaningful behavior concepts.",
+        "",
+        "`L3: Observable Scenario And Edge Case` covers loading, empty, error, invalid, dirty, stale, auth, recovery, edge cases, and must-not behavior.",
+        "",
+        "`L4: Acceptance Criteria And Proof` covers testable proof expectations tied to requirements, scenarios, or subflows.",
+        "",
+        "`L5: Minute Detail` covers exact copy when governing, validation copy and placement, focus/keyboard behavior, responsive behavior, accessibility, permissions, persistence, navigation, all known edge cases, and detailed acceptance criteria."
+      ]
+    },
+    {
+      "id": "facet-vocabulary",
+      "title": "Facet Vocabulary",
+      "body": [
+        "Use these facets in manifests. See [Artifact Roles And Facets](08-artifact-roles-and-facets.md) for the canonical definition of each facet and [Granularity And Coverage](09-granularity-and-coverage.md) for coverage-index rules.",
+        "",
+        "- `features`",
+        "- `subfeatures`",
+        "- `journeys`",
+        "- `flows`",
+        "- `subflows`",
+        "- `requirements`",
+        "- `observableScenarios`",
+        "- `validation`",
+        "- `recovery`",
+        "- `emptyLoadingError`",
+        "- `copy`",
+        "- `layoutSemantics`",
+        "- `accessibility`",
+        "- `permissions`",
+        "- `persistence`",
+        "- `navigation`",
+        "- `edgeCases`",
+        "- `acceptanceCriteria`",
+        "- `currentDesiredMappings`",
+        "- `pendingDecisions`"
+      ]
+    },
+    {
+      "id": "full-product-ux-spec",
+      "title": "Full Product UX Spec",
+      "body": [
+        "Use `full-product-ux-spec` for broad, important product areas where agents need a complete behavior model.",
+        "",
+        "Required modes: `desired`; add `current`, `ideal`, or `pending-confirmation` when relevant.",
+        "",
+        "Required depth: at least `L4`.",
+        "",
+        "Required facets: features, subfeatures, journeys, flows, subflows, requirements, observableScenarios, acceptanceCriteria, pendingDecisions.",
+        "",
+        "Optional facets: copy, layoutSemantics, accessibility, permissions, persistence, navigation, currentDesiredMappings.",
+        "",
+        "Allowed omissions: minute copy, pixel-level layout, implementation proof details, and unrelated adjacent features.",
+        "",
+        "Completion standard: another agent can understand the product area and implement from desired UX without inventing major behavior."
+      ]
+    },
+    {
+      "id": "refactor-preservation-spec",
+      "title": "Refactor Preservation Spec",
+      "body": [
+        "Use `refactor-preservation-spec` before meaningful refactor work on existing UX.",
+        "",
+        "Required modes: `current`, `confirmed-current`, `desired`; add `intermediate` when migration or staged rollout affects UX.",
+        "",
+        "Required depth: at least `L4`.",
+        "",
+        "Required facets: journeys, flows, subflows, requirements, observableScenarios, acceptanceCriteria, currentDesiredMappings, pendingDecisions.",
+        "",
+        "Optional facets: ideal, copy, layoutSemantics, accessibility, persistence, navigation.",
+        "",
+        "Allowed omissions: ideal redesign, unrelated UX improvements, minute copy unless behavior-changing, and pixel-level visual detail.",
+        "",
+        "Completion standard: preserved behavior, changed behavior, pending behavior, and proof gates are explicit before implementation."
+      ]
+    },
+    {
+      "id": "new-feature-spec",
+      "title": "New Feature Spec",
+      "body": [
+        "Use `new-feature-spec` when no current UX exists.",
+        "",
+        "Required modes: `desired`; add `ideal` when exploring best possible UX before selecting target behavior.",
+        "",
+        "Required depth: at least `L3`, or `L4` for important shipped features.",
+        "",
+        "Required facets: features or subfeatures, journeys, flows, requirements, observableScenarios, acceptanceCriteria.",
+        "",
+        "Optional facets: pendingDecisions, copy, layoutSemantics, accessibility, permissions, persistence, navigation.",
+        "",
+        "Allowed omissions: current UX, currentDesiredMappings, migration-only details.",
+        "",
+        "Completion standard: desired UX is complete enough for implementation and proof without relying on future product invention."
+      ]
+    },
+    {
+      "id": "feature-extension-spec",
+      "title": "Feature Extension Spec",
+      "body": [
+        "Use `feature-extension-spec` when adding behavior to an existing feature.",
+        "",
+        "Required modes: `current`, `desired`; add `pending-confirmation` for behavior changes and `confirmed-current` for preserved touched behavior.",
+        "",
+        "Required depth: at least `L3`.",
+        "",
+        "Required facets: affected journeys, affected flows, requirements, observableScenarios, currentDesiredMappings, acceptanceCriteria, pendingDecisions.",
+        "",
+        "Optional facets: broader feature overview, ideal, copy, layoutSemantics, accessibility.",
+        "",
+        "Allowed omissions: unaffected feature areas and unrelated existing flows.",
+        "",
+        "Completion standard: the extension is clearly integrated with existing UX without redefining unaffected behavior."
+      ]
+    },
+    {
+      "id": "ux-audit-spec",
+      "title": "UX Audit Spec",
+      "body": [
+        "Use `ux-audit-spec` to document what exists today.",
+        "",
+        "Required modes: `current` and `unknown`; add `suspected accidental` through status/authority where appropriate.",
+        "",
+        "Required depth: at least `L2`, with `L3` for complex flows.",
+        "",
+        "Required facets: journeys, flows, requirements, observableScenarios, pendingDecisions for unknowns.",
+        "",
+        "Optional facets: desired, currentDesiredMappings, acceptanceCriteria.",
+        "",
+        "Allowed omissions: desired UX decisions and implementation plans.",
+        "",
+        "Completion standard: current UX is discoverable with confidence levels and unresolved gaps are routed.",
+        "",
+        "For exhaustive full-app current UX investigation, use this as a route/source-first audit profile: declare current, observed-current, uncertain-current, and unknown modes in the package manifest; include route inventory, surface decomposition, hidden UX inventory, runtime observations, current requirements, observable scenarios, coverage rows, and pending decisions; and follow the JSON-only investigation guidance in [Investigation System](../50-investigation/00-investigation-system.doc.json). Desired UX remains out of scope except for pending recommendations or explicit follow-up decisions."
+      ]
+    },
+    {
+      "id": "test-contract-spec",
+      "title": "Test Contract Spec",
+      "body": [
+        "Use `test-contract-spec` when proof is the main deliverable.",
+        "",
+        "Required modes: `desired`; add `confirmed-current` for refactor preservation.",
+        "",
+        "Required depth: `L4`.",
+        "",
+        "Required facets: requirements, observableScenarios, acceptanceCriteria.",
+        "",
+        "Optional facets: journeys and flows for context, currentDesiredMappings when preserving existing behavior.",
+        "",
+        "Allowed omissions: feature overview if already present, broad product rationale, and visual details not needed for proof.",
+        "",
+        "Completion standard: tests can be written or reviewed against explicit UX acceptance criteria."
+      ]
+    },
+    {
+      "id": "minute-detail-spec",
+      "title": "Minute Detail Spec",
+      "body": [
+        "Use `minute-detail-spec` when exactness matters because risk, regulation, high traffic, conversion, accessibility, or user trust requires it.",
+        "",
+        "Required modes: `desired`; add current or intermediate as needed.",
+        "",
+        "Required depth: `L5`.",
+        "",
+        "Required facets: all relevant facets, especially validation, recovery, emptyLoadingError, copy, layoutSemantics, accessibility, permissions, persistence, navigation, edgeCases, and acceptanceCriteria.",
+        "",
+        "Allowed omissions: only explicitly out-of-scope adjacent behavior.",
+        "",
+        "Completion standard: a future agent can implement and test the behavior to minute observable detail without asking for UX clarification."
+      ]
+    },
+    {
+      "id": "lightweight-spec",
+      "title": "Lightweight Spec",
+      "body": [
+        "Use `lightweight-spec` for small, low-risk behavior where full hierarchy would add noise.",
+        "",
+        "Required modes: `desired`; add `current` only if changing existing behavior.",
+        "",
+        "Required depth: `L2`, or `L3` if edge cases are meaningful.",
+        "",
+        "Required facets: affected requirements and acceptanceCriteria.",
+        "",
+        "Optional facets: journey, flow, observableScenarios.",
+        "",
+        "Allowed omissions: feature overview, full journey map, unaffected flows, minute detail.",
+        "",
+        "Completion standard: the small change is clear enough to implement and verify without creating duplicate UX authority."
+      ]
+    }
+  ]
+}

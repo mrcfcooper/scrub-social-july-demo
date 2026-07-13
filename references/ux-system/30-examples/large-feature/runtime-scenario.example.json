@@ -1,0 +1,99 @@
+{
+  "schema": "tgn.ux-runtime-scenario.v1",
+  "itemType": "uxRuntimeScenario",
+  "id": "jobs.filters.scenario.apply-invalid",
+  "title": "Apply is relevant but invalid input blocks execution",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 95,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "subflowIds": [
+      "jobs.filters.apply-filters"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "scenario": {
+    "scenarioType": "invalid",
+    "situation": "The user has changed filters in a way that would affect browsing, but at least one filter value is invalid.",
+    "userSees": [
+      "The Apply action remains visible.",
+      "The Apply action is disabled.",
+      "The invalid input is communicated near the relevant field or surface."
+    ],
+    "userCanDo": [
+      "Correct the invalid input.",
+      "Discard changes.",
+      "Cancel or close through the appropriate exit behavior."
+    ],
+    "userCannotDo": [
+      "Apply invalid filters.",
+      "Bypass the invalid state through the primary Apply action."
+    ],
+    "systemFeedback": [
+      "The disabled Apply state communicates that applying is relevant but blocked.",
+      "The validation message communicates what needs to be fixed."
+    ],
+    "recoveryPath": [
+      "User corrects the invalid field.",
+      "Apply becomes enabled when the edited filters are valid.",
+      "User applies the corrected filters."
+    ],
+    "settledOutcome": "After correction and apply, results reflect the valid filters and the modal closes.",
+    "mustNotHappen": [
+      "Apply disappears while invalid input is blocking execution.",
+      "Invalid filters are applied.",
+      "The user is left without a visible recovery path."
+    ]
+  },
+  "relationships": {
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply"
+    ],
+    "subflowIds": [
+      "jobs.filters.apply-filters"
+    ],
+    "acceptanceCriterionIds": [
+      "jobs.filters.acceptance.modal-apply-invalid"
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.scenario.apply-invalid.md"
+  },
+  "db": {
+    "collection": "uxRuntimeScenarios",
+    "documentId": "jobs.filters.scenario.apply-invalid",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

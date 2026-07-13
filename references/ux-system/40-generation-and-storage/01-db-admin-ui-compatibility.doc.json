@@ -1,0 +1,90 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.40-generation-and-storage.01-db-admin-ui-compatibility",
+  "title": "DB Admin UI Compatibility",
+  "content": [
+    {
+      "id": "db-admin-ui-compatibility-body-1",
+      "body": "This document exists to define how UX JSON should remain compatible with document databases and admin UI workflows. Use it when shaping IDs, collections, split files, mappings, imports, exports, or comparison views."
+    },
+    {
+      "id": "storage-principle",
+      "title": "Storage Principle",
+      "body": "The schema should work as file-based JSON and as document-based database records. Collection files are preferred for repo authoring, but every item must be self-contained enough to become a DB document."
+    },
+    {
+      "id": "recommended-collections",
+      "title": "Recommended Collections",
+      "body": [
+        "Use these logical collections when seeding a database or powering an admin UI:",
+        "",
+        "- `uxCorpuses`",
+        "- `uxFeatures`",
+        "- `uxSubfeatures`",
+        "- `uxJourneys`",
+        "- `uxFlows`",
+        "- `uxSubflows`",
+        "- `uxRequirements`",
+        "- `uxObservableScenarios`",
+        "- `uxAcceptanceCriteria`",
+        "- `uxCurrentDesiredMappings`",
+        "- `uxPendingDecisions`",
+        "- `uxCoverageIndexes`",
+        "- `uxGeneratedArtifacts`",
+        "",
+        "The v1 schema defines the core UX hierarchy in detail: package manifests, coverage indexes, feature, subfeature, journey, flow, subflow, requirement, observable scenario, acceptance criterion, pending decision, and current-to-desired mapping objects."
+      ]
+    },
+    {
+      "id": "stable-ids",
+      "title": "Stable IDs",
+      "body": [
+        "IDs should be:",
+        "",
+        "- globally unique within the repo or corpus namespace",
+        "- stable across file moves",
+        "- readable enough for review",
+        "- safe for document IDs",
+        "- independent of generated Markdown location",
+        "",
+        "Prefer dot-separated IDs such as:",
+        "",
+        "```text",
+        "jobs.filters.desired.modal-apply",
+        "```"
+      ]
+    },
+    {
+      "id": "admin-ui-views",
+      "title": "Admin UI Views",
+      "body": [
+        "An admin UI should be able to render:",
+        "",
+        "- current UX item",
+        "- desired UX item",
+        "- mapping decision",
+        "- recommendation and confidence",
+        "- confirmation state",
+        "- implementation gate",
+        "- test gate",
+        "- generated Markdown preview",
+        "",
+        "Mappings should drive comparison views rather than requiring current and desired rows to know about each other directly."
+      ]
+    },
+    {
+      "id": "split-and-compose",
+      "title": "Split And Compose",
+      "body": [
+        "Scripts may split a collection into one file per item or compose item files into a collection. This must not change IDs, status, authority, mode, owner, scope, or mapping meaning.",
+        "",
+        "When composing, preserve stable order by explicit order fields when present, then by ID."
+      ]
+    },
+    {
+      "id": "versioning",
+      "title": "Versioning",
+      "body": "Store schema versions with every artifact and item. Future migrations should be explicit and scriptable, and should not silently rewrite governing behavior."
+    }
+  ]
+}

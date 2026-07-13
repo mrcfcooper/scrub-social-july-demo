@@ -1,0 +1,46 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-shared-specs.06-shared-security-privacy",
+  "title": "Shared Security Privacy",
+  "content": [
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Defines the Shared Security Privacy shared App Behavior home and its ownership boundary.",
+        "Audience: Agents documenting shared frontend App Behavior and route packets that reference it.",
+        "Keep In Sync With: App Behavior shared specs README, full coverage taxonomy, and route/shared-surface inventory templates.",
+        "Update When: The shared ownership boundary, route reference rule, or backend authority boundary changes.",
+        "Does Not Cover: Route-local behavior, backend internals, or runtime implementation details.",
+        "-->"
+      ]
+    },
+    {
+      "id": "shared-security-privacy",
+      "title": "Shared Security Privacy",
+      "depth": 1,
+      "body": "This shared home governs redaction, token exposure, private data visibility, download/export privacy, sensitive cleanup, route-safe public-token handling, shared safety gates, and frontend-visible privacy proof."
+    },
+    {
+      "id": "ownership-boundary",
+      "title": "Ownership Boundary",
+      "body": "Put behavior here when it has shared frontend meaning, shared runtime source, shared proof, or repeated route usage. The shared spec should define the common frontend contract and the required proof expectations once."
+    },
+    {
+      "id": "must-stay-route-local",
+      "title": "Must Stay Route-Local",
+      "body": "Keep route-specific sensitive fields, route-specific token/query behavior, route-specific visibility rules, route-local copy, and route-specific proof in the route packet. The route packet may reference this shared spec but should not duplicate shared authority."
+    },
+    {
+      "id": "backend-authority-only",
+      "title": "Backend Authority Only",
+      "body": "Do not document server-side encryption, database access controls, backend secret storage, backend audit implementation, and compliance process internals as frontend App Behavior authority. Reference backend/API authority when the frontend behavior depends on those facts."
+    },
+    {
+      "id": "route-reference-shape",
+      "title": "Route Reference Shape",
+      "body": "Route packets should reference this shared home and record the route-specific trigger, input, projection, override, proof row, or accepted gap. If a route differs from the shared behavior, document the route-specific override explicitly and route any product decision that cannot be derived."
+    }
+  ]
+}

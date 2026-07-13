@@ -1,0 +1,228 @@
+{
+  "schema": "tgn.ux-requirement.v1",
+  "itemType": "uxRequirement",
+  "id": "jobs.filters.desired.modal-clear",
+  "title": "Clear Filters resets active browse filters",
+  "mode": "desired",
+  "status": "pending-confirmation",
+  "authority": "pending-confirmation",
+  "confidence": 85,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.return-to-broad-results"
+    ],
+    "flowIds": [
+      "clear-reset-recovery"
+    ],
+    "subflowIds": [
+      "clear-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "requirement": {
+    "summary": "Clear Filters resets active browsing filters and returns the user to a broader Jobs results state.",
+    "detailsMd": "The desired UX treats `Clear Filters` as a committed browse reset, not as local modal cleanup.",
+    "userGoal": "Quickly remove active filter constraints and return to broader browsing.",
+    "productMeaning": "Clear Filters means active filter reset from the user's perspective.",
+    "nonGoals": [
+      "Do not use Clear Filters as a draft-only cleanup action.",
+      "Do not preserve hidden filter constraints after the user confirms clear."
+    ]
+  },
+  "requirementSource": {
+    "origin": "desired-ux-design",
+    "confirmation": "pending",
+    "confirmedBy": null,
+    "confirmedAt": null,
+    "notesMd": "This desired behavior should become governing only after user confirmation because it changes current UX semantics."
+  },
+  "changeControl": {
+    "changePolicy": "user-confirmation-required",
+    "materialBehaviorChange": true,
+    "pendingChangeIds": [
+      "jobs.filters.mapping.modal-clear"
+    ],
+    "supersedesRequirementIds": [],
+    "supersededByRequirementId": null
+  },
+  "conditions": {
+    "appliesWhen": [
+      "active browse filters are present",
+      "the user invokes Clear Filters"
+    ],
+    "doesNotApplyWhen": [
+      "there are no active browse filters"
+    ],
+    "preconditions": [
+      "the user is in the Jobs search experience"
+    ],
+    "blockedWhen": [],
+    "variants": []
+  },
+  "visibility": {
+    "specified": true,
+    "visibleWhen": [
+      "active browse filters are present"
+    ],
+    "hiddenWhen": [
+      "no active browse filters are present"
+    ],
+    "displayMode": "hide-when-not-relevant",
+    "notesMd": "Visibility is user-meaningful because it communicates whether there is anything to clear."
+  },
+  "interaction": {
+    "specified": true,
+    "triggers": [
+      {
+        "type": "click",
+        "target": "Clear Filters"
+      }
+    ],
+    "primaryAction": "reset active browse filters",
+    "interactionResult": "the user returns to broader Jobs browsing results"
+  },
+  "confirmation": {
+    "specified": true,
+    "required": true,
+    "requiredWhen": [
+      "the clear action will discard active filter constraints"
+    ],
+    "confirmationType": "destructive-reset",
+    "cancelBehavior": "keep current filters unchanged",
+    "confirmBehavior": "reset active filters and settle into broad browsing"
+  },
+  "effects": {
+    "immediate": [
+      "remove active filter constraints",
+      "return to broader results"
+    ],
+    "deferred": [],
+    "sideEffects": [
+      "filter summary updates to reflect cleared browsing"
+    ],
+    "mustNot": [
+      "leave hidden active filters in place",
+      "treat clear as modal-local only"
+    ]
+  },
+  "observableScenarios": [
+    {
+      "scenario": "User clears active filters from the modal",
+      "userSees": "A confirmation before the reset completes.",
+      "userCanDo": [
+        "confirm clear",
+        "cancel clear"
+      ],
+      "expectedOutcome": "Confirmed clear removes active filter constraints and returns the user to broader browsing."
+    }
+  ],
+  "recovery": {
+    "specified": true,
+    "recoveryPaths": [
+      {
+        "id": "cancel-clear",
+        "summary": "Canceling confirmation keeps current filters unchanged."
+      }
+    ],
+    "notesMd": "Recovery is required because the action materially changes the active browse state."
+  },
+  "contentCopy": {
+    "specified": true,
+    "governing": true,
+    "labels": [
+      {
+        "id": "clear-filters-label",
+        "text": "Clear Filters",
+        "appliesTo": "active filter reset action"
+      }
+    ],
+    "bodyCopy": [],
+    "notesMd": "The label is governing because it defines the user's action meaning."
+  },
+  "relationships": {
+    "relatedRequirementIds": [
+      "jobs.filters.desired.filter-summary"
+    ],
+    "dependsOnRequirementIds": [],
+    "parentRequirementId": null,
+    "childRequirementIds": []
+  },
+  "implementationGate": {
+    "required": true,
+    "gateType": "hard",
+    "canImplement": false,
+    "blockedReason": "This behavior change is pending confirmation.",
+    "acceptanceCriteria": [
+      "Clear Filters is available only when active filter constraints exist.",
+      "Confirming Clear Filters removes active filter constraints.",
+      "Canceling confirmation preserves the active filters."
+    ]
+  },
+  "testGate": {
+    "required": true,
+    "proofLevel": "behavior-test",
+    "assertions": [
+      {
+        "id": "jobs.filters.desired.modal-clear.assertion.visibility",
+        "summary": "Clear Filters is visible when active browse filters exist."
+      },
+      {
+        "id": "jobs.filters.desired.modal-clear.assertion.confirmation",
+        "summary": "Clear Filters requires confirmation before resetting active filters."
+      },
+      {
+        "id": "jobs.filters.desired.modal-clear.assertion.result",
+        "summary": "Confirming Clear Filters returns the user to broader browsing results."
+      }
+    ],
+    "manualProofAllowed": false,
+    "testRefs": []
+  },
+  "risk": {
+    "level": "high",
+    "categories": [
+      "behavior-change",
+      "destructive-reset"
+    ],
+    "failureModes": [
+      "The user may lose active filter constraints unexpectedly if confirmation is skipped."
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.desired.modal-clear.md"
+  },
+  "db": {
+    "collection": "uxRequirements",
+    "documentId": "jobs.filters.desired.modal-clear",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

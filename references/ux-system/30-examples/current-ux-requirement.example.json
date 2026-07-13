@@ -1,0 +1,161 @@
+{
+  "schema": "tgn.ux-requirement.v1",
+  "itemType": "uxRequirement",
+  "id": "jobs.filters.current.modal-clear",
+  "title": "Current modal clear behavior",
+  "mode": "current",
+  "status": "observed-current",
+  "authority": "observed-current",
+  "confidence": 80,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.author-filter-query"
+    ],
+    "flowIds": [
+      "advanced-filters"
+    ],
+    "subflowIds": [
+      "clear-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "requirement": {
+    "summary": "The current modal exposes a clear action for filter authoring cleanup.",
+    "detailsMd": "This current behavior is captured for comparison only. It does not become desired UX unless mapped and confirmed.",
+    "userGoal": "Remove filter edits while working in the modal.",
+    "productMeaning": "Current behavior appears to treat clear as a modal-local cleanup action.",
+    "nonGoals": [
+      "Do not treat this current behavior as automatically governing desired UX."
+    ]
+  },
+  "requirementSource": {
+    "origin": "current-ux-observation",
+    "confirmation": "unknown",
+    "confirmedBy": null,
+    "confirmedAt": null,
+    "notesMd": "Current UX rows may be discovered from observation or existing docs, but should not cite implementation files as governing product truth."
+  },
+  "changeControl": {
+    "changePolicy": "non-governing-current",
+    "materialBehaviorChange": false,
+    "pendingChangeIds": [],
+    "supersedesRequirementIds": [],
+    "supersededByRequirementId": null
+  },
+  "conditions": {
+    "appliesWhen": [
+      "the advanced-filter modal is open"
+    ],
+    "doesNotApplyWhen": [
+      "the modal is closed"
+    ],
+    "preconditions": [
+      "the user is editing filters"
+    ],
+    "blockedWhen": [],
+    "variants": []
+  },
+  "interaction": {
+    "specified": true,
+    "triggers": [
+      {
+        "type": "click",
+        "target": "Clear Filters"
+      }
+    ],
+    "primaryAction": "clear modal filter edits",
+    "interactionResult": "the user sees filter edit cleanup within the modal"
+  },
+  "effects": {
+    "immediate": [
+      "modal filter edits are cleared or reset"
+    ],
+    "deferred": [],
+    "sideEffects": [],
+    "mustNot": [
+      "assume desired browse-state reset without a mapping decision"
+    ]
+  },
+  "observableScenarios": [
+    {
+      "scenario": "User clears while editing filters",
+      "userSees": "A clear action in the modal.",
+      "userCanDo": [
+        "continue editing",
+        "apply separately if available"
+      ],
+      "expectedOutcome": "The current modal editing surface is cleaned up."
+    }
+  ],
+  "relationships": {
+    "relatedRequirementIds": [],
+    "dependsOnRequirementIds": [],
+    "parentRequirementId": null,
+    "childRequirementIds": []
+  },
+  "implementationGate": {
+    "required": false,
+    "gateType": "none",
+    "canImplement": false,
+    "blockedReason": "Current UX is comparison input, not the implementation target.",
+    "acceptanceCriteria": []
+  },
+  "testGate": {
+    "required": false,
+    "proofLevel": "none",
+    "assertions": [],
+    "manualProofAllowed": true,
+    "testRefs": []
+  },
+  "risk": {
+    "level": "medium",
+    "categories": [
+      "behavior-ambiguity"
+    ],
+    "failureModes": [
+      "Current behavior could be mistaken for desired behavior without an explicit mapping."
+    ]
+  },
+  "openQuestions": [
+    {
+      "id": "jobs.filters.current.modal-clear.question.intent",
+      "summary": "Should clear remain modal-local or become committed browse reset in desired UX?"
+    }
+  ],
+  "generatedRefs": {
+    "markdown": "generated/current/jobs.filters.current.modal-clear.md"
+  },
+  "db": {
+    "collection": "uxRequirements",
+    "documentId": "jobs.filters.current.modal-clear",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "current"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

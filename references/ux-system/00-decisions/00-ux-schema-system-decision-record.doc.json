@@ -1,0 +1,78 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.00-decisions.00-ux-schema-system-decision-record",
+  "title": "UX Schema System Decision Record",
+  "content": [
+    {
+      "id": "ux-schema-system-decision-record-body-1",
+      "body": "This document exists to preserve the durable decisions behind the production App Behavior spec schema system. Use it when revising schemas, examples, generators, storage rules, or App Behavior corpus guidance so updates continue serving the same product-behavior purpose."
+    },
+    {
+      "id": "decision",
+      "title": "Decision",
+      "body": "The repo will use a UX-only, JSON-first spec system for governing product behavior. The system will support current UX capture, desired App Behavior specification, first-class current-to-desired mappings, generated Markdown review artifacts, and database/admin UI workflows."
+    },
+    {
+      "id": "rationale",
+      "title": "Rationale",
+      "body": [
+        "Agents need a source of truth that can drive real implementation without rediscovering product behavior from code. Human-readable Markdown alone is useful for review, but JSON is better for stable diffs, validation, generation, database seeding, admin UI editing, and direct row-to-row mapping.",
+        "",
+        "The schema must start from user journeys and refine toward specific observable requirements. It must not force implementation details into App Behavior truth. Implementation plans, tests, audits, and conformance reports may reference App Behavior requirement IDs, but they must not redefine the behavior."
+      ]
+    },
+    {
+      "id": "preserved-decisions",
+      "title": "Preserved Decisions",
+      "body": [
+        "- App Behavior specs are the primary source of truth for development.",
+        "- Runtime/code is not UX authority.",
+        "- UX-only comes first; architecture and state management stay outside the governing UX schema.",
+        "- JSON is governing; generated Markdown is review-only.",
+        "- The same schema shape applies across large files, collection files, split files, DB documents, and generated artifacts.",
+        "- Collection files are the default authoring format.",
+        "- Each item is portable enough for scripts to split or compose without losing meaning.",
+        "- Current UX and desired UX are separate modes.",
+        "- Current UX is not automatically governing desired UX.",
+        "- Current-to-desired mappings are first-class objects.",
+        "- Mappings support one-to-one, one-to-many, many-to-one, and many-to-many relationships.",
+        "- Behavior changes need decision state, recommendation, confidence, alternatives, consequences, confirmation status, and implementation gating.",
+        "- App Behavior requirements may group related assertions.",
+        "- Exact copy is governing only when explicitly marked.",
+        "- App Behavior requirements must avoid controller, store, code path, raw state-variable, and state-management design details."
+      ]
+    },
+    {
+      "id": "ux-hierarchy",
+      "title": "UX Hierarchy",
+      "body": [
+        "Use this hierarchy when structuring App Behavior specs:",
+        "",
+        "```text",
+        "User Journeys",
+        "  -> Experience Flows",
+        "    -> Feature Behavior Specs",
+        "      -> Interaction Requirements",
+        "        -> Observable Scenarios / Validation / Content Details",
+        "          -> Acceptance Criteria",
+        "```",
+        "",
+        "The hierarchy is conceptual, not a mandate that every corpus must create a separate file for every level."
+      ]
+    },
+    {
+      "id": "what-this-excludes",
+      "title": "What This Excludes",
+      "body": [
+        "This system does not define architecture ownership, controller boundaries, store design, implementation sequencing, runtime conformance results, automated test files, or code-level evidence.",
+        "",
+        "When implementation artifacts need those concerns, they should reference App Behavior requirement IDs instead of adding implementation fields to governing App Behavior rows."
+      ]
+    },
+    {
+      "id": "evolution-rule",
+      "title": "Evolution Rule",
+      "body": "Future revisions should preserve the distinction between product behavior truth and implementation proof. If new needs arise, prefer adding optional facets, companion artifacts, or versioned schema definitions over weakening that boundary."
+    }
+  ]
+}

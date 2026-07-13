@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-requirement-item.schema.json",
+  "title": "TGN UX Requirement Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "mode",
+    "status",
+    "authority",
+    "confidence",
+    "owner",
+    "scope",
+    "requirement",
+    "requirementSource",
+    "changeControl",
+    "implementationGate",
+    "testGate",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-requirement.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxRequirement"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "$ref": "shared-definitions.schema.json#/$defs/mode"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/status"
+    },
+    "authority": {
+      "$ref": "shared-definitions.schema.json#/$defs/authority"
+    },
+    "confidence": {
+      "$ref": "shared-definitions.schema.json#/$defs/confidence"
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detailsMd": {
+          "type": "string"
+        },
+        "userGoal": {
+          "type": "string"
+        },
+        "productMeaning": {
+          "type": "string"
+        },
+        "nonGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requirementSource": {
+      "type": "object",
+      "required": [
+        "origin",
+        "confirmation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "type": "string",
+          "enum": [
+            "product-spec",
+            "user-request",
+            "user-confirmed",
+            "current-ux-observation",
+            "desired-ux-design",
+            "agent-recommendation",
+            "imported"
+          ]
+        },
+        "confirmation": {
+          "type": "string",
+          "enum": [
+            "confirmed",
+            "pending",
+            "not-required",
+            "rejected",
+            "unknown"
+          ]
+        },
+        "confirmedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confirmedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notesMd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "changeControl": {
+      "type": "object",
+      "required": [
+        "changePolicy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "changePolicy": {
+          "type": "string",
+          "enum": [
+            "user-confirmation-required",
+            "agent-safe",
+            "pending",
+            "frozen",
+            "non-governing-current"
+          ]
+        },
+        "materialBehaviorChange": {
+          "type": "boolean"
+        },
+        "pendingChangeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supersedesRequirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supersededByRequirementId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "visibility": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "enabledState": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "interaction": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "observableScenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "persistence": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "authPermissions": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "contentCopy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "specified": {
+          "type": "boolean"
+        },
+        "governing": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "bodyCopy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "layoutSemantics": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "relationships": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "implementationGate": {
+      "type": "object",
+      "required": [
+        "required"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "gateType": {
+          "type": "string",
+          "enum": [
+            "hard",
+            "soft",
+            "none"
+          ]
+        },
+        "canImplement": {
+          "type": "boolean"
+        },
+        "blockedReason": {
+          "type": "string"
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "testGate": {
+      "type": "object",
+      "required": [
+        "required"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "proofLevel": {
+          "type": "string"
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "manualProofAllowed": {
+          "type": "boolean"
+        },
+        "testRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "currentUxAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/currentUxAssessment"
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    }
+  }
+}

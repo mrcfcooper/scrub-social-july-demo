@@ -1,0 +1,105 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.02-ux-requirement-item",
+  "title": "UX Requirement Item",
+  "content": [
+    {
+      "id": "ux-requirement-item-body-1",
+      "body": "This document exists to define the governing UX requirement item shape. Use it when describing what users see, can do, cannot do, what happens next, recovery behavior, constraints, non-goals, and proof expectations."
+    },
+    {
+      "id": "purpose",
+      "title": "Purpose",
+      "body": [
+        "A `uxRequirement` answers: what must the product experience do?",
+        "",
+        "It should not answer: which controller owns it, which store computes it, which state variable drives it, which file implements it, or which code path proves it."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- `schema`",
+        "- `itemType`",
+        "- `id`",
+        "- `title`",
+        "- `mode`",
+        "- `status`",
+        "- `authority`",
+        "- `confidence`",
+        "- `owner`",
+        "- `scope`",
+        "- `requirement.summary`",
+        "- `requirementSource`",
+        "- `changeControl`",
+        "- `implementationGate.required`",
+        "- `testGate.required`"
+      ]
+    },
+    {
+      "id": "optional-facets",
+      "title": "Optional Facets",
+      "body": [
+        "Use optional facets to add precision only where the requirement needs it:",
+        "",
+        "- `conditions`",
+        "- `visibility`",
+        "- `enabledState`",
+        "- `interaction`",
+        "- `confirmation`",
+        "- `effects`",
+        "- `observableScenarios`",
+        "- `validation`",
+        "- `recovery`",
+        "- `persistence`",
+        "- `navigation`",
+        "- `authPermissions`",
+        "- `contentCopy`",
+        "- `layoutSemantics`",
+        "- `accessibility`",
+        "- `relationships`",
+        "- `risk`",
+        "- `openQuestions`",
+        "- `generatedRefs`",
+        "- `db`",
+        "- `custom`"
+      ]
+    },
+    {
+      "id": "user-facing-language",
+      "title": "User-Facing Language",
+      "body": [
+        "Write requirements in product and UX terms:",
+        "",
+        "- \"The user can apply the draft and return to updated results.\"",
+        "- \"The action stays visible but disabled when the input is invalid.\"",
+        "- \"The modal closes after a successful apply.\"",
+        "",
+        "Avoid implementation terms:",
+        "",
+        "- controller",
+        "- store",
+        "- reducer",
+        "- selector",
+        "- raw state variable",
+        "- code path",
+        "- component-internal flag"
+      ]
+    },
+    {
+      "id": "grouped-assertions",
+      "title": "Grouped Assertions",
+      "body": [
+        "A single requirement may group related assertions when that keeps a coherent behavior together. For example, one `Apply` requirement may include visibility, disabled behavior, result, and must-not assertions.",
+        "",
+        "Use `testGate.assertions` for the nested proof statements so tests can still map to specific checks."
+      ]
+    },
+    {
+      "id": "copy-governance",
+      "title": "Copy Governance",
+      "body": "Copy is not governing just because it appears in a requirement. Mark exact copy with `contentCopy.governing: true` only when the exact wording materially affects behavior, comprehension, legal meaning, or test expectations."
+    }
+  ]
+}

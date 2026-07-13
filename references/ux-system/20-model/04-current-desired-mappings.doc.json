@@ -1,0 +1,94 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.04-current-desired-mappings",
+  "title": "Current Desired Mappings",
+  "content": [
+    {
+      "id": "current-desired-mappings-body-1",
+      "body": "This document exists to define first-class mapping objects between current UX and desired UX. Use it when a database, admin UI, refactor plan, or audit needs to show exactly how existing behavior relates to intended behavior. For broader documented-current, observed-current, intended, desired, governing, pending, superseded, or drift relationships, use behavior-thread parent containers and relationship mappings."
+    },
+    {
+      "id": "purpose",
+      "title": "Purpose",
+      "body": [
+        "Mappings answer:",
+        "",
+        "- Which current behavior corresponds to which desired behavior?",
+        "- Is it preserved, changed, added, removed, split, merged, or unresolved?",
+        "- Does a user need to confirm the change?",
+        "- Can implementation proceed?",
+        "- Which desired requirements need proof?"
+      ]
+    },
+    {
+      "id": "behavior-lifecycle-mapping-rule",
+      "title": "Behavior Lifecycle Mapping Rule",
+      "body": [
+        "Mappings should expose whether a behavior is observed runtime, documented current, verified current, intended target, intended change, ideal future, out-of-scope candidate, runtime drift, or pending decision.",
+        "If a mapping discovers behavior that is not yet owned by an App Behavior row or behavior-thread container, route it to the correct App Behavior destination or record a bounded gap.",
+        "A mapping may describe ideal/future behavior, but it must mark it non-current and outside current scope unless explicit authority expands scope.",
+        "Proof and closeout should use mappings to show which behavior was preserved, changed, promoted, deferred, or left pending."
+      ]
+    },
+    {
+      "id": "central-row-reference-rule",
+      "title": "Central Row Reference Rule",
+      "body": [
+        "Current-to-desired mappings must reference central App Behavior row IDs and paths when they govern planning, implementation, proof, review, or closeout.",
+        "A local mapping or cached snapshot may orient the agent, but the central App Behavior row remains the governing behavior record.",
+        "When a mapping marks behavior as `replaced`, the default lifecycle is `supersede_then_archive_or_remove_after_proof`: supersede first with replacement refs and proof obligations, then archive or remove after proof-backed closeout."
+      ]
+    },
+    {
+      "id": "first-class-objects",
+      "title": "First-Class Objects",
+      "body": [
+        "Do not rely on loose inline references as the authoritative relationship. Store current-to-desired relationships as `uxCurrentDesiredMapping` items.",
+        "",
+        "This supports:",
+        "",
+        "- direct admin UI comparison views",
+        "- many-to-many mapping",
+        "- pending confirmation workflows",
+        "- implementation gating",
+        "- test planning",
+        "- DB queries"
+      ]
+    },
+    {
+      "id": "mapping-types",
+      "title": "Mapping Types",
+      "body": [
+        "- `same`",
+        "- `preserved-with-clarification`",
+        "- `changed`",
+        "- `added`",
+        "- `removed`",
+        "- `split`",
+        "- `merged`",
+        "- `replaced`",
+        "- `missing-current`",
+        "- `missing-desired`",
+        "- `pending-decision`",
+        "- `not-comparable`"
+      ]
+    },
+    {
+      "id": "many-to-many-rule",
+      "title": "Many-To-Many Rule",
+      "body": [
+        "Always use arrays:",
+        "",
+        "- `currentRefs`",
+        "- `desiredRefs`",
+        "",
+        "Even a one-to-one mapping should use arrays so split and merge cases do not need a different shape."
+      ]
+    },
+    {
+      "id": "confirmation-rule",
+      "title": "Confirmation Rule",
+      "body": "Behavior changes should include recommendation, confidence, alternatives, consequences, and confirmation status. If a desired behavior changes existing UX and is not confirmed, implementation should be blocked or limited to non-governing preparation work."
+    }
+  ]
+}

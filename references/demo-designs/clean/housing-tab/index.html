@@ -1,0 +1,550 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ss-housing-tab">
+  <style>
+    .ss-housing-tab {
+      --plum: #421A31;
+      --plum-soft: #6b3a52;
+      --open-air: #F9F2E8;
+      --lavender: #BBAFEF;
+      --clear-sky: #82ABF4;
+      --morning-dew: #CEDBFE;
+      --cloud: #FFFFFF;
+      --ink: #2c1320;
+      --muted: #8a7480;
+      --good: #6fc78a;
+      --amber: #e6b35a;
+      --line: #efe7dd;
+      --map-bg: #e7e0d4;
+      --map-road: #f4eee4;
+
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(110% 70% at 50% -8%, rgba(187,175,239,0.20), transparent 55%),
+        radial-gradient(90% 60% at 100% 110%, rgba(130,171,244,0.15), transparent 50%),
+        var(--open-air);
+      padding: 38px 18px 50px; min-height: 100vh; box-sizing: border-box;
+    }
+    .ss-housing-tab *,
+    .ss-housing-tab *::before,
+    .ss-housing-tab *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* section scaffolding */
+    .ss-housing-tab .sec-intro { max-width: 980px; margin: 0 auto 26px; text-align: center; }
+    .ss-housing-tab .sec-intro .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--plum-soft); margin-bottom: 8px;
+    }
+    .ss-housing-tab .sec-intro h2 { font-size: 26px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+    .ss-housing-tab .sec-intro p { font-size: 14px; font-weight: 300; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+    .ss-housing-tab .divider { max-width: 980px; margin: 52px auto; border: none; border-top: 1px solid rgba(66,26,49,0.12); }
+
+    /* ---------- shared map placeholder ---------- */
+    .ss-housing-tab .map {
+      background:
+        repeating-linear-gradient(0deg, transparent 0 38px, var(--map-road) 38px 44px),
+        repeating-linear-gradient(90deg, transparent 0 52px, var(--map-road) 52px 58px),
+        var(--map-bg);
+      position: relative; overflow: hidden;
+    }
+    .ss-housing-tab .map .river {
+      position: absolute; top: -10%; left: 22%; width: 46px; height: 120%;
+      background: rgba(130,171,244,0.28); transform: rotate(18deg); border-radius: 40px;
+    }
+    .ss-housing-tab .map .park {
+      position: absolute; bottom: 12%; right: 10%; width: 90px; height: 70px;
+      background: rgba(111,199,138,0.22); border-radius: 14px;
+    }
+    .ss-housing-tab .pin {
+      position: absolute; transform: translate(-50%, -100%);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .ss-housing-tab .pin .marker {
+      width: 30px; height: 30px; border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 8px rgba(66,26,49,0.3); border: 2px solid var(--cloud);
+    }
+    .ss-housing-tab .pin .marker svg { width: 14px; height: 14px; transform: rotate(45deg); stroke: var(--cloud); }
+    .ss-housing-tab .pin .price {
+      margin-top: 5px; background: var(--cloud); color: var(--plum);
+      font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
+      box-shadow: 0 2px 6px rgba(66,26,49,0.18); white-space: nowrap;
+    }
+    .ss-housing-tab .pin.facility .marker { background: var(--plum); width: 34px; height: 34px; }
+    .ss-housing-tab .pin.esa .marker { background: var(--clear-sky); }
+    .ss-housing-tab .pin.vidle .marker { background: var(--lavender); }
+    .ss-housing-tab .pin.facility .tagf {
+      margin-top: 5px; background: var(--plum); color: var(--open-air);
+      font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+    }
+
+    /* legend */
+    .ss-housing-tab .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+    .ss-housing-tab .legend .li { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: var(--plum-soft); }
+    .ss-housing-tab .legend .sw { width: 11px; height: 11px; border-radius: 50%; }
+    .ss-housing-tab .legend .sw.f { background: var(--plum); }
+    .ss-housing-tab .legend .sw.e { background: var(--clear-sky); }
+    .ss-housing-tab .legend .sw.v { background: var(--lavender); }
+
+    /* filter pills */
+    .ss-housing-tab .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
+    .ss-housing-tab .filters::-webkit-scrollbar { height: 0; }
+    .ss-housing-tab .fpill {
+      display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+      font-size: 12.5px; font-weight: 500; color: var(--plum);
+      background: var(--cloud); border: 1.5px solid var(--line); padding: 8px 13px; border-radius: 999px; cursor: pointer;
+    }
+    .ss-housing-tab .fpill.active { background: var(--plum); color: var(--open-air); border-color: var(--plum); }
+    .ss-housing-tab .fpill svg { width: 13px; height: 13px; stroke: var(--plum-soft); }
+    .ss-housing-tab .fpill.active svg { stroke: var(--open-air); }
+
+    /* ---------- price period control + multi-period prices ---------- */
+    .ss-housing-tab .pviz { position: absolute; opacity: 0; pointer-events: none; }
+    .ss-housing-tab .period {
+      display: inline-flex; background: var(--cloud); border: 1.5px solid var(--line);
+      border-radius: 11px; padding: 3px; gap: 3px;
+    }
+    .ss-housing-tab .period label {
+      font-size: 12px; font-weight: 500; color: var(--muted);
+      padding: 6px 11px; border-radius: 8px; cursor: pointer; transition: all .14s ease; white-space: nowrap;
+    }
+    .ss-housing-tab .period-note {
+      font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 7px;
+    }
+    .ss-housing-tab .period-note b { font-weight: 600; color: var(--plum); }
+
+    /* all period spans hidden by default; shown by the checked radio per region */
+    .ss-housing-tab .hprice .pn, .ss-housing-tab .hprice .pm, .ss-housing-tab .hprice .pt,
+    .ss-housing-tab .pin .price .pn, .ss-housing-tab .pin .price .pm, .ss-housing-tab .pin .price .pt { display: none; }
+
+    /* MOBILE period rules (radios: ss-pn / ss-pm / ss-pt) */
+    .ss-housing-tab #ss-pn:checked ~ .period-row label[for="ss-pn"],
+    .ss-housing-tab #ss-pm:checked ~ .period-row label[for="ss-pm"],
+    .ss-housing-tab #ss-pt:checked ~ .period-row label[for="ss-pt"] { background: var(--morning-dew); color: var(--plum); }
+    .ss-housing-tab #ss-pn:checked ~ .map-pane .pn, .ss-housing-tab #ss-pn:checked ~ .list-pane .pn { display: inline; }
+    .ss-housing-tab #ss-pm:checked ~ .map-pane .pm, .ss-housing-tab #ss-pm:checked ~ .list-pane .pm { display: inline; }
+    .ss-housing-tab #ss-pt:checked ~ .map-pane .pt, .ss-housing-tab #ss-pt:checked ~ .list-pane .pt { display: inline; }
+
+    /* WEB period rules (radios: ss-wpn / ss-wpm / ss-wpt) */
+    .ss-housing-tab #ss-wpn:checked ~ .web-subbar .period-row label[for="ss-wpn"],
+    .ss-housing-tab #ss-wpm:checked ~ .web-subbar .period-row label[for="ss-wpm"],
+    .ss-housing-tab #ss-wpt:checked ~ .web-subbar .period-row label[for="ss-wpt"] { background: var(--morning-dew); color: var(--plum); }
+    .ss-housing-tab #ss-wpn:checked ~ .web-split .pn { display: inline; }
+    .ss-housing-tab #ss-wpm:checked ~ .web-split .pm { display: inline; }
+    .ss-housing-tab #ss-wpt:checked ~ .web-split .pt { display: inline; }
+
+    /* housing card */
+    .ss-housing-tab .hcard {
+      background: var(--cloud); border-radius: 16px; padding: 13px;
+      box-shadow: 0 2px 10px rgba(66,26,49,0.06); display: flex; gap: 12px;
+    }
+    .ss-housing-tab .hcard .thumb {
+      width: 74px; height: 74px; border-radius: 12px 12px 12px 0; flex-shrink: 0;
+      background: linear-gradient(150deg, var(--morning-dew), var(--lavender));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-housing-tab .hcard .thumb svg { width: 28px; height: 28px; stroke: var(--cloud); }
+    .ss-housing-tab .hcard .hmeta { flex: 1; min-width: 0; }
+    .ss-housing-tab .hcard .brandrow { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+    .ss-housing-tab .hcard .brandtag {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px;
+    }
+    .ss-housing-tab .hcard .brandtag.esa { background: rgba(130,171,244,0.18); color: var(--clear-sky); }
+    .ss-housing-tab .hcard .brandtag.vidle { background: rgba(187,175,239,0.22); color: #6f5fc8; }
+    .ss-housing-tab .hcard .hname { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.25; }
+    .ss-housing-tab .hcard .hdist {
+      font-size: 11.5px; font-weight: 300; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px;
+    }
+    .ss-housing-tab .hcard .hdist svg { width: 11px; height: 11px; stroke: var(--clear-sky); }
+    .ss-housing-tab .hcard .hrow { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+    .ss-housing-tab .hcard .hprice { font-size: 15px; font-weight: 600; color: var(--plum); }
+    .ss-housing-tab .hcard .hprice small { font-size: 11px; font-weight: 400; color: var(--muted); }
+    .ss-housing-tab .avail { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 999px; }
+    .ss-housing-tab .avail.ok { background: rgba(111,199,138,0.18); color: #4a9d65; }
+    .ss-housing-tab .avail.low { background: rgba(230,179,90,0.2); color: #b9842f; }
+
+    /* booking CTA */
+    .ss-housing-tab .book {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--plum); color: var(--open-air); padding: 14px; border-radius: 14px;
+      font-size: 14.5px; font-weight: 500; cursor: pointer; box-shadow: 0 8px 16px rgba(66,26,49,0.22); transition: transform .15s ease;
+    }
+    .ss-housing-tab .book:hover { transform: translateY(-2px); }
+    .ss-housing-tab .book svg { width: 16px; height: 16px; stroke: var(--open-air); }
+
+    /* ============================================================ MOBILE ============================================================ */
+    .ss-housing-tab .phone-wrap { display: flex; justify-content: center; }
+    .ss-housing-tab .phone {
+      width: 360px; max-width: 100%; background: var(--plum);
+      border-radius: 46px; padding: 12px;
+      box-shadow: 0 2px 4px rgba(66,26,49,0.18), 0 22px 52px rgba(66,26,49,0.40), inset 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .ss-housing-tab .screen {
+      background: var(--open-air); border-radius: 36px; overflow: hidden;
+      position: relative; height: 780px; display: flex; flex-direction: column;
+    }
+    .ss-housing-tab .notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 112px; height: 26px; background: var(--plum); border-radius: 15px; z-index: 40; }
+    .ss-housing-tab .home-ind { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 120px; height: 5px; border-radius: 999px; background: rgba(66,26,49,0.22); z-index: 40; }
+    .ss-housing-tab .statusbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px 6px; font-size: 13px; font-weight: 600; color: var(--plum); }
+    .ss-housing-tab .statusbar svg { display: block; }
+
+    .ss-housing-tab .mhead { padding: 4px 20px 12px; }
+    .ss-housing-tab .mhead .top { display: flex; align-items: center; gap: 9px; }
+    .ss-housing-tab .smark { width: 22px; height: 26px; display: block; }
+    .ss-housing-tab .mhead .wm { font-size: 13px; font-weight: 600; color: var(--plum); }
+    .ss-housing-tab .mhead h1 { font-size: 19px; font-weight: 500; color: var(--ink); margin-top: 10px; line-height: 1.2; }
+    .ss-housing-tab .mhead .near { font-size: 12px; font-weight: 300; color: var(--plum-soft); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+    .ss-housing-tab .mhead .near svg { width: 12px; height: 12px; stroke: var(--clear-sky); }
+
+    /* map/list toggle (radio hack) */
+    .ss-housing-tab .vtoggle { position: absolute; opacity: 0; pointer-events: none; }
+    .ss-housing-tab .seg-bar { display: flex; gap: 5px; background: var(--cloud); border: 1.5px solid var(--line); border-radius: 12px; padding: 4px; margin: 0 20px 10px; }
+    .ss-housing-tab .seg-bar label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--muted); padding: 8px; border-radius: 9px; cursor: pointer; transition: all .14s ease; }
+    .ss-housing-tab .seg-bar label svg { width: 15px; height: 15px; stroke: currentColor; }
+    .ss-housing-tab #ss-map:checked ~ .seg-bar label[for="ss-map"],
+    .ss-housing-tab #ss-list:checked ~ .seg-bar label[for="ss-list"] { background: var(--morning-dew); color: var(--plum); }
+
+    /* mobile period row */
+    .ss-housing-tab .period-row { padding: 0 20px 10px; }
+    .ss-housing-tab .period-row .period-note { margin-left: 2px; }
+
+    .ss-housing-tab .mfilters { padding: 0 20px 12px; }
+    .ss-housing-tab .pane { display: none; flex: 1; overflow: hidden; }
+    .ss-housing-tab #ss-map:checked ~ .map-pane { display: flex; flex-direction: column; }
+    .ss-housing-tab #ss-list:checked ~ .list-pane { display: block; }
+
+    .ss-housing-tab .map-pane .map { flex: 1; margin: 0 20px; border-radius: 18px; }
+    .ss-housing-tab .map-pane .mleg { padding: 12px 20px; display: flex; justify-content: center; }
+    .ss-housing-tab .map-pane .peek { margin: 0 20px 16px; background: var(--cloud); border-radius: 16px; padding: 13px; box-shadow: 0 6px 18px rgba(66,26,49,0.12); }
+
+    .ss-housing-tab .list-pane { overflow-y: auto; padding: 0 20px 16px; }
+    .ss-housing-tab .list-pane::-webkit-scrollbar { width: 0; }
+    .ss-housing-tab .list-pane .hcard { margin-bottom: 10px; }
+
+    /* ============================================================ WEB / DESKTOP ============================================================ */
+    .ss-housing-tab .browser { max-width: 980px; margin: 0 auto; background: var(--cloud); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 6px rgba(66,26,49,0.10), 0 30px 70px rgba(66,26,49,0.20); }
+    .ss-housing-tab .chrome { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: #ece4da; border-bottom: 1px solid rgba(66,26,49,0.08); }
+    .ss-housing-tab .chrome .traffic { display: flex; gap: 7px; }
+    .ss-housing-tab .chrome .traffic i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .ss-housing-tab .chrome .traffic .r { background: #ff5f57; }
+    .ss-housing-tab .chrome .traffic .y { background: #febc2e; }
+    .ss-housing-tab .chrome .traffic .g { background: #28c840; }
+    .ss-housing-tab .chrome .urlbar { flex: 1; display: flex; align-items: center; gap: 8px; background: var(--cloud); border-radius: 9px; padding: 8px 13px; font-size: 12.5px; font-weight: 400; color: var(--plum-soft); }
+    .ss-housing-tab .chrome .urlbar svg { width: 13px; height: 13px; stroke: var(--good); flex-shrink: 0; }
+    .ss-housing-tab .chrome .urlbar b { color: var(--ink); font-weight: 500; }
+
+    .ss-housing-tab .web-topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; border-bottom: 1px solid var(--line); }
+    .ss-housing-tab .web-topbar .brand { display: flex; align-items: center; gap: 9px; }
+    .ss-housing-tab .web-topbar .smark { width: 22px; height: 26px; }
+    .ss-housing-tab .web-topbar .wm { font-size: 16px; font-weight: 600; color: var(--plum); }
+    .ss-housing-tab .web-topbar .nav { display: flex; gap: 22px; }
+    .ss-housing-tab .web-topbar .nav a { font-size: 13.5px; font-weight: 400; color: var(--plum-soft); text-decoration: none; }
+    .ss-housing-tab .web-topbar .nav a.active { color: var(--plum); font-weight: 500; }
+
+    .ss-housing-tab .web-subbar { padding: 18px 28px 14px; }
+    .ss-housing-tab .web-subbar h1 { font-size: 22px; font-weight: 500; color: var(--ink); }
+    .ss-housing-tab .web-subbar .near { font-size: 13px; font-weight: 300; color: var(--plum-soft); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+    .ss-housing-tab .web-subbar .near svg { width: 13px; height: 13px; stroke: var(--clear-sky); }
+    .ss-housing-tab .web-subbar .filters { margin-top: 14px; }
+    .ss-housing-tab .web-subbar .period-row { padding: 0; margin-top: 12px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ss-housing-tab .web-subbar .period-row .period-note { margin-top: 0; }
+
+    .ss-housing-tab .web-split { display: grid; grid-template-columns: 1.25fr 1fr; height: 520px; border-top: 1px solid var(--line); }
+    .ss-housing-tab .web-split .map { height: 100%; }
+    .ss-housing-tab .web-split .map .mleg-float { position: absolute; left: 16px; bottom: 16px; background: var(--cloud); border-radius: 12px; padding: 10px 13px; box-shadow: 0 4px 14px rgba(66,26,49,0.18); }
+    .ss-housing-tab .web-split .web-list { overflow-y: auto; padding: 18px 20px; }
+    .ss-housing-tab .web-split .web-list .lcount { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .ss-housing-tab .web-split .web-list .hcard { margin-bottom: 11px; }
+    .ss-housing-tab .web-split .web-list .hcard .book-mini { margin-top: 9px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--plum); cursor: pointer; }
+    .ss-housing-tab .web-split .web-list .hcard .book-mini svg { width: 13px; height: 13px; stroke: var(--plum); }
+
+    @media (max-width: 720px) {
+      .ss-housing-tab .web-topbar .nav { display: none; }
+      .ss-housing-tab .web-split { grid-template-columns: 1fr; height: auto; }
+      .ss-housing-tab .web-split .map { height: 300px; }
+    }
+  </style>
+
+  <!-- ===================== MOBILE ===================== -->
+  <div class="sec-intro">
+    <div class="eyebrow">Housing tab &middot; In-app</div>
+    <h2>Somewhere to land, near the work.</h2>
+    <p>Furnished stays close to the assignment, priced the way you actually pay.</p>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar">
+          <span>9:41</span>
+          <span style="display:flex;gap:5px;align-items:center;">
+            <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+          </span>
+        </div>
+
+        <div class="mhead">
+          <div class="top">
+            <svg class="smark" viewBox="0 0 68 80" fill="#421A31"><rect x="18" y="0" width="22" height="46" rx="11" transform="rotate(32 29 23)"/><rect x="23" y="17" width="22" height="46" rx="11" transform="rotate(32 34 40)"/><rect x="0" y="48" width="22" height="38" rx="11" transform="rotate(32 11 67)"/></svg>
+            <span class="wm">Housing</span>
+          </div>
+          <h1>Stays near your assignment</h1>
+          <div class="near">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Rose Medical Center &middot; Denver, CO
+          </div>
+        </div>
+
+        <input type="radio" name="ss-view" id="ss-map" class="vtoggle" checked>
+        <input type="radio" name="ss-view" id="ss-list" class="vtoggle">
+        <input type="radio" name="ss-period" id="ss-pn" class="pviz" checked>
+        <input type="radio" name="ss-period" id="ss-pm" class="pviz">
+        <input type="radio" name="ss-period" id="ss-pt" class="pviz">
+
+        <div class="seg-bar">
+          <label for="ss-map"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 4-6 2v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg> Map</label>
+          <label for="ss-list"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> List</label>
+        </div>
+
+        <div class="period-row">
+          <div class="period">
+            <label for="ss-pn">Nightly</label>
+            <label for="ss-pm">Monthly</label>
+            <label for="ss-pt">Assignment</label>
+          </div>
+          <div class="period-note">Most assignments run <b>13 weeks</b>. We do the math.</div>
+        </div>
+
+        <div class="mfilters">
+          <div class="filters">
+            <span class="fpill active"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M7 12h10M11 18h2"/></svg>Filters</span>
+            <span class="fpill">Under $90</span>
+            <span class="fpill">Furnished</span>
+            <span class="fpill">&lt; 3 mi</span>
+          </div>
+        </div>
+
+        <!-- MAP PANE -->
+        <div class="pane map-pane">
+          <div class="map">
+            <div class="river"></div>
+            <div class="park"></div>
+            <div class="pin facility" style="top:46%; left:50%;">
+              <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"/></svg></span>
+              <span class="tagf">Facility</span>
+            </div>
+            <div class="pin vidle" style="top:34%; left:32%;">
+              <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span>
+              <span class="price"><span class="pn">$76</span><span class="pm">$2.3k</span><span class="pt">$6.9k</span></span>
+            </div>
+            <div class="pin esa" style="top:60%; left:66%;">
+              <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span>
+              <span class="price"><span class="pn">$89</span><span class="pm">$2.7k</span><span class="pt">$8.1k</span></span>
+            </div>
+            <div class="pin esa" style="top:24%; left:62%;">
+              <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span>
+              <span class="price"><span class="pn">$82</span><span class="pm">$2.5k</span><span class="pt">$7.5k</span></span>
+            </div>
+          </div>
+          <div class="mleg">
+            <div class="legend">
+              <span class="li"><span class="sw f"></span>Facility</span>
+              <span class="li"><span class="sw e"></span>Extended Stay</span>
+              <span class="li"><span class="sw v"></span>Vidle</span>
+            </div>
+          </div>
+          <div class="peek">
+            <div class="hcard" style="box-shadow:none; padding:0;">
+              <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+              <div class="hmeta">
+                <div class="brandrow"><span class="brandtag vidle">Vidle</span></div>
+                <div class="hname">Vidle Furnished Studio</div>
+                <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>1.1 mi to facility</div>
+                <div class="hrow">
+                  <span class="hprice"><span class="pn">$76<small>/night</small></span><span class="pm">$2,280<small>/mo</small></span><span class="pt">$6,916<small> total &middot; 13 wks</small></span></span>
+                  <span class="avail ok">Available</span>
+                </div>
+              </div>
+            </div>
+            <div class="book" style="margin-top:12px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Reserve through Scrub Society
+            </div>
+          </div>
+        </div>
+
+        <!-- LIST PANE -->
+        <div class="pane list-pane">
+          <div class="hcard">
+            <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+            <div class="hmeta">
+              <div class="brandrow"><span class="brandtag vidle">Vidle</span></div>
+              <div class="hname">Vidle Furnished Studio</div>
+              <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>1.1 mi to facility</div>
+              <div class="hrow"><span class="hprice"><span class="pn">$76<small>/night</small></span><span class="pm">$2,280<small>/mo</small></span><span class="pt">$6,916<small> total &middot; 13 wks</small></span></span><span class="avail ok">Available</span></div>
+            </div>
+          </div>
+          <div class="hcard">
+            <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+            <div class="hmeta">
+              <div class="brandrow"><span class="brandtag esa">Extended Stay</span></div>
+              <div class="hname">Extended Stay America &mdash; Tech Center</div>
+              <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>2.4 mi to facility</div>
+              <div class="hrow"><span class="hprice"><span class="pn">$89<small>/night</small></span><span class="pm">$2,670<small>/mo</small></span><span class="pt">$8,099<small> total &middot; 13 wks</small></span></span><span class="avail ok">Available</span></div>
+            </div>
+          </div>
+          <div class="hcard">
+            <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+            <div class="hmeta">
+              <div class="brandrow"><span class="brandtag esa">Extended Stay</span></div>
+              <div class="hname">Extended Stay America &mdash; Aurora</div>
+              <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>4.0 mi to facility</div>
+              <div class="hrow"><span class="hprice"><span class="pn">$82<small>/night</small></span><span class="pm">$2,460<small>/mo</small></span><span class="pt">$7,462<small> total &middot; 13 wks</small></span></span><span class="avail low">2 rooms left</span></div>
+            </div>
+          </div>
+          <div class="book">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Reserve through Scrub Society
+          </div>
+        </div>
+
+        <div class="home-ind"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===================== WEB / DESKTOP ===================== -->
+  <div class="sec-intro">
+    <div class="eyebrow">Housing portal &middot; Web destination</div>
+    <h2>The housing search, wide open.</h2>
+    <p>Map and listings side by side, with pricing shown by night, month, or full assignment &mdash; the Phase 3 revenue surface.</p>
+  </div>
+
+  <div class="browser">
+    <div class="chrome">
+      <div class="traffic"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+      <div class="urlbar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        scrubsociety.com/<b>housing</b>?near=rose-medical-center
+      </div>
+    </div>
+
+    <div class="web-topbar">
+      <div class="brand">
+        <svg class="smark" viewBox="0 0 68 80" fill="#421A31"><rect x="18" y="0" width="22" height="46" rx="11" transform="rotate(32 29 23)"/><rect x="23" y="17" width="22" height="46" rx="11" transform="rotate(32 34 40)"/><rect x="0" y="48" width="22" height="38" rx="11" transform="rotate(32 11 67)"/></svg>
+        <span class="wm">Scrub Society</span>
+      </div>
+      <div class="nav">
+        <a href="#">Jobs</a>
+        <a href="#">Agencies</a>
+        <a href="#" class="active">Housing</a>
+        <a href="#">Community</a>
+      </div>
+    </div>
+
+    <input type="radio" name="ss-wperiod" id="ss-wpn" class="pviz" checked>
+    <input type="radio" name="ss-wperiod" id="ss-wpm" class="pviz">
+    <input type="radio" name="ss-wperiod" id="ss-wpt" class="pviz">
+
+    <div class="web-subbar">
+      <h1>Furnished stays near Rose Medical Center</h1>
+      <div class="near">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Denver, CO &middot; 14 stays within 5 miles
+      </div>
+      <div class="filters">
+        <span class="fpill active"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M7 12h10M11 18h2"/></svg>All filters</span>
+        <span class="fpill">Price: Under $90</span>
+        <span class="fpill">Property: Furnished</span>
+        <span class="fpill">Distance: &lt; 5 mi</span>
+        <span class="fpill">Extended Stay</span>
+        <span class="fpill">Vidle</span>
+      </div>
+      <div class="period-row">
+        <div class="period">
+          <label for="ss-wpn">Nightly</label>
+          <label for="ss-wpm">Monthly</label>
+          <label for="ss-wpt">Assignment total</label>
+        </div>
+        <div class="period-note">Most assignments run <b>13 weeks</b>, billed monthly or up front. We total it for you.</div>
+      </div>
+    </div>
+
+    <div class="web-split">
+      <div class="map">
+        <div class="river"></div>
+        <div class="park"></div>
+        <div class="pin facility" style="top:48%; left:46%;">
+          <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"/></svg></span>
+          <span class="tagf">Rose Medical Center</span>
+        </div>
+        <div class="pin vidle" style="top:32%; left:28%;"><span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span><span class="price"><span class="pn">$76</span><span class="pm">$2.3k</span><span class="pt">$6.9k</span></span></div>
+        <div class="pin esa" style="top:62%; left:64%;"><span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span><span class="price"><span class="pn">$89</span><span class="pm">$2.7k</span><span class="pt">$8.1k</span></span></div>
+        <div class="pin esa" style="top:22%; left:66%;"><span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span><span class="price"><span class="pn">$82</span><span class="pm">$2.5k</span><span class="pt">$7.5k</span></span></div>
+        <div class="pin vidle" style="top:70%; left:34%;"><span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13"/></svg></span><span class="price"><span class="pn">$94</span><span class="pm">$2.8k</span><span class="pt">$8.6k</span></span></div>
+        <div class="mleg-float">
+          <div class="legend">
+            <span class="li"><span class="sw f"></span>Facility</span>
+            <span class="li"><span class="sw e"></span>Extended Stay</span>
+            <span class="li"><span class="sw v"></span>Vidle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="web-list">
+        <div class="lcount">14 stays &middot; sorted by distance</div>
+
+        <div class="hcard">
+          <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+          <div class="hmeta">
+            <div class="brandrow"><span class="brandtag vidle">Vidle</span></div>
+            <div class="hname">Vidle Furnished Studio</div>
+            <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>1.1 mi to facility</div>
+            <div class="hrow"><span class="hprice"><span class="pn">$76<small>/night</small></span><span class="pm">$2,280<small>/mo</small></span><span class="pt">$6,916<small> total &middot; 13 wks</small></span></span><span class="avail ok">Available</span></div>
+            <span class="book-mini">Reserve through Scrub Society <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+          <div class="hmeta">
+            <div class="brandrow"><span class="brandtag esa">Extended Stay</span></div>
+            <div class="hname">Extended Stay America &mdash; Tech Center</div>
+            <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>2.4 mi to facility</div>
+            <div class="hrow"><span class="hprice"><span class="pn">$89<small>/night</small></span><span class="pm">$2,670<small>/mo</small></span><span class="pt">$8,099<small> total &middot; 13 wks</small></span></span><span class="avail ok">Available</span></div>
+            <span class="book-mini">Reserve through Scrub Society <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+          <div class="hmeta">
+            <div class="brandrow"><span class="brandtag esa">Extended Stay</span></div>
+            <div class="hname">Extended Stay America &mdash; Aurora</div>
+            <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>4.0 mi to facility</div>
+            <div class="hrow"><span class="hprice"><span class="pn">$82<small>/night</small></span><span class="pm">$2,460<small>/mo</small></span><span class="pt">$7,462<small> total &middot; 13 wks</small></span></span><span class="avail low">2 rooms left</span></div>
+            <span class="book-mini">Reserve through Scrub Society <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></div>
+          <div class="hmeta">
+            <div class="brandrow"><span class="brandtag vidle">Vidle</span></div>
+            <div class="hname">Vidle 1-Bedroom &mdash; Cherry Creek</div>
+            <div class="hdist"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>4.6 mi to facility</div>
+            <div class="hrow"><span class="hprice"><span class="pn">$94<small>/night</small></span><span class="pm">$2,820<small>/mo</small></span><span class="pt">$8,554<small> total &middot; 13 wks</small></span></span><span class="avail ok">Available</span></div>
+            <span class="book-mini">Reserve through Scrub Society <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

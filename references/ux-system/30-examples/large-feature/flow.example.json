@@ -1,0 +1,104 @@
+{
+  "schema": "tgn.ux-flow.v1",
+  "itemType": "uxFlow",
+  "id": "jobs.filters.advanced-filter-authoring",
+  "title": "Advanced filter authoring",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 95,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "flow": {
+    "purpose": "Let the user edit filter constraints in a focused modal before applying, discarding, or clearing them.",
+    "startsWhen": "The user opens advanced filters from Jobs search or arrives with a filter-editing context.",
+    "endsWhen": "The user applies filters, closes without applying, clears active filters, or otherwise exits the modal.",
+    "happyPath": [
+      "Modal opens with the current filter context represented clearly.",
+      "User edits filter values.",
+      "User applies valid edits.",
+      "Modal closes and results reflect the applied filters."
+    ],
+    "alternatePaths": [
+      "User cancels without applying edits.",
+      "User discards edits and continues in the modal.",
+      "User clears active filters after confirmation.",
+      "User resolves invalid input before applying."
+    ],
+    "blockedPaths": [
+      "Applying invalid filter input is blocked.",
+      "Closing with unsaved provisional edits requires a clear discard path when destructive."
+    ],
+    "recoveryPaths": [
+      "Fix invalid values and apply again.",
+      "Cancel or discard to return to the previous browsing context.",
+      "Clear filters to broaden results."
+    ],
+    "expectedOutcomes": [
+      "The user understands whether edits are active, pending, discarded, or cleared.",
+      "Results reflect only confirmed apply or clear actions.",
+      "No hidden filter edits remain after the user exits intentionally."
+    ],
+    "nonGoals": [
+      "Define API request construction.",
+      "Define modal component composition.",
+      "Define state management mechanics."
+    ]
+  },
+  "relationships": {
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "subflowIds": [
+      "jobs.filters.apply-filters",
+      "jobs.filters.clear-filters"
+    ],
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply",
+      "jobs.filters.desired.modal-clear"
+    ],
+    "relatedFlowIds": [
+      "jobs.search.results-browsing"
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.advanced-filter-authoring.flow.md"
+  },
+  "db": {
+    "collection": "uxFlows",
+    "documentId": "jobs.filters.advanced-filter-authoring",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

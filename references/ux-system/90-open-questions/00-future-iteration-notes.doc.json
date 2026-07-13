@@ -1,0 +1,61 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.90-open-questions.00-future-iteration-notes",
+  "title": "Future Iteration Notes",
+  "content": [
+    {
+      "id": "future-iteration-notes-body-1",
+      "body": "This document exists to preserve non-blocking future work for the UX schema system. Use it when extending the system after v1 rather than expanding the initial schema before it has been used."
+    },
+    {
+      "id": "generator-implementation",
+      "title": "Generator Implementation",
+      "body": [
+        "The generator should eventually validate UX JSON, render Markdown companions, and run in check mode. It should discover schema versions and suffixes rather than relying on hard-coded file lists.",
+        "",
+        "The current dependency-free Node validator checks JSON syntax, schema conformance for the existing schema subset, collection envelope items, and duplicate IDs within each file. Future generator work should build on that validator or replace it with a production-grade validator/generator pipeline."
+      ]
+    },
+    {
+      "id": "schema-expansion",
+      "title": "Schema Expansion",
+      "body": [
+        "The initial hierarchy item schemas now cover feature, subfeature, journey, flow, subflow, observable scenario, acceptance criterion, and pending decision objects.",
+        "",
+        "Future schema expansion should focus on field tightening after real usage, dedicated validation/recovery item schemas if they prove necessary, and schema migration patterns for existing UX corpuses."
+      ]
+    },
+    {
+      "id": "database-indexes",
+      "title": "Database Indexes",
+      "body": [
+        "Exact DB indexes are intentionally not locked in v1. Likely indexes include:",
+        "",
+        "- `corpusId + mode`",
+        "- `corpusId + itemType`",
+        "- `corpusId + mappingType`",
+        "- `corpusId + confirmation.status`",
+        "- `owner.module + owner.submodule`"
+      ]
+    },
+    {
+      "id": "admin-ui-workflow",
+      "title": "Admin UI Workflow",
+      "body": [
+        "Future admin UI work should support:",
+        "",
+        "- current vs desired comparison",
+        "- many-to-many mapping editing",
+        "- pending confirmation review",
+        "- requirement ID browsing",
+        "- generated Markdown previews",
+        "- schema validation feedback"
+      ]
+    },
+    {
+      "id": "migration-strategy",
+      "title": "Migration Strategy",
+      "body": "Schema migrations should be explicit, scripted, reviewable, and separated from behavior changes. A schema migration should not silently change desired UX truth."
+    }
+  ]
+}

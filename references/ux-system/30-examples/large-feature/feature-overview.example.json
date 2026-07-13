@@ -1,0 +1,140 @@
+{
+  "schema": "tgn.ux-feature.v1",
+  "itemType": "uxFeature",
+  "id": "jobs.search",
+  "title": "Jobs Search",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 95,
+  "owner": {
+    "module": "jobs",
+    "primaryUxOwner": "jobs.search",
+    "notesMd": "Example owner for the full Jobs search experience."
+  },
+  "scope": {
+    "corpusId": "jobs.search",
+    "featureIds": [
+      "jobs.search"
+    ],
+    "surfaceIds": [
+      "jobs-search-page"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "feature": {
+    "purpose": "Help users discover relevant jobs, narrow results, inspect opportunities, and recover from dead ends without losing browsing context.",
+    "userValue": "Users can move from a broad jobs list to a relevant set of opportunities with understandable filters, clear results feedback, and reversible actions.",
+    "primaryUserGoals": [
+      "Search for jobs by text or location intent.",
+      "Narrow jobs using filters that are understandable and reversible.",
+      "Sort and browse results without losing context.",
+      "Inspect job details and return to the prior browsing state.",
+      "Recover from empty or error states without starting over."
+    ],
+    "includedSubfeatures": [
+      "jobs.search.filters",
+      "jobs.search.results-browsing",
+      "jobs.search.sort",
+      "jobs.search.map",
+      "jobs.search.drawer",
+      "jobs.search.compare"
+    ],
+    "excludedBehavior": [
+      "Job application submission after leaving the search experience.",
+      "Employer-side job posting authoring.",
+      "Saved-search email delivery outside the Jobs search surface."
+    ],
+    "primarySurfaces": [
+      "Jobs search page",
+      "Search and filter controls",
+      "Advanced filter modal",
+      "Results list or grid",
+      "Map view",
+      "Job detail drawer",
+      "Empty, loading, and error states"
+    ],
+    "entryPoints": [
+      "Clean navigation to /jobs",
+      "URL with query parameters",
+      "Return from job details",
+      "Browser back or forward navigation",
+      "Saved or shared Jobs URL"
+    ],
+    "exitPoints": [
+      "Open a job detail page or drawer",
+      "Navigate to compare jobs",
+      "Navigate away from Jobs search",
+      "Clear filters and return to broad browsing"
+    ],
+    "successOutcomes": [
+      "The user understands the active search and filter context.",
+      "The results reflect the user's intended constraints.",
+      "The user can inspect jobs and return without losing context.",
+      "The user can recover from empty or error states."
+    ],
+    "failureOrHesitationPoints": [
+      "The user cannot tell which filters are active.",
+      "The user is unsure whether edits are live or pending.",
+      "The user hits empty results and does not know how to broaden the search.",
+      "Navigation loses scroll, selected job, or loaded result depth unexpectedly."
+    ],
+    "recoveryExpectations": [
+      "Clear or reset actions must make it obvious what will be removed.",
+      "Empty and error states must provide a meaningful next step.",
+      "Dismissal, cancel, and discard paths must avoid surprise commits.",
+      "Returning to Jobs should preserve meaningful browsing context where expected."
+    ],
+    "importantConstraints": [
+      "Search, sort, filters, results, map, and drawer behavior must remain understandable as one Jobs browsing experience.",
+      "Exact copy is governing only when explicitly marked.",
+      "Desired UX governs implementation; runtime behavior is not automatic authority."
+    ],
+    "nonGoals": [
+      "Define implementation architecture.",
+      "Define controller or store boundaries.",
+      "Specify pixel-level visual layout unrelated to behavior."
+    ]
+  },
+  "relationships": {
+    "subfeatureIds": [
+      "jobs.search.filters"
+    ],
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply"
+    ],
+    "relatedFeatureIds": []
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.search.feature.md"
+  },
+  "db": {
+    "collection": "uxFeatures",
+    "documentId": "jobs.search",
+    "partitionKeys": {
+      "corpusId": "jobs.search",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

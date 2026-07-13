@@ -1,0 +1,61 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.system",
+  "title": "UX Investigation System",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines the JSON-only investigation system agents use to discover and document existing UX exhaustively before refactor, redesign, or desired-UX authoring work.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "If Markdown companions are generated later, they are review artifacts only and must not replace these JSON sources."
+  },
+  "principles": [
+    {
+      "id": "current-first",
+      "summary": "Capture current UX before desired UX.",
+      "detailsMd": "Existing UX investigation starts by documenting what users can observe today. Current UX is evidence and baseline material; it is not automatically desired, ideal, or governing target UX."
+    },
+    {
+      "id": "runtime-code-not-authority",
+      "summary": "Runtime and source code help discovery but do not govern UX.",
+      "detailsMd": "Agents may inspect routes, components, providers, tests, and runtime behavior to discover current UX, but governing UX truth must be expressed in UX spec artifacts rather than inferred permanently from code paths."
+    },
+    {
+      "id": "deterministic-inventory",
+      "summary": "Investigation begins from deterministic source inventory.",
+      "detailsMd": "Agents should first create a complete route/source inventory so every compiled route and every excluded route-like source location has an explicit row before runtime observation begins."
+    },
+    {
+      "id": "json-only-source",
+      "summary": "Investigation packages are JSON-only source corpuses.",
+      "detailsMd": "Plans, inventories, schemas, matrices, coverage indexes, and pending-decision registers in an investigation package should be authored as JSON so they are stable, diffable, validatable, composable, and suitable for scripts or admin UI workflows."
+    }
+  ],
+  "appliesWhen": [
+    "auditing existing frontend UX",
+    "preparing a major refactor",
+    "creating current UX corpuses",
+    "building a route-based UX coverage baseline",
+    "finding hidden or conditional UX before implementation"
+  ],
+  "doesNotCover": [
+    "desired UX design decisions",
+    "architecture ownership decisions",
+    "controller/store implementation design",
+    "test implementation",
+    "route inventory script implementation"
+  ],
+  "requiredCompanionDocs": [
+    "01-investigation-method.doc.json",
+    "02-exhaustive-current-ux-standard.doc.json",
+    "03-source-route-inventory-standard.doc.json",
+    "04-hidden-ux-investigation-standard.doc.json",
+    "05-investigation-classification-standard.doc.json",
+    "06-coverage-and-completion-standard.doc.json"
+  ]
+}

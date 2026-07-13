@@ -1,0 +1,15 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.07-flow-subflow-roadmap-template-placeholder",
+  "title": "Flow Subflow Roadmap Template Placeholder",
+  "content": [
+    { "id": "status", "title": "Status", "body": "placeholder" },
+    { "id": "purpose", "title": "Purpose", "body": "Would guide flow and subflow planning inside App Behavior packages." },
+    { "id": "already-decision-complete", "title": "Already Decision-Complete", "body": "The corpus supports progressive refinement from feature overview to journey, flow, subflow, scenario, and acceptance criteria." },
+    { "id": "needs-clarity", "title": "Needs Clarity", "body": "Needs exact model/schema field mapping and stop condition for when a flow requires its own roadmap." },
+    { "id": "authority-to-review", "title": "Authority To Review", "body": "Review ux-system model and examples before promotion." },
+    { "id": "promotion-criteria", "title": "Promotion Criteria", "body": "Promote when repeated flow planning shows this reduces decision burden beyond the parent App Behavior roadmap." },
+    { "id": "possible-outcomes", "title": "Possible Outcomes", "body": "Promote, merge into parent, keep as optional appendix, or delete." },
+    { "id": "non-authority-warning", "title": "Non-Authority Warning", "body": "This placeholder is not authority." }
+  ]
+}
