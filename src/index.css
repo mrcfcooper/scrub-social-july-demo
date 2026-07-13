@@ -258,8 +258,27 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 .btn.bubble { border-radius: 9999px 9999px 9999px 6px; }
 .btn:focus-visible, .tab:focus-visible, .persona-chip:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 
+/* Erin suggestion chips — white pills on her plum card */
+.chip-btn {
+  border: none; cursor: pointer; font-family: inherit;
+  font-size: 12.5px; font-weight: 400; color: var(--plum);
+  background: var(--cloud); border-radius: var(--r-pill);
+  padding: 8px 13px;
+}
+
+/* Event date tile — plum, squared bottom-left */
+.date-tile {
+  width: 52px; height: 52px; border-radius: 14px 14px 14px 0;
+  background: var(--plum); color: var(--air);
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1px; flex: none;
+}
+.date-tile span { font-size: 9px; letter-spacing: 0.1em; opacity: 0.75; }
+.date-tile b { font-size: 14px; font-weight: 400; letter-spacing: -0.01em; }
+
 /* Tabs — chip strip; active = plum-filled */
 .tabs { display: flex; gap: 6px; margin-top: 14px; overflow-x: auto; scrollbar-width: none; }
+.tabs .attrib-mini { margin-top: 0; margin-left: auto; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
   font-family: inherit; font-size: 13px; font-weight: 400; white-space: nowrap;
@@ -333,6 +352,29 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
   border-radius: 9999px 9999px 9999px 0;
   padding: 4px 10px; font-size: 11px; font-weight: 400; text-transform: lowercase;
 }
+
+/* Plum hero details (facility/recruiter/mentor bands) */
+.hero-meta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: rgba(249, 242, 232, 0.85);
+}
+.hero-meta svg { color: var(--lavender); flex: none; }
+.meta-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.meta-tile { background: rgba(249, 242, 232, 0.10); border-radius: 14px; padding: 10px 12px; min-width: 0; }
+.meta-tile .lbl {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(249, 242, 232, 0.66);
+}
+.meta-tile .val { font-size: 13.5px; letter-spacing: -0.01em; color: var(--air); margin-top: 3px; line-height: 1.3; }
+
+/* Breakdown bars — label / track / value */
+.bars { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+.bar-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) 88px 32px;
+  align-items: center; gap: 10px; font-size: 13.5px;
+}
+.bar-track { height: 8px; border-radius: var(--r-pill); background: rgba(66, 26, 49, 0.10); overflow: hidden; }
+.bar-track i { display: block; height: 100%; background: var(--lavender); border-radius: var(--r-pill); }
 
 /* Icon wells — tinted tiles, squared bottom-left */
 .icon-well {
@@ -411,6 +453,39 @@ textarea.compose:disabled { background: var(--air); color: var(--fg3); }
   margin-top: 8px; font-size: 12px; padding: 10px 12px; border-radius: 12px;
   background: var(--dew); color: var(--plum);
 }
+/* Diary capture form */
+.block { margin-top: 18px; }
+.star-rate { display: flex; gap: 6px; margin-top: 8px; }
+.star-rate button {
+  border: none; background: none; padding: 2px; cursor: pointer;
+  display: inline-flex; border-radius: 8px;
+}
+.star-rate button:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.seg {
+  display: flex; gap: 4px; margin-top: 8px; padding: 4px;
+  background: var(--cloud); box-shadow: var(--hairline); border-radius: 14px;
+}
+.seg button {
+  flex: 1; border: none; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: 12.5px; font-weight: 400; color: var(--fg2);
+  padding: 8px 4px; border-radius: 10px; white-space: nowrap;
+}
+.seg button.on { background: var(--dew); color: var(--plum); }
+.tagchip { display: inline-flex; align-items: center; gap: 5px; }
+.tagchip svg { color: var(--lavender); transition: transform 160ms ease; }
+.chips-select button.tagchip.on {
+  background: #ece8fb; color: var(--plum);
+  box-shadow: inset 0 0 0 1.5px var(--lavender);
+}
+.tagchip.on svg { transform: rotate(45deg); }
+.seal {
+  width: 92px; height: 92px; border-radius: 50%;
+  margin: 0 auto; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--sky), var(--lavender));
+  color: #fff;
+}
+.btn:disabled { opacity: 0.45; cursor: default; }
+
 .chips-select { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .chips-select button {
   font-family: inherit; font-size: 12px; font-weight: 400;

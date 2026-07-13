@@ -6,6 +6,133 @@ import { Icon, Logomark } from "./icons";
 
 // ─── Assignment Diary (Rachel's dream, built to spec) ───────────────────────
 export function Diary() {
+  const [view, setView] = useState("read");
+  return (
+    <div>
+      <div className="tabs" role="tablist">
+        <button className={`tab ${view === "read" ? "on" : ""}`} onClick={() => setView("read")}>
+          Read Maya's diary
+        </button>
+        <button className={`tab ${view === "log" ? "on" : ""}`} onClick={() => setView("log")}>
+          Log this assignment
+        </button>
+      </div>
+      {view === "read" ? <DiaryRead /> : <DiaryLog />}
+    </div>
+  );
+}
+
+const LOG_PARKING = ["Free & easy", "Paid lot", "Street hunt", "Shuttle"];
+const LOG_CHARTING = ["Epic", "Cerner", "Meditech", "Paper"];
+const LOG_FLOATS = ["Never", "Rarely", "Weekly", "Constantly"];
+const LOG_TAGS = ["Supportive charge nurses", "Great orientation", "Heavy patient loads", "Traveler-friendly", "Fair scheduling", "Would return"];
+
+// Structured capture per the assignment-diary reference, in kit tokens.
+// Mock only: submit shows the saved state, nothing persists.
+function DiaryLog() {
+  const [rating, setRating] = useState(0);
+  const [parking, setParking] = useState(null);
+  const [charting, setCharting] = useState(null);
+  const [floatFreq, setFloatFreq] = useState(null);
+  const [tags, setTags] = useState([]);
+  const [done, setDone] = useState(false);
+
+  if (done) {
+    return (
+      <div className="card" style={{ textAlign: "center", padding: "28px 16px 16px" }}>
+        <span className="seal"><Icon name="check" size={38} strokeWidth={2.5} /></span>
+        <h3 style={{ marginTop: 16 }}>Saved to your diary.</h3>
+        <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
+          You're the 43rd member to log Pacific View — structured answers feed
+          the facility hub, so the next traveler isn't blindsided.
+        </p>
+        <button className="btn ghost sm" style={{ marginTop: 16 }} onClick={() => setDone(false)}>
+          Log another entry
+        </button>
+        <Attrib id="rachel" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="card">
+      <h3>How was Pacific View Medical Center?</h3>
+      <div className="muted" style={{ marginTop: 4 }}>San Diego, CA · ICU · 13-week contract</div>
+
+      <div className="block">
+        <div className="eyebrow">Overall</div>
+        <div className="star-rate" role="radiogroup" aria-label="Overall rating">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <button
+              key={i}
+              role="radio"
+              aria-checked={rating === i}
+              aria-label={`${i} star${i > 1 ? "s" : ""}`}
+              onClick={() => setRating(i)}
+            >
+              <svg width={30} height={30} viewBox="0 0 24 24" fill={i <= rating ? "var(--lavender)" : "rgba(66, 26, 49, 0.16)"} aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Parking</div>
+        <div className="chips-select">
+          {LOG_PARKING.map((o) => (
+            <button key={o} className={parking === o ? "on" : ""} onClick={() => setParking(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Charting system</div>
+        <div className="chips-select">
+          {LOG_CHARTING.map((o) => (
+            <button key={o} className={charting === o ? "on" : ""} onClick={() => setCharting(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">How often did you float?</div>
+        <div className="seg">
+          {LOG_FLOATS.map((o) => (
+            <button key={o} className={floatFreq === o ? "on" : ""} onClick={() => setFloatFreq(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Tap any that fit</div>
+        <div className="chips-select">
+          {LOG_TAGS.map((t) => (
+            <button
+              key={t}
+              className={`tagchip ${tags.includes(t) ? "on" : ""}`}
+              aria-pressed={tags.includes(t)}
+              onClick={() => setTags((c) => c.includes(t) ? c.filter((x) => x !== t) : [...c, t])}
+            >
+              <Icon name="plus" size={13} /> {t}
+            </button>
+          ))}
+        </div>
+        <Attrib id="cooperStructured" />
+      </div>
+
+      <button className="btn block bubble" style={{ marginTop: 18 }} disabled={!rating} onClick={() => setDone(true)}>
+        <Icon name="send" size={16} /> Save to my diary
+      </button>
+      <div className="subtext" style={{ marginTop: 10, textAlign: "center" }}>
+        published as a verified traveler · negatives never carry your name
+      </div>
+    </div>
+  );
+}
+
+function DiaryRead() {
   const d = DIARY;
   const job = JOBS.find((j) => d.jobsBelow.includes(j.id));
   return (
@@ -15,7 +142,7 @@ export function Diary() {
         <div className="row" style={{ marginTop: 8 }}>
           <Avatar initials="MC" color="#CEDBFE" size="lg" />
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{d.author} · {d.authorRole}</div>
+            <div className="small">{d.author} · {d.authorRole}</div>
             <div className="muted">{d.facility} · {d.city}</div>
             <div className="muted">{d.dates}</div>
           </div>
@@ -70,10 +197,10 @@ export function Diary() {
         <Link to={`/jobs/${job.id}`} className="linkless">
           <div className="card dew between">
             <div>
-              <div className="small" style={{ fontWeight: 600 }}>{job.title}</div>
-              <div className="muted" style={{ color: "var(--plum-soft)" }}>{job.facility} · starts {job.start}</div>
+              <div className="small">{job.title}</div>
+              <div className="muted" style={{ color: "var(--fg2)" }}>{job.facility} · starts {job.start}</div>
             </div>
-            <div style={{ fontWeight: 700, color: "var(--plum)" }}>{job.weekly}</div>
+            <div className="money" style={{ fontSize: 17 }}>{job.weekly}</div>
           </div>
         </Link>
       )}
@@ -95,7 +222,7 @@ export function Profile() {
           <div className="grow">
             <div className="between">
               <div>
-                <div style={{ fontWeight: 600, fontSize: 16 }}>{p.name}</div>
+                <div style={{ fontSize: 16 }}>{p.name}</div>
                 <div className="muted">{p.role} · {p.handle}</div>
               </div>
             </div>
@@ -144,7 +271,7 @@ export function Profile() {
       <Sect title="Profile strength" sub={`${p.completion}%`} />
       <div className="card">
         <div className="meter"><i style={{ width: `${p.completion}%` }} /></div>
-        <p className="small" style={{ marginTop: 10, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 10, color: "var(--fg2)" }}>
           Add one professional reference to hit 100% and earn the <b>Society Founder</b> badge. Built from your resume — you've worked 8 cities, 12 hospitals, 7 states. We filled that in for you.
         </p>
         <Attrib id="jennyComplete" />
@@ -162,7 +289,7 @@ export function Recruiter() {
         <div className="row">
           <Avatar initials="AH" color="#82ABF4" size="lg" />
           <div className="grow">
-            <div style={{ fontWeight: 600, fontSize: 16 }}>{r.name}</div>
+            <div style={{ fontSize: 16 }}>{r.name}</div>
             <div className="muted">{r.agency} · {r.years} years</div>
           </div>
           <div style={{ textAlign: "center" }}>
@@ -186,7 +313,7 @@ export function Recruiter() {
       {r.reviewsList.map((rv, i) => (
         <div key={i} className="card">
           <div className="between">
-            <span className="small" style={{ fontWeight: 600 }}>{rv.by}</span>
+            <span className="small">{rv.by}</span>
             <Stars n={rv.stars} />
           </div>
           <p className="small" style={{ marginTop: 6, lineHeight: 1.45 }}>{rv.text}</p>
@@ -198,17 +325,17 @@ export function Recruiter() {
       {r.hotJobs.map((h, i) => (
         <div key={i} className="card dew between">
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{h.title}</div>
+            <div className="small">{h.title}</div>
             <div className="muted row" style={{ gap: 5 }}><Icon name="flame" size={13} /> {h.tag}</div>
           </div>
-          <div style={{ fontWeight: 700, color: "var(--plum)" }}>{h.pay}</div>
+          <div className="money" style={{ fontSize: 17 }}>{h.pay}</div>
         </div>
       ))}
 
       <Sect title="Ambassador rewards" />
-      <div className="card lav flip">
+      <div className="card lav">
         <div className="between">
-          <div className="small" style={{ fontWeight: 600, color: "var(--plum)" }}>
+          <div className="small" style={{ color: "var(--plum)" }}>
             {r.ambassador.referred} referrals · {r.ambassador.booked} booked
           </div>
           <span className="pill" style={{ background: "var(--cloud)" }}>
@@ -222,8 +349,8 @@ export function Recruiter() {
       </div>
 
       <div className="card">
-        <div className="small" style={{ fontWeight: 600 }}>Answer as anonymous</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+        <div className="small">Answer as anonymous</div>
+        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
           Toggle on to answer community questions with your real thoughts — shown as “Recruiter · TravelMed” with no name.
         </p>
         <Attrib id="ashleyAnon" />
@@ -258,7 +385,7 @@ export function Mentor() {
       {m.history.map((h, i) => (
         <div key={i} className="card between">
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{h.text}</div>
+            <div className="small">{h.text}</div>
             <div className="muted">{h.where}</div>
           </div>
           <span className="muted">{h.when}</span>
@@ -283,8 +410,8 @@ export function Mentor() {
       <div className="stack"><Attrib id="brandyMod" /></div>
 
       <div className="card dew">
-        <div className="small" style={{ fontWeight: 600 }}>Ban from social, keep job access</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+        <div className="small">Ban from social, keep job access</div>
+        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
           Trolls lose posting and commenting — the troll badge is real — but they keep the app for job search. The community stays clean without losing the candidate.
         </p>
         <Attrib id="harpsterBan" />
@@ -325,7 +452,7 @@ export function Graph() {
               <circle cx={n.x + 34} cy={n.y} r={onPath(n.id) ? 32 : 26}
                 fill={n.tone} stroke={active?.id === n.id ? "#421A31" : "white"} strokeWidth="3" />
               <text x={n.x + 34} y={n.y + 4} textAnchor="middle"
-                fontSize="11" fontWeight="600"
+                fontSize="11" fontWeight="400"
                 fill={n.tone === "#421A31" ? "#F9F2E8" : "#421A31"}>
                 {n.label.split(" ")[0]}
               </text>
@@ -337,10 +464,10 @@ export function Graph() {
         </svg>
       </div>
       <div className="card sky" style={{ background: "var(--dew)" }}>
-        <div className="small" style={{ fontWeight: 600 }}>
+        <div className="small">
           {active ? `${active.label}` : "You're 2 connections from Brandy"}
         </div>
-        <p className="small" style={{ marginTop: 4, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 4, color: "var(--fg2)" }}>
           {active ? active.sub : "You → Ashley H. (booked you, Feb '26) → Brandy P. Ashley staffed 57 travelers; every one is a path into the graph."}
         </p>
       </div>
@@ -357,7 +484,7 @@ export function Guide() {
         <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
         <div className="eyebrow" style={{ color: "var(--lavender)" }}>The one-line demo script</div>
         <h2 style={{ fontSize: 18, marginTop: 6, lineHeight: 1.35 }}>
-          “Everything you're about to see, you asked for on May 11.”
+          “Everything you're about to see, you asked for.”
         </h2>
         <p className="small" style={{ marginTop: 8, color: "var(--dew)" }}>
           Every feature carries a chip citing who asked for it on the workshop call. Walk the loop: Feed → Job → Facility hub → Q&A → Diary → switch personas.
