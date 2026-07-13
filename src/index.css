@@ -434,6 +434,39 @@ textarea.compose:disabled { background: var(--air); color: var(--fg3); }
   margin-top: 8px; font-size: 12px; padding: 10px 12px; border-radius: 12px;
   background: var(--dew); color: var(--plum);
 }
+/* Diary capture form */
+.block { margin-top: 18px; }
+.star-rate { display: flex; gap: 6px; margin-top: 8px; }
+.star-rate button {
+  border: none; background: none; padding: 2px; cursor: pointer;
+  display: inline-flex; border-radius: 8px;
+}
+.star-rate button:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.seg {
+  display: flex; gap: 4px; margin-top: 8px; padding: 4px;
+  background: var(--cloud); box-shadow: var(--hairline); border-radius: 14px;
+}
+.seg button {
+  flex: 1; border: none; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: 12.5px; font-weight: 400; color: var(--fg2);
+  padding: 8px 4px; border-radius: 10px; white-space: nowrap;
+}
+.seg button.on { background: var(--dew); color: var(--plum); }
+.tagchip { display: inline-flex; align-items: center; gap: 5px; }
+.tagchip svg { color: var(--lavender); transition: transform 160ms ease; }
+.chips-select button.tagchip.on {
+  background: #ece8fb; color: var(--plum);
+  box-shadow: inset 0 0 0 1.5px var(--lavender);
+}
+.tagchip.on svg { transform: rotate(45deg); }
+.seal {
+  width: 92px; height: 92px; border-radius: 50%;
+  margin: 0 auto; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--sky), var(--lavender));
+  color: #fff;
+}
+.btn:disabled { opacity: 0.45; cursor: default; }
+
 .chips-select { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .chips-select button {
   font-family: inherit; font-size: 12px; font-weight: 400;

@@ -6,6 +6,133 @@ import { Icon, Logomark } from "./icons";
 
 // ─── Assignment Diary (Rachel's dream, built to spec) ───────────────────────
 export function Diary() {
+  const [view, setView] = useState("read");
+  return (
+    <div>
+      <div className="tabs" role="tablist">
+        <button className={`tab ${view === "read" ? "on" : ""}`} onClick={() => setView("read")}>
+          Read Maya's diary
+        </button>
+        <button className={`tab ${view === "log" ? "on" : ""}`} onClick={() => setView("log")}>
+          Log this assignment
+        </button>
+      </div>
+      {view === "read" ? <DiaryRead /> : <DiaryLog />}
+    </div>
+  );
+}
+
+const LOG_PARKING = ["Free & easy", "Paid lot", "Street hunt", "Shuttle"];
+const LOG_CHARTING = ["Epic", "Cerner", "Meditech", "Paper"];
+const LOG_FLOATS = ["Never", "Rarely", "Weekly", "Constantly"];
+const LOG_TAGS = ["Supportive charge nurses", "Great orientation", "Heavy patient loads", "Traveler-friendly", "Fair scheduling", "Would return"];
+
+// Structured capture per the assignment-diary reference, in kit tokens.
+// Mock only: submit shows the saved state, nothing persists.
+function DiaryLog() {
+  const [rating, setRating] = useState(0);
+  const [parking, setParking] = useState(null);
+  const [charting, setCharting] = useState(null);
+  const [floatFreq, setFloatFreq] = useState(null);
+  const [tags, setTags] = useState([]);
+  const [done, setDone] = useState(false);
+
+  if (done) {
+    return (
+      <div className="card" style={{ textAlign: "center", padding: "28px 16px 16px" }}>
+        <span className="seal"><Icon name="check" size={38} strokeWidth={2.5} /></span>
+        <h3 style={{ marginTop: 16 }}>Saved to your diary.</h3>
+        <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
+          You're the 43rd member to log Pacific View — structured answers feed
+          the facility hub, so the next traveler isn't blindsided.
+        </p>
+        <button className="btn ghost sm" style={{ marginTop: 16 }} onClick={() => setDone(false)}>
+          Log another entry
+        </button>
+        <Attrib id="rachel" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="card">
+      <h3>How was Pacific View Medical Center?</h3>
+      <div className="muted" style={{ marginTop: 4 }}>San Diego, CA · ICU · 13-week contract</div>
+
+      <div className="block">
+        <div className="eyebrow">Overall</div>
+        <div className="star-rate" role="radiogroup" aria-label="Overall rating">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <button
+              key={i}
+              role="radio"
+              aria-checked={rating === i}
+              aria-label={`${i} star${i > 1 ? "s" : ""}`}
+              onClick={() => setRating(i)}
+            >
+              <svg width={30} height={30} viewBox="0 0 24 24" fill={i <= rating ? "var(--lavender)" : "rgba(66, 26, 49, 0.16)"} aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Parking</div>
+        <div className="chips-select">
+          {LOG_PARKING.map((o) => (
+            <button key={o} className={parking === o ? "on" : ""} onClick={() => setParking(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Charting system</div>
+        <div className="chips-select">
+          {LOG_CHARTING.map((o) => (
+            <button key={o} className={charting === o ? "on" : ""} onClick={() => setCharting(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">How often did you float?</div>
+        <div className="seg">
+          {LOG_FLOATS.map((o) => (
+            <button key={o} className={floatFreq === o ? "on" : ""} onClick={() => setFloatFreq(o)}>{o}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="eyebrow">Tap any that fit</div>
+        <div className="chips-select">
+          {LOG_TAGS.map((t) => (
+            <button
+              key={t}
+              className={`tagchip ${tags.includes(t) ? "on" : ""}`}
+              aria-pressed={tags.includes(t)}
+              onClick={() => setTags((c) => c.includes(t) ? c.filter((x) => x !== t) : [...c, t])}
+            >
+              <Icon name="plus" size={13} /> {t}
+            </button>
+          ))}
+        </div>
+        <Attrib id="cooperStructured" />
+      </div>
+
+      <button className="btn block bubble" style={{ marginTop: 18 }} disabled={!rating} onClick={() => setDone(true)}>
+        <Icon name="send" size={16} /> Save to my diary
+      </button>
+      <div className="subtext" style={{ marginTop: 10, textAlign: "center" }}>
+        published as a verified traveler · negatives never carry your name
+      </div>
+    </div>
+  );
+}
+
+function DiaryRead() {
   const d = DIARY;
   const job = JOBS.find((j) => d.jobsBelow.includes(j.id));
   return (
