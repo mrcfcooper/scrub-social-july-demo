@@ -156,7 +156,37 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
   opacity: 0.14; pointer-events: none;
 }
 
-/* Attribution chip — the signature element, styled as a quote callout */
+/* Attribution marker — mini chip + tap popover (default) */
+.attrib-mini { position: relative; display: flex; justify-content: flex-end; margin-top: 10px; }
+.attrib-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: none; cursor: pointer; font-family: inherit;
+  font-size: 11px; font-weight: 400; text-transform: lowercase;
+  color: var(--fg2); background: var(--air);
+  border-radius: 9999px 9999px 9999px 0; padding: 3px 9px 3px 7px;
+}
+.attrib-chip .q {
+  color: var(--plum); background: var(--lavender);
+  width: 14px; height: 14px; border-radius: 9999px 9999px 9999px 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: Georgia, serif; font-size: 11px; line-height: 1; padding-top: 3px;
+}
+.card.plum .attrib-chip { background: rgba(249, 242, 232, 0.12); color: rgba(249, 242, 232, 0.85); }
+.card.dew .attrib-chip, .card.lav .attrib-chip { background: rgba(255, 255, 255, 0.55); }
+.attrib-scrim { position: fixed; inset: 0; z-index: 44; }
+.attrib-pop {
+  position: absolute; bottom: calc(100% + 8px); right: 0; z-index: 45;
+  width: 240px; padding: 14px;
+  background: var(--cloud); color: var(--plum);
+  border-radius: 16px 16px 0 16px;
+  box-shadow: var(--shadow-pop);
+  display: flex; flex-direction: column; gap: 6px;
+  text-align: left; text-transform: none;
+}
+.attrib-pop .attrib-quote { font-size: 13px; }
+.attrib-pop .subtext { color: var(--fg2); }
+
+/* Attribution quote callout — full variant (Guide page) */
 .attrib {
   position: relative;
   margin-top: 20px;
@@ -180,7 +210,7 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 .attrib-meta b { font-weight: 400; }
 .card.plum .attrib { background: rgba(249, 242, 232, 0.10); box-shadow: none; }
 .card.plum .attrib .subtext { color: rgba(249, 242, 232, 0.72); }
-.card.plum .attrib-quote { color: var(--air); }
+.card.plum .attrib .attrib-quote { color: var(--air); }
 
 /* ── Bits ── */
 .row { display: flex; align-items: center; gap: 8px; }

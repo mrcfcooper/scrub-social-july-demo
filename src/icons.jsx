@@ -1,4 +1,5 @@
 import logomarkUrl from "./assets/logomark.svg";
+import logotypeUrl from "./assets/logotype.svg";
 
 // Inline Lucide-style icon set — 24×24 viewBox, stroke 1.75, round caps/joins,
 // currentColor. No icon-library dependency; no emoji anywhere in the UI.
@@ -320,18 +321,18 @@ export function Icon({ name, size = 18, strokeWidth = 1.75, className, style }) 
   );
 }
 
-// Renders src/assets/logomark.svg via CSS mask so the mark can take any brand
-// color (cream in the header, lavender as a hero watermark) regardless of the
-// fill baked into the file. Swap the SVG file and every usage updates.
-export function Logomark({ size = 22, color = "currentColor", style }) {
-  const mask = `url("${logomarkUrl}")`;
+// Renders a brand SVG via CSS mask so the art can take any brand color
+// (cream in the header, lavender as a hero watermark) regardless of the
+// fill baked into the file. Swap the SVG files and every usage updates.
+function MaskedArt({ url, width, height, color, style }) {
+  const mask = `url("${url}")`;
   return (
     <span
       aria-hidden="true"
       style={{
         display: "inline-block",
-        width: size,
-        height: size,
+        width,
+        height,
         flex: "none",
         background: color,
         WebkitMaskImage: mask,
@@ -346,4 +347,14 @@ export function Logomark({ size = 22, color = "currentColor", style }) {
       }}
     />
   );
+}
+
+export function Logomark({ size = 22, color = "currentColor", style }) {
+  // Official mark is portrait (681×1080); size = height.
+  return <MaskedArt url={logomarkUrl} width={Math.round(size * (681.022 / 1080))} height={size} color={color} style={style} />;
+}
+
+export function Logotype({ height = 28, color = "currentColor", style }) {
+  // Stacked wordmark, 1651×966.
+  return <MaskedArt url={logotypeUrl} width={Math.round(height * (1651.055 / 966.112))} height={height} color={color} style={style} />;
 }

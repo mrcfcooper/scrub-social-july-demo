@@ -1,11 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Generated from src/assets/logomark.svg (placeholder art) on a cream
-       speech-bubble tile (squared bottom-left). Re-export when the official
-       logomark vector lands. -->
+  <!-- Official logomark (src/assets/logomark.svg) on a cream speech-bubble
+       tile (squared bottom-left). -->
   <path d="M8 0h16a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H0V8a8 8 0 0 1 8-8z" fill="#F9F2E8"/>
-  <g fill="#421A31" transform="translate(4.8 4.8) scale(0.7)">
-    <rect x="5" y="2.5" width="21" height="7.2" rx="3.6" transform="rotate(-12 15.5 6.1)"/>
-    <rect x="5.5" y="12.4" width="21" height="7.2" rx="3.6" transform="rotate(12 16 16)"/>
-    <rect x="6" y="22.3" width="21" height="7.2" rx="3.6" transform="rotate(-12 16.5 25.9)"/>
-  </g>
+  <svg x="8.5" y="4" width="15" height="24" viewBox="0 0 681.022 1080">
+    <g fill="#421A31">
+      <path d="M451.545,827.944L52.567,428.966c-48.852-48.852-48.852-128.057,0-176.91l0,0c48.852-48.852,128.057-48.852,176.91,0l398.979,398.979c48.852,48.852,48.852,128.057,0,176.91l0,0C579.603,876.796,500.397,876.796,451.545,827.944z"/>
+      <path d="M236.129,1043.361L36.639,843.871c-48.852-48.852-48.852-128.057,0-176.91l0,0c48.852-48.852,128.057-48.852,176.91,0l287.944,287.944l-88.455,88.455C364.186,1092.213,284.981,1092.213,236.129,1043.361z"/>
+      <path d="M444.893,36.639l199.489,199.489c48.852,48.852,48.852,128.057,0,176.91l0,0c-48.852,48.852-128.057,48.852-176.91,0L179.528,125.094l88.455-88.455C316.836-12.213,396.041-12.213,444.893,36.639z"/>
+    </g>
+  </svg>
 </svg>

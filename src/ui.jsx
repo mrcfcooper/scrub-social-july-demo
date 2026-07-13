@@ -1,18 +1,47 @@
+import { useState } from "react";
 import { ATTRIB } from "./data";
 
-// Attribution chip — the demo's thesis, styled as a quote callout: lavender
-// speech-bubble badge (squared bottom-left), the quote, then who asked.
-export function Attrib({ id }) {
+// Attribution marker — the demo's thesis, kept unobtrusive: a small lavender
+// quote chip with the asker's name. Tapping opens a popover with the full
+// quote. Pass `full` for the quote-callout rendering (Guide page).
+export function Attrib({ id, full }) {
   const a = ATTRIB[id];
+  const [open, setOpen] = useState(false);
   if (!a) return null;
+  if (full) {
+    return (
+      <aside className="attrib">
+        <span className="attrib-badge" aria-hidden="true">“</span>
+        <p className="attrib-quote">“{a.quote}”</p>
+        <div className="attrib-meta subtext">
+          <b>{a.who}</b> asked for this · may 11
+        </div>
+      </aside>
+    );
+  }
   return (
-    <aside className="attrib">
-      <span className="attrib-badge" aria-hidden="true">“</span>
-      <p className="attrib-quote">“{a.quote}”</p>
-      <div className="attrib-meta subtext">
-        <b>{a.who}</b> asked for this · may 11
-      </div>
-    </aside>
+    <span className="attrib-mini">
+      <button
+        className="attrib-chip"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-label={`${a.who} asked for this feature`}
+      >
+        <span className="q" aria-hidden="true">“</span>
+        {a.who.toLowerCase()}
+      </button>
+      {open && (
+        <>
+          <span className="attrib-scrim" onClick={() => setOpen(false)} />
+          <span className="attrib-pop" role="dialog">
+            <span className="attrib-quote">“{a.quote}”</span>
+            <span className="attrib-meta subtext">
+              <b>{a.who}</b> asked for this · may 11
+            </span>
+          </span>
+        </>
+      )}
+    </span>
   );
 }
 

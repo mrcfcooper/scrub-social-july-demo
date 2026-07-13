@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { PERSONAS } from "./data";
 import { Avatar } from "./ui";
-import { Icon, Logomark } from "./icons";
+import { Icon, Logotype } from "./icons";
 import { Feed, Jobs, JobDetail, Facility } from "./screens";
 import { Diary, Profile, Recruiter, Mentor, Graph, Guide } from "./screens2";
 
@@ -24,8 +24,8 @@ function Header({ persona, setPersona }) {
     <header className="top">
       <div className="top-row">
         <div className="wordmark">
-          <Logomark size={20} color="var(--air)" />
-          Scrub Society <span>Social</span>
+          <Logotype height={30} color="var(--air)" />
+          <span>Social</span>
         </div>
         <button className="persona-chip" onClick={() => setOpen(!open)} aria-expanded={open}>
           <Avatar initials={p.initials} color={p.color} dark={p.color === "#421A31"} />
