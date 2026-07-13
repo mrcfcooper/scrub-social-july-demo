@@ -1,0 +1,90 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.10-schemas.README",
+  "title": "Schemas",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for machine-readable JSON Schema files used by the App Behavior spec system.",
+        "Audience: Agents and engineers validating UX JSON files, examples, generators, or DB import/export tooling.",
+        "Keep In Sync With: Model docs, examples, and any future validation scripts.",
+        "Update When: Required fields, enum values, schema versions, or shared definitions change.",
+        "Does Not Cover: Human-readable schema rationale beyond short orientation.",
+        "-->"
+      ]
+    },
+    {
+      "id": "schemas",
+      "title": "Schemas",
+      "depth": 1,
+      "body": [
+        "This folder contains JSON Schema files for the App Behavior spec system. The schemas define v1 structure while allowing controlled extension through optional fields and `custom` objects.",
+        "",
+        "Use the package manifest schema before authoring detailed items. The manifest declares the profile, depth target, UX modes, required facets, allowed omissions, and completion standard for the package.",
+        "",
+        "`shared-definitions.schema.json` owns common vocabulary such as `mode`, `artifactRole`, `specProfile`, `depthTarget`, `facet`, and the future-consolidation `baseUxItem` definition.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Shared Definitions](shared-definitions.schema.json)",
+        "2. [UX Artifact Envelope](ux-artifact-envelope.schema.json)",
+        "3. [UX Spec Package Manifest](ux-spec-package-manifest.schema.json)",
+        "4. [UX Coverage Index](ux-coverage-index.schema.json)",
+        "5. [UX Feature Item](ux-feature-item.schema.json)",
+        "6. [UX Subfeature Item](ux-subfeature-item.schema.json)",
+        "7. [UX Journey Item](ux-journey-item.schema.json)",
+        "8. [UX Flow Item](ux-flow-item.schema.json)",
+        "9. [UX Subflow Item](ux-subflow-item.schema.json)",
+        "10. [UX Requirement Item](ux-requirement-item.schema.json)",
+        "11. [UX Observable Scenario Item](ux-runtime-scenario-item.schema.json)",
+        "12. [UX Acceptance Criterion Item](ux-acceptance-criterion-item.schema.json)",
+        "13. [UX Pending Decision Item](ux-pending-decision-item.schema.json)",
+        "14. [UX Current Desired Mapping](ux-current-desired-mapping.schema.json)",
+        "",
+        "- `ux-behavior-mapping.schema.json` defines compatibility and cross-row behavior relationship edges; row-local behaviorRelations in shared-definitions.schema.json are preferred for normal App Behavior rows.",
+        "- `ux-runtime-drift-item.schema.json` defines compatibility and cross-row UX/runtime drift entries; row-local runtimeAlignment in shared-definitions.schema.json is preferred for normal App Behavior rows.",
+        "- `ux-behavior-thread.schema.json` defines parent-container behavior threads. A thread physically contains child rows in behavior, relationships, issues, and context sections; child rows remain the behavior/source truth."
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when validating, interpreting, or updating UX-system schema-shaped artifacts.",
+        "",
+        "- For general schema interpretation, read the schema docs listed here before judging generated or stored artifacts.",
+        "- For confirmation baseline schema questions, read the confirmation baseline schema section before comparing route or behavior outputs.",
+        "- Use `.core.behavior`, `.core.ux`, or `.core.docs` when the schema question affects App Behavior authoring, UX modeling, or generated documentation.",
+        "",
+        "Does not own product behavior truth; schema compliance shapes how behavior is recorded, not what behavior should be.",
+        "",
+        "Stop when the agent can state the schema being applied, the artifact being checked, the required fields or shape, and the source authority for the behavior content."
+      ]
+    },
+    {
+      "id": "confirmation-baseline-schema",
+      "title": "Confirmation Baseline Schema",
+      "body": [
+        "- `shared-definitions.schema.json#/$defs/confirmationBaseline` defines the common row-level commit baseline shape.",
+        "- UX item schemas and coverage rows require the field so scripts can find rows that need audit refresh.",
+        "- Use `tools/backfill-confirmation-baseline.cjs` for one-off migration or baseline refresh passes."
+      ]
+    }
+  ]
+}

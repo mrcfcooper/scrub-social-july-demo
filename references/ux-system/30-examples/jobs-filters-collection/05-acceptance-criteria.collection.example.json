@@ -1,0 +1,194 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "acceptance-criterion",
+  "artifactType": "acceptance-criteria",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Acceptance Criteria Collection",
+  "uxModes": [
+    "desired"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "Acceptance criteria define proof expectations for governing UX behavior."
+  },
+  "sourceFile": "05-acceptance-criteria.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.acceptance-criteria.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-acceptance-criterion.v1",
+      "itemType": "uxAcceptanceCriterion",
+      "id": "jobs.filters.acceptance.modal-apply-success",
+      "title": "Apply commits filters and closes the modal",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 100,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "criterion": {
+        "given": [
+          "The advanced filter modal is open.",
+          "The filter draft is valid.",
+          "Applying the edits would change Jobs browsing."
+        ],
+        "when": [
+          "The user invokes Apply."
+        ],
+        "then": [
+          "The modal closes.",
+          "Jobs browsing reflects the applied filters."
+        ],
+        "and": [
+          "The filter summary reflects the applied filters.",
+          "No saved filter is created or updated by Apply alone."
+        ],
+        "proofPriority": "high",
+        "automationExpectation": "automated-required",
+        "manualProofAllowed": false,
+        "failureMeaning": "The implementation violates the governing Apply behavior contract."
+      },
+      "relationships": {
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply"
+        ],
+        "scenarioIds": [
+          "jobs.filters.scenario.apply-invalid"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.acceptance.modal-apply-success.md"
+      },
+      "db": {
+        "collection": "uxAcceptanceCriteria",
+        "documentId": "jobs.filters.acceptance.modal-apply-success"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "schema": "tgn.ux-acceptance-criterion.v1",
+      "itemType": "uxAcceptanceCriterion",
+      "id": "jobs.filters.acceptance.modal-apply-invalid",
+      "title": "Invalid filter draft blocks Apply",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "criterion": {
+        "given": [
+          "The advanced filter modal is open.",
+          "The filter draft contains invalid input.",
+          "The draft would otherwise affect browsing."
+        ],
+        "when": [
+          "The user reviews the Apply action."
+        ],
+        "then": [
+          "Apply remains visible.",
+          "Apply is disabled."
+        ],
+        "and": [
+          "The user can correct the invalid input.",
+          "Invalid filters are not applied."
+        ],
+        "proofPriority": "high",
+        "automationExpectation": "automated-required",
+        "manualProofAllowed": false,
+        "failureMeaning": "The implementation either hides a relevant blocked action or allows invalid behavior."
+      },
+      "relationships": {
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply"
+        ],
+        "scenarioIds": [
+          "jobs.filters.scenario.apply-invalid"
+        ],
+        "subflowIds": [
+          "jobs.filters.apply-filters"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.acceptance.modal-apply-invalid.md"
+      },
+      "db": {
+        "collection": "uxAcceptanceCriteria",
+        "documentId": "jobs.filters.acceptance.modal-apply-invalid"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

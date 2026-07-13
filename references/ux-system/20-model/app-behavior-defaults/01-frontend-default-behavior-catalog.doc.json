@@ -1,0 +1,170 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-defaults.01-frontend-default-behavior-catalog",
+  "title": "Frontend Default Behavior Catalog",
+  "content": [
+    {
+      "id": "frontend-default-behavior-catalog-body-1",
+      "body": "This catalog names default categories that should eventually become reusable governed App Behavior defaults. It is not the final exhaustive rule set; it defines the starting categories, when the reusable default is enough, and when route/module overrides are required."
+    },
+    {
+      "id": "not-defaultable",
+      "title": "Not Defaultable",
+      "body": "Defaults do not cover DTO/query shape, state ownership, command semantics, permissions, persistence, side effects, security/privacy boundaries, runtime drift, backend internals, or backend/API authority. Those require runtime/source/API/test discovery, backend authority references, explicit App Behavior rows, or true product decisions."
+    },
+    {
+      "id": "loading",
+      "title": "Loading",
+      "body": [
+        "Intent:",
+        "Acknowledge that work is in progress and prevent users from mistaking delay for failure.",
+        "",
+        "Reusable default is enough when:",
+        "The operation is ordinary, low-risk, and has no special stale, permission, token, upload, or external-side-effect behavior.",
+        "",
+        "Override is required when:",
+        "Loading affects command admission, stale data, identity, privacy, public token state, uploads/downloads, long-running work, partial hydration, or proof readiness."
+      ]
+    },
+    {
+      "id": "empty-state",
+      "title": "Empty State",
+      "body": [
+        "Intent:",
+        "Explain that no usable results or records are available and preserve the next meaningful action.",
+        "",
+        "Reusable default is enough when:",
+        "The empty state has no product-specific cause, no permission ambiguity, and no special recovery path.",
+        "",
+        "Override is required when:",
+        "Empty can mean filtered results, missing permissions, incomplete profile, unavailable source, deleted object, expired token, or a meaningful product milestone."
+      ]
+    },
+    {
+      "id": "recoverable-error",
+      "title": "Recoverable Error",
+      "body": [
+        "Intent:",
+        "Make failure understandable and give users a safe way to retry, adjust input, return, or continue.",
+        "",
+        "Reusable default is enough when:",
+        "The error is generic, non-destructive, and does not expose private details or require product-specific recovery.",
+        "",
+        "Override is required when:",
+        "Failure involves tokens, payments, external sends, uploads/downloads, partial success, permission, privacy, compliance, data loss, or user support escalation."
+      ]
+    },
+    {
+      "id": "unauthorized-or-forbidden",
+      "title": "Unauthorized Or Forbidden",
+      "body": [
+        "Intent:",
+        "Protect private behavior while explaining the user's safe next step.",
+        "",
+        "Reusable default is enough when:",
+        "The access state is ordinary and governed by a shared auth/role pattern.",
+        "",
+        "Override is required when:",
+        "The route is public-token, admin, delegated, impersonated, identity-switching, or uses stored intent/post-login resume."
+      ]
+    },
+    {
+      "id": "disabled-while-submitting",
+      "title": "Disabled While Submitting",
+      "body": [
+        "Intent:",
+        "Prevent duplicate submission and make in-flight command state clear.",
+        "",
+        "Reusable default is enough when:",
+        "The command is single-step, idempotent enough for ordinary retry, and has no special cancellation or partial-success behavior.",
+        "",
+        "Override is required when:",
+        "The command has external side effects, file upload, irreversible state, duplicate semantics, optimistic updates, or cross-owner projection updates."
+      ]
+    },
+    {
+      "id": "required-field-validation-display",
+      "title": "Required-Field Validation Display",
+      "body": [
+        "Intent:",
+        "Show what blocks progress and how the user can fix it.",
+        "",
+        "Reusable default is enough when:",
+        "Required fields are ordinary, local to the form, and have predictable labels and recovery.",
+        "",
+        "Override is required when:",
+        "Requirements are conditional, derived, server-owned, role-dependent, upload-dependent, cross-field, exact-copy governed, or tied to legal/privacy meaning."
+      ]
+    },
+    {
+      "id": "stale-data-indication",
+      "title": "Stale Data Indication",
+      "body": [
+        "Intent:",
+        "Prevent users from trusting outdated information when freshness changes meaning.",
+        "",
+        "Reusable default is enough when:",
+        "A simple refresh or background reload resolves the state without data risk.",
+        "",
+        "Override is required when:",
+        "Staleness affects command admission, list/detail consistency, parent state patching, concurrent edits, permissions, public tokens, or financial/privacy/safety meaning."
+      ]
+    },
+    {
+      "id": "retry",
+      "title": "Retry",
+      "body": [
+        "Intent:",
+        "Let users recover from transient failures without losing work or duplicating effects.",
+        "",
+        "Reusable default is enough when:",
+        "Retry is safe, local, and does not duplicate side effects.",
+        "",
+        "Override is required when:",
+        "Retry can resend email, duplicate a mutation, re-upload a file, charge/create/update records, replay a token, or conflict with stale state."
+      ]
+    },
+    {
+      "id": "cancel-or-close-without-persistence",
+      "title": "Cancel Or Close Without Persistence",
+      "body": [
+        "Intent:",
+        "Let users leave temporary UI without surprise saved-state changes or work loss.",
+        "",
+        "Reusable default is enough when:",
+        "The UI is read-only or contains only ephemeral, safely discardable state.",
+        "",
+        "Override is required when:",
+        "The UI has drafts, dirty state, uploaded files, multi-step progress, external effects, pending commands, or stored intent."
+      ]
+    },
+    {
+      "id": "responsive-containment",
+      "title": "Responsive Containment",
+      "body": [
+        "Intent:",
+        "Keep content readable, reachable, and non-overlapping across supported viewport sizes.",
+        "",
+        "Reusable default is enough when:",
+        "The layout uses ordinary stacking, wrapping, scrolling, or table/card conversion without changing behavior meaning.",
+        "",
+        "Override is required when:",
+        "Breakpoint behavior changes available actions, information hierarchy, table/card semantics, sticky controls, map/file preview, modals, drawers, or accessibility behavior."
+      ]
+    },
+    {
+      "id": "focus-and-accessibility-baseline",
+      "title": "Focus And Accessibility Baseline",
+      "body": [
+        "Intent:",
+        "Keep controls reachable, labeled, and understandable for keyboard and assistive technology users.",
+        "",
+        "Reusable default is enough when:",
+        "Controls, headings, form fields, dialogs, and status messages follow standard accessible patterns.",
+        "",
+        "Override is required when:",
+        "Behavior includes custom widgets, drag/drop, complex tables, modals/drawers, toasts that carry required meaning, live async status, keyboard shortcuts, canvas/map/file previews, or exact announcement behavior."
+      ]
+    }
+  ]
+}

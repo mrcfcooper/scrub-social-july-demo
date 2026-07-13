@@ -1,0 +1,550 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ss-recruiter-profile">
+  <style>
+    .ss-recruiter-profile {
+      --plum: #421A31;
+      --plum-soft: #6b3a52;
+      --open-air: #F9F2E8;
+      --lavender: #BBAFEF;
+      --clear-sky: #82ABF4;
+      --morning-dew: #CEDBFE;
+      --cloud: #FFFFFF;
+      --ink: #2c1320;
+      --muted: #8a7480;
+      --star: #e8b54a;
+      --good: #6fc78a;
+      --line: #efe7dd;
+
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(110% 70% at 50% -8%, rgba(187,175,239,0.20), transparent 55%),
+        radial-gradient(90% 60% at 100% 110%, rgba(130,171,244,0.15), transparent 50%),
+        var(--open-air);
+      padding: 38px 18px 50px; min-height: 100vh; box-sizing: border-box;
+    }
+    .ss-recruiter-profile *,
+    .ss-recruiter-profile *::before,
+    .ss-recruiter-profile *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ---------- section scaffolding ---------- */
+    .ss-recruiter-profile .sec-intro { max-width: 980px; margin: 0 auto 26px; text-align: center; }
+    .ss-recruiter-profile .sec-intro .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--plum-soft); margin-bottom: 8px;
+    }
+    .ss-recruiter-profile .sec-intro h2 { font-size: 26px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+    .ss-recruiter-profile .sec-intro p { font-size: 14px; font-weight: 300; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+    .ss-recruiter-profile .divider {
+      max-width: 980px; margin: 52px auto; border: none; border-top: 1px solid rgba(66,26,49,0.12);
+    }
+
+    /* shared avatar */
+    .ss-recruiter-profile .avatar {
+      border-radius: 22px; overflow: hidden; flex-shrink: 0;
+      background: linear-gradient(150deg, var(--clear-sky), var(--lavender));
+      display: flex; align-items: center; justify-content: center; color: var(--cloud);
+      font-weight: 600; position: relative;
+    }
+    .ss-recruiter-profile .avatar .vbadge {
+      position: absolute; bottom: -6px; right: -6px;
+      width: 26px; height: 26px; border-radius: 50%; background: var(--good);
+      display: flex; align-items: center; justify-content: center; border: 3px solid var(--cloud);
+    }
+    .ss-recruiter-profile .avatar .vbadge svg { width: 13px; height: 13px; stroke: var(--cloud); stroke-width: 3; }
+
+    /* stat chip */
+    .ss-recruiter-profile .stat .sv { font-weight: 600; color: var(--plum); }
+    .ss-recruiter-profile .stat .sl {
+      font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 2px;
+    }
+
+    /* stars inline */
+    .ss-recruiter-profile .star-row { display: inline-flex; gap: 2px; }
+    .ss-recruiter-profile .star-row svg { width: 14px; height: 14px; }
+    .ss-recruiter-profile .star-row svg path { fill: var(--star); }
+
+    /* ============================================================
+       MOBILE FRAME
+       ============================================================ */
+    .ss-recruiter-profile .phone-wrap { display: flex; justify-content: center; }
+    .ss-recruiter-profile .phone {
+      width: 360px; max-width: 100%; background: var(--plum);
+      border-radius: 46px; padding: 12px;
+      box-shadow: 0 2px 4px rgba(66,26,49,0.18), 0 22px 52px rgba(66,26,49,0.40), inset 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .ss-recruiter-profile .screen {
+      background: var(--open-air); border-radius: 36px; overflow: hidden;
+      position: relative; height: 760px; display: flex; flex-direction: column;
+    }
+    .ss-recruiter-profile .notch {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 112px; height: 26px; background: var(--plum); border-radius: 15px; z-index: 40;
+    }
+    .ss-recruiter-profile .home-ind {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 5px; border-radius: 999px; background: rgba(66,26,49,0.22); z-index: 40;
+    }
+    .ss-recruiter-profile .statusbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px 6px; font-size: 13px; font-weight: 600; color: var(--plum);
+    }
+    .ss-recruiter-profile .statusbar svg { display: block; }
+    .ss-recruiter-profile .navbar {
+      display: flex; align-items: center; gap: 12px; padding: 6px 18px 10px;
+    }
+    .ss-recruiter-profile .navbar .back {
+      width: 34px; height: 34px; border-radius: 50%; background: var(--cloud);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-recruiter-profile .navbar .back svg { width: 17px; height: 17px; stroke: var(--plum); }
+    .ss-recruiter-profile .navbar .nt { font-size: 13px; font-weight: 600; color: var(--plum); }
+
+    .ss-recruiter-profile .mscroll { flex: 1; overflow-y: auto; }
+    .ss-recruiter-profile .mscroll::-webkit-scrollbar { width: 0; }
+
+    /* mobile hero */
+    .ss-recruiter-profile .mhero {
+      background:
+        radial-gradient(120% 110% at 80% 0%, rgba(187,175,239,0.30), transparent 60%),
+        var(--plum);
+      padding: 20px 20px 22px; color: var(--open-air); text-align: center;
+    }
+    .ss-recruiter-profile .mhero .avatar { width: 92px; height: 92px; font-size: 30px; margin: 4px auto 14px; }
+    .ss-recruiter-profile .mhero .rname { font-size: 21px; font-weight: 500; }
+    .ss-recruiter-profile .mhero .rrole {
+      font-size: 12.5px; font-weight: 300; color: rgba(249,242,232,0.78); margin-top: 4px;
+    }
+    .ss-recruiter-profile .mhero .ragency {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+      background: rgba(249,242,232,0.12); padding: 6px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+    }
+    .ss-recruiter-profile .mhero .ragency svg { width: 12px; height: 12px; stroke: var(--lavender); }
+
+    /* mobile stat strip */
+    .ss-recruiter-profile .mstats {
+      display: flex; margin: -16px 16px 0; background: var(--cloud); border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(66,26,49,0.10); position: relative; z-index: 2; overflow: hidden;
+    }
+    .ss-recruiter-profile .mstats .stat {
+      flex: 1; text-align: center; padding: 14px 6px;
+    }
+    .ss-recruiter-profile .mstats .stat + .stat { border-left: 1px solid var(--line); }
+    .ss-recruiter-profile .mstats .stat .sv { font-size: 17px; }
+    .ss-recruiter-profile .mstats .stat .sv.rate { display: inline-flex; align-items: center; gap: 4px; }
+
+    .ss-recruiter-profile .mbody { padding: 20px; }
+    .ss-recruiter-profile .sub {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+    }
+    .ss-recruiter-profile .mblock { margin-bottom: 22px; }
+
+    /* know your recruiter list */
+    .ss-recruiter-profile .kyr { display: flex; flex-direction: column; gap: 9px; }
+    .ss-recruiter-profile .kyr-item {
+      display: flex; align-items: center; gap: 11px;
+      background: var(--cloud); border-radius: 14px; padding: 12px 13px;
+      box-shadow: 0 2px 8px rgba(66,26,49,0.05);
+    }
+    .ss-recruiter-profile .kyr-item .ic {
+      width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; background: var(--morning-dew);
+    }
+    .ss-recruiter-profile .kyr-item .ic svg { width: 17px; height: 17px; stroke: var(--clear-sky); }
+    .ss-recruiter-profile .kyr-item .kt { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+    .ss-recruiter-profile .kyr-item .ks { font-size: 11.5px; font-weight: 300; color: var(--muted); margin-top: 1px; }
+
+    /* bio collapse (checkbox hack) */
+    .ss-recruiter-profile .bio-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .ss-recruiter-profile .bio {
+      font-size: 13.5px; font-weight: 300; color: var(--plum-soft); line-height: 1.6;
+      max-height: 66px; overflow: hidden; position: relative; transition: max-height .4s cubic-bezier(.22,1,.36,1);
+    }
+    .ss-recruiter-profile .bio::after {
+      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 32px;
+      background: linear-gradient(transparent, var(--open-air)); transition: opacity .3s ease;
+    }
+    .ss-recruiter-profile .bio-toggle:checked ~ .bio { max-height: 320px; }
+    .ss-recruiter-profile .bio-toggle:checked ~ .bio::after { opacity: 0; }
+    .ss-recruiter-profile .bio-more {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; cursor: pointer;
+      font-size: 12.5px; font-weight: 600; color: var(--plum);
+    }
+    .ss-recruiter-profile .bio-more svg { width: 14px; height: 14px; stroke: var(--plum); transition: transform .3s ease; }
+    .ss-recruiter-profile .bio-toggle:checked ~ .bio-more .bio-more-show { display: none; }
+    .ss-recruiter-profile .bio-more .bio-more-hide { display: none; }
+    .ss-recruiter-profile .bio-toggle:checked ~ .bio-more .bio-more-hide { display: inline; }
+    .ss-recruiter-profile .bio-toggle:checked ~ .bio-more svg { transform: rotate(180deg); }
+
+    /* review snippet */
+    .ss-recruiter-profile .review {
+      background: var(--morning-dew); border-radius: 16px; padding: 14px 15px;
+    }
+    .ss-recruiter-profile .review .rq { font-size: 13.5px; font-weight: 400; color: var(--plum); line-height: 1.5; font-style: italic; }
+    .ss-recruiter-profile .review .rm {
+      display: flex; align-items: center; gap: 7px; margin-top: 10px;
+      font-size: 11.5px; font-weight: 500; color: var(--plum-soft);
+    }
+    .ss-recruiter-profile .review .rm .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--plum-soft); opacity: 0.5; }
+
+    /* sticky contact bar */
+    .ss-recruiter-profile .contact-bar {
+      padding: 12px 18px 14px; border-top: 1px solid var(--line); background: var(--open-air);
+      display: flex; gap: 10px;
+    }
+    .ss-recruiter-profile .cb-msg {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--plum); color: var(--open-air); padding: 14px; border-radius: 14px;
+      font-size: 14.5px; font-weight: 500; cursor: pointer; box-shadow: 0 8px 16px rgba(66,26,49,0.24);
+      transition: transform .15s ease;
+    }
+    .ss-recruiter-profile .cb-msg:hover { transform: translateY(-2px); }
+    .ss-recruiter-profile .cb-msg svg { width: 17px; height: 17px; stroke: var(--open-air); }
+    .ss-recruiter-profile .cb-call {
+      width: 52px; display: flex; align-items: center; justify-content: center;
+      background: var(--morning-dew); border-radius: 14px; cursor: pointer; transition: filter .15s ease;
+    }
+    .ss-recruiter-profile .cb-call:hover { filter: brightness(0.96); }
+    .ss-recruiter-profile .cb-call svg { width: 19px; height: 19px; stroke: var(--plum); }
+
+    /* ============================================================
+       DESKTOP / WEB SLUG PAGE
+       ============================================================ */
+    .ss-recruiter-profile .browser {
+      max-width: 980px; margin: 0 auto;
+      background: var(--cloud); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 2px 6px rgba(66,26,49,0.10), 0 30px 70px rgba(66,26,49,0.20);
+    }
+    .ss-recruiter-profile .chrome {
+      display: flex; align-items: center; gap: 14px; padding: 12px 16px;
+      background: #ece4da; border-bottom: 1px solid rgba(66,26,49,0.08);
+    }
+    .ss-recruiter-profile .chrome .traffic { display: flex; gap: 7px; }
+    .ss-recruiter-profile .chrome .traffic i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .ss-recruiter-profile .chrome .traffic .r { background: #ff5f57; }
+    .ss-recruiter-profile .chrome .traffic .y { background: #febc2e; }
+    .ss-recruiter-profile .chrome .traffic .g { background: #28c840; }
+    .ss-recruiter-profile .chrome .urlbar {
+      flex: 1; display: flex; align-items: center; gap: 8px;
+      background: var(--cloud); border-radius: 9px; padding: 8px 13px;
+      font-size: 12.5px; font-weight: 400; color: var(--plum-soft);
+    }
+    .ss-recruiter-profile .chrome .urlbar svg { width: 13px; height: 13px; stroke: var(--good); flex-shrink: 0; }
+    .ss-recruiter-profile .chrome .urlbar b { color: var(--ink); font-weight: 500; }
+
+    .ss-recruiter-profile .web-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px; border-bottom: 1px solid var(--line);
+    }
+    .ss-recruiter-profile .web-topbar .brand { display: flex; align-items: center; gap: 9px; }
+    .ss-recruiter-profile .web-topbar .smark { width: 22px; height: 26px; display: block; }
+    .ss-recruiter-profile .web-topbar .wm { font-size: 16px; font-weight: 600; color: var(--plum); }
+    .ss-recruiter-profile .web-topbar .nav { display: flex; gap: 24px; }
+    .ss-recruiter-profile .web-topbar .nav a { font-size: 13.5px; font-weight: 400; color: var(--plum-soft); text-decoration: none; }
+    .ss-recruiter-profile .web-topbar .nav a.active { color: var(--plum); font-weight: 500; }
+
+    /* web hero band */
+    .ss-recruiter-profile .web-hero {
+      background:
+        radial-gradient(90% 140% at 88% -20%, rgba(187,175,239,0.34), transparent 55%),
+        var(--plum);
+      padding: 36px 32px; color: var(--open-air);
+      display: flex; gap: 28px; align-items: center;
+    }
+    .ss-recruiter-profile .web-hero .avatar { width: 124px; height: 124px; font-size: 40px; }
+    .ss-recruiter-profile .web-hero .wh-meta { flex: 1; }
+    .ss-recruiter-profile .web-hero .wh-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--lavender); margin-bottom: 7px;
+    }
+    .ss-recruiter-profile .web-hero h1 { font-size: 30px; font-weight: 500; letter-spacing: -0.01em; }
+    .ss-recruiter-profile .web-hero .wh-role { font-size: 15px; font-weight: 300; color: rgba(249,242,232,0.82); margin-top: 5px; }
+    .ss-recruiter-profile .web-hero .wh-chips { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .ss-recruiter-profile .web-hero .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(249,242,232,0.12); padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 500;
+    }
+    .ss-recruiter-profile .web-hero .chip svg { width: 13px; height: 13px; stroke: var(--lavender); }
+    .ss-recruiter-profile .web-hero .chip.rate { background: rgba(249,242,232,0.16); }
+    .ss-recruiter-profile .web-hero .wh-cta { display: flex; flex-direction: column; gap: 10px; width: 200px; }
+    .ss-recruiter-profile .web-hero .wc-msg {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--open-air); color: var(--plum); padding: 13px; border-radius: 12px;
+      font-size: 14.5px; font-weight: 600; cursor: pointer; transition: transform .15s ease;
+    }
+    .ss-recruiter-profile .web-hero .wc-msg:hover { transform: translateY(-2px); }
+    .ss-recruiter-profile .web-hero .wc-msg svg { width: 16px; height: 16px; stroke: var(--plum); }
+    .ss-recruiter-profile .web-hero .wc-call {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: rgba(249,242,232,0.12); color: var(--open-air); padding: 13px; border-radius: 12px;
+      font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s ease;
+    }
+    .ss-recruiter-profile .web-hero .wc-call:hover { background: rgba(249,242,232,0.2); }
+    .ss-recruiter-profile .web-hero .wc-call svg { width: 16px; height: 16px; stroke: var(--open-air); }
+
+    /* web content grid */
+    .ss-recruiter-profile .web-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; padding: 32px;
+    }
+    .ss-recruiter-profile .web-col h3 {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+    }
+    .ss-recruiter-profile .web-col .wbio {
+      font-size: 14.5px; font-weight: 300; color: var(--ink); line-height: 1.65;
+    }
+    .ss-recruiter-profile .web-col .wbio p + p { margin-top: 12px; }
+    .ss-recruiter-profile .web-block { margin-bottom: 30px; }
+
+    .ss-recruiter-profile .web-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .ss-recruiter-profile .web-stat {
+      background: var(--open-air); border-radius: 14px; padding: 15px;
+    }
+    .ss-recruiter-profile .web-stat .wsv { font-size: 22px; font-weight: 600; color: var(--plum); display: flex; align-items: center; gap: 5px; }
+    .ss-recruiter-profile .web-stat .wsl {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-top: 3px;
+    }
+
+    .ss-recruiter-profile .web-review {
+      background: var(--morning-dew); border-radius: 16px; padding: 18px; margin-bottom: 12px;
+    }
+    .ss-recruiter-profile .web-review .wrq { font-size: 14px; font-weight: 400; color: var(--plum); line-height: 1.55; font-style: italic; }
+    .ss-recruiter-profile .web-review .wrm {
+      display: flex; align-items: center; gap: 8px; margin-top: 11px; font-size: 12px; font-weight: 500; color: var(--plum-soft);
+    }
+    .ss-recruiter-profile .web-review .wrm .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--plum-soft); opacity: 0.5; }
+
+    /* active jobs mini */
+    .ss-recruiter-profile .wjob {
+      display: flex; align-items: center; gap: 12px; padding: 13px 14px;
+      border: 1px solid var(--line); border-radius: 14px; margin-bottom: 9px; transition: border-color .15s ease;
+    }
+    .ss-recruiter-profile .wjob:hover { border-color: var(--lavender); }
+    .ss-recruiter-profile .wjob .wj-meta { flex: 1; }
+    .ss-recruiter-profile .wjob .wj-t { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .ss-recruiter-profile .wjob .wj-s { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 2px; }
+    .ss-recruiter-profile .wjob .wj-pay { font-size: 14px; font-weight: 600; color: var(--plum); white-space: nowrap; }
+    .ss-recruiter-profile .wjob .wj-pay small { font-size: 11px; font-weight: 400; color: var(--muted); }
+
+    @media (max-width: 720px) {
+      .ss-recruiter-profile .web-hero { flex-direction: column; text-align: center; }
+      .ss-recruiter-profile .web-hero .wh-cta { width: 100%; }
+      .ss-recruiter-profile .web-hero .wh-chips { justify-content: center; }
+      .ss-recruiter-profile .web-grid { grid-template-columns: 1fr; }
+      .ss-recruiter-profile .web-topbar .nav { display: none; }
+    }
+  </style>
+
+  <!-- ===================== MOBILE ===================== -->
+  <div class="sec-intro">
+    <div class="eyebrow">Recruiter profile &middot; In-app</div>
+    <h2>Know who's in your corner.</h2>
+    <p>Before you message, see who they are, who they've placed, and what travelers say.</p>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar">
+          <span>9:41</span>
+          <span style="display:flex;gap:5px;align-items:center;">
+            <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+          </span>
+        </div>
+
+        <div class="navbar">
+          <span class="back"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></span>
+          <span class="nt">Recruiter</span>
+        </div>
+
+        <div class="mscroll">
+          <div class="mhero">
+            <div class="avatar" style="width:92px;height:92px;font-size:30px;">MT
+              <span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            </div>
+            <div class="rname">Maya Torres</div>
+            <div class="rrole">ICU &amp; Critical Care travel placements</div>
+            <div class="ragency">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+              Medical Solutions
+            </div>
+          </div>
+
+          <div class="mstats">
+            <div class="stat"><div class="sv">6 yrs</div><div class="sl">Tenure</div></div>
+            <div class="stat"><div class="sv">340+</div><div class="sl">Placed</div></div>
+            <div class="stat"><div class="sv rate">4.9 <span class="star-row"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg></span></div><div class="sl">128 reviews</div></div>
+          </div>
+
+          <div class="mbody">
+            <!-- bio -->
+            <div class="mblock">
+              <div class="sub">About Maya</div>
+              <input type="checkbox" id="ss-bio" class="bio-toggle">
+              <div class="bio">Maya has spent six years placing ICU and critical care travelers, and was a bedside ICU nurse herself for four years before that. She gets the 3 a.m. text about a contract that fell through, and she answers it. Her travelers describe her as the one who actually reads the unit reviews before sending a submission, who flags a bad ratio before you sign, and who remembers your dog's name. She works coast to coast but knows the Mountain West facilities especially well.</div>
+              <label for="ss-bio" class="bio-more">
+                <span class="bio-more-show">Read more</span>
+                <span class="bio-more-hide">Show less</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </label>
+            </div>
+
+            <!-- know your recruiter -->
+            <div class="mblock">
+              <div class="sub">Know your recruiter</div>
+              <div class="kyr">
+                <div class="kyr-item">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></span>
+                  <div><div class="kt">Replies in about 2 hours</div><div class="ks">Based on her last 90 days of messages</div></div>
+                </div>
+                <div class="kyr-item">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  <div><div class="kt">Specializes in ICU, ER, PCU</div><div class="ks">Won't pitch you roles outside your lane</div></div>
+                </div>
+                <div class="kyr-item">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-4 7-9 9-5-2-9-4-9-9V5l9-3 9 3z"/></svg></span>
+                  <div><div class="kt">Verified Medical Solutions recruiter</div><div class="ks">Identity and agency confirmed by Scrub Society</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- review -->
+            <div class="mblock">
+              <div class="sub">What travelers say</div>
+              <div class="review">
+                <div class="rq">"She talked me out of a contract that looked great on paper and would've been miserable. That's when I knew she was on my side."</div>
+                <div class="rm">ICU RN <span class="dot"></span> placed in Phoenix <span class="dot"></span> Mar 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-bar">
+          <div class="cb-msg">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Message Maya
+          </div>
+          <div class="cb-call">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+        </div>
+
+        <div class="home-ind"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===================== WEB / SLUG PAGE ===================== -->
+  <div class="sec-intro">
+    <div class="eyebrow">Recruiter profile &middot; Shareable web page</div>
+    <h2>The link a recruiter sends.</h2>
+    <p>Every profile lives at its own URL &mdash; shareable, searchable, and part of the Lead Gen package.</p>
+  </div>
+
+  <div class="browser">
+    <div class="chrome">
+      <div class="traffic"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+      <div class="urlbar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        scrubsociety.com/r/<b>maya-torres</b>
+      </div>
+    </div>
+
+    <div class="web-topbar">
+      <div class="brand">
+        <svg class="smark" viewBox="0 0 68 80" fill="#421A31"><rect x="18" y="0" width="22" height="46" rx="11" transform="rotate(32 29 23)"/><rect x="23" y="17" width="22" height="46" rx="11" transform="rotate(32 34 40)"/><rect x="0" y="48" width="22" height="38" rx="11" transform="rotate(32 11 67)"/></svg>
+        <span class="wm">Scrub Society</span>
+      </div>
+      <div class="nav">
+        <a href="#">Jobs</a>
+        <a href="#">Agencies</a>
+        <a href="#" class="active">Recruiters</a>
+        <a href="#">Community</a>
+      </div>
+    </div>
+
+    <div class="web-hero">
+      <div class="avatar" style="width:124px;height:124px;font-size:40px;">MT
+        <span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      </div>
+      <div class="wh-meta">
+        <div class="wh-tag">Verified recruiter</div>
+        <h1>Maya Torres</h1>
+        <div class="wh-role">ICU &amp; Critical Care travel placements &middot; Medical Solutions</div>
+        <div class="wh-chips">
+          <span class="chip rate">4.9 <span class="star-row"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg></span> 128 reviews</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg> Replies in ~2 hrs</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg> 340+ placed</span>
+        </div>
+      </div>
+      <div class="wh-cta">
+        <div class="wc-msg">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Message Maya
+        </div>
+        <div class="wc-call">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Request a call
+        </div>
+      </div>
+    </div>
+
+    <div class="web-grid">
+      <div class="web-col">
+        <div class="web-block">
+          <h3>About Maya</h3>
+          <div class="wbio">
+            <p>Maya has spent six years placing ICU and critical care travelers, and was a bedside ICU nurse herself for four years before that. She gets the 3 a.m. text about a contract that fell through, and she answers it.</p>
+            <p>Her travelers describe her as the one who actually reads the unit reviews before sending a submission, who flags a bad ratio before you sign, and who remembers your dog's name. She works coast to coast but knows the Mountain West facilities especially well.</p>
+          </div>
+        </div>
+
+        <div class="web-block">
+          <h3>What travelers say</h3>
+          <div class="web-review">
+            <div class="wrq">"She talked me out of a contract that looked great on paper and would've been miserable. That's when I knew she was on my side."</div>
+            <div class="wrm">ICU RN <span class="dot"></span> placed in Phoenix <span class="dot"></span> Mar 2026</div>
+          </div>
+          <div class="web-review">
+            <div class="wrq">"Fastest recruiter I've worked with. Submitted me Monday, had two interviews by Thursday, signed the next week."</div>
+            <div class="wrm">CVICU RN <span class="dot"></span> placed in Denver <span class="dot"></span> Feb 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="web-col">
+        <div class="web-block">
+          <h3>By the numbers</h3>
+          <div class="web-stats">
+            <div class="web-stat"><div class="wsv">6 yrs</div><div class="wsl">Recruiting</div></div>
+            <div class="web-stat"><div class="wsv">340+</div><div class="wsl">Travelers placed</div></div>
+            <div class="web-stat"><div class="wsv">4.9 <span class="star-row"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg></span></div><div class="wsl">Avg rating</div></div>
+            <div class="web-stat"><div class="wsv">~2 hrs</div><div class="wsl">Reply time</div></div>
+          </div>
+        </div>
+
+        <div class="web-block">
+          <h3>Maya's open roles</h3>
+          <div class="wjob">
+            <div class="wj-meta"><div class="wj-t">ICU Travel RN</div><div class="wj-s">Denver, CO &middot; Nights &middot; 13 wks</div></div>
+            <div class="wj-pay">$2,980<small>/wk</small></div>
+          </div>
+          <div class="wjob">
+            <div class="wj-meta"><div class="wj-t">CVICU Travel RN</div><div class="wj-s">Phoenix, AZ &middot; Days &middot; 13 wks</div></div>
+            <div class="wj-pay">$3,120<small>/wk</small></div>
+          </div>
+          <div class="wjob">
+            <div class="wj-meta"><div class="wj-t">ER Travel RN</div><div class="wj-s">Salt Lake City, UT &middot; Nights &middot; 13 wks</div></div>
+            <div class="wj-pay">$2,840<small>/wk</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

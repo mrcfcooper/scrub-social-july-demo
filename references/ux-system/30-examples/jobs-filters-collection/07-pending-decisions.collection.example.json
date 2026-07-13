@@ -1,0 +1,134 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "pending-decision",
+  "artifactType": "pending-decisions",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Pending Decision Collection",
+  "uxModes": [
+    "pending-confirmation"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "Pending decisions are non-governing until confirmed, but they gate implementation where indicated."
+  },
+  "sourceFile": "07-pending-decisions.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.pending-decisions.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-pending-decision.v1",
+      "itemType": "uxPendingDecision",
+      "id": "jobs.filters.pending.clear-confirmation-copy",
+      "title": "Confirm exact Clear Filters confirmation copy",
+      "mode": "pending-confirmation",
+      "status": "pending-confirmation",
+      "authority": "pending-confirmation",
+      "confidence": 70,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "subflowIds": [
+          "jobs.filters.clear-filters"
+        ],
+        "surfaceIds": [
+          "filter-modal"
+        ]
+      },
+      "decision": {
+        "question": "Should the Clear Filters confirmation copy explicitly say that active Jobs results will broaden after confirmation?",
+        "whyItMatters": "Exact copy may determine whether users understand a broad reset before committing it.",
+        "decisionNeededBy": "Before marking desired Clear Filters behavior as confirmed governing.",
+        "blockedBehavior": [
+          "jobs.filters.desired.modal-clear",
+          "jobs.filters.mapping.modal-clear"
+        ],
+        "options": [
+          {
+            "id": "explicit-confirmation-copy",
+            "summary": "Use explicit confirmation copy for broad reset behavior.",
+            "tradeoffsMd": "Reduces surprise and improves proof clarity, but adds interruption to the clear path."
+          },
+          {
+            "id": "label-only",
+            "summary": "Use the existing Clear Filters label without confirmation copy.",
+            "tradeoffsMd": "Keeps the interaction lighter, but increases risk that users do not understand the reset scope."
+          }
+        ],
+        "consequencesIfUnresolved": [
+          "Clear Filters desired behavior cannot become confirmed governing.",
+          "Implementation should not ship the behavior change as complete."
+        ]
+      },
+      "recommendation": {
+        "summary": "Use explicit confirmation copy for broad reset behavior.",
+        "confidence": 70,
+        "rationaleMd": "Clear/reset behavior can be destructive to browsing context, so copy should reduce surprise.",
+        "alternatives": [
+          {
+            "summary": "Use the existing Clear Filters label without confirmation copy.",
+            "tradeoffsMd": "Less interruption, but higher risk of accidental context loss."
+          }
+        ],
+        "consequencesMd": "If accepted, exact confirmation copy should become governing for Clear Filters."
+      },
+      "confirmation": {
+        "required": true,
+        "status": "pending",
+        "confirmedBy": null,
+        "confirmedAt": null,
+        "notesMd": "Confirmation required before implementation can ship changed broad reset behavior."
+      },
+      "relationships": {
+        "affectedRequirementIds": [
+          "jobs.filters.desired.modal-clear"
+        ],
+        "affectedMappingIds": [
+          "jobs.filters.mapping.modal-clear"
+        ],
+        "affectedFlowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ]
+      },
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.filters.pending.clear-confirmation-copy.md"
+      },
+      "db": {
+        "collection": "uxPendingDecisions",
+        "documentId": "jobs.filters.pending.clear-confirmation-copy"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

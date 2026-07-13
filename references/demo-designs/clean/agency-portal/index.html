@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recruiter Inbox — Scrub Society for Agencies</title>
+
+<!-- Design system tokens -->
+<style>/* ============================================================
+   Scrub Society — Design Tokens
+   Source of truth: ScrubSociety_BrandStandards.pdf (Spring 2026)
+   Usage: import once in your HTML/CSS root.
+   ============================================================ */
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/demo/assets/agency-portal-dea2e793.bin") format("truetype-variations"),
+       url("/demo/assets/agency-portal-dea2e793.bin") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------- BRAND COLOR — primary palette ---------------- */
+  /* Plum Grove — dominant background and hero color (40% of color use). */
+  --ss-plum-grove: #421A31;
+  /* Open Air — paper white (20% of color use). */
+  --ss-open-air: #FFFFFF;
+  /* Lavender Field — accent (15% of color use). */
+  --ss-lavender-field: #BBAFEF;
+
+  /* ---------------- BRAND COLOR — secondary palette ---------------- */
+  /* Backgrounds and buttons only. Never combined with Open Air in duotone — Soft Cloud + Open Air are the ONLY duotone pair. */
+  --ss-clear-sky:    #82ABF4;
+  --ss-morning-dew:  #CEDBFE;
+  --ss-soft-cloud:   #F9F2E8;
+
+  /* ---------------- DERIVED color states ---------------- */
+  /* All derived states use color-mix on the canonical brand values; no new hues invented. */
+  --ss-plum-grove-90: color-mix(in srgb, var(--ss-plum-grove) 90%, black);   /* press */
+  --ss-plum-grove-80: color-mix(in srgb, var(--ss-plum-grove) 80%, white);   /* hover-on-light surface */
+  --ss-plum-grove-60: color-mix(in srgb, var(--ss-plum-grove) 60%, white);
+  --ss-plum-grove-40: color-mix(in srgb, var(--ss-plum-grove) 40%, white);
+  --ss-plum-grove-20: color-mix(in srgb, var(--ss-plum-grove) 20%, white);   /* hairline tint */
+  --ss-plum-grove-08: color-mix(in srgb, var(--ss-plum-grove) 8%,  white);   /* faintest fill */
+
+  --ss-lavender-field-60: color-mix(in srgb, var(--ss-lavender-field) 60%, white);
+  --ss-lavender-field-30: color-mix(in srgb, var(--ss-lavender-field) 30%, white);
+  --ss-clear-sky-30:      color-mix(in srgb, var(--ss-clear-sky)      30%, white);
+  --ss-morning-dew-50:    color-mix(in srgb, var(--ss-morning-dew)    50%, white);
+
+  /* ---------------- SEMANTIC color tokens ---------------- */
+  /* Surfaces */
+  --ss-bg-page:     var(--ss-open-air);
+  --ss-bg-canvas:   var(--ss-soft-cloud);       /* warm paper, sparing — 5% */
+  --ss-bg-hero:     var(--ss-plum-grove);       /* dominant dark hero */
+  --ss-bg-card:     var(--ss-open-air);
+  --ss-bg-card-alt: var(--ss-soft-cloud);
+  --ss-bg-tint:     var(--ss-morning-dew);      /* soft secondary fill */
+  --ss-bg-accent:   var(--ss-lavender-field);   /* accent fill */
+  --ss-bg-info:     var(--ss-clear-sky);
+
+  /* Text — on light */
+  --ss-fg-1: var(--ss-plum-grove);                              /* primary body + heading */
+  --ss-fg-2: color-mix(in srgb, var(--ss-plum-grove) 72%, var(--ss-open-air));  /* muted */
+  --ss-fg-3: color-mix(in srgb, var(--ss-plum-grove) 50%, var(--ss-open-air));  /* very muted, captions */
+  --ss-fg-on-dark:        var(--ss-open-air);
+  --ss-fg-on-dark-muted:  color-mix(in srgb, var(--ss-open-air) 75%, var(--ss-plum-grove));
+
+  /* Lines & dividers */
+  --ss-line:       color-mix(in srgb, var(--ss-plum-grove) 12%, var(--ss-open-air));
+  --ss-line-soft:  color-mix(in srgb, var(--ss-plum-grove)  8%, var(--ss-open-air));
+  --ss-line-on-dark: color-mix(in srgb, var(--ss-open-air) 18%, transparent);
+
+  /* Interaction */
+  --ss-focus-ring: color-mix(in srgb, var(--ss-lavender-field) 60%, transparent);
+
+  /* ---------------- TYPOGRAPHY — family + weights ---------------- */
+  /* Only one typeface, two weights. */
+  --ss-font: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --ss-weight-light:   300;   /* body copy */
+  --ss-weight-regular: 400;   /* headlines, subheads, subtext */
+
+  /* ---------------- TYPOGRAPHY — scale ---------------- */
+  /* Mobile-first sizes; the type roles below define the role-to-step mapping. */
+  --ss-step-1:  0.75rem;    /* 12 */
+  --ss-step-2:  0.875rem;   /* 14 */
+  --ss-step-3:  1rem;       /* 16 */
+  --ss-step-4:  1.125rem;   /* 18 */
+  --ss-step-5:  1.375rem;   /* 22 */
+  --ss-step-6:  1.75rem;    /* 28 */
+  --ss-step-7:  2.25rem;    /* 36 */
+  --ss-step-8:  3rem;       /* 48 */
+  --ss-step-9:  4rem;       /* 64 */
+  --ss-step-10: 5.5rem;     /* 88 — hero display */
+
+  /* ---------------- SPACING ---------------- */
+  --ss-space-1:  4px;
+  --ss-space-2:  8px;
+  --ss-space-3:  12px;
+  --ss-space-4:  16px;
+  --ss-space-5:  24px;
+  --ss-space-6:  32px;
+  --ss-space-7:  48px;
+  --ss-space-8:  64px;
+  --ss-space-9:  96px;
+  --ss-space-10: 128px;
+
+  /* ---------------- RADII ---------------- */
+  /* Speech-bubble inspired: pill + photo-frame asymmetric pill (square bottom-left). */
+  --ss-radius-1:  6px;
+  --ss-radius-2:  12px;     /* default card */
+  --ss-radius-3:  20px;     /* large card */
+  --ss-radius-4:  32px;     /* hero element */
+  --ss-radius-pill:    9999px;
+  --ss-radius-photo:   28px 28px 28px 0;   /* speech-bubble photo frame */
+  --ss-radius-bubble:  9999px 9999px 9999px 0; /* full bubble — used for the S mark + chat tails */
+
+  /* ---------------- SHADOWS ---------------- */
+  /* Subtle; the brand is paper-flat, not glossy. */
+  --ss-shadow-1: 0 1px 2px color-mix(in srgb, var(--ss-plum-grove) 12%, transparent);
+  --ss-shadow-2: 0 6px 16px -8px color-mix(in srgb, var(--ss-plum-grove) 22%, transparent);
+  --ss-shadow-3: 0 18px 36px -16px color-mix(in srgb, var(--ss-plum-grove) 28%, transparent);
+  --ss-shadow-inset-hairline: inset 0 0 0 1px var(--ss-line);
+
+  /* ---------------- MOTION ---------------- */
+  --ss-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ss-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ss-dur-fast: 120ms;
+  --ss-dur-base: 220ms;
+  --ss-dur-slow: 400ms;
+}
+
+/* ---------------- ROLE-TO-STYLE — these are the canonical type roles. ----------------
+   Per brand standards (page 29):
+   - HEADLINE:  Outfit Regular,  tracking -40pt (≈ -0.04em), sentence case
+   - SUBHEAD:   Outfit Regular,  tracking  0pt,  ALL CAPS
+   - BODY COPY: Outfit Light,    tracking  0pt,  sentence case
+   - SUBTEXT:   Outfit Regular,  tracking  0pt,  lower case
+*/
+.ss-headline,
+.ss-h1, .ss-h2, .ss-h3, .ss-h4 {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: -0.04em;        /* -40pt tracking */
+  line-height: 1.04;
+  text-transform: none;           /* sentence case */
+  text-wrap: balance;
+  color: var(--ss-fg-1);
+  margin: 0;
+}
+.ss-h1 { font-size: clamp(2.5rem, 6vw + 0.5rem, var(--ss-step-10)); }
+.ss-h2 { font-size: clamp(2rem,   4vw + 0.5rem, var(--ss-step-8));  }
+.ss-h3 { font-size: clamp(1.5rem, 2.5vw + 0.5rem, var(--ss-step-7)); }
+.ss-h4 { font-size: clamp(1.25rem, 1.5vw + 0.5rem, var(--ss-step-6)); line-height: 1.15; }
+
+.ss-subhead {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+.ss-body, p.ss-body {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-light);    /* light = the body weight */
+  letter-spacing: 0;
+  line-height: 1.55;
+  font-size: var(--ss-step-3);
+  color: var(--ss-fg-1);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ss-body-sm { font-size: var(--ss-step-2); line-height: 1.5; }
+.ss-body-lg { font-size: var(--ss-step-4); line-height: 1.55; }
+
+.ss-subtext {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: lowercase;              /* lower case per spec */
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+/* On-dark variants */
+.ss-on-dark { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-body, .ss-on-dark .ss-headline,
+.ss-on-dark .ss-h1, .ss-on-dark .ss-h2, .ss-on-dark .ss-h3, .ss-on-dark .ss-h4 { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-subhead, .ss-on-dark .ss-subtext { color: var(--ss-fg-on-dark-muted); }
+
+/* Reset helpers */
+html, body { background: var(--ss-bg-page); color: var(--ss-fg-1); font-family: var(--ss-font); }
+*, *::before, *::after { box-sizing: border-box; }
+</style>
+<style>/* ============================================================
+   Scrub Society — Design Tokens
+   Source of truth: ScrubSociety_BrandStandards.pdf (Spring 2026)
+   Usage: import once in your HTML/CSS root.
+   ============================================================ */
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/demo/assets/agency-portal-8ca1a442.bin") format("truetype-variations"),
+       url("/demo/assets/agency-portal-8ca1a442.bin") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------- BRAND COLOR — primary palette ---------------- */
+  /* Plum Grove — dominant background and hero color (40% of color use). */
+  --ss-plum-grove: #421A31;
+  /* Open Air — paper white (20% of color use). */
+  --ss-open-air: #FFFFFF;
+  /* Lavender Field — accent (15% of color use). */
+  --ss-lavender-field: #BBAFEF;
+
+  /* ---------------- BRAND COLOR — secondary palette ---------------- */
+  /* Backgrounds and buttons only. Never combined with Open Air in duotone — Soft Cloud + Open Air are the ONLY duotone pair. */
+  --ss-clear-sky:    #82ABF4;
+  --ss-morning-dew:  #CEDBFE;
+  --ss-soft-cloud:   #F9F2E8;
+
+  /* ---------------- DERIVED color states ---------------- */
+  /* All derived states use color-mix on the canonical brand values; no new hues invented. */
+  --ss-plum-grove-90: color-mix(in srgb, var(--ss-plum-grove) 90%, black);   /* press */
+  --ss-plum-grove-80: color-mix(in srgb, var(--ss-plum-grove) 80%, white);   /* hover-on-light surface */
+  --ss-plum-grove-60: color-mix(in srgb, var(--ss-plum-grove) 60%, white);
+  --ss-plum-grove-40: color-mix(in srgb, var(--ss-plum-grove) 40%, white);
+  --ss-plum-grove-20: color-mix(in srgb, var(--ss-plum-grove) 20%, white);   /* hairline tint */
+  --ss-plum-grove-08: color-mix(in srgb, var(--ss-plum-grove) 8%,  white);   /* faintest fill */
+
+  --ss-lavender-field-60: color-mix(in srgb, var(--ss-lavender-field) 60%, white);
+  --ss-lavender-field-30: color-mix(in srgb, var(--ss-lavender-field) 30%, white);
+  --ss-clear-sky-30:      color-mix(in srgb, var(--ss-clear-sky)      30%, white);
+  --ss-morning-dew-50:    color-mix(in srgb, var(--ss-morning-dew)    50%, white);
+
+  /* ---------------- SEMANTIC color tokens ---------------- */
+  /* Surfaces */
+  --ss-bg-page:     var(--ss-open-air);
+  --ss-bg-canvas:   var(--ss-soft-cloud);       /* warm paper, sparing — 5% */
+  --ss-bg-hero:     var(--ss-plum-grove);       /* dominant dark hero */
+  --ss-bg-card:     var(--ss-open-air);
+  --ss-bg-card-alt: var(--ss-soft-cloud);
+  --ss-bg-tint:     var(--ss-morning-dew);      /* soft secondary fill */
+  --ss-bg-accent:   var(--ss-lavender-field);   /* accent fill */
+  --ss-bg-info:     var(--ss-clear-sky);
+
+  /* Text — on light */
+  --ss-fg-1: var(--ss-plum-grove);                              /* primary body + heading */
+  --ss-fg-2: color-mix(in srgb, var(--ss-plum-grove) 72%, var(--ss-open-air));  /* muted */
+  --ss-fg-3: color-mix(in srgb, var(--ss-plum-grove) 50%, var(--ss-open-air));  /* very muted, captions */
+  --ss-fg-on-dark:        var(--ss-open-air);
+  --ss-fg-on-dark-muted:  color-mix(in srgb, var(--ss-open-air) 75%, var(--ss-plum-grove));
+
+  /* Lines & dividers */
+  --ss-line:       color-mix(in srgb, var(--ss-plum-grove) 12%, var(--ss-open-air));
+  --ss-line-soft:  color-mix(in srgb, var(--ss-plum-grove)  8%, var(--ss-open-air));
+  --ss-line-on-dark: color-mix(in srgb, var(--ss-open-air) 18%, transparent);
+
+  /* Interaction */
+  --ss-focus-ring: color-mix(in srgb, var(--ss-lavender-field) 60%, transparent);
+
+  /* ---------------- TYPOGRAPHY — family + weights ---------------- */
+  /* Only one typeface, two weights. */
+  --ss-font: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --ss-weight-light:   300;   /* body copy */
+  --ss-weight-regular: 400;   /* headlines, subheads, subtext */
+
+  /* ---------------- TYPOGRAPHY — scale ---------------- */
+  /* Mobile-first sizes; the type roles below define the role-to-step mapping. */
+  --ss-step-1:  0.75rem;    /* 12 */
+  --ss-step-2:  0.875rem;   /* 14 */
+  --ss-step-3:  1rem;       /* 16 */
+  --ss-step-4:  1.125rem;   /* 18 */
+  --ss-step-5:  1.375rem;   /* 22 */
+  --ss-step-6:  1.75rem;    /* 28 */
+  --ss-step-7:  2.25rem;    /* 36 */
+  --ss-step-8:  3rem;       /* 48 */
+  --ss-step-9:  4rem;       /* 64 */
+  --ss-step-10: 5.5rem;     /* 88 — hero display */
+
+  /* ---------------- SPACING ---------------- */
+  --ss-space-1:  4px;
+  --ss-space-2:  8px;
+  --ss-space-3:  12px;
+  --ss-space-4:  16px;
+  --ss-space-5:  24px;
+  --ss-space-6:  32px;
+  --ss-space-7:  48px;
+  --ss-space-8:  64px;
+  --ss-space-9:  96px;
+  --ss-space-10: 128px;
+
+  /* ---------------- RADII ---------------- */
+  /* Speech-bubble inspired: pill + photo-frame asymmetric pill (square bottom-left). */
+  --ss-radius-1:  6px;
+  --ss-radius-2:  12px;     /* default card */
+  --ss-radius-3:  20px;     /* large card */
+  --ss-radius-4:  32px;     /* hero element */
+  --ss-radius-pill:    9999px;
+  --ss-radius-photo:   28px 28px 28px 0;   /* speech-bubble photo frame */
+  --ss-radius-bubble:  9999px 9999px 9999px 0; /* full bubble — used for the S mark + chat tails */
+
+  /* ---------------- SHADOWS ---------------- */
+  /* Subtle; the brand is paper-flat, not glossy. */
+  --ss-shadow-1: 0 1px 2px color-mix(in srgb, var(--ss-plum-grove) 12%, transparent);
+  --ss-shadow-2: 0 6px 16px -8px color-mix(in srgb, var(--ss-plum-grove) 22%, transparent);
+  --ss-shadow-3: 0 18px 36px -16px color-mix(in srgb, var(--ss-plum-grove) 28%, transparent);
+  --ss-shadow-inset-hairline: inset 0 0 0 1px var(--ss-line);
+
+  /* ---------------- MOTION ---------------- */
+  --ss-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ss-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ss-dur-fast: 120ms;
+  --ss-dur-base: 220ms;
+  --ss-dur-slow: 400ms;
+}
+
+/* ---------------- ROLE-TO-STYLE — these are the canonical type roles. ----------------
+   Per brand standards (page 29):
+   - HEADLINE:  Outfit Regular,  tracking -40pt (≈ -0.04em), sentence case
+   - SUBHEAD:   Outfit Regular,  tracking  0pt,  ALL CAPS
+   - BODY COPY: Outfit Light,    tracking  0pt,  sentence case
+   - SUBTEXT:   Outfit Regular,  tracking  0pt,  lower case
+*/
+.ss-headline,
+.ss-h1, .ss-h2, .ss-h3, .ss-h4 {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: -0.04em;        /* -40pt tracking */
+  line-height: 1.04;
+  text-transform: none;           /* sentence case */
+  text-wrap: balance;
+  color: var(--ss-fg-1);
+  margin: 0;
+}
+.ss-h1 { font-size: clamp(2.5rem, 6vw + 0.5rem, var(--ss-step-10)); }
+.ss-h2 { font-size: clamp(2rem,   4vw + 0.5rem, var(--ss-step-8));  }
+.ss-h3 { font-size: clamp(1.5rem, 2.5vw + 0.5rem, var(--ss-step-7)); }
+.ss-h4 { font-size: clamp(1.25rem, 1.5vw + 0.5rem, var(--ss-step-6)); line-height: 1.15; }
+
+.ss-subhead {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+.ss-body, p.ss-body {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-light);    /* light = the body weight */
+  letter-spacing: 0;
+  line-height: 1.55;
+  font-size: var(--ss-step-3);
+  color: var(--ss-fg-1);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ss-body-sm { font-size: var(--ss-step-2); line-height: 1.5; }
+.ss-body-lg { font-size: var(--ss-step-4); line-height: 1.55; }
+
+.ss-subtext {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: lowercase;              /* lower case per spec */
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+/* On-dark variants */
+.ss-on-dark { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-body, .ss-on-dark .ss-headline,
+.ss-on-dark .ss-h1, .ss-on-dark .ss-h2, .ss-on-dark .ss-h3, .ss-on-dark .ss-h4 { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-subhead, .ss-on-dark .ss-subtext { color: var(--ss-fg-on-dark-muted); }
+
+/* Reset helpers */
+html, body { background: var(--ss-bg-page); color: var(--ss-fg-1); font-family: var(--ss-font); }
+*, *::before, *::after { box-sizing: border-box; }
+</style>
+<style>/* ============================================================
+   Scrub Society — Design Tokens
+   Source of truth: ScrubSociety_BrandStandards.pdf (Spring 2026)
+   Usage: import once in your HTML/CSS root.
+   ============================================================ */
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/demo/assets/agency-portal-215e6fec.bin") format("truetype-variations"),
+       url("/demo/assets/agency-portal-215e6fec.bin") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------- BRAND COLOR — primary palette ---------------- */
+  /* Plum Grove — dominant background and hero color (40% of color use). */
+  --ss-plum-grove: #421A31;
+  /* Open Air — paper white (20% of color use). */
+  --ss-open-air: #FFFFFF;
+  /* Lavender Field — accent (15% of color use). */
+  --ss-lavender-field: #BBAFEF;
+
+  /* ---------------- BRAND COLOR — secondary palette ---------------- */
+  /* Backgrounds and buttons only. Never combined with Open Air in duotone — Soft Cloud + Open Air are the ONLY duotone pair. */
+  --ss-clear-sky:    #82ABF4;
+  --ss-morning-dew:  #CEDBFE;
+  --ss-soft-cloud:   #F9F2E8;
+
+  /* ---------------- DERIVED color states ---------------- */
+  /* All derived states use color-mix on the canonical brand values; no new hues invented. */
+  --ss-plum-grove-90: color-mix(in srgb, var(--ss-plum-grove) 90%, black);   /* press */
+  --ss-plum-grove-80: color-mix(in srgb, var(--ss-plum-grove) 80%, white);   /* hover-on-light surface */
+  --ss-plum-grove-60: color-mix(in srgb, var(--ss-plum-grove) 60%, white);
+  --ss-plum-grove-40: color-mix(in srgb, var(--ss-plum-grove) 40%, white);
+  --ss-plum-grove-20: color-mix(in srgb, var(--ss-plum-grove) 20%, white);   /* hairline tint */
+  --ss-plum-grove-08: color-mix(in srgb, var(--ss-plum-grove) 8%,  white);   /* faintest fill */
+
+  --ss-lavender-field-60: color-mix(in srgb, var(--ss-lavender-field) 60%, white);
+  --ss-lavender-field-30: color-mix(in srgb, var(--ss-lavender-field) 30%, white);
+  --ss-clear-sky-30:      color-mix(in srgb, var(--ss-clear-sky)      30%, white);
+  --ss-morning-dew-50:    color-mix(in srgb, var(--ss-morning-dew)    50%, white);
+
+  /* ---------------- SEMANTIC color tokens ---------------- */
+  /* Surfaces */
+  --ss-bg-page:     var(--ss-open-air);
+  --ss-bg-canvas:   var(--ss-soft-cloud);       /* warm paper, sparing — 5% */
+  --ss-bg-hero:     var(--ss-plum-grove);       /* dominant dark hero */
+  --ss-bg-card:     var(--ss-open-air);
+  --ss-bg-card-alt: var(--ss-soft-cloud);
+  --ss-bg-tint:     var(--ss-morning-dew);      /* soft secondary fill */
+  --ss-bg-accent:   var(--ss-lavender-field);   /* accent fill */
+  --ss-bg-info:     var(--ss-clear-sky);
+
+  /* Text — on light */
+  --ss-fg-1: var(--ss-plum-grove);                              /* primary body + heading */
+  --ss-fg-2: color-mix(in srgb, var(--ss-plum-grove) 72%, var(--ss-open-air));  /* muted */
+  --ss-fg-3: color-mix(in srgb, var(--ss-plum-grove) 50%, var(--ss-open-air));  /* very muted, captions */
+  --ss-fg-on-dark:        var(--ss-open-air);
+  --ss-fg-on-dark-muted:  color-mix(in srgb, var(--ss-open-air) 75%, var(--ss-plum-grove));
+
+  /* Lines & dividers */
+  --ss-line:       color-mix(in srgb, var(--ss-plum-grove) 12%, var(--ss-open-air));
+  --ss-line-soft:  color-mix(in srgb, var(--ss-plum-grove)  8%, var(--ss-open-air));
+  --ss-line-on-dark: color-mix(in srgb, var(--ss-open-air) 18%, transparent);
+
+  /* Interaction */
+  --ss-focus-ring: color-mix(in srgb, var(--ss-lavender-field) 60%, transparent);
+
+  /* ---------------- TYPOGRAPHY — family + weights ---------------- */
+  /* Only one typeface, two weights. */
+  --ss-font: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --ss-weight-light:   300;   /* body copy */
+  --ss-weight-regular: 400;   /* headlines, subheads, subtext */
+
+  /* ---------------- TYPOGRAPHY — scale ---------------- */
+  /* Mobile-first sizes; the type roles below define the role-to-step mapping. */
+  --ss-step-1:  0.75rem;    /* 12 */
+  --ss-step-2:  0.875rem;   /* 14 */
+  --ss-step-3:  1rem;       /* 16 */
+  --ss-step-4:  1.125rem;   /* 18 */
+  --ss-step-5:  1.375rem;   /* 22 */
+  --ss-step-6:  1.75rem;    /* 28 */
+  --ss-step-7:  2.25rem;    /* 36 */
+  --ss-step-8:  3rem;       /* 48 */
+  --ss-step-9:  4rem;       /* 64 */
+  --ss-step-10: 5.5rem;     /* 88 — hero display */
+
+  /* ---------------- SPACING ---------------- */
+  --ss-space-1:  4px;
+  --ss-space-2:  8px;
+  --ss-space-3:  12px;
+  --ss-space-4:  16px;
+  --ss-space-5:  24px;
+  --ss-space-6:  32px;
+  --ss-space-7:  48px;
+  --ss-space-8:  64px;
+  --ss-space-9:  96px;
+  --ss-space-10: 128px;
+
+  /* ---------------- RADII ---------------- */
+  /* Speech-bubble inspired: pill + photo-frame asymmetric pill (square bottom-left). */
+  --ss-radius-1:  6px;
+  --ss-radius-2:  12px;     /* default card */
+  --ss-radius-3:  20px;     /* large card */
+  --ss-radius-4:  32px;     /* hero element */
+  --ss-radius-pill:    9999px;
+  --ss-radius-photo:   28px 28px 28px 0;   /* speech-bubble photo frame */
+  --ss-radius-bubble:  9999px 9999px 9999px 0; /* full bubble — used for the S mark + chat tails */
+
+  /* ---------------- SHADOWS ---------------- */
+  /* Subtle; the brand is paper-flat, not glossy. */
+  --ss-shadow-1: 0 1px 2px color-mix(in srgb, var(--ss-plum-grove) 12%, transparent);
+  --ss-shadow-2: 0 6px 16px -8px color-mix(in srgb, var(--ss-plum-grove) 22%, transparent);
+  --ss-shadow-3: 0 18px 36px -16px color-mix(in srgb, var(--ss-plum-grove) 28%, transparent);
+  --ss-shadow-inset-hairline: inset 0 0 0 1px var(--ss-line);
+
+  /* ---------------- MOTION ---------------- */
+  --ss-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ss-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ss-dur-fast: 120ms;
+  --ss-dur-base: 220ms;
+  --ss-dur-slow: 400ms;
+}
+
+/* ---------------- ROLE-TO-STYLE — these are the canonical type roles. ----------------
+   Per brand standards (page 29):
+   - HEADLINE:  Outfit Regular,  tracking -40pt (≈ -0.04em), sentence case
+   - SUBHEAD:   Outfit Regular,  tracking  0pt,  ALL CAPS
+   - BODY COPY: Outfit Light,    tracking  0pt,  sentence case
+   - SUBTEXT:   Outfit Regular,  tracking  0pt,  lower case
+*/
+.ss-headline,
+.ss-h1, .ss-h2, .ss-h3, .ss-h4 {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: -0.04em;        /* -40pt tracking */
+  line-height: 1.04;
+  text-transform: none;           /* sentence case */
+  text-wrap: balance;
+  color: var(--ss-fg-1);
+  margin: 0;
+}
+.ss-h1 { font-size: clamp(2.5rem, 6vw + 0.5rem, var(--ss-step-10)); }
+.ss-h2 { font-size: clamp(2rem,   4vw + 0.5rem, var(--ss-step-8));  }
+.ss-h3 { font-size: clamp(1.5rem, 2.5vw + 0.5rem, var(--ss-step-7)); }
+.ss-h4 { font-size: clamp(1.25rem, 1.5vw + 0.5rem, var(--ss-step-6)); line-height: 1.15; }
+
+.ss-subhead {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+.ss-body, p.ss-body {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-light);    /* light = the body weight */
+  letter-spacing: 0;
+  line-height: 1.55;
+  font-size: var(--ss-step-3);
+  color: var(--ss-fg-1);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ss-body-sm { font-size: var(--ss-step-2); line-height: 1.5; }
+.ss-body-lg { font-size: var(--ss-step-4); line-height: 1.55; }
+
+.ss-subtext {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: lowercase;              /* lower case per spec */
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+/* On-dark variants */
+.ss-on-dark { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-body, .ss-on-dark .ss-headline,
+.ss-on-dark .ss-h1, .ss-on-dark .ss-h2, .ss-on-dark .ss-h3, .ss-on-dark .ss-h4 { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-subhead, .ss-on-dark .ss-subtext { color: var(--ss-fg-on-dark-muted); }
+
+/* Reset helpers */
+html, body { background: var(--ss-bg-page); color: var(--ss-fg-1); font-family: var(--ss-font); }
+*, *::before, *::after { box-sizing: border-box; }
+</style>
+
+<style>
+  html, body { margin: 0; height: 100%; background: #F1ECEF; overflow: hidden; }
+  #root { height: 100%; }
+  * { box-sizing: border-box; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(66,26,49,0.16); border-radius: 9999px; border: 3px solid transparent; background-clip: padding-box; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(66,26,49,0.28); background-clip: padding-box; }
+  textarea::placeholder, input::placeholder { color: rgba(66,26,49,0.42); }
+  button { font: inherit; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+
+
+<!-- React (pinned) -->
+<script src="src/d16e1619.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="vendor/cf90a2d4.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+
+<!-- Scrub Society design system bundle (plain JS — defines window primitives) -->
+<script src="vendor/5d0a5b3f.js"></script>
+
+<!-- Babel -->
+<script src="vendor/312497a5.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Portal app -->
+<script type="text/babel" src="src/b99be290.js"></script>
+<script type="text/babel" src="src/2c7bc945.js"></script>
+<script type="text/babel" src="src/1fc10b25.jsx"></script>
+<script type="text/babel" src="src/3d88c4cc.js"></script>
+<script type="text/babel" src="src/b710da11.js"></script>
+<script type="text/babel" src="src/df235bd8.js"></script>
+<script type="text/babel" src="src/3f51db08.js"></script>
+<script type="text/babel" src="src/d6169f8e.js"></script>
+<script type="text/babel">
+  const App = window.PortalApp;
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<App />);
+</script>
+
+
+</body></html>

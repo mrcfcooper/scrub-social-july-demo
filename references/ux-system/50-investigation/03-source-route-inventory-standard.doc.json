@@ -1,0 +1,71 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.source-route-inventory-standard",
+  "title": "Source Route Inventory Standard",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines the deterministic route inventory agents must create before runtime UX observation so every route, dynamic pattern, layout chain, and exclusion is visible.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "inventoryScope": {
+    "root": "frontend/app",
+    "include": [
+      "directories that compile to UI routes through page files",
+      "static route segments",
+      "dynamic route segments",
+      "catch-all route segments",
+      "optional catch-all route segments",
+      "route groups as metadata",
+      "layout files as route metadata",
+      "not-found and error-adjacent UI when user-visible"
+    ],
+    "excludeFromCompiledRouteRows": [
+      "api route handlers",
+      "underscore-prefixed folders",
+      "shared/internal folders that do not compile as app routes"
+    ],
+    "recordAsExclusions": [
+      "underscore-prefixed folders under app",
+      "route-like folders skipped because they do not compile",
+      "API routes excluded from UX route audit scope"
+    ]
+  },
+  "requiredRouteMetadata": [
+    "routeId",
+    "routePattern",
+    "sourcePath",
+    "routeKind",
+    "routeGroups",
+    "rawSegments",
+    "visibleUrlSegments",
+    "dynamicParams",
+    "catchAllParams",
+    "layoutChain",
+    "compileInclusion",
+    "auditStatus",
+    "exclusionReason",
+    "notesMd"
+  ],
+  "rules": [
+    "The route inventory is the first audit control surface.",
+    "Dynamic and catch-all patterns must be represented even when concrete runtime values are unknown.",
+    "Route groups must be preserved as metadata but must not add URL segments.",
+    "Underscore folders are intentionally excluded from compiled route UX scope and must have exclusion records.",
+    "The existing app-route-slug generator may be used as reference only; it is not the audit source of truth if it omits dynamic routes.",
+    "The inventory must be stable and sorted so future diffs show meaningful route changes.",
+    "Source/runtime behavior discovered during inventory must be routed to the relevant App Behavior row, shared spec, behavior thread/parent container, runtime drift row, pending decision, ideal/future record, or explicit bounded gap.",
+    "The route inventory is not final behavior authority. It may carry evidence, but App Behavior remains the durable destination for behavior truth."
+  ],
+  "plannedScript": {
+    "path": "frontend/scripts/ux-audit/generate-route-inventory.cjs",
+    "output": "frontend/agent-plans/full-app-ux-audit/data/generated-route-inventory.json",
+    "runtime": "dependency-free CommonJS",
+    "notImplementedInThisPass": true
+  }
+}

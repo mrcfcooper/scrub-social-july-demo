@@ -1,0 +1,96 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.00-file-and-folder-structure",
+  "title": "File And Folder Structure",
+  "content": [
+    {
+      "id": "file-and-folder-structure-body-1",
+      "body": "This document exists to define the recommended production layout for UX JSON corpuses. Use it when creating module, submodule, implied-submodule, or shared App Behavior specs that need to be scriptable, reviewable, and database-compatible."
+    },
+    {
+      "id": "recommended-corpus-layout",
+      "title": "Recommended Corpus Layout",
+      "body": [
+        "Use this structure for a coherent UX owner:",
+        "",
+        "```text",
+        "docs/ux/<surface-or-submodule>/",
+        "  README.md",
+        "  ux-corpus.json",
+        "  current/",
+        "    journeys.ux.json",
+        "    flows.ux.json",
+        "    requirements.ux.json",
+        "    scenarios.ux.json",
+        "    gaps.ux.json",
+        "  desired/",
+        "    journeys.ux.json",
+        "    flows.ux.json",
+        "    requirements.ux.json",
+        "    scenarios.ux.json",
+        "    acceptance.ux.json",
+        "  mappings/",
+        "    current-to-desired.ux-mappings.json",
+        "    pending-decisions.ux-mappings.json",
+        "  generated/",
+        "    current/",
+        "    desired/",
+        "    mappings/",
+        "```",
+        "",
+        "`ux-corpus.json` is the manifest. It should identify the corpus owner, governing JSON files, generated review outputs, split/compose policy, and related parent or child corpuses."
+      ]
+    },
+    {
+      "id": "recursive-owner-folder-default",
+      "title": "Recursive Owner Folder Default",
+      "body": [
+        "UX/App Behavior storage defaults to recursive owner folders. When creating a module, submodule, implied-submodule, shared behavior, generated-output, proof, or validation artifact home, create or use the smallest durable owner folder that can grow with related files.",
+        "",
+        "Runtime/source files governed or planned from App Behavior still follow the root and engineering runtime ownership rules. Components, hooks, services, adapters, controllers, scripts, configs, fixtures, tests, generated-output homes, and implementation helpers should be routed to the smallest durable source owner folder, and file-level tests should be colocated with the exact file they test.",
+        "",
+        "This applies even when v1 has only one file. Do not create a flat shared behavior or UX artifact file in a broad parent folder merely because the first version is small.",
+        "",
+        "Owner folders should carry a README, manifest, index, or equivalent routing surface when they are durable. Parent folders route and index; child owner folders contain the behavior substance and related evidence/proof artifacts.",
+        "",
+        "Flat files are allowed only for root locators/indexes, compatibility-required paths, existing legacy compatibility files, temporary scratch output, or truly standalone artifacts where recursion adds no ownership, routing, lifecycle, proof, or expansion value."
+      ]
+    },
+    {
+      "id": "authoring-default",
+      "title": "Authoring Default",
+      "body": [
+        "Use collection files by default because they are easier to review and manage:",
+        "",
+        "```text",
+        "desired/requirements.ux.json",
+        "```",
+        "",
+        "Each item inside the collection must still be portable. A script should be able to split one item into a smaller JSON file or compose several item files back into a collection without changing meaning."
+      ]
+    },
+    {
+      "id": "split-file-compatibility",
+      "title": "Split File Compatibility",
+      "body": [
+        "Split files should keep the same item schema:",
+        "",
+        "```text",
+        "desired/requirements/jobs.filters.modal.apply.ux-requirement.json",
+        "```",
+        "",
+        "Do not invent a different schema for split files. File layout is a storage choice, not a semantic model."
+      ]
+    },
+    {
+      "id": "generated-markdown",
+      "title": "Generated Markdown",
+      "body": "Generated Markdown belongs under `generated/` and is review-only. It should name the governing JSON source and state that manual edits will be overwritten."
+    },
+    {
+      "id": "shared-ux-fallback",
+      "title": "Shared UX Fallback",
+      "body": "Place App Behavior corpuses inside the owning module or implied submodule when possible. Use shared UX folders only when no clear module or submodule owner exists."
+    }
+  ]
+}

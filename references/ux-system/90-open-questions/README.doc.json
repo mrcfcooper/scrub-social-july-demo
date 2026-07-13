@@ -1,0 +1,60 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.90-open-questions.README",
+  "title": "Open Questions",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for future UX schema system questions that should not block v1 adoption.",
+        "Audience: Agents and engineers extending the UX schema system after initial documentation.",
+        "Keep In Sync With: Decision records, schema files, generator work, and DB/admin UI implementation.",
+        "Update When: Open questions are answered, new questions appear, or future work is converted into durable docs.",
+        "Does Not Cover: Active product intent for any specific feature.",
+        "-->"
+      ]
+    },
+    {
+      "id": "open-questions",
+      "title": "Open Questions",
+      "depth": 1,
+      "body": [
+        "This folder captures future iteration notes that should not block the current UX schema system.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Future Iteration Notes](00-future-iteration-notes.md)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when a UX-system question is unresolved, deferred, or being considered for future iteration.",
+        "",
+        "Route by task:",
+        "- Read future-iteration notes when deciding whether a question is still open, deferred, answered elsewhere, or ready for promotion into a decision artifact.",
+        "- Classify unresolved questions as open gaps, future scope, non-blocking follow-ups, or blockers according to the active roadmap or `.core.*` route.",
+        "",
+        "Open questions are not App Behavior, product, source, architecture, implementation, or proof authority. They must not be used to invent behavior.",
+        "",
+        "Stop when the agent can state the unresolved question, its current classification, what authority could resolve it, and whether it blocks the current task."
+      ]
+    }
+  ]
+}

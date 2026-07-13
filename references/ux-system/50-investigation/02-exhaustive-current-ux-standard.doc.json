@@ -1,0 +1,92 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.exhaustive-current-standard",
+  "title": "Exhaustive Current UX Standard",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines what exhaustive means when agents document existing UX so future refactors can rely on the corpus instead of rediscovering behavior from runtime or source code.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "requiredCoverageAreas": [
+    "routes",
+    "layouts",
+    "app shells",
+    "providers with user-visible effects",
+    "screens",
+    "sections",
+    "subscreens",
+    "modals",
+    "drawers",
+    "popovers",
+    "forms",
+    "fields",
+    "validation",
+    "submit/apply/save behavior",
+    "reset/cancel/discard behavior",
+    "lists",
+    "tables",
+    "grids",
+    "cards",
+    "action clusters",
+    "loading states",
+    "empty states",
+    "error states",
+    "stale states",
+    "dirty states",
+    "invalid states",
+    "success states",
+    "auth redirects",
+    "role behavior",
+    "protected-route behavior",
+    "session expiration",
+    "deep-link behavior",
+    "navigation and back/forward behavior",
+    "persistence and restore behavior",
+    "confirmation behavior",
+    "recovery behavior",
+    "all user-visible conditional behavior"
+  ],
+  "missingExpectedBasics": {
+    "rule": "Do not document obvious generic UX existence when it exists normally; do document missing expected basics as explicit gaps.",
+    "examples": [
+      "required field lacks validation",
+      "invalid value can be submitted",
+      "submit action remains enabled during invalid or in-flight state",
+      "error appears without recovery path",
+      "dirty edits can be lost without confirmation when user expectation says they should not",
+      "empty state lacks usable next action",
+      "auth loss produces unclear routing or no recovery",
+      "loading state has no visible status for a blocking operation"
+    ],
+    "requiredFieldsForGapRows": [
+      "gapId",
+      "surfaceRef",
+      "expectedBasic",
+      "observedAbsence",
+      "userImpact",
+      "recommendation",
+      "confidence",
+      "confirmationRequired"
+    ]
+  },
+  "exhaustivenessRules": [
+    "Every compiled route must have a route inventory row and coverage status.",
+    "Every route with UI must have at least one surface decomposition row.",
+    "Every meaningful surface must have runtime observation or documented reason runtime observation is blocked.",
+    "Every hidden UX lane that can affect users must have an inventory row.",
+    "Every meaningful observed behavior must map to a UX hierarchy object or be explicitly marked intentionally omitted.",
+    "Every unknown or unclear behavior must become a pending decision, needs-proof row, or unknown coverage row."
+  ],
+  "nonGoals": [
+    "Do not create desired UX redesigns during current UX investigation.",
+    "Do not document implementation state management details.",
+    "Do not document every pixel or visual decoration unless it affects user meaning, accessibility, interaction, or proof.",
+    "Do not duplicate the same behavior across multiple governing rows."
+  ]
+}

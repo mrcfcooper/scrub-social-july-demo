@@ -1,0 +1,88 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.method",
+  "title": "UX Investigation Method",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines the ordered, repeatable method agents use to move from source inventory to exhaustive current UX capture without skipping hidden branches or inventing desired behavior.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "orderedMethod": [
+    {
+      "step": 1,
+      "id": "source-route-inventory",
+      "title": "Source Route Inventory",
+      "output": "generated-route-inventory.json",
+      "summary": "Generate or manually create a deterministic inventory of compiled frontend routes, route patterns, layout chains, and excluded route-like folders."
+    },
+    {
+      "step": 2,
+      "id": "route-surface-decomposition",
+      "title": "Route And Surface Decomposition",
+      "output": "surface-decomposition.json",
+      "summary": "Break each route into layouts, shells, screens, sections, subscreens, dialogs, drawers, forms, lists, cards, action groups, and supporting controls."
+    },
+    {
+      "step": 3,
+      "id": "runtime-observation",
+      "title": "Runtime Observation",
+      "output": "runtime-observations.json",
+      "summary": "Manually observe the route and surface behavior users can see, including states, transitions, validation, recovery, navigation, permissions, and content behavior."
+    },
+    {
+      "step": 4,
+      "id": "source-traversal-hidden-branches",
+      "title": "Source Traversal For Hidden Branches",
+      "output": "hidden-ux-inventory.json",
+      "summary": "Inspect source for conditional UX that may not appear in a single runtime pass, including auth, role gates, redirects, readiness, empty states, error branches, feature flags, and deep-link behavior."
+    },
+    {
+      "step": 5,
+      "id": "ux-hierarchy-classification",
+      "title": "UX Hierarchy Classification",
+      "output": "surface-decomposition.json",
+      "summary": "Assign discovered behavior to feature, subfeature, implied subfeature, journey, flow, subflow, requirement, observable scenario, acceptance criterion, or pending decision."
+    },
+    {
+      "step": 6,
+      "id": "current-requirement-capture",
+      "title": "Current UX Requirement Capture",
+      "output": "current-ux-requirements.json",
+      "summary": "Convert meaningful observed behavior into current UX requirement items without treating current behavior as desired behavior."
+    },
+    {
+      "step": 7,
+      "id": "observable-scenario-capture",
+      "title": "Observable Scenario Capture",
+      "output": "observable-scenarios.json",
+      "summary": "Capture loading, empty, error, invalid, dirty, stale, auth, permission, success, restore, and recovery situations when they affect user-visible behavior."
+    },
+    {
+      "step": 8,
+      "id": "coverage-indexing",
+      "title": "Coverage Indexing",
+      "output": "coverage-index.json",
+      "summary": "Create coverage rows for routes, surfaces, hidden lanes, requirements, scenarios, and acceptance criteria so missing branches are visible."
+    },
+    {
+      "step": 9,
+      "id": "pending-decision-routing",
+      "title": "Pending Decision Routing",
+      "output": "pending-decisions.json",
+      "summary": "Route unresolved product intent, desired behavior, ownership, missing expected basics, suspected accidental behavior, and proof gaps into explicit pending decisions."
+    }
+  ],
+  "rules": [
+    "Do not start runtime observation before the route/source inventory exists.",
+    "Do not treat route discovery as complete when dynamic routes or excluded underscore folders have not been accounted for.",
+    "Do not author desired UX while current UX is still being discovered unless the user explicitly requests desired UX decisions.",
+    "Continue capturing known current UX even when some branches remain pending or unknown.",
+    "Every unresolved branch must be represented as coverage, pending decision, or intentionally omitted with rationale."
+  ]
+}

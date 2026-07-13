@@ -1,0 +1,104 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.11-schema-example-conformance",
+  "title": "Schema Example Conformance",
+  "content": [
+    {
+      "id": "schema-example-conformance-body-1",
+      "body": [
+        "This document exists to keep UX schemas, model docs, and examples aligned. Use it when adding or changing schemas, examples, generated Markdown expectations, or validation tooling.",
+        "",
+        "Syntax-valid JSON is necessary but not sufficient. A UX example should also demonstrate the schema's required fields, intended optional fields, reference behavior, and production authoring conventions."
+      ]
+    },
+    {
+      "id": "representative-example-rule",
+      "title": "Representative Example Rule",
+      "body": [
+        "Every durable UX schema should have at least one representative example.",
+        "",
+        "The example should:",
+        "",
+        "- use the schema's exact `schema` version",
+        "- use the expected `itemType` when applicable",
+        "- include every required field",
+        "- demonstrate the main content object for that artifact role",
+        "- use realistic IDs, owner, scope, mode, status, authority, and confidence",
+        "- show generated refs and DB metadata when relevant",
+        "- avoid implementation, controller, store, code-path, or raw state-management authority"
+      ]
+    },
+    {
+      "id": "required-field-coverage",
+      "title": "Required Field Coverage",
+      "body": [
+        "Examples must cover all required fields in the corresponding schema.",
+        "",
+        "If a required field is intentionally sparse, the example should still make the intended meaning clear. Do not satisfy required fields with placeholder text that hides an unresolved decision."
+      ]
+    },
+    {
+      "id": "optional-field-demonstration",
+      "title": "Optional Field Demonstration",
+      "body": [
+        "Examples should demonstrate optional fields when those fields are important to production use.",
+        "",
+        "For example:",
+        "",
+        "- package manifest examples should show omissions, blocked areas, governing artifacts, generated refs, and DB metadata",
+        "- requirement examples should show gates, source, change control, relationships, observable scenarios, and grouped assertions when relevant",
+        "- mapping examples should show recommendations, confirmation, consequences, implementation gates, and test gates",
+        "- coverage examples should show covered, pending, needs-confirmation, intentionally omitted, and proof-related rows",
+        "",
+        "Not every optional field needs to appear in every example."
+      ]
+    },
+    {
+      "id": "schema-to-example-mapping",
+      "title": "Schema-To-Example Mapping",
+      "body": [
+        "Schema indexes should make it easy to find the corresponding example for each schema.",
+        "",
+        "When a schema is added, update the example index or conformance notes so future agents know whether the schema has:",
+        "",
+        "- a minimal example",
+        "- a detailed example",
+        "- a collection example",
+        "- no example yet",
+        "",
+        "Missing examples should be treated as corpus debt, not as an invitation to invent a new shape."
+      ]
+    },
+    {
+      "id": "drift-detection",
+      "title": "Drift Detection",
+      "body": [
+        "Schema and example drift exists when:",
+        "",
+        "- an example uses a field not allowed by the schema",
+        "- an example omits a required field",
+        "- a model doc describes a field that no schema supports",
+        "- a schema supports a field that model docs do not explain",
+        "- generated Markdown guidance references old field names",
+        "- examples imply implementation authority where the UX system should stay UX-only",
+        "",
+        "Agents should fix drift when they change the affected schema or route the mismatch as open corpus debt."
+      ]
+    },
+    {
+      "id": "validation-expectations",
+      "title": "Validation Expectations",
+      "body": [
+        "Use JSON syntax validation for every pass.",
+        "",
+        "Every example should validate against its corresponding schema. Run the local validator from the repo root:",
+        "",
+        "```sh",
+        "node agent/ux-system/tools/validate-ux-system.cjs",
+        "```",
+        "",
+        "The validation pass checks JSON syntax, the current schema subset, collection envelope item conformance, and duplicate IDs within each file. Future tooling may add deeper reference integrity checks for missing refs, invalid mapping refs, and stale generated Markdown references."
+      ]
+    }
+  ]
+}

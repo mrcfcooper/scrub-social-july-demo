@@ -1,0 +1,133 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.query-api-dto-behavior",
+  "title": "Jobs Query API DTO Behavior",
+  "module": "jobs",
+  "proposedSubmodule": "api-interaction",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/api-interaction/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Jobs query behavior builds public jobs request DTOs, consumes public list response DTOs, normalizes job wires, maps errors, and projects pagination/result state for /jobs.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.query-api-dto-behavior",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "requestAndResponse": "Query commands build request params from canonical query state, URL/session filters, sort, pagination, map/location inputs, and applied filters. Response data jobs/pagination/message/appliedFilter are consumed by frontend normalizers and projected into replace/append result state with dedupe and error mapping.",
+        "routeOwnedParticipation": "/jobs owns user triggers and visible result states; shared API spec should own request/response DTO shape, normalization chain, backend authority references, and error/status mapping."
+      },
+      "sourceRefs": [
+        "frontend/modules/jobs/query/query/controller/internal/execution.ts",
+        "frontend/modules/jobs/query/query/controller/internal/store.ts",
+        "frontend/src-legacy/services/domain/filters.ts",
+        "frontend/src-legacy/services/publicJobsQuery.ts",
+        "frontend/src-legacy/services/domain/jobs.ts",
+        "frontend/src-legacy/hooks/jobs/fetch/useJobsListFetch.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/03-api-dto-inventory.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-jobs-list-request.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-jobs-list-response.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-job-wire-dto.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/applied-filter-dto.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/error-status-mappings/jobs-fetch-errors.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/jobs/query/query/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/query/query/controller/internal/store.test.ts",
+        "frontend/src-legacy/services/domain/filters.test.ts",
+        "frontend/src-legacy/services/publicJobsQuery.test.ts",
+        "frontend/src-legacy/services/domain/jobs.test.ts"
+      ],
+      "backendAuthorityRefs": [
+        "backend public jobs list endpoint contract as consumed by frontend wrappers"
+      ],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "proof:route.jobs.fetch-result-projection"
+      ],
+      "proofStatus": "source-and-vitest-covered-for-dense DTO/query paths; browser result transitions still rely on route proof gaps"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "current-ux-requirement:route.jobs.restore-and-query",
+        "coverage:route.jobs.data-states",
+        "coverage:route.jobs.pagination"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/jobs/query/query/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/query/query/controller/internal/store.test.ts",
+        "frontend/src-legacy/services/domain/filters.test.ts",
+        "frontend/src-legacy/services/publicJobsQuery.test.ts",
+        "frontend/src-legacy/services/domain/jobs.test.ts"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/jobs/query/query/controller/internal/execution.ts",
+    "frontend/modules/jobs/query/query/controller/internal/store.ts",
+    "frontend/src-legacy/services/domain/filters.ts",
+    "frontend/src-legacy/services/publicJobsQuery.ts",
+    "frontend/src-legacy/services/domain/jobs.ts",
+    "frontend/src-legacy/hooks/jobs/fetch/useJobsListFetch.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/03-api-dto-inventory.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-jobs-list-request.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-jobs-list-response.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-job-wire-dto.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/applied-filter-dto.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/error-status-mappings/jobs-fetch-errors.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/jobs/query/query/controller/internal/execution.test.ts",
+    "frontend/modules/jobs/query/query/controller/internal/store.test.ts",
+    "frontend/src-legacy/services/domain/filters.test.ts",
+    "frontend/src-legacy/services/publicJobsQuery.test.ts",
+    "frontend/src-legacy/services/domain/jobs.test.ts"
+  ],
+  "backendAuthorityRefs": [
+    "backend public jobs list endpoint contract as consumed by frontend wrappers"
+  ],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "proof:route.jobs.fetch-result-projection"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.12-reference-integrity",
+  "title": "Reference Integrity",
+  "content": [
+    {
+      "id": "reference-integrity-body-1",
+      "body": [
+        "This document exists to define how UX JSON items should reference each other without creating hidden gaps, duplicate authority, or broken hierarchy traces. Use it when authoring relationships, current-to-desired mappings, coverage indexes, pending decisions, or acceptance criteria.",
+        "",
+        "References are part of the UX source of truth. Broken or ambiguous refs should be treated as corpus drift."
+      ]
+    },
+    {
+      "id": "id-rules",
+      "title": "ID Rules",
+      "body": [
+        "IDs should be stable, readable, and unique within the repo or corpus namespace.",
+        "",
+        "Prefer dot-separated IDs that include the domain and behavior concept, such as:",
+        "",
+        "```text",
+        "jobs.filters.desired.modal-apply",
+        "```",
+        "",
+        "Do not make IDs depend on file location, generated Markdown path, implementation file path, or current component names."
+      ]
+    },
+    {
+      "id": "parent-and-child-refs",
+      "title": "Parent And Child Refs",
+      "body": [
+        "Hierarchy refs should support this trace where the corpus depth requires it:",
+        "",
+        "```text",
+        "feature -> subfeature -> journey -> flow -> subflow -> requirement -> observable scenario -> acceptance criterion",
+        "```",
+        "",
+        "Child items should point to their parent when the parent exists. Parent items may list children for navigation and review, but child-to-parent refs are the more important integrity path because split/compose workflows may move child files independently.",
+        "",
+        "If a child belongs under multiple parents, prefer creating a relationship ref and explain the primary governing parent. Do not duplicate the child as two governing items."
+      ]
+    },
+    {
+      "id": "relationship-refs",
+      "title": "Relationship Refs",
+      "body": [
+        "Relationship refs should describe UX meaning, not implementation dependency.",
+        "",
+        "Use relationship refs for:",
+        "",
+        "- parent/child hierarchy",
+        "- related requirements",
+        "- prerequisite UX behavior",
+        "- dependent UX behavior",
+        "- acceptance criteria",
+        "- pending decisions",
+        "- current/desired mapping links",
+        "- row-inline behaviorRelations field links",
+        "- runtime drift links",
+        "",
+        "Do not use relationship refs to encode controller imports, store ownership, hook composition, backend endpoints, or implementation sequencing."
+      ]
+    },
+    {
+      "id": "current-to-desired-mapping-refs",
+      "title": "Current-To-Desired Mapping Refs",
+      "body": [
+        "Mappings must support many-to-many relationships.",
+        "",
+        "Use arrays for both `currentRefs` and `desiredRefs`, even when the mapping is one-to-one, so split, merge, replacement, added, and removed behavior can use the same shape.",
+        "",
+        "Mapping refs should identify the relevant mode. A desired behavior change should not be inferred from a current row unless a mapping records the decision."
+      ]
+    },
+    {
+      "id": "coverage-refs",
+      "title": "Coverage Refs",
+      "body": [
+        "Coverage rows should reference the item they cover and, when relevant, the parent item that makes the coverage meaningful.",
+        "",
+        "Coverage should expose unresolved refs instead of hiding them. Use:",
+        "",
+        "- `missingChildren` for expected child branches that do not exist yet",
+        "- `pendingDecisionRefs` for unresolved behavior or confirmation",
+        "- `acceptanceCriterionRefs` for proof rows",
+        "- coverage statuses such as `missing`, `pending`, `needs-confirmation`, or `needs-proof`",
+        "",
+        "Do not mark a branch as `covered` when important child refs are missing."
+      ]
+    },
+    {
+      "id": "pending-decision-refs",
+      "title": "Pending Decision Refs",
+      "body": [
+        "Pending decisions should reference affected requirements, mappings, flows, subflows, observable scenarios, or acceptance criteria where practical.",
+        "",
+        "If a pending decision blocks implementation, the affected artifact should also expose that block through implementation gate or coverage status. Do not rely on the pending decision item alone."
+      ]
+    },
+    {
+      "id": "acceptance-criterion-refs",
+      "title": "Acceptance Criterion Refs",
+      "body": [
+        "Acceptance criteria should point to the behavior they prove.",
+        "",
+        "Prefer linking acceptance criteria to the lowest meaningful governing object:",
+        "",
+        "- requirement when proving a behavior concept",
+        "- observable scenario when proving a user-visible state",
+        "- subflow when proving a coherent user action sequence",
+        "- flow when the proof spans multiple subflows",
+        "",
+        "Do not create acceptance criteria that prove implementation details instead of UX behavior."
+      ]
+    },
+    {
+      "id": "broken-reference-handling",
+      "title": "Broken Reference Handling",
+      "body": [
+        "When an agent finds a broken, ambiguous, or duplicated reference, it should classify the issue as one of:",
+        "",
+        "- doc drift",
+        "- missing artifact",
+        "- pending ownership decision",
+        "- pending behavior decision",
+        "- intentionally omitted branch",
+        "- stale generated output",
+        "",
+        "The agent should fix the ref when the correct target is clear. If the correct target is not clear, it should route the issue through a pending decision or coverage row rather than guessing."
+      ]
+    }
+  ]
+}

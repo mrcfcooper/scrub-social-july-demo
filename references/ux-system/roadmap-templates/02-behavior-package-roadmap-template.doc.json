@@ -1,0 +1,53 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.02-behavior-package-roadmap-template",
+  "title": "Behavior Package Roadmap Template",
+  "content": [
+    {
+      "id": "non-authority-warning",
+      "title": "Non-Authority Warning",
+      "body": "This roadmap tracks behavior package planning. It does not replace behavior rows, schema rules, or governing App Behavior authority."
+    },
+    {
+      "id": "ordered-steps",
+      "title": "Ordered Steps",
+      "body": [
+        "1. Define package mission, owner, and scope.",
+        "2. Identify route/module/workflow behavior coverage.",
+        "3. Identify included facets, omitted facets, and allowed omissions.",
+        "4. Identify child roadmaps needed for current/desired/governing state, drift, and pending decisions.",
+        "5. Confirm package readiness for downstream architecture, implementation planning, or proof."
+      ]
+    },
+    {
+      "id": "review-before-moving-forward",
+      "title": "Review Before Moving Forward",
+      "body": [
+        "Each phase or meaningful subphase should populate `review_before_moving_forward` before moving on.",
+        "",
+        "Field shape:",
+        "- core_workflow: applicable `.core.*` workflow from `agent/core-workflows.doc.json`.",
+        "- standard_review: use the ordered review ladder from `agent/core-workflows.doc.json`.",
+        "- specific_review: active workstream docs, governing specs, source evidence, or local artifacts for this roadmap.",
+        "- stop_condition: what must be true before the next phase or subphase begins."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- status",
+        "- parent roadmap",
+        "- child roadmaps",
+        "- behavior package scope",
+        "- authority inputs",
+        "- derived summary",
+        "- included facets",
+        "- omitted facets",
+        "- confirmation gate",
+        "- stop condition",
+        "- review_before_moving_forward"
+      ]
+    }
+  ]
+}

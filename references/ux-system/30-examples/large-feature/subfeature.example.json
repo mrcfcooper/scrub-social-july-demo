@@ -1,0 +1,121 @@
+{
+  "schema": "tgn.ux-subfeature.v1",
+  "itemType": "uxSubfeature",
+  "id": "jobs.search.filters",
+  "title": "Jobs Search Filters",
+  "mode": "desired",
+  "status": "confirmed-governing",
+  "authority": "governing",
+  "confidence": 95,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "featureIds": [
+      "jobs.search"
+    ],
+    "surfaceIds": [
+      "filter-controls",
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "subfeature": {
+    "purpose": "Let users narrow Jobs results through understandable filter controls and reversible filter-editing actions.",
+    "userValue": "Users can shape the job list without losing confidence about what is currently active, pending, or cleared.",
+    "ownedSurfaces": [
+      "Filter entry controls",
+      "Advanced filter modal",
+      "Applied filter summary",
+      "Filter reset and recovery actions"
+    ],
+    "userGoals": [
+      "Open filtering controls from the Jobs search page.",
+      "Choose filter values that meaningfully narrow results.",
+      "Apply or discard filter edits intentionally.",
+      "Clear filters and return to broader browsing."
+    ],
+    "inScopeBehavior": [
+      "Filter authoring",
+      "Filter apply behavior",
+      "Filter clear/reset behavior",
+      "Filter summary behavior",
+      "Validation and recovery for filter input"
+    ],
+    "outOfScopeBehavior": [
+      "Results card rendering details unrelated to active filters.",
+      "Map marker behavior except where filter changes affect map results.",
+      "Job application workflow after selecting a job."
+    ],
+    "entryPoints": [
+      "User clicks Filters from Jobs search.",
+      "User opens a saved URL with active filters.",
+      "User returns to Jobs with filters already active."
+    ],
+    "exitPoints": [
+      "User applies filters and returns to results.",
+      "User discards edits and remains at prior results.",
+      "User clears filters and returns to broad browsing."
+    ],
+    "dependencies": [
+      "Jobs Search feature overview",
+      "Results browsing feedback",
+      "Empty results recovery"
+    ],
+    "constraints": [
+      "Filter UX must distinguish active browsing constraints from provisional edits.",
+      "Destructive or broad reset behavior must be explicit enough for users to understand."
+    ],
+    "nonGoals": [
+      "Define data fetching mechanics.",
+      "Define storage or state ownership.",
+      "Define unrelated results-card actions."
+    ]
+  },
+  "relationships": {
+    "parentFeatureId": "jobs.search",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "requirementIds": [
+      "jobs.filters.desired.modal-apply",
+      "jobs.filters.desired.modal-clear"
+    ],
+    "siblingSubfeatureIds": [
+      "jobs.search.results-browsing",
+      "jobs.search.map"
+    ]
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.search.filters.subfeature.md"
+  },
+  "db": {
+    "collection": "uxSubfeatures",
+    "documentId": "jobs.search.filters",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

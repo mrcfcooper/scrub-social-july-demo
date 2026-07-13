@@ -1,0 +1,109 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-shared-specs.07-provisional-shared-spec-standard",
+  "title": "Provisional Shared Spec Standard",
+  "content": [
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Defines how route agents record behavior-complete provisional shared App Behavior specs without chasing global shared ownership.",
+        "Audience: Agents and engineers performing route inventory, shared-surface reconciliation, and full App Behavior coverage closeout.",
+        "Keep In Sync With: App Behavior shared specs README, route inventory template, companion inventory template, proof closeout plan, and quality gate review.",
+        "Update When: Shared discovery homes, provisional spec lifecycle, route-completeness rules, or reconciliation responsibilities change.",
+        "Does Not Cover: Backend internals, runtime implementation, formal JSON schema enforcement, or route packet row schemas.",
+        "-->"
+      ]
+    },
+    {
+      "id": "provisional-shared-spec-standard",
+      "title": "Provisional Shared Spec Standard",
+      "depth": 1,
+      "body": [
+        "Use provisional shared specs when a route pass discovers behavior that is shared or likely shared, no confirmed shared spec is obvious, and the behavior is needed to close the current route. The provisional spec records the actual discovered behavior in a shared place so later routes can find it, append route-specific usage, and avoid re-recording the same App Behavior.",
+        "",
+        "A provisional shared spec is provisional only because final shared owner/home is unresolved. It must be complete for the discovering route's usage. It does not need to be globally complete across all possible routes."
+      ]
+    },
+    {
+      "id": "required-concepts",
+      "title": "Required Concepts",
+      "body": [
+        "- `provisional-shared-spec`: a behavior-complete shared record under `shared/{module}/provisional/` awaiting owner/home reconciliation.",
+        "- `owner-unconfirmed`: final shared owner/home is unresolved; behavior is still recorded for route use.",
+        "- `route-complete`: the behavior slice contains enough source, companion, proof, gap, and route-specific detail to preserve the discovering route's use without reopening source except accepted gaps.",
+        "- `global-completeness-not-claimed`: the spec does not claim all routes or all usages have contributed behavior slices.",
+        "- `behaviorSlices`: route-scoped contributions inside the shared spec. Each slice is append-only unless a later pass explicitly supersedes or corrects it with evidence.",
+        "- `participatingRoutes`: reverse route graph entries for each route that consumes, produces, delegates to, adapts, or proves the shared behavior.",
+        "- `reconciliation`: later shared cleanup that confirms owner/home, moves the spec, merges duplicates, splits by owner, normalizes route edges, marks stale/superseded entries, or accepts gaps."
+      ]
+    },
+    {
+      "id": "required-record-shape",
+      "title": "Required Record Shape",
+      "body": [
+        "A provisional shared spec should record at least:",
+        "",
+        "- `schema` and `inventoryType` identifying a provisional shared App Behavior spec.",
+        "- `id`, `title`, `module`, `proposedSubmodule`, `status: provisional-shared-spec`, and `ownerStatus: owner-unconfirmed`.",
+        "- `intendedFinalHome` or `ownerOptions` when known.",
+        "- `globalCompleteness.status: not-claimed` with a reason.",
+        "- `behaviorSlices` with at least one route-complete slice for the discovering route.",
+        "- `participatingRoutes` with at least one edge for the discovering route.",
+        "- `sourceRefs`, `companionInventoryRefs`, `proofRefs`, `backendAuthorityRefs`, `routeSpecificOverrides`, `openGaps`, and `reconciliation`."
+      ]
+    },
+    {
+      "id": "behavior-slice-requirements",
+      "title": "Behavior Slice Requirements",
+      "body": [
+        "Each behavior slice must be complete for the route that contributed it. Do not write a vague shared lead when the current route depends on the behavior.",
+        "",
+        "Each slice should include `id`, `routeRef`, `packetRef`, `routePacketPath`, `status: route-complete`, `behavior`, `sourceRefs`, `companionInventoryRefs`, `proofRefs`, `backendAuthorityRefs`, `routeSpecificOverrides`, `openGaps`, and `proofStatus`.",
+        "",
+        "Later route passes may append their own route-complete slices when they discover additional usage. They should not overwrite another route's slice unless they are correcting it with explicit evidence and preserving the correction history."
+      ]
+    },
+    {
+      "id": "participation-edge-requirements",
+      "title": "Participation Edge Requirements",
+      "body": [
+        "Every provisional shared spec must include a `participatingRoutes` edge for the discovering route. This edge is graph traceability, not behavior authority.",
+        "",
+        "Each edge should include `routeRef`, `packetRef`, `routePacketPath`, `discoveredIn`, `participationKind`, `routeSpecificRefs`, `routeSpecificOverrides`, `proofRefs`, and `status`.",
+        "",
+        "Use `status: observed` when a route pass discovered the shared behavior, `confirmed` after reconciliation validates the edge, `needs-reconciliation` when the edge or home needs cleanup, `stale` when source evidence may no longer apply, and `removed` when the route no longer participates."
+      ]
+    },
+    {
+      "id": "route-agent-limits",
+      "title": "Route Agent Limits",
+      "body": [
+        "Route agents should discover the shared behavior only as far as needed to close the current route. They should not inspect every possible route, build the complete shared route graph, or prove global shared completeness during a route pass.",
+        "",
+        "If another route later exposes additional shared behavior, that route appends a route-complete slice and participation edge. Shared reconciliation decides whether the combined spec is globally complete."
+      ]
+    },
+    {
+      "id": "reconciliation-lifecycle",
+      "title": "Reconciliation Lifecycle",
+      "body": [
+        "Allowed lifecycle outcomes are `provisional-shared-spec`, `confirmed-moved`, `governed-shared-spec`, `merged-into-existing`, `split-by-owner`, `superseded`, and `accepted-gap`.",
+        "",
+        "Confirmed specs should move out of `shared/{module}/provisional/` into the correct shared module/submodule folder. Reconciliation owns final owner selection, file movement, duplicate merge, owner split, route participation graph normalization, stale edge cleanup, and global completeness decisions."
+      ]
+    },
+    {
+      "id": "closeout-rule",
+      "title": "Closeout Rule",
+      "body": [
+        "A route pass can close with provisional shared behavior only when every shared behavior needed by the current route has a route-complete behavior slice, source/proof/gap status, and a participation edge.",
+        "",
+        "Route closeout must fail when shared behavior is only a vague candidate, missing the route's behavior slice, missing source or companion evidence, missing proof/gap status, or missing the route participation edge. Route closeout should not fail merely because final shared owner/home is unresolved or because other routes have not contributed slices.",
+        "",
+        "A rebuild-from-specs trial is the strongest validation that a provisional shared slice is sufficient for the discovering route. If the trial cannot reconstruct route behavior from the provisional slice and its referenced authorities, patch the shared slice, route packet, companion inventory, proof map, or accepted gap before claiming implementation-ready closure."
+      ]
+    }
+  ]
+}

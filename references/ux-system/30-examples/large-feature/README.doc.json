@@ -1,0 +1,63 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.30-examples.large-feature.README",
+  "title": "Large Feature Examples",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for detailed large-feature hierarchy examples using Jobs search and Jobs filters as the reference domain.",
+        "Audience: Agents and engineers creating complete App Behavior corpuses from feature overview down to acceptance criteria.",
+        "Keep In Sync With: Large feature hierarchy model docs and hierarchy item schemas.",
+        "Update When: Hierarchy schemas, required fields, or example conventions change.",
+        "Does Not Cover: Actual Jobs product authority or implementation status.",
+        "-->"
+      ]
+    },
+    {
+      "id": "large-feature-examples",
+      "title": "Large Feature Examples",
+      "depth": 1,
+      "body": [
+        "This folder shows how to model a large UX feature from high-level overview down to concrete proof rows. The examples are detailed enough to copy as templates.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Feature Overview](feature-overview.example.json)",
+        "2. [Subfeature](subfeature.example.json)",
+        "3. [Journey](journey.example.json)",
+        "4. [Flow](flow.example.json)",
+        "5. [Subflow](subflow.example.json)",
+        "6. [Observable Scenario](runtime-scenario.example.json)",
+        "7. [Acceptance Criterion](acceptance-criterion.example.json)",
+        "8. [Pending Decision](pending-decision.example.json)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this example area when the current task needs a reference for organizing or reasoning about large-feature App Behavior examples.",
+        "",
+        "Does not own target behavior, source authority, implementation details, or proof. Large-feature examples show structure and pattern only.",
+        "",
+        "Stop when the agent can state the large-feature pattern being borrowed, the target artifact it informs, and the target authority that must govern real behavior."
+      ]
+    }
+  ]
+}

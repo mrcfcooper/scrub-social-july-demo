@@ -1,0 +1,46 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.16-behavior-thread-parent-containers",
+  "title": "Behavior Thread Parent Containers",
+  "content": [
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Defines uxBehaviorThread as the parent-container model for grouping UX behavior rows and sibling behavior states.",
+        "Audience: Agents and engineers maintaining UX behavior specs, full-app route packets, behavior mappings, runtime drift, quality observations, and implementation-plan source-of-truth maps.",
+        "Keep In Sync With: ux-behavior-thread.schema.json, wrap-behavior-threads.cjs, shared UX definitions, UX guidance, and validation reports.",
+        "Update When: Behavior thread sections, child row grouping, migration safety rules, or parent-container rules change.",
+        "Does Not Cover: Runtime implementation, product behavior decisions, or generated Markdown rendering.",
+        "-->"
+      ]
+    },
+    {
+      "id": "behavior-thread-parent-containers",
+      "title": "Behavior Thread Parent Containers",
+      "depth": 1,
+      "body": "A `uxBehaviorThread` is the durable parent container for one UX behavior concept. It physically contains related child rows so agents and scripts can compare documented current, observed current, intended, desired, governing, drift, decisions, quality notes, evidence, proof, and audit context from one place."
+    },
+    {
+      "id": "authority-rule",
+      "title": "Authority Rule",
+      "body": "The parent container organizes child rows but does not redefine them. Child App Behavior rows remain the behavior/source truth. The parent should carry no confirmation, provenance, generated metadata, duplicated title, or authority prose; if a wrapper appears to say more than its child placement, remove the wrapper noise."
+    },
+    {
+      "id": "conceptual-sections",
+      "title": "Conceptual Sections",
+      "body": [
+        "- `behavior` contains behavior-state rows such as documented current, observed current, confirmed current, intended, desired, governing, proposed, pending confirmation, superseded, rejected, and out of scope.",
+        "- `relationships` contains mapping rows and exceptional sideways mappings across behavior threads.",
+        "- `issues` contains pending decisions, runtime drift, lightweight quality observations, and deeper quality assessments.",
+        "- `context` contains evidence, proof, and audit rows that support the thread without becoming behavior authority."
+      ]
+    },
+    {
+      "id": "migration-rule",
+      "title": "Migration Rule",
+      "body": "Behavior-thread migrations should wrap existing row objects in place. They must not create a generated sidecar thread index as the default and must not require row-local parent refs. Use dry-run checks, row counts, semantic fingerprints, unwrap comparisons, deterministic thread IDs, and idempotence checks before accepting a migration."
+    }
+  ]
+}

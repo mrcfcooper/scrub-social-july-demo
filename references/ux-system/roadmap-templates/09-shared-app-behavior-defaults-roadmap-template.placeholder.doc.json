@@ -1,0 +1,15 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.09-shared-app-behavior-defaults-roadmap-template-placeholder",
+  "title": "Shared App Behavior Defaults Roadmap Template Placeholder",
+  "content": [
+    { "id": "status", "title": "Status", "body": "placeholder" },
+    { "id": "purpose", "title": "Purpose", "body": "Would guide planning for reusable governed App Behavior defaults and shared specs." },
+    { "id": "already-decision-complete", "title": "Already Decision-Complete", "body": "The UX system recognizes shared specs and defaults as reusable App Behavior authority." },
+    { "id": "needs-clarity", "title": "Needs Clarity", "body": "Needs review of shared-spec/default model docs to distinguish defaults, shared specs, and target-specific behavior." },
+    { "id": "authority-to-review", "title": "Authority To Review", "body": "Review agent/ux-system/20-model/app-behavior-shared-specs/README.doc.json and app-behavior-defaults guidance before promotion." },
+    { "id": "promotion-criteria", "title": "Promotion Criteria", "body": "Promote when real shared-default planning repeats and the roadmap can prevent duplicate local behavior docs." },
+    { "id": "possible-outcomes", "title": "Possible Outcomes", "body": "Promote, merge into App Behavior roadmap, keep as appendix, or delete." },
+    { "id": "non-authority-warning", "title": "Non-Authority Warning", "body": "This placeholder is not authority." }
+  ]
+}

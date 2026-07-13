@@ -1,0 +1,100 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.03-current-desired-separation",
+  "title": "Current Desired Separation",
+  "content": [
+    {
+      "id": "current-desired-separation-body-1",
+      "body": "This document exists to define how App Behavior corpuses represent what exists today separately from what should govern implementation. Use it when auditing existing features, creating desired specs, or preparing a refactor from current behavior toward intended behavior."
+    },
+    {
+      "id": "current-ux",
+      "title": "Current UX",
+      "body": [
+        "Current UX captures what users experience today. It may come from runtime observation, existing docs, user reports, or prior behavior records. Distinguish documented current from observed current: documented current is what App Behavior docs previously said exists, while observed current is what runtime investigation, tests, or source traversal show now.",
+        "",
+        "Current UX is not automatically governing. It may be preserved, clarified, changed, removed, marked accidental, or left unresolved.",
+        "",
+        "Use current UX to answer:",
+        "",
+        "- What happens now?",
+        "- Which journeys and flows exist?",
+        "- Which behavior appears inconsistent or missing?",
+        "- Which expected basics are absent?",
+        "- How confident are we in the observation?"
+      ]
+    },
+    {
+      "id": "behavior-status-alignment",
+      "title": "Behavior Status Alignment",
+      "body": [
+        "Use the root behavior status vocabulary when current/desired separation is part of roadmap, implementation, proof, or closeout work.",
+        "`observed_runtime` maps to current evidence, not automatic governing intent.",
+        "`documented_current` maps to current behavior already captured in App Behavior.",
+        "`verified_current` maps to current behavior reconciled and proven for the relevant scope.",
+        "`intended_target` and `intended_change` map to desired/target behavior only when authority and proof requirements are explicit.",
+        "`ideal_future` and `out_of_scope_candidate` may be documented as future or non-current behavior, but they must not silently expand current implementation scope.",
+        "`runtime_drift` and `pending_decision` must be routed before implementation readiness if they affect the current scope."
+      ]
+    },
+    {
+      "id": "desired-ux",
+      "title": "Desired UX",
+      "body": [
+        "Desired UX captures what should govern implementation.",
+        "",
+        "Use desired UX to answer:",
+        "",
+        "- What should the user experience be?",
+        "- Which behaviors are confirmed?",
+        "- Which changes are approved?",
+        "- Which behavior is pending confirmation?",
+        "- What must implementation and tests prove?"
+      ]
+    },
+    {
+      "id": "same-schema-different-mode",
+      "title": "Same Schema, Different Mode",
+      "body": [
+        "Current and desired requirements use the same `uxRequirement` shape. The distinction is the `mode`, `status`, `authority`, and mapping relationship.",
+        "",
+        "Current:",
+        "",
+        "```json",
+        "{",
+        "  \"mode\": \"current\",",
+        "  \"authority\": \"observed-current\"",
+        "}",
+        "```",
+        "",
+        "Desired:",
+        "",
+        "```json",
+        "{",
+        "  \"mode\": \"desired\",",
+        "  \"authority\": \"governing\"",
+        "}",
+        "```"
+      ]
+    },
+    {
+      "id": "decision-boundary",
+      "title": "Decision Boundary",
+      "body": [
+        "Implementation should be built against desired governing UX. Current UX should inform desired UX, but it should not silently become the implementation target.",
+        "",
+        "When current and desired differ, a current-to-desired mapping must explain the decision, recommendation, confirmation status, and implementation gate."
+      ]
+    },
+    {
+      "id": "central-row-lifecycle-alignment",
+      "title": "Central Row Lifecycle Alignment",
+      "body": [
+        "Current and desired separation must preserve central App Behavior rows as the behavior authority.",
+        "Planning corpuses may include `central_app_behavior_row_snapshot` records only as non-governing cached full-row copies for orientation.",
+        "New observed current behavior, newly specified desired behavior, runtime drift, and replaced old behavior must update central rows or enter the corpus-wide `behavior_row_reconciliation_ledger` until applied, bounded, future-scoped, or blocked.",
+        "Audit, PR review, verification, proof, and closeout must use central rows directly, not cached snapshots."
+      ]
+    }
+  ]
+}

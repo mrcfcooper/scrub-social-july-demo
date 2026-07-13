@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Scrub Society — Mobile UI Kit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+  <style>
+    body { background: #d8d0c2; display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; min-height: 100vh; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      gap: 28px;
+      align-items: start;
+    }
+    .cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .cell-label { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 13px; color: #421A31;
+      text-transform: lowercase; letter-spacing: 0; }
+    @media (max-width: 1400px) { .grid { grid-template-columns: repeat(3, auto); } }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, auto); } }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+    .mini-frame {
+      width: 340px; height: 738px;
+      transform-origin: top center;
+    }
+    .frame-wrap {
+      width: 340px; height: 738px;
+      border-radius: 42px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(66,26,49,0.18), 0 0 0 1px rgba(66,26,49,0.12);
+      position: relative;
+      background: #000;
+    }
+    .dynamic-island {
+      position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+      width: 108px; height: 32px; border-radius: 20px; background: #000; z-index: 50;
+    }
+    .home-indicator {
+      position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%);
+      width: 118px; height: 4.5px; border-radius: 100px; background: rgba(66,26,49,0.28); z-index: 60;
+    }
+    .home-indicator.light { background: rgba(249,242,232,0.7); }
+    .inner { width: 100%; height: 100%; overflow: hidden; position: relative; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="OnboardingScreen.jsx"></script>
+  <script type="text/babel" src="FeedScreen.jsx"></script>
+  <script type="text/babel" src="JobsScreen.jsx"></script>
+  <script type="text/babel" src="CommunityScreen.jsx"></script>
+  <script type="text/babel" src="ProfileScreen.jsx"></script>
+
+  <script type="text/babel">
+    const Frame = ({ label, Screen, dark }) => (
+      <div className="cell" data-screen-label={label}>
+        <div className="frame-wrap">
+          <div className="dynamic-island" />
+          <div className="inner"><Screen /></div>
+          <div className={`home-indicator ${dark ? 'light' : ''}`} />
+        </div>
+        <div className="cell-label">{label}</div>
+      </div>
+    );
+
+    const App = () => (
+      <div className="grid">
+        <Frame label="01 Onboarding" Screen={OnboardingScreen} dark />
+        <Frame label="02 Feed" Screen={FeedScreen} />
+        <Frame label="03 Jobs" Screen={JobsScreen} />
+        <Frame label="04 Community" Screen={CommunityScreen} />
+        <Frame label="05 Profile" Screen={ProfileScreen} />
+      </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

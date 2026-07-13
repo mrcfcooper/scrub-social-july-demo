@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-behavior-thread.schema.json",
+  "title": "TGN UX Behavior Thread",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "behavior"
+      ]
+    },
+    {
+      "required": [
+        "relationships"
+      ]
+    },
+    {
+      "required": [
+        "issues"
+      ]
+    },
+    {
+      "required": [
+        "context"
+      ]
+    }
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-behavior-thread.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxBehaviorThread"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "behavior": {
+      "$ref": "#/$defs/behaviorRows"
+    },
+    "relationships": {
+      "$ref": "#/$defs/relationshipRows"
+    },
+    "issues": {
+      "$ref": "#/$defs/issueRows"
+    },
+    "context": {
+      "$ref": "#/$defs/contextRows"
+    }
+  },
+  "$defs": {
+    "rowArray": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "behaviorRows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "documentedCurrent": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "observedCurrent": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "confirmedCurrent": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "intended": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "desired": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "governing": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "proposed": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "pendingConfirmation": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "superseded": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "rejected": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "outOfScope": {
+          "$ref": "#/$defs/rowArray"
+        }
+      }
+    },
+    "relationshipRows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mappings": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "sidewaysMappings": {
+          "$ref": "#/$defs/rowArray"
+        }
+      }
+    },
+    "issueRows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pendingDecisions": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "runtimeDrift": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "qualityObservations": {
+          "$ref": "#/$defs/rowArray"
+        },
+        "qualityAssessments": {
+          "$ref": "#/$defs/rowArray"
+        }
+      }
+    },
+    "contextRows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sourceTrace": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "behaviorSurfaces": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "userActions": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "behaviorBranches": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "hiddenUx": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "rolePermissionBehavior": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "expectedBasics": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "behaviorMatrices": {
+              "$ref": "#/$defs/rowArray"
+            }
+          }
+        },
+        "proof": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "observableScenarios": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "acceptanceCriteria": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "coverageRows": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "rebuildReadiness": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "routeCompletionProof": {
+              "$ref": "#/$defs/rowArray"
+            }
+          }
+        },
+        "audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "phaseAudits": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "followUpItems": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "auditDebtItems": {
+              "$ref": "#/$defs/rowArray"
+            },
+            "otherRows": {
+              "$ref": "#/$defs/rowArray"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.classification-standard",
+  "title": "Investigation Classification Standard",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines how agents classify discovered UX into the UX system hierarchy so route observations become durable specs instead of loose notes.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "classificationTargets": [
+    {
+      "artifactRole": "feature",
+      "useWhen": "A broad product area or route family needs a high-level behavior owner."
+    },
+    {
+      "artifactRole": "subfeature",
+      "useWhen": "A smaller coherent UX surface has its own user goals, flows, validation, or proof needs."
+    },
+    {
+      "artifactRole": "implied-subfeature",
+      "useWhen": "Behavior has a clear UX owner even if the codebase does not have a matching physical submodule."
+    },
+    {
+      "artifactRole": "journey",
+      "useWhen": "A user goal crosses one or more flows or requires context, motivation, success, hesitation, or recovery modeling."
+    },
+    {
+      "artifactRole": "flow",
+      "useWhen": "A coherent path has entry, happy path, alternates, blocked states, and exit behavior."
+    },
+    {
+      "artifactRole": "subflow",
+      "useWhen": "A reusable or proof-worthy part of a flow needs its own requirements."
+    },
+    {
+      "artifactRole": "requirement",
+      "useWhen": "A meaningful user-visible behavior needs to be specified as current, desired, proposed, or pending."
+    },
+    {
+      "artifactRole": "observable-scenario",
+      "useWhen": "A runtime/user-visible situation changes behavior, options, recovery, or proof expectations."
+    },
+    {
+      "artifactRole": "acceptance-criterion",
+      "useWhen": "A behavior must be proven through manual or automated validation."
+    },
+    {
+      "artifactRole": "pending-decision",
+      "useWhen": "A missing product, behavior, ownership, or proof decision cannot be safely derived."
+    },
+    {
+      "artifactRole": "coverage-row",
+      "useWhen": "A branch must be tracked as covered, missing, pending, omitted, out of scope, needs confirmation, or needs proof."
+    }
+  ],
+  "rules": [
+    "Prefer the smallest coherent UX owner that makes behavior discoverable.",
+    "Use implied subfeatures when UX ownership is real but code folders do not reflect it.",
+    "Do not create duplicate governing rows for the same behavior concept.",
+    "A route can contain multiple features or subfeatures; a feature can span multiple routes.",
+    "When classification is unclear, create a pending ownership/classification decision rather than hiding ambiguity."
+  ]
+}

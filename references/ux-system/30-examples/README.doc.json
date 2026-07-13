@@ -1,0 +1,102 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.30-examples.README",
+  "title": "Examples",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for valid JSON examples that demonstrate the UX schema system with Jobs filters as the reference domain.",
+        "Audience: Agents and engineers learning, testing, validating, or generating UX JSON artifacts.",
+        "Keep In Sync With: JSON Schema files and model docs.",
+        "Update When: Required fields, enum values, example conventions, or schema versions change.",
+        "Does Not Cover: Actual Jobs product authority or implementation status.",
+        "-->"
+      ]
+    },
+    {
+      "id": "examples",
+      "title": "Examples",
+      "depth": 1,
+      "body": [
+        "This folder contains fully fleshed JSON examples. They use Jobs filters as a reference domain, but they are schema examples only and do not govern the Jobs product.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Spec Package Manifest](spec-package-manifest.example.json)",
+        "2. [Coverage Index](coverage-index.example.json)",
+        "3. [Current UX Requirement](current-ux-requirement.example.json)",
+        "4. [Desired UX Requirement](desired-ux-requirement.example.json)",
+        "5. [Current To Desired Mapping](current-to-desired-mapping.example.json)",
+        "6. [Grouped Interaction Requirement](grouped-interaction-requirement.example.json)",
+        "7. [Large Feature Examples](large-feature/README.md)",
+        "8. [Jobs Filters Collection Example](jobs-filters-collection/README.md)",
+        "",
+        "- `behavior-mapping.example.json` shows generalized behavior relationship mapping.",
+        "- `runtime-drift.example.json` shows a non-blocking row-inline runtimeAlignment field.",
+        "- `requirement-with-behavior-relations.example.json` shows requirement-local behavior relationship refs.",
+        "- `requirement-with-quality-assessment.example.json` shows row-inline uxQualityAssessment, runtimeAlignment, and behaviorRelations fields."
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this corpus when:",
+        "- learning schema-conformant UX/App Behavior examples without treating examples as product authority",
+        "",
+        "Does not own:",
+        "- actual Jobs product behavior",
+        "- implementation status",
+        "- architecture decisions",
+        "",
+        "Read first:",
+        "- this README",
+        "- spec-package-manifest.example.json and coverage-index.example.json for package shape",
+        "",
+        "Route deeper to:",
+        "- large-feature/README.doc.json for large feature examples",
+        "- jobs-filters-collection/README.doc.json for collection examples",
+        "- individual example JSON files for specific schema shapes",
+        "",
+        "Common cross-routes:",
+        "- 20-model/README.doc.json for concepts behind examples",
+        "- 10-schemas/README.doc.json for validation",
+        "- tools/README.doc.json for validation command",
+        "",
+        "Stop when:",
+        "- the agent understands the reusable schema/example pattern without importing example facts into target authority"
+      ]
+    },
+    {
+      "id": "route-intent-guidance",
+      "title": "Route Intent Guidance",
+      "body": [
+        "Use examples by example type and route through child READMEs before opening example leaf docs.",
+        "",
+        "- For jobs-filters collection examples, read `jobs-filters-collection/README.doc.json` first.",
+        "- For large-feature examples, read `large-feature/README.doc.json` first.",
+        "- Use direct example files only after confirming the child README says they match the current authoring or audit task.",
+        "",
+        "Examples are reference patterns only. They do not provide target App Behavior, source, product, architecture, implementation, or proof authority.",
+        "",
+        "Stop when the agent can state which example family applies, which child README to read next, and what target authority must replace example facts."
+      ]
+    }
+  ]
+}

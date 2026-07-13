@@ -1,0 +1,110 @@
+{
+  "schema": "tgn.ux-pending-decision.v1",
+  "itemType": "uxPendingDecision",
+  "id": "jobs.filters.pending.clear-confirmation-copy",
+  "title": "Confirm exact Clear Filters confirmation copy",
+  "mode": "desired",
+  "status": "pending-confirmation",
+  "authority": "pending-confirmation",
+  "confidence": 80,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.narrow-results"
+    ],
+    "flowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ],
+    "subflowIds": [
+      "jobs.filters.clear-filters"
+    ],
+    "surfaceIds": [
+      "advanced-filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ]
+  },
+  "decision": {
+    "question": "Should the Clear Filters confirmation copy explicitly say that active Jobs results will broaden after confirmation?",
+    "whyItMatters": "The action changes active browse constraints, so vague confirmation copy could make users think only modal-local edits are being cleared.",
+    "decisionNeededBy": "Before marking the desired Clear Filters behavior as confirmed governing.",
+    "blockedBehavior": [
+      "Exact confirmation copy cannot be marked governing.",
+      "Implementation may proceed only with non-governing placeholder copy if behavior is otherwise confirmed."
+    ],
+    "options": [
+      {
+        "id": "explicit-browse-reset",
+        "summary": "Use copy that explicitly says active filters will be cleared and results will broaden.",
+        "tradeoffsMd": "Best for clarity, but slightly longer confirmation text."
+      },
+      {
+        "id": "short-action-copy",
+        "summary": "Use short copy that only asks whether the user wants to clear filters.",
+        "tradeoffsMd": "More concise, but easier to confuse with modal-local cleanup."
+      }
+    ],
+    "consequencesIfUnresolved": [
+      "Exact copy remains non-governing.",
+      "Generated review docs should show the copy decision as pending.",
+      "Tests should avoid asserting exact confirmation text until confirmed."
+    ]
+  },
+  "recommendation": {
+    "summary": "Use explicit browse-reset confirmation copy.",
+    "confidence": 80,
+    "rationaleMd": "The copy should resolve the main ambiguity between modal-local cleanup and active browse reset.",
+    "alternatives": [
+      {
+        "summary": "Use short action copy.",
+        "tradeoffsMd": "Acceptable only if the surrounding UI already makes the reset scope obvious."
+      }
+    ],
+    "consequencesMd": "If accepted, mark exact confirmation copy as governing for the Clear Filters requirement."
+  },
+  "confirmation": {
+    "required": true,
+    "status": "pending",
+    "confirmedBy": null,
+    "confirmedAt": null,
+    "notesMd": "This pending decision governs exact copy only, not the broader Clear Filters behavior."
+  },
+  "relationships": {
+    "affectedRequirementIds": [
+      "jobs.filters.desired.modal-clear"
+    ],
+    "affectedMappingIds": [
+      "jobs.filters.mapping.modal-clear"
+    ],
+    "affectedFlowIds": [
+      "jobs.filters.advanced-filter-authoring"
+    ]
+  },
+  "generatedRefs": {
+    "markdown": "generated/desired/jobs.filters.pending.clear-confirmation-copy.md"
+  },
+  "db": {
+    "collection": "uxPendingDecisions",
+    "documentId": "jobs.filters.pending.clear-confirmation-copy",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "desired"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+  }
+}

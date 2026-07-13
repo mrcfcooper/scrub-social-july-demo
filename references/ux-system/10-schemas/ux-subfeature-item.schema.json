@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-subfeature-item.schema.json",
+  "title": "TGN UX Subfeature Item",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "title",
+    "mode",
+    "status",
+    "authority",
+    "confidence",
+    "owner",
+    "scope",
+    "subfeature",
+    "relationships",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-subfeature.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxSubfeature"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "$ref": "shared-definitions.schema.json#/$defs/mode"
+    },
+    "status": {
+      "$ref": "shared-definitions.schema.json#/$defs/status"
+    },
+    "authority": {
+      "$ref": "shared-definitions.schema.json#/$defs/authority"
+    },
+    "confidence": {
+      "$ref": "shared-definitions.schema.json#/$defs/confidence"
+    },
+    "owner": {
+      "$ref": "shared-definitions.schema.json#/$defs/owner"
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "subfeature": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "userValue",
+        "ownedSurfaces",
+        "userGoals",
+        "inScopeBehavior",
+        "outOfScopeBehavior",
+        "entryPoints",
+        "exitPoints",
+        "dependencies",
+        "constraints",
+        "nonGoals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "userValue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownedSurfaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inScopeBehavior": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outOfScopeBehavior": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "entryPoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exitPoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nonGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": [
+        "parentFeatureId",
+        "journeyIds",
+        "flowIds",
+        "requirementIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "parentFeatureId": {
+          "type": "string"
+        },
+        "journeyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flowIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "siblingSubfeatureIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    },
+    "uxQualityAssessment": {
+      "$ref": "shared-definitions.schema.json#/$defs/uxQualityAssessment"
+    },
+    "runtimeAlignment": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignment"
+    },
+    "behaviorRelations": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorRelations"
+    }
+  }
+}

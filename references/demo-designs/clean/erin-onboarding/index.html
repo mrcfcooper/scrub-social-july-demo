@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erin Onboarding · TSS-1116</title>
+
+<style>/* ============================================================
+   Scrub Society — Design Tokens
+   Source of truth: ScrubSociety_BrandStandards.pdf (Spring 2026)
+   Usage: import once in your HTML/CSS root.
+   ============================================================ */
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/demo/assets/erin-onboarding-6408c145.bin") format("truetype-variations"),
+       url("/demo/assets/erin-onboarding-6408c145.bin") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------- BRAND COLOR — primary palette ---------------- */
+  /* Plum Grove — dominant background and hero color (40% of color use). */
+  --ss-plum-grove: #421A31;
+  /* Open Air — paper white (20% of color use). */
+  --ss-open-air: #FFFFFF;
+  /* Lavender Field — accent (15% of color use). */
+  --ss-lavender-field: #BBAFEF;
+
+  /* ---------------- BRAND COLOR — secondary palette ---------------- */
+  /* Backgrounds and buttons only. Never combined with Open Air in duotone — Soft Cloud + Open Air are the ONLY duotone pair. */
+  --ss-clear-sky:    #82ABF4;
+  --ss-morning-dew:  #CEDBFE;
+  --ss-soft-cloud:   #F9F2E8;
+
+  /* ---------------- DERIVED color states ---------------- */
+  /* All derived states use color-mix on the canonical brand values; no new hues invented. */
+  --ss-plum-grove-90: color-mix(in srgb, var(--ss-plum-grove) 90%, black);   /* press */
+  --ss-plum-grove-80: color-mix(in srgb, var(--ss-plum-grove) 80%, white);   /* hover-on-light surface */
+  --ss-plum-grove-60: color-mix(in srgb, var(--ss-plum-grove) 60%, white);
+  --ss-plum-grove-40: color-mix(in srgb, var(--ss-plum-grove) 40%, white);
+  --ss-plum-grove-20: color-mix(in srgb, var(--ss-plum-grove) 20%, white);   /* hairline tint */
+  --ss-plum-grove-08: color-mix(in srgb, var(--ss-plum-grove) 8%,  white);   /* faintest fill */
+
+  --ss-lavender-field-60: color-mix(in srgb, var(--ss-lavender-field) 60%, white);
+  --ss-lavender-field-30: color-mix(in srgb, var(--ss-lavender-field) 30%, white);
+  --ss-clear-sky-30:      color-mix(in srgb, var(--ss-clear-sky)      30%, white);
+  --ss-morning-dew-50:    color-mix(in srgb, var(--ss-morning-dew)    50%, white);
+
+  /* ---------------- SEMANTIC color tokens ---------------- */
+  /* Surfaces */
+  --ss-bg-page:     var(--ss-open-air);
+  --ss-bg-canvas:   var(--ss-soft-cloud);       /* warm paper, sparing — 5% */
+  --ss-bg-hero:     var(--ss-plum-grove);       /* dominant dark hero */
+  --ss-bg-card:     var(--ss-open-air);
+  --ss-bg-card-alt: var(--ss-soft-cloud);
+  --ss-bg-tint:     var(--ss-morning-dew);      /* soft secondary fill */
+  --ss-bg-accent:   var(--ss-lavender-field);   /* accent fill */
+  --ss-bg-info:     var(--ss-clear-sky);
+
+  /* Text — on light */
+  --ss-fg-1: var(--ss-plum-grove);                              /* primary body + heading */
+  --ss-fg-2: color-mix(in srgb, var(--ss-plum-grove) 72%, var(--ss-open-air));  /* muted */
+  --ss-fg-3: color-mix(in srgb, var(--ss-plum-grove) 50%, var(--ss-open-air));  /* very muted, captions */
+  --ss-fg-on-dark:        var(--ss-open-air);
+  --ss-fg-on-dark-muted:  color-mix(in srgb, var(--ss-open-air) 75%, var(--ss-plum-grove));
+
+  /* Lines & dividers */
+  --ss-line:       color-mix(in srgb, var(--ss-plum-grove) 12%, var(--ss-open-air));
+  --ss-line-soft:  color-mix(in srgb, var(--ss-plum-grove)  8%, var(--ss-open-air));
+  --ss-line-on-dark: color-mix(in srgb, var(--ss-open-air) 18%, transparent);
+
+  /* Interaction */
+  --ss-focus-ring: color-mix(in srgb, var(--ss-lavender-field) 60%, transparent);
+
+  /* ---------------- TYPOGRAPHY — family + weights ---------------- */
+  /* Only one typeface, two weights. */
+  --ss-font: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --ss-weight-light:   300;   /* body copy */
+  --ss-weight-regular: 400;   /* headlines, subheads, subtext */
+
+  /* ---------------- TYPOGRAPHY — scale ---------------- */
+  /* Mobile-first sizes; the type roles below define the role-to-step mapping. */
+  --ss-step-1:  0.75rem;    /* 12 */
+  --ss-step-2:  0.875rem;   /* 14 */
+  --ss-step-3:  1rem;       /* 16 */
+  --ss-step-4:  1.125rem;   /* 18 */
+  --ss-step-5:  1.375rem;   /* 22 */
+  --ss-step-6:  1.75rem;    /* 28 */
+  --ss-step-7:  2.25rem;    /* 36 */
+  --ss-step-8:  3rem;       /* 48 */
+  --ss-step-9:  4rem;       /* 64 */
+  --ss-step-10: 5.5rem;     /* 88 — hero display */
+
+  /* ---------------- SPACING ---------------- */
+  --ss-space-1:  4px;
+  --ss-space-2:  8px;
+  --ss-space-3:  12px;
+  --ss-space-4:  16px;
+  --ss-space-5:  24px;
+  --ss-space-6:  32px;
+  --ss-space-7:  48px;
+  --ss-space-8:  64px;
+  --ss-space-9:  96px;
+  --ss-space-10: 128px;
+
+  /* ---------------- RADII ---------------- */
+  /* Speech-bubble inspired: pill + photo-frame asymmetric pill (square bottom-left). */
+  --ss-radius-1:  6px;
+  --ss-radius-2:  12px;     /* default card */
+  --ss-radius-3:  20px;     /* large card */
+  --ss-radius-4:  32px;     /* hero element */
+  --ss-radius-pill:    9999px;
+  --ss-radius-photo:   28px 28px 28px 0;   /* speech-bubble photo frame */
+  --ss-radius-bubble:  9999px 9999px 9999px 0; /* full bubble — used for the S mark + chat tails */
+
+  /* ---------------- SHADOWS ---------------- */
+  /* Subtle; the brand is paper-flat, not glossy. */
+  --ss-shadow-1: 0 1px 2px color-mix(in srgb, var(--ss-plum-grove) 12%, transparent);
+  --ss-shadow-2: 0 6px 16px -8px color-mix(in srgb, var(--ss-plum-grove) 22%, transparent);
+  --ss-shadow-3: 0 18px 36px -16px color-mix(in srgb, var(--ss-plum-grove) 28%, transparent);
+  --ss-shadow-inset-hairline: inset 0 0 0 1px var(--ss-line);
+
+  /* ---------------- MOTION ---------------- */
+  --ss-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ss-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ss-dur-fast: 120ms;
+  --ss-dur-base: 220ms;
+  --ss-dur-slow: 400ms;
+}
+
+/* ---------------- ROLE-TO-STYLE — these are the canonical type roles. ----------------
+   Per brand standards (page 29):
+   - HEADLINE:  Outfit Regular,  tracking -40pt (≈ -0.04em), sentence case
+   - SUBHEAD:   Outfit Regular,  tracking  0pt,  ALL CAPS
+   - BODY COPY: Outfit Light,    tracking  0pt,  sentence case
+   - SUBTEXT:   Outfit Regular,  tracking  0pt,  lower case
+*/
+.ss-headline,
+.ss-h1, .ss-h2, .ss-h3, .ss-h4 {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: -0.04em;        /* -40pt tracking */
+  line-height: 1.04;
+  text-transform: none;           /* sentence case */
+  text-wrap: balance;
+  color: var(--ss-fg-1);
+  margin: 0;
+}
+.ss-h1 { font-size: clamp(2.5rem, 6vw + 0.5rem, var(--ss-step-10)); }
+.ss-h2 { font-size: clamp(2rem,   4vw + 0.5rem, var(--ss-step-8));  }
+.ss-h3 { font-size: clamp(1.5rem, 2.5vw + 0.5rem, var(--ss-step-7)); }
+.ss-h4 { font-size: clamp(1.25rem, 1.5vw + 0.5rem, var(--ss-step-6)); line-height: 1.15; }
+
+.ss-subhead {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+.ss-body, p.ss-body {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-light);    /* light = the body weight */
+  letter-spacing: 0;
+  line-height: 1.55;
+  font-size: var(--ss-step-3);
+  color: var(--ss-fg-1);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ss-body-sm { font-size: var(--ss-step-2); line-height: 1.5; }
+.ss-body-lg { font-size: var(--ss-step-4); line-height: 1.55; }
+
+.ss-subtext {
+  font-family: var(--ss-font);
+  font-weight: var(--ss-weight-regular);
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: lowercase;              /* lower case per spec */
+  font-size: var(--ss-step-2);
+  color: var(--ss-fg-2);
+  margin: 0;
+}
+
+/* On-dark variants */
+.ss-on-dark { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-body, .ss-on-dark .ss-headline,
+.ss-on-dark .ss-h1, .ss-on-dark .ss-h2, .ss-on-dark .ss-h3, .ss-on-dark .ss-h4 { color: var(--ss-fg-on-dark); }
+.ss-on-dark .ss-subhead, .ss-on-dark .ss-subtext { color: var(--ss-fg-on-dark-muted); }
+
+/* Reset helpers */
+html, body { background: var(--ss-bg-page); color: var(--ss-fg-1); font-family: var(--ss-font); }
+*, *::before, *::after { box-sizing: border-box; }
+</style>
+
+<script src="src/623073ce.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="vendor/045deeda.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="vendor/dfdae70b.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="vendor/a4f7afea.js"></script>
+<script src="src/9db54c16.js"></script>
+
+<style>
+  html, body { margin: 0; background: #ECE8E1; color: var(--ss-plum-grove); font-family: var(--ss-font); }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 40px 28px 100px; }
+  .eyebrow { font-weight: 400; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(66,26,49,0.55); }
+  .board-h1 { font-weight: 400; letter-spacing: -0.04em; line-height: 1.02; font-size: 44px; margin: 8px 0 0; color: var(--ss-plum-grove); }
+  .lede { font-weight: 300; font-size: 17px; line-height: 1.55; color: rgba(66,26,49,0.72); max-width: 720px; margin: 14px 0 0; }
+  .section-label { font-weight: 400; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(66,26,49,0.5); margin: 0 0 4px; }
+  .section-title { font-weight: 400; letter-spacing: -0.03em; font-size: 26px; margin: 0; color: var(--ss-plum-grove); }
+  .section-note { font-weight: 300; font-size: 14.5px; color: rgba(66,26,49,0.62); margin: 8px 0 0; max-width: 660px; line-height: 1.5; }
+  .sec { margin-top: 56px; }
+  .frame-label { font-weight: 400; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(66,26,49,0.55); margin: 12px 0 0; display: flex; align-items: center; gap: 6px; }
+  .dot { width: 7px; height: 7px; border-radius: 9999px; background: #BBAFEF; flex: 0 0 auto; }
+  .storyboard { display: flex; flex-wrap: wrap; gap: 26px 22px; margin-top: 22px; }
+  .frame-cell { display: flex; flex-direction: column; }
+  .hero-card { background: #fff; border-radius: 28px; padding: 28px; box-shadow: 0 1px 0 rgba(66,26,49,0.06), inset 0 0 0 1px rgba(66,26,49,0.08); display: inline-flex; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 20px; }
+  .legend span { font-weight: 300; font-size: 13px; color: rgba(66,26,49,0.7); display: inline-flex; align-items: center; gap: 7px; }
+  .anno-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 22px; }
+  .anno { background: #fff; border-radius: 20px; padding: 22px 22px 6px; box-shadow: inset 0 0 0 1px rgba(66,26,49,0.1); }
+  .anno h4 { font-weight: 400; letter-spacing: -0.02em; font-size: 17px; margin: 0 0 4px; }
+  .anno .kicker { font-weight: 400; font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(66,26,49,0.5); }
+  .anno ul { list-style: none; margin: 14px 0 0; padding: 0; }
+  .anno li { font-weight: 300; font-size: 14px; line-height: 1.5; color: rgba(66,26,49,0.85); padding: 12px 0; border-top: 1px solid rgba(66,26,49,0.08); }
+  .anno li b { font-weight: 400; }
+  .anno li .tag { font-weight: 400; color: var(--ss-plum-grove); background: #CEDBFE; border-radius: 9999px; padding: 1px 8px; font-size: 12px; }
+  .map-row { display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
+  .map-row .to { font-weight: 400; color: rgba(66,26,49,0.6); font-size: 12.5px; text-align: right; white-space: nowrap; }
+  .desk-scaler { margin-top: 22px; }
+  @keyframes erinTyping { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+  .erin-typing-dot { animation: erinTyping 1s infinite ease-in-out; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="src/d28d3c84.js"></script>
+<script type="text/babel" src="src/6dbd213d.js"></script>
+
+<script type="text/babel">
+const { useRef, useState, useEffect } = React;
+
+function DeskScaler({ children, natural = 1180, height = 800 }) {
+  const ref = useRef(null);
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const fit = () => {
+      const w = ref.current ? ref.current.offsetWidth : natural;
+      setScale(Math.min(1, w / natural));
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, []);
+  return (
+    <div ref={ref} className="desk-scaler" style={{ width: '100%' }}>
+      <div style={{ height: height * scale, overflow: 'hidden' }}>
+        <div style={{ transform: `scale(${scale})`, transformOrigin: 'top left', width: natural }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
+const STORY = [
+  { key: 'welcome',    label: 'Welcome takeover',     target: false },
+  { key: 'profession', label: 'Profession · single',  target: false },
+  { key: 'specialty',  label: 'Specialty · multi',    target: false },
+  { key: 'experience', label: 'Experience',           target: false },
+  { key: 'location',   label: 'Home base',            target: false },
+  { key: 'radius',     label: 'Travel radius',        target: false },
+  { key: 'finding',    label: 'Erin finds matches',   target: true },
+  { key: 'match',      label: 'Hero match in chat',   target: true },
+  { key: 'results',    label: 'See all · results',    target: true },
+];
+
+const FLAGS = [
+  ['Selectable chips aren’t in the kit', 'DS <b>Chip</b> ships tones but no selected state. Added an <b>OptionChip</b> (plum fill + check) on existing tokens — recommend promoting it to the kit.'],
+  ['No progress component exists', 'Built the 7-segment bar from the pill radius + lavender tints. Paper-flat, no glow — but it’s net-new shared UI.'],
+  ['Location can’t be tap-only', 'Pure tap options can’t cover an open city/state. Reused the chat composer input + four suggestion chips; tap-only would mean a 50-state drill-down.'],
+  ['Auto-advance has no precedent', 'Single-select commits + advances in 120ms. Multi-select keeps an explicit Continue — your call, and it’s the only place a button is needed.'],
+  ['Erin has no face asset', 'Kept the speech-bubble “E” monogram from the mobile kit. If Erin ever gets an illustrated avatar, swap to a photo-frame placeholder per the brand rule.'],
+];
+
+const MAP = [
+  ['Profession', 'professionSpecialties[].profession · legacy step 1'],
+  ['Specialties', 'professionSpecialties[].specialty · legacy step 2'],
+  ['Home base', 'city + state · step 5'],
+  ['Years', 'yearsOfExperience · step 5'],
+  ['Radius · shift · availability', 'match preferences · net-new'],
+];
+
+function Board() {
+  return (
+    <div className="wrap">
+      <div className="eyebrow">TSS-1116 · erin onboarding flow · scrub society design system</div>
+      <h1 className="board-h1">Erin walks a new clinician<br/>from signup to first match.</h1>
+      <p className="lede">
+        A mobile-primary, Erin-led conversation that captures the four core profile fields — profession, specialty,
+        home base, travel radius — plus experience, shift, and availability, then opens with one hero match in-chat.
+        Everything is built on the Scrub Society primitives and saves straight to the existing ProfileOnboarding spec, so
+        nothing gets re-asked. Erin’s proactive ranking is marked target-state (Phase 2).
+      </p>
+      <div className="legend">
+        <span><span className="dot"></span> lavender dot = target-state · Phase 2</span>
+        <span>● tap any frame in the interactive sections — they’re live</span>
+      </div>
+
+      {/* Storyboard */}
+      <div className="sec">
+        <div className="section-label">the flow</div>
+        <h2 className="section-title">Every screen, start to match</h2>
+        <p className="section-note">The whole sequence at a glance. The interactive version is below — this is the map.</p>
+        <div className="storyboard">
+          {STORY.map(s => (
+            <div className="frame-cell" key={s.key}>
+              <StaticMobile frozenKey={s.key} scale={0.5} />
+              <div className="frame-label">{s.target ? <span className="dot"></span> : null}{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Interactive mobile */}
+      <div className="sec">
+        <div className="section-label">interactive · mobile is primary</div>
+        <h2 className="section-title">Click the whole thing through</h2>
+        <p className="section-note">
+          Tap an answer and Erin moves on; specialty lets you multi-pick then Continue. The ✕ in the header starts over.
+          End on the hero match, then “see all” for the ranked list.
+        </p>
+        <div style={{ marginTop: 24 }}>
+          <div className="hero-card"><ErinMobile /></div>
+        </div>
+      </div>
+
+      {/* Desktop */}
+      <div className="sec">
+        <div className="section-label">desktop · secondary</div>
+        <h2 className="section-title">Same flow, centered over the dimmed app</h2>
+        <p className="section-note">
+          Post-signup, the modal runs the identical conversation. A live “captured so far” row doubles as the profile
+          preview, and the footer makes the no-re-asking promise explicit.
+        </p>
+        <DeskScaler natural={1180} height={800}>
+          <DesktopOnboarding width={1180} height={800} />
+        </DeskScaler>
+      </div>
+
+      {/* Annotations */}
+      <div className="sec">
+        <div className="section-label">notes for you</div>
+        <h2 className="section-title">Where this met — and pushed — the primitives</h2>
+        <div className="anno-grid">
+          <div className="anno">
+            <div className="kicker">flags</div>
+            <h4>Net-new UI the brief required</h4>
+            <ul>
+              {FLAGS.map((f, i) => (
+                <li key={i}><b dangerouslySetInnerHTML={{ __html: f[0] }} /> — <span dangerouslySetInnerHTML={{ __html: f[1] }} /></li>
+              ))}
+            </ul>
+          </div>
+          <div className="anno">
+            <div className="kicker">consistency</div>
+            <h4>Field → ProfileOnboarding mapping</h4>
+            <ul>
+              {MAP.map((m, i) => (
+                <li key={i} className="map-row"><b>{m[0]}</b><span className="to">{m[1]}</span></li>
+              ))}
+            </ul>
+            <p className="section-note" style={{ margin: '14px 0 18px', fontSize: 13.5 }}>
+              Radius, shift and availability aren’t in <b>ProfileData</b> yet — they’re the one place this flow adds fields. Worth a schema call.
+            </p>
+          </div>
+          <div className="anno">
+            <div className="kicker">target-state</div>
+            <h4>Phase 2 · proactive matching</h4>
+            <ul>
+              <li>Today, the reveal is a <b>deterministic filter</b> on the captured fields — honest and shippable now.</li>
+              <li>Phase 2: Erin’s agent <b>ranks by pay-vs-target, housing and license fit</b> and surfaces matches proactively.</li>
+              <li>Frames carrying the <span className="tag">●</span> lavender dot are the parts that depend on that agent.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Board />);
+</script>
+
+
+
+
+</body></html>

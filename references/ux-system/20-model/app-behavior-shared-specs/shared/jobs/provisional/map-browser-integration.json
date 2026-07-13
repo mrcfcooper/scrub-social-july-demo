@@ -1,0 +1,102 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.map-browser-integration",
+  "title": "Jobs Map Browser Integration",
+  "module": "jobs",
+  "proposedSubmodule": "map-integration",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/map-integration/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Jobs map behavior loads Google Maps, geocodes jobs, clusters markers, opens info windows, preserves map viewport, and applies Search This Area through reverse geocode and workspace commands.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.map-browser-integration",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "browserRuntime": "/jobs map view changes available surface and runtime adapters. It depends on Google Maps load/geocode APIs, marker clustering, map drag state, Search This Area reverse geocode, map viewport URL/session projection, and runtime/browser proof.",
+        "routeOwnedParticipation": "/jobs owns the map view trigger, Search This Area user action, result projection, and accepted proof debt. Shared integration should own the browser adapter contract and deterministic proof strategy."
+      },
+      "sourceRefs": [
+        "frontend/src-legacy/components/JobsMap.tsx",
+        "frontend/src-legacy/utils/loadGoogleMaps.ts",
+        "frontend/modules/jobs/workspace/internal/commands.ts",
+        "frontend/modules/jobs/workspace/internal/session.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-browser-runtime.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-drawer-and-map-runtime.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/07-browser-runtime-inventory.json"
+      ],
+      "proofRefs": [],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "audit-debt:route.jobs.map-runtime-proof"
+      ],
+      "proofStatus": "source-inventoried; browser/mock/manual proof gap routed"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "adapter-consumer",
+      "routeSpecificRefs": [
+        "user-action:route.jobs.map-search-area",
+        "behavior-branch:route.jobs.map-runtime",
+        "observable-scenario:route.jobs.map-area",
+        "audit-debt:route.jobs.map-runtime-proof"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/src-legacy/components/JobsMap.tsx",
+    "frontend/src-legacy/utils/loadGoogleMaps.ts",
+    "frontend/modules/jobs/workspace/internal/commands.ts",
+    "frontend/modules/jobs/workspace/internal/session.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-browser-runtime.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/browser-integration-adapters/jobs-drawer-and-map-runtime.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/07-browser-runtime-inventory.json"
+  ],
+  "proofRefs": [],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "audit-debt:route.jobs.map-runtime-proof"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.03-current-desired-governing-roadmap-template",
+  "title": "Current Desired Governing Roadmap Template",
+  "content": [
+    {
+      "id": "non-authority-warning",
+      "title": "Non-Authority Warning",
+      "body": "This roadmap summarizes current, desired, and governing behavior state for planning only. It does not turn runtime evidence into intended behavior."
+    },
+    {
+      "id": "ordered-steps",
+      "title": "Ordered Steps",
+      "body": [
+        "1. Identify current documented behavior.",
+        "2. Identify observed runtime behavior and evidence.",
+        "3. Identify desired or intended behavior authority.",
+        "4. Identify governing behavior rows.",
+        "5. Classify mismatches as drift, pending decision, quality issue, or out-of-scope finding.",
+        "6. Confirm which behavior state is ready for downstream planning."
+      ]
+    },
+    {
+      "id": "review-before-moving-forward",
+      "title": "Review Before Moving Forward",
+      "body": [
+        "Each phase or meaningful subphase should populate `review_before_moving_forward` before moving on.",
+        "",
+        "Field shape:",
+        "- core_workflow: applicable `.core.*` workflow from `agent/core-workflows.doc.json`.",
+        "- standard_review: use the ordered review ladder from `agent/core-workflows.doc.json`.",
+        "- specific_review: active workstream docs, governing specs, source evidence, or local artifacts for this roadmap.",
+        "- stop_condition: what must be true before the next phase or subphase begins."
+      ]
+    },
+    {
+      "id": "required-fields",
+      "title": "Required Fields",
+      "body": [
+        "- current behavior summary",
+        "- observed runtime summary",
+        "- desired/intended behavior summary",
+        "- governing behavior summary",
+        "- authority inputs",
+        "- drift or mismatch items",
+        "- pending decisions",
+        "- confirmation gate",
+        "- stop condition",
+        "- review_before_moving_forward"
+      ]
+    }
+  ]
+}

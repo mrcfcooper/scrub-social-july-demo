@@ -1,0 +1,66 @@
+{
+  "schema": "tgn.agent-doc.v0",
+  "id": "ux-investigation.coverage-completion-standard",
+  "title": "Coverage And Completion Standard",
+  "docType": "ux-investigation-guidance",
+  "status": "draft",
+  "owner": {
+    "area": "agent/ux-system",
+    "primaryOwner": "ux-system"
+  },
+  "purpose": "Defines investigation coverage statuses and completion gates so agents cannot accidentally treat partial UX discovery as complete.",
+  "sourceOfTruth": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true
+  },
+  "coverageStatuses": [
+    {
+      "status": "covered",
+      "meaning": "The branch has been investigated to the declared depth and has linked evidence/spec rows."
+    },
+    {
+      "status": "missing",
+      "meaning": "The branch is required by scope but no sufficient investigation/spec rows exist yet."
+    },
+    {
+      "status": "pending",
+      "meaning": "The branch is known but blocked by unresolved evidence, access, runtime setup, or product decision."
+    },
+    {
+      "status": "intentionally-omitted",
+      "meaning": "The branch is omitted with explicit rationale and is not required for the declared package profile."
+    },
+    {
+      "status": "out-of-scope",
+      "meaning": "The branch exists but is outside this investigation package's declared scope."
+    },
+    {
+      "status": "needs-confirmation",
+      "meaning": "The branch depends on user/product confirmation before it can be treated as complete."
+    },
+    {
+      "status": "needs-proof",
+      "meaning": "The branch has a suspected or specified behavior but still needs runtime observation, test evidence, or other proof."
+    }
+  ],
+  "completionGate": {
+    "summary": "A UX investigation is complete only when every in-scope route, surface, subsurface, hidden lane, requirement branch, scenario branch, and acceptance/proof branch has a coverage row.",
+    "requiredBeforeComplete": [
+      "No in-scope compiled route is missing a coverage row.",
+      "No route with UI is missing surface decomposition.",
+      "No meaningful surface is missing current UX requirement coverage or an explicit omission.",
+      "No hidden UX lane is suspected but untracked.",
+      "No pending decision is hidden in notes-only fields.",
+      "No missing expected basic is silently omitted.",
+      "All intentionally omitted rows have rationale."
+    ]
+  },
+  "rules": [
+    "Coverage indexes expose incompleteness; they do not force agents to resolve all product decisions.",
+    "A pending branch can be acceptable for discovery closeout when it is visible and routed.",
+    "Implementation or refactor work must not treat pending current UX discovery as confirmed behavior.",
+    "Desired UX authoring must not proceed from unknown current behavior without recording the uncertainty.",
+    "Discovery closeout must say which discovered behavior was captured in App Behavior, which remains observed-only, which is ideal/future or out of scope, which is runtime drift, which is pending decision, and which bounded gaps remain.",
+    "Coverage is not complete for implementation readiness when behavior exists only in source/runtime inventories, audit notes, proof notes, or chat without an App Behavior destination or bounded reconciliation gap."
+  ]
+}

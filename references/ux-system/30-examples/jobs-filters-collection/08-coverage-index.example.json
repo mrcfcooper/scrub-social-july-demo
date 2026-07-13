@@ -1,0 +1,270 @@
+{
+  "schema": "tgn.ux-coverage-index.v1",
+  "coverageIndexId": "jobs.filters.collection-example.coverage",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Collection Example Coverage Index",
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "specProfile": "refactor-preservation-spec",
+  "depthTarget": "L4-acceptance-criteria-and-proof",
+  "coverageRows": [
+    {
+      "id": "coverage.jobs.filters.collection.feature",
+      "artifactRole": "feature",
+      "itemRef": {
+        "id": "jobs.search",
+        "mode": "desired",
+        "itemType": "uxFeature",
+        "title": "Jobs Search"
+      },
+      "requiredByProfile": false,
+      "coverageStatus": "covered",
+      "modeCoverage": [
+        {
+          "mode": "desired",
+          "status": "covered"
+        }
+      ],
+      "facetCoverage": [
+        {
+          "facet": "features",
+          "status": "covered"
+        }
+      ],
+      "missingChildren": [],
+      "pendingDecisionRefs": [],
+      "acceptanceCriterionRefs": [],
+      "notesMd": "Feature context is included to anchor the filters subfeature.",
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "id": "coverage.jobs.filters.collection.subfeature",
+      "artifactRole": "subfeature",
+      "itemRef": {
+        "id": "jobs.search.filters",
+        "mode": "desired",
+        "itemType": "uxSubfeature",
+        "title": "Jobs Search Filters"
+      },
+      "parentRef": {
+        "id": "jobs.search",
+        "mode": "desired",
+        "itemType": "uxFeature",
+        "title": "Jobs Search"
+      },
+      "requiredByProfile": true,
+      "coverageStatus": "covered",
+      "modeCoverage": [
+        {
+          "mode": "desired",
+          "status": "covered"
+        },
+        {
+          "mode": "current",
+          "status": "covered"
+        },
+        {
+          "mode": "confirmed-current",
+          "status": "pending"
+        }
+      ],
+      "facetCoverage": [
+        {
+          "facet": "subfeatures",
+          "status": "covered"
+        },
+        {
+          "facet": "currentDesiredMappings",
+          "status": "covered"
+        }
+      ],
+      "missingChildren": [],
+      "pendingDecisionRefs": [],
+      "acceptanceCriterionRefs": [],
+      "notesMd": "Subfeature coverage anchors the affected refactor surface.",
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "id": "coverage.jobs.filters.collection.apply-requirement",
+      "artifactRole": "requirement",
+      "itemRef": {
+        "id": "jobs.filters.desired.modal-apply",
+        "mode": "desired",
+        "itemType": "uxRequirement",
+        "title": "Apply commits a valid filter draft"
+      },
+      "parentRef": {
+        "id": "jobs.filters.apply-filters",
+        "mode": "desired",
+        "itemType": "uxSubflow",
+        "title": "Apply filters"
+      },
+      "requiredByProfile": true,
+      "coverageStatus": "covered",
+      "modeCoverage": [
+        {
+          "mode": "desired",
+          "status": "covered"
+        }
+      ],
+      "facetCoverage": [
+        {
+          "facet": "requirements",
+          "status": "covered"
+        },
+        {
+          "facet": "observableScenarios",
+          "status": "covered"
+        },
+        {
+          "facet": "acceptanceCriteria",
+          "status": "covered"
+        }
+      ],
+      "missingChildren": [],
+      "pendingDecisionRefs": [],
+      "acceptanceCriterionRefs": [
+        {
+          "id": "jobs.filters.acceptance.modal-apply-success",
+          "mode": "desired",
+          "itemType": "uxAcceptanceCriterion",
+          "title": "Apply commits filters and closes the modal"
+        },
+        {
+          "id": "jobs.filters.acceptance.modal-apply-invalid",
+          "mode": "desired",
+          "itemType": "uxAcceptanceCriterion",
+          "title": "Invalid filter draft blocks Apply"
+        }
+      ],
+      "notesMd": "Apply behavior is implementation-ready in this example.",
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "id": "coverage.jobs.filters.collection.clear-requirement",
+      "artifactRole": "requirement",
+      "itemRef": {
+        "id": "jobs.filters.desired.modal-clear",
+        "mode": "desired",
+        "itemType": "uxRequirement",
+        "title": "Clear Filters resets active browse filters"
+      },
+      "parentRef": {
+        "id": "jobs.filters.advanced-filter-authoring",
+        "mode": "desired",
+        "itemType": "uxFlow",
+        "title": "Advanced filter authoring"
+      },
+      "requiredByProfile": true,
+      "coverageStatus": "needs-confirmation",
+      "modeCoverage": [
+        {
+          "mode": "current",
+          "status": "covered"
+        },
+        {
+          "mode": "desired",
+          "status": "pending"
+        }
+      ],
+      "facetCoverage": [
+        {
+          "facet": "requirements",
+          "status": "pending"
+        },
+        {
+          "facet": "currentDesiredMappings",
+          "status": "covered"
+        },
+        {
+          "facet": "copy",
+          "status": "pending"
+        }
+      ],
+      "missingChildren": [
+        "confirmed desired acceptance criterion for clear behavior"
+      ],
+      "pendingDecisionRefs": [
+        {
+          "id": "jobs.filters.pending.clear-confirmation-copy",
+          "mode": "pending-confirmation",
+          "itemType": "uxPendingDecision",
+          "title": "Confirm exact Clear Filters confirmation copy"
+        }
+      ],
+      "acceptanceCriterionRefs": [],
+      "notesMd": "Clear behavior remains visible as not implementation-ready until confirmed.",
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "id": "coverage.jobs.filters.collection.analytics-omission",
+      "artifactRole": "generated-review",
+      "itemRef": {
+        "id": "jobs.filters.analytics",
+        "title": "Filter analytics behavior"
+      },
+      "requiredByProfile": false,
+      "coverageStatus": "intentionally-omitted",
+      "modeCoverage": [
+        {
+          "mode": "desired",
+          "status": "not-required"
+        }
+      ],
+      "facetCoverage": [
+        {
+          "facet": "features",
+          "status": "not-required"
+        }
+      ],
+      "missingChildren": [],
+      "pendingDecisionRefs": [],
+      "acceptanceCriterionRefs": [],
+      "notesMd": "Analytics is outside this UX-only collection example.",
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "generatedRefs": {
+    "markdown": "generated/jobs.filters.collection-example.coverage.md"
+  },
+  "db": {
+    "collection": "uxCoverageIndexes",
+    "documentId": "jobs.filters.collection-example.coverage"
+  },
+  "custom": {}
+}

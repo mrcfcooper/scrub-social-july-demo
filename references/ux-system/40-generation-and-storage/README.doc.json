@@ -1,0 +1,61 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.40-generation-and-storage.README",
+  "title": "Generation And Storage",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for generated Markdown, script, database, and admin UI compatibility guidance for UX JSON specs.",
+        "Audience: Agents and engineers designing generators, validators, DB import/export, or admin UI views for App Behavior specs.",
+        "Keep In Sync With: Schema files, examples, and any future generator or DB tooling.",
+        "Update When: Generated output rules, storage assumptions, DB document shapes, or admin UI workflows change.",
+        "Does Not Cover: Implementation of generator scripts or database migrations.",
+        "-->"
+      ]
+    },
+    {
+      "id": "generation-and-storage",
+      "title": "Generation And Storage",
+      "depth": 1,
+      "body": [
+        "This folder explains how UX JSON should be rendered, stored, split, composed, and presented in tools without losing governance or row identity.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Generated Markdown Companions](00-generated-markdown-companions.md)",
+        "2. [DB Admin UI Compatibility](01-db-admin-ui-compatibility.md)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when checking how UX-system artifacts are generated, stored, or made compatible with DB/admin UI workflows.",
+        "",
+        "Route by task:",
+        "- Generated Markdown companions: read generation docs before judging generated review artifacts or Markdown outputs.",
+        "- DB/admin UI compatibility: read storage and compatibility docs before changing schema-facing or admin-facing artifact expectations.",
+        "",
+        "Generation and storage docs do not create App Behavior truth. They govern representation, generated companions, and storage compatibility for behavior that must come from proper authority.",
+        "",
+        "Stop when the agent can state the generated or stored artifact, the representation/storage rule being applied, the source behavior authority, and the validation needed before claiming compatibility."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.roadmap-templates.06-journey-roadmap-template-placeholder",
+  "title": "Journey Roadmap Template Placeholder",
+  "content": [
+    { "id": "status", "title": "Status", "body": "placeholder" },
+    { "id": "purpose", "title": "Purpose", "body": "Would guide App Behavior journey planning from user goal through route/workflow touchpoints and proof implications." },
+    { "id": "already-decision-complete", "title": "Already Decision-Complete", "body": "UX guidance recognizes journeys and behavior modeling as App Behavior authoring concerns." },
+    { "id": "needs-clarity", "title": "Needs Clarity", "body": "Needs deeper review of UX system model docs to decide exact journey fields, relationship mapping, and closure criteria." },
+    { "id": "authority-to-review", "title": "Authority To Review", "body": "Review agent/35-ux/02-ux-behavior-modeling-principles.doc.json and agent/ux-system/20-model/README.doc.json before promotion." },
+    { "id": "promotion-criteria", "title": "Promotion Criteria", "body": "Promote when journey roadmap fields can be derived from existing App Behavior schema/model authority without invention." },
+    { "id": "possible-outcomes", "title": "Possible Outcomes", "body": "Promote to full template, merge into App Behavior roadmap, keep as optional appendix, or delete if real use does not justify it." },
+    { "id": "non-authority-warning", "title": "Non-Authority Warning", "body": "This placeholder is not a usable roadmap template and is not authority." }
+  ]
+}

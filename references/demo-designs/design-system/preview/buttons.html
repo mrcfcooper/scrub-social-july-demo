@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .btn { font-family: var(--font-sans); font-weight: 400; font-size: 15px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; letter-spacing: -0.01em; transition: all 160ms var(--ease-out); }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary { background: var(--plum-grove); color: var(--morning-dew); }
+  .btn.secondary { background: transparent; color: var(--plum-grove); border-color: var(--plum-grove); }
+  .btn.tint { background: var(--clear-sky); color: var(--plum-grove); }
+  .btn.ghost { background: transparent; color: var(--plum-grove); }
+  .btn.sm { padding: 8px 14px; font-size: 13px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+</style></head>
+<body><div class="card">
+  <div class="row">
+    <button class="btn primary">Join Scrub Society</button>
+    <button class="btn secondary">Learn more</button>
+    <button class="btn tint">Find a job</button>
+    <button class="btn ghost">Skip</button>
+  </div>
+  <div class="row">
+    <button class="btn primary sm">Sign up</button>
+    <button class="btn secondary sm">View profile</button>
+    <button class="btn tint sm">Save</button>
+  </div>
+  <div style="font-size:11px; color:var(--fg-muted); text-transform:lowercase;">pill-shaped · outfit regular · sentence case</div>
+</div></body></html>

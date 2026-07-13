@@ -1,0 +1,256 @@
+/* ==========================================================================
+   SCRUB SOCIETY — COLORS & TYPE
+   Core brand tokens. Import this file wherever you design or prototype.
+   ========================================================================== */
+
+/* Brand fonts — Outfit (supplied by brand). Variable font first, static fallbacks. */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/Outfit-VariableFont_wght.ttf') format('truetype-variations'),
+       url('fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/Outfit-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Outfit-Regular.ttf') format('truetype');
+}
+
+:root {
+  /* ------------------------------------------------------------------------
+     BRAND PALETTE
+     Named exactly as in the brand deck. Use Plum Grove for most ink / logos;
+     use Lavender Field + Open Air for accents; use Morning Dew as the warm
+     off-white page background (softer than #FFFFFF in most contexts).
+     ------------------------------------------------------------------------ */
+  --plum-grove:      #421A31;   /* primary ink, deepest brand color */
+  --lavender-field:  #BBAFEF;   /* soft lilac accent */
+  --open-air:        #82ABF4;   /* saturated sky-blue accent */
+  --clear-sky:       #CEDBFE;   /* pale blue surface */
+  --morning-dew:     #F9F2E8;   /* warm off-white, primary surface */
+  --soft-cloud:      #FFFFFF;   /* pure white */
+
+  /* Extended tints/shades derived from the palette (OKLCH-adjacent).
+     Use sparingly; prefer the six named colors above where possible. */
+  --plum-grove-80:   #5E3A4D;
+  --plum-grove-60:   #7A5C6C;
+  --plum-grove-40:   #A892A0;
+  --plum-grove-20:   #D5C8D0;
+  --plum-grove-10:   #EBE3E8;
+
+  --open-air-dark:   #4F7ED1;
+  --open-air-tint:   #E1EAFB;
+  --lavender-tint:   #E6E1F8;
+
+  /* ------------------------------------------------------------------------
+     SEMANTIC SURFACES — use these in components
+     ------------------------------------------------------------------------ */
+  --bg:              var(--morning-dew);    /* page background */
+  --bg-alt:          var(--soft-cloud);     /* cards / elevated surfaces */
+  --bg-tint:         var(--clear-sky);      /* soft section background */
+  --bg-accent:       var(--lavender-field); /* hero / call-out sections */
+  --bg-deep:         var(--plum-grove);     /* inverted / footer */
+
+  --fg:              var(--plum-grove);     /* primary text */
+  --fg-muted:        var(--plum-grove-60);  /* secondary text, metadata */
+  --fg-subtle:       var(--plum-grove-40);  /* placeholder, disabled */
+  --fg-on-deep:      var(--morning-dew);    /* text on Plum Grove */
+  --fg-on-accent:    var(--plum-grove);     /* text on Lavender / Clear Sky */
+
+  --border:          var(--plum-grove-20);  /* hairlines, dividers */
+  --border-strong:   var(--plum-grove);     /* emphatic outlines */
+
+  --link:            var(--plum-grove);
+  --link-hover:      var(--open-air-dark);
+
+  /* ------------------------------------------------------------------------
+     TYPE — single family, wide weight range.
+     HEADLINE:  Outfit Regular, tracking -40 (−0.04em), sentence case
+     BODY:      Outfit Light,   tracking 0, sentence case
+     SUBTEXT:   Outfit Regular, tracking 0, lowercase
+     ------------------------------------------------------------------------ */
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+               Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* Tracking tokens — negative on headlines per brand spec */
+  --tracking-headline: -0.04em;  /* -40pt in brand deck */
+  --tracking-body:      0;
+  --tracking-subtext:   0;
+
+  /* Line heights */
+  --lh-tight:    1.02;
+  --lh-snug:     1.15;
+  --lh-normal:   1.45;
+  --lh-relaxed:  1.6;
+
+  /* Type scale — modular, built around 16px body */
+  --fs-display:  clamp(3.5rem, 8vw, 7.5rem);   /* 56–120 */
+  --fs-h1:       clamp(2.5rem, 5vw, 4.5rem);   /* 40–72  */
+  --fs-h2:       clamp(2rem, 3.6vw, 3rem);     /* 32–48  */
+  --fs-h3:       1.75rem;                       /* 28     */
+  --fs-h4:       1.375rem;                      /* 22     */
+  --fs-body-lg:  1.125rem;                      /* 18     */
+  --fs-body:     1rem;                          /* 16     */
+  --fs-small:    0.875rem;                      /* 14     */
+  --fs-caption:  0.75rem;                       /* 12     */
+
+  /* ------------------------------------------------------------------------
+     SPACING (8pt base)
+     ------------------------------------------------------------------------ */
+  --s-0:   0;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* ------------------------------------------------------------------------
+     RADII — soft and organic. Prefer full-round (pill) for buttons/tags.
+     ------------------------------------------------------------------------ */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:  12px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-2xl: 40px;
+  --r-full: 999px;
+
+  /* ------------------------------------------------------------------------
+     SHADOWS — soft, low-contrast. Tinted toward Plum Grove, never gray/black.
+     ------------------------------------------------------------------------ */
+  --shadow-sm: 0 1px 2px rgba(66, 26, 49, 0.06), 0 1px 1px rgba(66, 26, 49, 0.04);
+  --shadow-md: 0 4px 12px rgba(66, 26, 49, 0.08), 0 2px 4px rgba(66, 26, 49, 0.05);
+  --shadow-lg: 0 12px 32px rgba(66, 26, 49, 0.10), 0 4px 8px rgba(66, 26, 49, 0.06);
+  --shadow-xl: 0 24px 60px rgba(66, 26, 49, 0.14), 0 8px 16px rgba(66, 26, 49, 0.06);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* ------------------------------------------------------------------------
+     MOTION — gentle, inviting. No bounces. Slow fades on entry, snappy out.
+     ------------------------------------------------------------------------ */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:    cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   160ms;
+  --dur-base:   240ms;
+  --dur-slow:   420ms;
+}
+
+/* ==========================================================================
+   BASE TYPE STYLES
+   Apply these on real elements when the markup allows; use the utility
+   classes below otherwise.
+   ========================================================================== */
+
+html, body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--tracking-body);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-headline);
+  line-height: var(--lh-tight);
+  color: var(--fg);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-snug); }
+
+p  { margin: 0; line-height: var(--lh-relaxed); text-wrap: pretty; }
+
+small, .subtext {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-subtext);
+  text-transform: lowercase;
+  color: var(--fg-muted);
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--link-hover); }
+
+/* ==========================================================================
+   UTILITY CLASSES — match the brand-deck type hierarchy 1:1
+   ========================================================================== */
+
+.type-display {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display);
+  letter-spacing: var(--tracking-headline);
+  line-height: var(--lh-tight);
+}
+
+.type-headline {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-h1);
+  letter-spacing: var(--tracking-headline);
+  line-height: var(--lh-tight);
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body);
+  letter-spacing: var(--tracking-body);
+  line-height: var(--lh-relaxed);
+}
+
+.type-subtext {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-small);
+  letter-spacing: var(--tracking-subtext);
+  text-transform: lowercase;
+}
+
+.type-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}

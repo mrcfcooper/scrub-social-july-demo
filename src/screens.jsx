@@ -1,0 +1,322 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FEED, JOBS, FACILITY } from "./data";
+import { Attrib, Avatar, Post, Sect, Stars } from "./ui";
+
+// ─── Feed ────────────────────────────────────────────────────────────────────
+export function Feed() {
+  const [tab, setTab] = useState("questions");
+  const posts = tab === "questions" ? FEED.questions : FEED.lounge;
+  return (
+    <div>
+      <div className="tabs" role="tablist">
+        <button className={`tab ${tab === "questions" ? "on" : ""}`} onClick={() => setTab("questions")}>
+          Real questions
+        </button>
+        <button className={`tab ${tab === "lounge" ? "on" : ""}`} onClick={() => setTab("lounge")}>
+          The lounge
+        </button>
+      </div>
+      {tab === "questions" && (
+        <div className="attrib" style={{ marginTop: 10 }}>
+          <span className="mark">💬</span>
+          <span><b>Rachel asked for this</b> · May 11 — “I don't want real questions to get lost because a funny meme was in the feed.”</span>
+        </div>
+      )}
+
+      <Post p={posts[0]} />
+
+      {/* Erin prompt slot, injected between cards */}
+      <div className="card plum">
+        <div className="row">
+          <Avatar initials="E" color="#82ABF4" />
+          <div className="grow">
+            <div className="small" style={{ fontWeight: 600 }}>Erin</div>
+            <div style={{ fontSize: 12, color: "var(--dew)" }}>Your AI assistant · suggestion</div>
+          </div>
+        </div>
+        <p className="small" style={{ marginTop: 10, lineHeight: 1.5 }}>{FEED.erin.text}</p>
+        <div className="wrap" style={{ marginTop: 10 }}>
+          {FEED.erin.actions.map((a) => (
+            <button key={a} className="btn sky sm">{a}</button>
+          ))}
+        </div>
+      </div>
+
+      {posts.slice(1).map((p) => <Post key={p.id} p={p} />)}
+
+      {/* Meetups board */}
+      <div className="card dew">
+        <div className="eyebrow">Meetups & events</div>
+        <div className="small" style={{ fontWeight: 600, marginTop: 6 }}>{FEED.meetup.title}</div>
+        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.detail}</div>
+        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.sub}</div>
+        <button className="btn sm" style={{ marginTop: 10 }}>I'm going</button>
+      </div>
+
+      {/* Roommate board */}
+      <div className="card lav flip">
+        <div className="eyebrow" style={{ color: "var(--plum-soft)" }}>Roommate board</div>
+        <div className="small" style={{ fontWeight: 600, marginTop: 6 }}>{FEED.roommate.title}</div>
+        <div className="small" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.detail}</div>
+        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.sub}</div>
+        <Attrib id="amberRoommate" />
+      </div>
+    </div>
+  );
+}
+
+// ─── Jobs ────────────────────────────────────────────────────────────────────
+export function Jobs() {
+  return (
+    <div>
+      <Sect title="Jobs with the inside story" sub={`${JOBS.length} matches`} />
+      <p className="muted" style={{ marginTop: 4 }}>
+        Every card shows what the community knows — not just what the feed says.
+      </p>
+      {JOBS.map((j) => (
+        <Link key={j.id} to={`/jobs/${j.id}`} className="linkless">
+          <div className="card">
+            <div className="between">
+              <div>
+                <div className="small" style={{ fontWeight: 600 }}>{j.title}</div>
+                <div className="muted">{j.facility} · {j.city}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontWeight: 700, color: "var(--plum)" }}>{j.weekly}</div>
+                <div className="muted">{j.shift}</div>
+              </div>
+            </div>
+            <div className="wrap" style={{ marginTop: 10 }}>
+              <span className="pill sky">🏥 {j.social.score} traveler score</span>
+              <span className="pill">👥 {j.social.workedHere} worked here</span>
+              <span className="pill">📓 {j.social.diaries} diaries</span>
+              <span className="pill">💬 {j.social.answeredQs} questions answered</span>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+// ─── Job detail ──────────────────────────────────────────────────────────────
+export function JobDetail({ id }) {
+  const nav = useNavigate();
+  const j = JOBS.find((x) => x.id === id) || JOBS[0];
+  return (
+    <div>
+      <button className="btn ghost sm" style={{ marginTop: 14 }} onClick={() => nav(-1)}>← Jobs</button>
+      <div className="card">
+        <div className="eyebrow">Travel contract</div>
+        <h2 style={{ fontSize: 20, marginTop: 4 }}>{j.title}</h2>
+        <div className="muted">{j.facility} · {j.city}</div>
+        <div className="wrap" style={{ marginTop: 12 }}>
+          <span className="pill solid">{j.weekly}</span>
+          <span className="pill">{j.hourly} base</span>
+          <span className="pill">{j.shift}</span>
+          <span className="pill">Starts {j.start}</span>
+          <span className="pill">{j.length}</span>
+        </div>
+        <button className="btn block" style={{ marginTop: 14 }}>Quick apply</button>
+        <div className="muted" style={{ marginTop: 8, textAlign: "center" }}>
+          Recruiter: {j.recruiter} · replies in ~2h
+        </div>
+      </div>
+
+      {/* The social context column — the moat beat */}
+      <div className="card dew">
+        <div className="between">
+          <div>
+            <div className="eyebrow" style={{ color: "var(--plum-soft)" }}>What the Society knows</div>
+            <div className="small" style={{ fontWeight: 600, marginTop: 4 }}>
+              {j.social.workedHere} members have worked here
+            </div>
+            <div className="small" style={{ color: "var(--plum-soft)" }}>
+              {j.social.diaries} assignment diaries · {j.social.answeredQs} questions answered
+            </div>
+          </div>
+          <div className="score" style={{ "--v": j.social.score }}><b>{j.social.score}</b></div>
+        </div>
+        {j.facilityId ? (
+          <Link to={`/facility/${j.facilityId}`} className="linkless">
+            <button className="btn block" style={{ marginTop: 12 }}>Open the facility hub</button>
+          </Link>
+        ) : (
+          <button className="btn block ghost" style={{ marginTop: 12 }}>Facility hub (demo: see Pacific View)</button>
+        )}
+        <button className="btn block ghost" style={{ marginTop: 8 }}>Ask someone who worked here</button>
+        <Attrib id="jennyTrip" />
+      </div>
+    </div>
+  );
+}
+
+// ─── Facility hub ────────────────────────────────────────────────────────────
+export function Facility() {
+  const f = FACILITY;
+  const [tab, setTab] = useState("qa");
+  return (
+    <div>
+      <div className="card">
+        <div className="between">
+          <div>
+            <div className="eyebrow">Facility hub</div>
+            <h2 style={{ fontSize: 19, marginTop: 4 }}>{f.name}</h2>
+            <div className="muted">{f.city} · {f.type}</div>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <div className="score" style={{ "--v": f.score }}><b>{f.score}</b></div>
+            <div className="muted" style={{ marginTop: 4 }}>{f.scoreLabel}</div>
+          </div>
+        </div>
+        <div className="wrap" style={{ marginTop: 12 }}>
+          <span className="pill">👥 {f.workedHere} members worked here</span>
+          <span className="pill sky">🙋 {f.askable} open to questions</span>
+        </div>
+        <div className="stack" style={{ marginTop: 12 }}>
+          {f.vibe.map((v) => (
+            <div key={v.k} className="between small">
+              <span>{v.k}</span>
+              <span className="row" style={{ gap: 8 }}>
+                <span className="meter" style={{ width: 90 }}><i style={{ width: `${(v.v / 5) * 100}%` }} /></span>
+                <b>{v.v}</b>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="tabs" role="tablist">
+        {[["qa", "Q&A"], ["pay", "Pay reality"], ["notes", "Insider notes"], ["review", "Write a review"]].map(([k, label]) => (
+          <button key={k} className={`tab ${tab === k ? "on" : ""}`} onClick={() => setTab(k)}>{label}</button>
+        ))}
+      </div>
+
+      {tab === "qa" && <QATab f={f} />}
+      {tab === "pay" && <PayTab f={f} />}
+      {tab === "notes" && <NotesTab f={f} />}
+      {tab === "review" && <ReviewComposer />}
+    </div>
+  );
+}
+
+function QATab({ f }) {
+  return (
+    <div>
+      {f.qa.map((q) => (
+        <div key={q.id} className="card">
+          <div className="small" style={{ fontWeight: 600 }}>{q.q}</div>
+          <div className="muted" style={{ marginTop: 2 }}>Asked by {q.askedBy}</div>
+          {q.answers.map((a, i) => (
+            <div key={i} className="answer">
+              <div className="row">
+                <Avatar
+                  initials={a.anon ? "🎭" : a.by.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                  color={a.verified ? "#421A31" : "#CEDBFE"}
+                  dark={a.verified}
+                />
+                <div className="grow">
+                  <span className="small" style={{ fontWeight: 600 }}>{a.by}</span>{" "}
+                  {a.verified && <span className="verified small">✓ {a.badge}</span>}
+                  {a.anon && <span className="pill sky" style={{ marginLeft: 4 }}>anonymous answer</span>}
+                </div>
+              </div>
+              <p className="small" style={{ marginTop: 8, lineHeight: 1.45 }}>{a.text}</p>
+              <div className="muted" style={{ marginTop: 6 }}>💡 Helpful · {a.helpful}</div>
+            </div>
+          ))}
+          {q.id === "q1" && <Attrib id="brandyTesting" />}
+          {q.id === "q2" && <Attrib id="ashleyAnon" />}
+        </div>
+      ))}
+      <button className="btn block" style={{ marginTop: 14 }}>Ask the {f.workedHere} people who worked here</button>
+    </div>
+  );
+}
+
+function PayTab({ f }) {
+  return (
+    <div>
+      {f.payReports.map((p, i) => (
+        <div key={i} className="card between">
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 17, color: "var(--plum)" }}>{p.rate}</div>
+            <div className="muted">{p.spec} · {p.agency} · {p.when}</div>
+          </div>
+          {p.verified ? <span className="pill sky">✓ contract-verified</span> : <span className="pill outline">self-reported</span>}
+        </div>
+      ))}
+      <div className="card dew">
+        <div className="small" style={{ fontWeight: 600 }}>Reality check</div>
+        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+          Listed rates for this facility ranged $2,950–$3,600/wk over the last 90 days. If your quote is under $3,050, ask for the breakdown.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function NotesTab({ f }) {
+  return (
+    <div>
+      {f.insiderNotes.map((n, i) => (
+        <div key={i} className="card row" style={{ alignItems: "flex-start" }}>
+          <span style={{ fontSize: 20 }}>{n.emoji}</span>
+          <p className="small" style={{ lineHeight: 1.45 }}>{n.text}</p>
+        </div>
+      ))}
+      <div className="stack card" style={{ background: "transparent", boxShadow: "none", padding: 0 }}>
+        <Attrib id="rachel" />
+      </div>
+    </div>
+  );
+}
+
+// Review composer: Rachel's mad-face rule + Amber's moderation rule + Cooper's structured terms
+function ReviewComposer() {
+  const [mood, setMood] = useState(null);
+  const [chips, setChips] = useState([]);
+  const locked = mood === "mad";
+  const terms = ["Supportive charge nurses", "Heavy float", "Great orientation", "Parking is rough", "Traveler-friendly", "Short-staffed nights", "Fair scheduling", "Would return"];
+  return (
+    <div className="card">
+      <div className="small" style={{ fontWeight: 600 }}>How was your assignment here?</div>
+      <div className="faces">
+        {[["happy", "😊"], ["mid", "😐"], ["mad", "😠"]].map(([k, e]) => (
+          <button key={k} className={`face ${mood === k ? "on" : ""}`} onClick={() => setMood(k)} aria-label={k}>{e}</button>
+        ))}
+      </div>
+      {locked ? (
+        <>
+          <div className="locknote">
+            Free-text is closed for critical reviews — choose from structured feedback instead. Negative with a name attached is never published.
+          </div>
+          <div className="chips-select">
+            {terms.map((t) => (
+              <button
+                key={t}
+                className={chips.includes(t) ? "on" : ""}
+                onClick={() => setChips((c) => c.includes(t) ? c.filter((x) => x !== t) : [...c, t])}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <textarea
+          className="compose"
+          placeholder={mood ? "Tell travelers what to expect — as much as you want." : "Pick a face to start."}
+          disabled={!mood}
+        />
+      )}
+      <button className="btn block" style={{ marginTop: 12 }} disabled={!mood}>
+        Submit for review
+      </button>
+      <Attrib id="rachelMadFace" />
+      <Attrib id="amberModRule" />
+      <Attrib id="cooperStructured" />
+    </div>
+  );
+}

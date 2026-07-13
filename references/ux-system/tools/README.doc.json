@@ -1,0 +1,82 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.tools.README",
+  "title": "Tools",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for UX system validation and maintenance tools.",
+        "Audience: Agents and engineers checking UX JSON syntax, schema conformance, and corpus hygiene.",
+        "Keep In Sync With: UX schemas, examples, model docs, and validation expectations.",
+        "Update When: Validation commands, checks, schema locations, or generated artifact tooling changes.",
+        "Does Not Cover: Production application runtime validation or generated Markdown rendering.",
+        "-->"
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools",
+      "depth": 1,
+      "body": [
+        "This folder contains dependency-free local tools for validating the UX system corpus.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [Validate UX System](validate-ux-system.cjs)",
+        "2. [Wrap Behavior Threads](wrap-behavior-threads.cjs) wraps full-app UX audit rows in parent-container behavior threads with dry-run, fingerprint, row-count, and idempotence guardrails.",
+        "",
+        "Run from the repo root:",
+        "",
+        "```sh",
+        "node agent/ux-system/tools/validate-ux-system.cjs",
+        "node agent/ux-system/tools/wrap-behavior-threads.cjs --check --scope full-app-audit",
+        "```"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this corpus when:",
+        "- validating UX system JSON, schema conformance, behavior-thread wrapping, or corpus hygiene",
+        "",
+        "Does not own:",
+        "- runtime app validation",
+        "- product behavior authority",
+        "- generated Markdown rendering rules by itself",
+        "",
+        "Read first:",
+        "- this README",
+        "- validate-ux-system.cjs command guidance",
+        "",
+        "Route deeper to:",
+        "- wrap-behavior-threads.cjs when wrapping full-app audit rows",
+        "- 40-generation-and-storage/README.doc.json when generated/storage behavior is involved",
+        "",
+        "Common cross-routes:",
+        "- 10-schemas/README.doc.json for schema expectations",
+        "- 20-model/README.doc.json for model concepts",
+        "- 30-examples/README.doc.json for examples",
+        "",
+        "Stop when:",
+        "- the agent can name the validation command, scope, dry-run/check posture, and whether any writes are authorized"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.advanced-filters-saved-filters",
+  "title": "Jobs Advanced Filters And Saved Filters",
+  "module": "jobs",
+  "proposedSubmodule": "advanced-filters",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/advanced-filters/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Advanced filter and saved filter workflows own draft editing, validation, dirty close, apply/save/update/delete, saved filter persistence, and modal runtime participation for /jobs.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.advanced-filters-saved-filters",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "workflow": "The /jobs advanced filter modal opens with a draft based on committed query, supports field edits, catalog/facet status, min/max salary validation, dirty close confirmation, apply, clear, save new, update selected saved filter, apply saved filters, and mutation feedback.",
+        "routeOwnedParticipation": "/jobs owns modal entry and route-specific query commit. Shared workflow spec should own draft/session command contracts, saved filter persistence/API interaction, validation behavior, and saved-filter state semantics."
+      },
+      "sourceRefs": [
+        "frontend/modules/jobs/filters/advanced/ui/components/JobsAdvancedFilterModal/JobsAdvancedFilterModal.tsx",
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.tsx",
+        "frontend/modules/jobs/filters/advanced/draft/controller/internal/store.ts",
+        "frontend/modules/jobs/filters/advanced/session/internal/commands.ts",
+        "frontend/modules/jobs/filters/saved/local/controller/internal/store.ts",
+        "frontend/modules/jobs/filters/saved/persistence/controller/internal/store.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/saved-filter-wire-dto.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/user-filter-api-dtos.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "proof-gap:route.jobs.filter-modal-platform-runtime"
+      ],
+      "proofStatus": "source-inventoried; component proof partial; platform branch proof gap routed"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "user-action:route.jobs.open-advanced-filters",
+        "user-action:route.jobs.apply-advanced-filters",
+        "user-action:route.jobs.saved-filter-create-update",
+        "behavior-branch:route.jobs.filter-validation",
+        "behavior-branch:route.jobs.saved-filters"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/jobs/filters/advanced/ui/components/JobsAdvancedFilterModal/JobsAdvancedFilterModal.tsx",
+    "frontend/modules/jobs/ui/legacy/components/FilterModal.tsx",
+    "frontend/modules/jobs/filters/advanced/draft/controller/internal/store.ts",
+    "frontend/modules/jobs/filters/advanced/session/internal/commands.ts",
+    "frontend/modules/jobs/filters/saved/local/controller/internal/store.ts",
+    "frontend/modules/jobs/filters/saved/persistence/controller/internal/store.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/saved-filter-wire-dto.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/user-filter-api-dtos.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "proof-gap:route.jobs.filter-modal-platform-runtime"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

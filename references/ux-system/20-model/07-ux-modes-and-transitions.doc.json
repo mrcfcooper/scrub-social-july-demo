@@ -1,0 +1,71 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.07-ux-modes-and-transitions",
+  "title": "UX Modes And Transitions",
+  "content": [
+    {
+      "id": "ux-modes-and-transitions-body-1",
+      "body": "This document exists to define UX modes and valid transitions between them. Use it when a corpus needs to distinguish existing, preserved, desired, ideal, temporary, proposed, pending, deprecated, rejected, or unknown UX."
+    },
+    {
+      "id": "modes",
+      "title": "Modes",
+      "body": [
+        "`current` means behavior appears to exist now. It is discovery input, not automatic implementation authority.",
+        "",
+        "`confirmed-current` means current behavior has been intentionally confirmed for preservation.",
+        "",
+        "`desired` means approved target behavior that implementation should follow.",
+        "",
+        "`ideal` means best-known UX direction that may inform future work but is not automatically approved for the current pass.",
+        "",
+        "`intermediate` means a temporary UX state used during staged rollout, migration, or refactor.",
+        "",
+        "`proposed` means recommended UX that has not yet been confirmed.",
+        "",
+        "`pending-confirmation` means the UX decision is blocked on product/user confirmation.",
+        "",
+        "`deprecated` means behavior is intentionally being phased out.",
+        "",
+        "`rejected` means behavior or proposal was considered and explicitly not chosen.",
+        "",
+        "`unknown` means behavior is not yet discovered, derivable, or confirmed."
+      ]
+    },
+    {
+      "id": "valid-transition-patterns",
+      "title": "Valid Transition Patterns",
+      "body": [
+        "`current -> confirmed-current -> desired` is used when existing behavior is intentionally preserved as the desired target.",
+        "",
+        "`current -> proposed -> pending-confirmation -> desired` is used when an agent recommends a change that needs confirmation before it can govern implementation.",
+        "",
+        "`current -> intermediate -> desired` is used when a staged refactor or rollout requires temporary UX behavior before the final target.",
+        "",
+        "`current -> ideal -> desired` is used when product exploration identifies an ideal direction and then narrows it into an approved target.",
+        "",
+        "`current -> deprecated` is used when existing behavior should be phased out.",
+        "",
+        "`unknown -> current` is used when investigation discovers what exists.",
+        "",
+        "`unknown -> pending-confirmation` is used when investigation cannot resolve the behavior and product intent is needed."
+      ]
+    },
+    {
+      "id": "implementation-target-rule",
+      "title": "Implementation Target Rule",
+      "body": [
+        "Implementation should target `desired` or confirmed `intermediate` only.",
+        "",
+        "Implementation should not target raw `current`, `ideal`, `proposed`, `pending-confirmation`, `rejected`, or `unknown` UX.",
+        "",
+        "If work must proceed while a behavior is unresolved, route unresolved behavior into pending decisions and limit implementation to confirmed or safely separable areas."
+      ]
+    },
+    {
+      "id": "mapping-rule",
+      "title": "Mapping Rule",
+      "body": "Use current-to-desired mappings to explain transitions. Do not rely on mode labels alone to communicate whether behavior is preserved, changed, added, removed, split, merged, or blocked."
+    }
+  ]
+}

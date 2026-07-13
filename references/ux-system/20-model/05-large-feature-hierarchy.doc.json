@@ -1,0 +1,200 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.05-large-feature-hierarchy",
+  "title": "Large Feature Hierarchy",
+  "content": [
+    {
+      "id": "large-feature-hierarchy-body-1",
+      "body": [
+        "This document exists to define how agents should model large UX features from broad product intent down to fine-grained acceptance criteria. Use it when a App Behavior corpus is too large to be represented safely as a flat list of requirements.",
+        "",
+        "All hierarchy objects describe UX and product behavior only. They must not define architecture ownership, controller design, store design, code paths, raw state variables, or implementation sequencing."
+      ]
+    },
+    {
+      "id": "refinement-chain",
+      "title": "Refinement Chain",
+      "body": [
+        "Use this chain for large features:",
+        "",
+        "```text",
+        "Feature",
+        "  -> Subfeature",
+        "    -> Journey",
+        "      -> Flow",
+        "        -> Subflow",
+        "          -> Requirement",
+        "            -> Observable Scenario",
+        "            -> Acceptance Criterion",
+        "```",
+        "",
+        "The chain is progressive refinement. Higher layers explain why the experience exists and how users move through it. Lower layers define exact behavior and proof."
+      ]
+    },
+    {
+      "id": "feature",
+      "title": "Feature",
+      "body": [
+        "Use a feature item for a broad product area with multiple journeys, surfaces, or subfeatures.",
+        "",
+        "Do not use it for a single button, modal action, field, or implementation component.",
+        "",
+        "Required content:",
+        "",
+        "- purpose",
+        "- user value",
+        "- primary user goals",
+        "- included subfeatures",
+        "- excluded behavior",
+        "- primary surfaces",
+        "- entry points",
+        "- exit points",
+        "- success outcomes",
+        "- failure or hesitation points",
+        "- recovery expectations",
+        "- important constraints",
+        "- non-goals",
+        "",
+        "Completeness standard: a future agent should understand what the feature owns, why it matters, where users enter and leave, what success means, and what should not be absorbed into this feature."
+      ]
+    },
+    {
+      "id": "subfeature",
+      "title": "Subfeature",
+      "body": [
+        "Use a subfeature item for a coherent UX surface or workflow inside a larger feature.",
+        "",
+        "Do not use it for a code folder, component boundary, or small visual detail unless it has its own user behavior surface.",
+        "",
+        "Required content:",
+        "",
+        "- purpose",
+        "- user value",
+        "- owned surfaces",
+        "- user goals",
+        "- in-scope behavior",
+        "- out-of-scope behavior",
+        "- entry points",
+        "- exit points",
+        "- dependencies",
+        "- constraints",
+        "- non-goals",
+        "",
+        "Completeness standard: a future agent should know what behavior this subfeature governs and where to place new journeys, flows, and requirements."
+      ]
+    },
+    {
+      "id": "journey",
+      "title": "Journey",
+      "body": [
+        "Use a journey item for a user goal across one or more flows.",
+        "",
+        "Do not use it for a single implementation action or a narrow validation rule.",
+        "",
+        "Required content:",
+        "",
+        "- user goal",
+        "- user context",
+        "- trigger",
+        "- starting state",
+        "- success outcome",
+        "- happy path",
+        "- alternate paths",
+        "- hesitation or failure points",
+        "- recovery expectations",
+        "- non-goals",
+        "",
+        "Completeness standard: a future agent should understand the user's intent before writing lower-level behavior requirements."
+      ]
+    },
+    {
+      "id": "flow",
+      "title": "Flow",
+      "body": [
+        "Use a flow item for a coherent user path with a start, end, and expected outcome.",
+        "",
+        "Do not use it for every tiny click target. Use subflows for narrower behavioral units.",
+        "",
+        "Required content:",
+        "",
+        "- purpose",
+        "- starts when",
+        "- ends when",
+        "- happy path",
+        "- alternate paths",
+        "- blocked paths",
+        "- recovery paths",
+        "- expected outcomes",
+        "- non-goals",
+        "",
+        "Completeness standard: a future agent should be able to break the flow into subflows without guessing the primary path or recovery cases."
+      ]
+    },
+    {
+      "id": "subflow",
+      "title": "Subflow",
+      "body": [
+        "Use a subflow item for a stable behavioral unit inside a flow.",
+        "",
+        "Do not use it for implementation helper behavior that the user cannot observe.",
+        "",
+        "Required content:",
+        "",
+        "- purpose",
+        "- trigger",
+        "- user intent",
+        "- visible steps",
+        "- expected result",
+        "- alternate results",
+        "- edge cases",
+        "- must-not-happen behavior",
+        "",
+        "Completeness standard: a future agent should be able to attach requirements, observable scenarios, and acceptance criteria to the subflow."
+      ]
+    },
+    {
+      "id": "requirement",
+      "title": "Requirement",
+      "body": [
+        "Use a requirement item for one coherent UX behavior concept.",
+        "",
+        "Do not use it to define implementation state management.",
+        "",
+        "Required content is defined in [UX Requirement Item](02-ux-requirement-item.md).",
+        "",
+        "Completeness standard: implementation and tests should be able to use the requirement as a hard behavior gate."
+      ]
+    },
+    {
+      "id": "observable-scenario",
+      "title": "Observable Scenario",
+      "body": [
+        "Use an observable scenario item for user-visible situations such as loading, empty, error, invalid, dirty, stale, unauthenticated, success, restore, or recovery states.",
+        "",
+        "Do not use it for implementation timing details.",
+        "",
+        "Completeness standard: a future agent should know what the user sees, what the user can and cannot do, what feedback appears, and how the scenario settles."
+      ]
+    },
+    {
+      "id": "acceptance-criterion",
+      "title": "Acceptance Criterion",
+      "body": [
+        "Use an acceptance criterion item for proof expectations tied to requirements, scenarios, or subflows.",
+        "",
+        "Do not use it to duplicate the full requirement. It should make the proof concrete.",
+        "",
+        "Completeness standard: a future agent should know the given/when/then behavior, proof priority, automation expectation, and what failure means."
+      ]
+    },
+    {
+      "id": "pending-decision",
+      "title": "Pending Decision",
+      "body": [
+        "Use a pending decision item when product intent, behavior change, or confirmation is unresolved.",
+        "",
+        "Do not hide unresolved behavior inside notes fields. Pending decisions should be first-class so they can block or route implementation safely."
+      ]
+    }
+  ]
+}

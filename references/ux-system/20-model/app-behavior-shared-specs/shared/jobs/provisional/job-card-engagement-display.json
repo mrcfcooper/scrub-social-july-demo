@@ -1,0 +1,112 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.job-card-engagement-display",
+  "title": "Jobs Job Card Engagement And Display",
+  "module": "jobs",
+  "proposedSubmodule": "job-card-display",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/job-card-display/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Job card behavior for /jobs displays normalized job facts and exposes like/dislike/bookmark/compare actions with auth gates, applied-job restrictions, local patches, and toast/error feedback.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.job-card-engagement-display",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "displayAndActions": "Cards project title, location, dates, salary/pay, shift, status badges, facility fallback images, compact state badges, summary fields, featured/applied/workflow badges, and authenticated engagement actions. Guests route through auth intent; applied jobs block like/dislike/remove reaction while allowing bookmarks.",
+        "routeOwnedParticipation": "/jobs owns card placement and route-level result patch projection; shared workflow should own card display contract, engagement command effects, auth gates, restrictions, and proof mapping."
+      },
+      "sourceRefs": [
+        "frontend/src-legacy/components/JobCard.tsx",
+        "frontend/src-legacy/components/jobs/JobsResultsPanel.tsx",
+        "frontend/src-legacy/utils/jobDisplay.ts",
+        "frontend/src-legacy/utils/jobPayByType.ts",
+        "frontend/src-legacy/utils/formatJobField.ts",
+        "frontend/src-legacy/stores/useJobEngagementSyncStore.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-card-engagement-compare.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-job-wire-dto.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/06-access-privacy-inventory.json"
+      ],
+      "proofRefs": [
+        "frontend/src-legacy/pages/Jobs.1000.test.tsx",
+        "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [],
+      "proofStatus": "source-inventoried; existing tests map partial behavior; route browser proof remains useful for end-to-end confidence"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "user-action:route.jobs.card-like-dislike",
+        "user-action:route.jobs.card-bookmark",
+        "user-action:route.jobs.compare",
+        "current-ux-requirement:route.jobs.engagement-and-auth",
+        "coverage:route.jobs.engagement"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/src-legacy/pages/Jobs.1000.test.tsx",
+        "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/src-legacy/components/JobCard.tsx",
+    "frontend/src-legacy/components/jobs/JobsResultsPanel.tsx",
+    "frontend/src-legacy/utils/jobDisplay.ts",
+    "frontend/src-legacy/utils/jobPayByType.ts",
+    "frontend/src-legacy/utils/formatJobField.ts",
+    "frontend/src-legacy/stores/useJobEngagementSyncStore.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-card-engagement-compare.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/public-job-wire-dto.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/06-access-privacy-inventory.json"
+  ],
+  "proofRefs": [
+    "frontend/src-legacy/pages/Jobs.1000.test.tsx",
+    "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

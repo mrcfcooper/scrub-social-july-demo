@@ -1,0 +1,115 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.workspace-session-lifecycle",
+  "title": "Jobs Workspace Session Lifecycle",
+  "module": "jobs",
+  "proposedSubmodule": "workspace-session",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/workspace-session/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Jobs workspace session behavior serializes and restores URL, history, localStorage, page UI state, query state, results continuity, and account-scoped cleanup for /jobs.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.workspace-session-lifecycle",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "lifecycle": "On /jobs entry and interaction, workspace session arbitrates live state, URL, persisted session, defaults, history continuity, drawer state, view mode, map viewport, pagination/result continuity, and cleanup of stale or legacy state.",
+        "routeOwnedParticipation": "/jobs owns route entry and visible continuity expectations; shared lifecycle spec should own storage/history keys, versioning, restore precedence, stale suppression, and cleanup contract."
+      },
+      "sourceRefs": [
+        "frontend/modules/jobs/workspace/internal/session.ts",
+        "frontend/modules/jobs/entry/controller/internal/store.ts",
+        "frontend/modules/jobs/workspace/internal/commands.ts",
+        "frontend/modules/jobs/page/controller/internal/store.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/04-state-lifecycle-inventory.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-workspace-session.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/query-url-boundaries/jobs-url-query-canonicalization.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/jobs/workspace/internal/session.test.ts",
+        "frontend/modules/jobs/workspace/internal/commands.test.ts",
+        "frontend/modules/jobs/page/controller/internal/store.test.ts"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "follow-up:route.jobs.runtime-browser-proof"
+      ],
+      "proofStatus": "source-and-vitest-covered; browser history/storage proof gap routed"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "behavior-branch:route.jobs.initial-restore",
+        "behavior-branch:route.jobs.url-session",
+        "current-ux-requirement:route.jobs.url-storage-continuity"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/jobs/workspace/internal/session.test.ts",
+        "frontend/modules/jobs/workspace/internal/commands.test.ts",
+        "frontend/modules/jobs/page/controller/internal/store.test.ts"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/jobs/workspace/internal/session.ts",
+    "frontend/modules/jobs/entry/controller/internal/store.ts",
+    "frontend/modules/jobs/workspace/internal/commands.ts",
+    "frontend/modules/jobs/page/controller/internal/store.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/04-state-lifecycle-inventory.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-workspace-session.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/query-url-boundaries/jobs-url-query-canonicalization.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/jobs/workspace/internal/session.test.ts",
+    "frontend/modules/jobs/workspace/internal/commands.test.ts",
+    "frontend/modules/jobs/page/controller/internal/store.test.ts"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "follow-up:route.jobs.runtime-browser-proof"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

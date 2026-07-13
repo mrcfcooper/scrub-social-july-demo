@@ -1,0 +1,75 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.15-confirmation-baseline",
+  "title": "Confirmation Baseline",
+  "content": [
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Defines the App Behavior row confirmation baseline used to audit when a behavior row was last confirmed against a repository commit.",
+        "Audience: Agents and engineers maintaining App Behavior rows, row-inline behaviorRelations fields, row-inline runtimeAlignment fields and generated drift reports, validators, and UX implementation plans.",
+        "Keep In Sync With: shared-definitions.schema.json, App Behavior row schemas, confirmation baseline backfill tooling, and UX validation reports.",
+        "Update When: Baseline provenance fields, confirmation workflow, validator reports, or row audit policy changes.",
+        "Does Not Cover: Product confirmation authority, runtime drift resolution, or implementation proof.",
+        "-->"
+      ]
+    },
+    {
+      "id": "confirmation-baseline",
+      "title": "Confirmation Baseline",
+      "depth": 1,
+      "body": "This document defines the `confirmationBaseline` field for App Behavior spec rows. The field answers: when was this row last confirmed against a concrete repository commit?"
+    },
+    {
+      "id": "principle",
+      "title": "Principle",
+      "body": "App Behavior rows are durable behavior truth and audit evidence. A row needs a deterministic baseline commit so future agents can compare repo changes since confirmation and decide whether the behavior should be manually rechecked."
+    },
+    {
+      "id": "rule",
+      "title": "Rule",
+      "body": "Every UX behavior/spec row should carry `confirmationBaseline` once it enters a durable App Behavior corpus. The baseline records audit provenance only. It does not replace `requirementSource.confirmation`, current/desired mappings, row-inline behaviorRelations fields, pending decisions, row-inline runtimeAlignment fields and generated drift reports, or implementation proof."
+    },
+    {
+      "id": "field-meaning",
+      "title": "Field Meaning",
+      "body": [
+        "- `lastConfirmedCommit`: full 40-character git commit hash that anchors the last row confirmation. It means the row claim was actually checked against that commit; it does not mean the branch merely contains that commit in history.",
+        "- `lastConfirmedAt`: date associated with the baseline confirmation.",
+        "- `method`: how the baseline was recorded, such as `bulk-backfill`, `user-confirmed`, `agent-confirmed`, `runtime-audit`, or `migration`.",
+        "- `scope`: short stable label for the confirmation pass or audit reason.",
+        "- `notesMd`: optional explanation of what the baseline means and what it does not mean."
+      ]
+    },
+    {
+      "id": "confirmation-currentness-rule",
+      "title": "Confirmation Currentness Rule",
+      "body": [
+        "Do not bulk-refresh confirmation metadata after code or evidence changes. A row may remain valid with an old confirmation commit when its evidence did not change. A row may be stale even when the branch contains its old confirmation commit.",
+        "",
+        "Update `confirmationBaseline` only when an agent intentionally reviews the row or inventory evidence against the new commit. Rows omitted from targeted reverification, or rows marked `not-reviewed`, must keep existing confirmation metadata."
+      ]
+    },
+    {
+      "id": "future-updates",
+      "title": "Future Updates",
+      "body": "When an agent intentionally rechecks or reconfirms an App Behavior row, it should update the baseline to the commit used for that confirmation and preserve row-inline behaviorRelations fields, runtime alignment fields, reverification ledgers, or drift reports for any mismatch it discovers. Non-blocking runtime mismatch should be recorded without letting the baseline hide drift. App Behavior updates promoted from discovered or proven runtime should also record what source/runtime, route-packet, shared-spec, proof, owner, contract, cutover-scope, backend/API, evidence-quality, priority, or product-authority change would force a future re-check."
+    },
+    {
+      "id": "behavior-preservation-recheck-input",
+      "title": "Behavior Preservation Recheck Input",
+      "body": [
+        "Behavior preservation recheck matrix evidence may support an App Behavior row `confirmationBaseline` update only when the row was intentionally rechecked against concrete commit/source/runtime evidence.",
+        "",
+        "Do not bulk-refresh confirmation baselines merely because a recheck matrix exists. Matrix rows are evidence and history; confirmation baselines remain row-level provenance for App Behavior rows."
+      ]
+    },
+    {
+      "id": "backfill",
+      "title": "Backfill",
+      "body": "Use `agent/ux-system/tools/backfill-confirmation-baseline.cjs` for one-off baseline stamping. Run `--check` first, inspect the row count and conflicts, then run `--write` only when the target set is correct. Use `--commit` to override the default baseline commit."
+    }
+  ]
+}

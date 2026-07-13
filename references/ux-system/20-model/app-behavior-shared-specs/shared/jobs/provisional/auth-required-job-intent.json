@@ -1,0 +1,109 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.auth-required-job-intent",
+  "title": "Jobs Auth Required Job Intent",
+  "module": "jobs",
+  "proposedSubmodule": "auth-intent",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/auth-intent/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Auth-required job actions capture, store, replay, materialize, and clear job intent for /jobs public users crossing into authenticated behavior.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.auth-required-job-intent",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "accessAndReplay": "Guest job actions from /jobs capture intent and route through identity/auth. Once session readiness allows materialization, stored intent may open drawer, replay requested action, or clear/cancel according to intent runtime rules. Public listing remains visible while private mutations are gated.",
+        "routeOwnedParticipation": "/jobs owns which visible controls expose auth-required actions; shared access spec should own stored payload shape, claim/clear/materialization behavior, and session readiness constraints."
+      },
+      "sourceRefs": [
+        "frontend/modules/auth/resume/families/job/job-intent-controller.ts",
+        "frontend/modules/auth/resume/shared/resume-intent-storage.ts",
+        "frontend/src-legacy/utils/guestIntentAuthRedirect.ts",
+        "frontend/src-legacy/components/JobCard.tsx"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/06-access-privacy-inventory.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/auth-intent-payloads/jobs-auth-required-actions.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-card-engagement-compare.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/auth/resume/runtime/job-auth-resume-contract.test.ts",
+        "frontend/modules/auth/resume/runtime/intent-family-runtime.test.ts",
+        "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [],
+      "proofStatus": "runtime tests exist for auth resume contract; route browser proof remains bounded to consumer flows"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "role-permission:route.jobs.public-route-auth-actions",
+        "hidden-ux:route.jobs.intent-materialization",
+        "coverage:route.jobs.auth"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/auth/resume/runtime/job-auth-resume-contract.test.ts",
+        "frontend/modules/auth/resume/runtime/intent-family-runtime.test.ts",
+        "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/auth/resume/families/job/job-intent-controller.ts",
+    "frontend/modules/auth/resume/shared/resume-intent-storage.ts",
+    "frontend/src-legacy/utils/guestIntentAuthRedirect.ts",
+    "frontend/src-legacy/components/JobCard.tsx"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/06-access-privacy-inventory.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/auth-intent-payloads/jobs-auth-required-actions.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-card-engagement-compare.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/auth/resume/runtime/job-auth-resume-contract.test.ts",
+    "frontend/modules/auth/resume/runtime/intent-family-runtime.test.ts",
+    "frontend/modules/jobs/runtime/jobs-auth-consumers.runtime.test.tsx"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "schema": "tgn.ux-artifact.v1",
+  "artifactRole": "mixed",
+  "artifactType": "mixed",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters Feature And Subfeature Collection",
+  "uxModes": [
+    "desired"
+  ],
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "governing": {
+    "jsonIsGoverning": true,
+    "markdownIsReviewOnly": true,
+    "notesMd": "This collection governs UX feature/subfeature meaning, not implementation structure."
+  },
+  "sourceFile": "01-feature-and-subfeature.collection.example.json",
+  "generatedMarkdown": "generated/jobs.filters.features-and-subfeatures.md",
+  "splitCompose": {
+    "portableItems": true,
+    "stableItemOrder": true,
+    "preferredSplitKey": "id"
+  },
+  "items": [
+    {
+      "schema": "tgn.ux-feature.v1",
+      "itemType": "uxFeature",
+      "id": "jobs.search",
+      "title": "Jobs Search",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "primaryUxOwner": "jobs.search",
+        "notesMd": "Parent context for Jobs filters."
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "featureIds": [
+          "jobs.search"
+        ],
+        "surfaceIds": [
+          "jobs-search-page"
+        ],
+        "platforms": [
+          "web"
+        ],
+        "breakpoints": [
+          "mobile",
+          "desktop"
+        ]
+      },
+      "feature": {
+        "purpose": "Help users discover relevant jobs, narrow results, inspect opportunities, and recover from dead ends without losing browsing context.",
+        "userValue": "Users can move from a broad jobs list to relevant opportunities with understandable filters, clear results feedback, and reversible actions.",
+        "primaryUserGoals": [
+          "Search for jobs by text or location intent.",
+          "Narrow jobs with understandable and reversible filters.",
+          "Inspect jobs and return to the prior browsing context."
+        ],
+        "includedSubfeatures": [
+          "jobs.search.filters"
+        ],
+        "excludedBehavior": [
+          "Employer-side job posting authoring.",
+          "Job application submission after leaving search."
+        ],
+        "primarySurfaces": [
+          "Jobs search page",
+          "Search and filter controls",
+          "Advanced filter modal",
+          "Results list",
+          "Empty, loading, and error states"
+        ],
+        "entryPoints": [
+          "Clean navigation to Jobs",
+          "URL with query parameters",
+          "Return from job details"
+        ],
+        "exitPoints": [
+          "Open job details",
+          "Navigate away from Jobs search",
+          "Clear filters and return to broad browsing"
+        ],
+        "successOutcomes": [
+          "The user understands active search and filter context.",
+          "Results reflect the user's intended constraints."
+        ],
+        "failureOrHesitationPoints": [
+          "The user cannot tell which filters are active.",
+          "The user is unsure whether edits are live or pending."
+        ],
+        "recoveryExpectations": [
+          "Clear or reset actions must make it obvious what will be removed.",
+          "Empty and error states must provide a meaningful next step."
+        ],
+        "importantConstraints": [
+          "Desired UX governs implementation; runtime behavior is not automatic authority."
+        ],
+        "nonGoals": [
+          "Define implementation architecture.",
+          "Specify pixel-level layout unrelated to behavior."
+        ]
+      },
+      "relationships": {
+        "subfeatureIds": [
+          "jobs.search.filters"
+        ],
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply",
+          "jobs.filters.desired.modal-clear"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.search.feature.md"
+      },
+      "db": {
+        "collection": "uxFeatures",
+        "documentId": "jobs.search"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    },
+    {
+      "schema": "tgn.ux-subfeature.v1",
+      "itemType": "uxSubfeature",
+      "id": "jobs.search.filters",
+      "title": "Jobs Search Filters",
+      "mode": "desired",
+      "status": "confirmed-governing",
+      "authority": "governing",
+      "confidence": 95,
+      "owner": {
+        "module": "jobs",
+        "submodule": "filters",
+        "impliedSubmodule": "advanced-filter-modal",
+        "surface": "filter-modal",
+        "primaryUxOwner": "jobs.filters"
+      },
+      "scope": {
+        "corpusId": "jobs.filters",
+        "featureIds": [
+          "jobs.search"
+        ],
+        "surfaceIds": [
+          "filter-modal",
+          "filter-summary"
+        ],
+        "platforms": [
+          "web"
+        ],
+        "breakpoints": [
+          "mobile",
+          "desktop"
+        ]
+      },
+      "subfeature": {
+        "purpose": "Let users narrow Jobs results through filter authoring, review, apply, clear, and recovery behavior.",
+        "userValue": "Users can confidently edit filters before committing them to browsing.",
+        "ownedSurfaces": [
+          "Advanced filter modal",
+          "Filter summary",
+          "Clear/reset controls",
+          "Filter validation and recovery states"
+        ],
+        "userGoals": [
+          "Open advanced filters.",
+          "Edit constraints without accidental commit.",
+          "Apply or discard edits intentionally.",
+          "Clear filters and understand the effect."
+        ],
+        "inScopeBehavior": [
+          "Filter authoring",
+          "Apply behavior",
+          "Clear behavior",
+          "Invalid input blocking",
+          "Modal dismissal and recovery"
+        ],
+        "outOfScopeBehavior": [
+          "Saved-search email delivery",
+          "Employer-side filters",
+          "Analytics implementation"
+        ],
+        "entryPoints": [
+          "Open advanced filters",
+          "Return to filters from URL state"
+        ],
+        "exitPoints": [
+          "Apply",
+          "Cancel",
+          "Discard",
+          "Clear",
+          "Dismiss modal"
+        ],
+        "dependencies": [
+          "Jobs search feature context"
+        ],
+        "constraints": [
+          "Existing confirmed behavior must not change without user confirmation.",
+          "Exact copy is governing only when explicitly marked."
+        ],
+        "nonGoals": [
+          "Define controller boundaries.",
+          "Define data persistence implementation."
+        ]
+      },
+      "relationships": {
+        "parentFeatureId": "jobs.search",
+        "journeyIds": [
+          "jobs.filters.narrow-results"
+        ],
+        "flowIds": [
+          "jobs.filters.advanced-filter-authoring"
+        ],
+        "requirementIds": [
+          "jobs.filters.desired.modal-apply",
+          "jobs.filters.desired.modal-clear"
+        ]
+      },
+      "openQuestions": [],
+      "generatedRefs": {
+        "markdown": "generated/desired/jobs.search.filters.subfeature.md"
+      },
+      "db": {
+        "collection": "uxSubfeatures",
+        "documentId": "jobs.search.filters"
+      },
+      "custom": {},
+      "confirmationBaseline": {
+        "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+        "lastConfirmedAt": "2026-05-01",
+        "method": "bulk-backfill",
+        "scope": "one-pass-ux-spec-creation",
+        "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or runtime drift ledgers."
+      }
+    }
+  ],
+  "custom": {}
+}

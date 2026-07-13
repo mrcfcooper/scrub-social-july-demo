@@ -1,0 +1,129 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.compact-license-state-behavior",
+  "title": "Jobs Compact License State Behavior",
+  "module": "jobs",
+  "proposedSubmodule": "catalog-facets",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/catalog-facets/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Catalog-provided compactStates drive /jobs compact license state filter shortcuts, filter summary copy, results badges, and delegated detail badges for eligible nursing professions.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.compact-license-state-behavior",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "triggerAndProjection": "The advanced filter modal shows compact license state controls when catalog compactStates exist and the selected profession is compact-license eligible. Add All Compact States merges compactStates into draft states; Reset to All Compact States replaces draft states exactly. Exact compact state selection is summarized as Compact License States. Results and delegated detail show Compact State badges when job profession and state match compact eligibility.",
+        "routeOwnedParticipation": "/jobs owns the filter modal entry, result card projection, and route-specific proof/gap routing; final shared owner should govern compactStates catalog payload, matching helpers, and badge eligibility."
+      },
+      "sourceRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.ts",
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.tsx",
+        "frontend/src-legacy/hooks/jobs/query/jobsFilterDescription.ts",
+        "frontend/src-legacy/components/jobs/JobsResultsPanel.tsx",
+        "frontend/src-legacy/components/JobCard.tsx",
+        "frontend/src-legacy/utils/compactStates.ts",
+        "frontend/src-legacy/pages/JobDetail.tsx"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/jobs-catalog-and-facet-boundaries.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/proof-assets/jobs-proof-map.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx",
+        "frontend/src-legacy/components/jobs/JobsControlsPanel.test.tsx",
+        "frontend/src-legacy/components/jobs/JobsResultsPanel.test.tsx"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "proof-gap:route.jobs.compact-license-end-to-end"
+      ],
+      "proofStatus": "partially-covered-existing-tests; browser/end-to-end proof gap routed"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "user-action:route.jobs.compact-license-states",
+        "behavior-branch:route.jobs.compact-license-states",
+        "coverage:route.jobs.compact-license-states"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx",
+        "frontend/src-legacy/components/jobs/JobsControlsPanel.test.tsx",
+        "frontend/src-legacy/components/jobs/JobsResultsPanel.test.tsx"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/jobs/filters/catalog/controller/internal/execution.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/selectors.ts",
+    "frontend/modules/jobs/ui/legacy/components/FilterModal.tsx",
+    "frontend/src-legacy/hooks/jobs/query/jobsFilterDescription.ts",
+    "frontend/src-legacy/components/jobs/JobsResultsPanel.tsx",
+    "frontend/src-legacy/components/JobCard.tsx",
+    "frontend/src-legacy/utils/compactStates.ts",
+    "frontend/src-legacy/pages/JobDetail.tsx"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/jobs-catalog-and-facet-boundaries.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/state-payloads/jobs-page-ui-and-host-runtime.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/proof-assets/jobs-proof-map.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+    "frontend/modules/jobs/ui/legacy/components/FilterModal.test.tsx",
+    "frontend/src-legacy/components/jobs/JobsControlsPanel.test.tsx",
+    "frontend/src-legacy/components/jobs/JobsResultsPanel.test.tsx"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "proof-gap:route.jobs.compact-license-end-to-end"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

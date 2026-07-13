@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-behavior-mapping.schema.json",
+  "title": "TGN UX Behavior Mapping",
+  "type": "object",
+  "required": [
+    "schema",
+    "itemType",
+    "id",
+    "corpusId",
+    "scope",
+    "fromRefs",
+    "toRefs",
+    "fromBehaviorKind",
+    "toBehaviorKind",
+    "mappingType",
+    "decisionStatus",
+    "runtimeAlignmentStatus",
+    "summary",
+    "recommendation",
+    "confirmation",
+    "implementationGate",
+    "testGate",
+    "confirmationBaseline"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "tgn.ux-behavior-mapping.v1"
+    },
+    "itemType": {
+      "type": "string",
+      "const": "uxBehaviorMapping"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "corpusId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "$ref": "shared-definitions.schema.json#/$defs/scope"
+    },
+    "fromRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "toRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-definitions.schema.json#/$defs/ref"
+      }
+    },
+    "fromBehaviorKind": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorKind"
+    },
+    "toBehaviorKind": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorKind"
+    },
+    "mappingType": {
+      "$ref": "shared-definitions.schema.json#/$defs/behaviorMappingType"
+    },
+    "decisionStatus": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "pending-confirmation",
+        "recommended",
+        "deferred",
+        "blocked",
+        "not-required"
+      ]
+    },
+    "runtimeAlignmentStatus": {
+      "$ref": "shared-definitions.schema.json#/$defs/runtimeAlignmentStatus"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "behaviorDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preserved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "added": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknown": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notesMd": {
+          "type": "string"
+        }
+      }
+    },
+    "recommendation": {
+      "$ref": "shared-definitions.schema.json#/$defs/recommendation"
+    },
+    "confirmation": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmation"
+    },
+    "implementationGate": {
+      "type": "object",
+      "required": [
+        "canImplement"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "canImplement": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "blockedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "testGate": {
+      "type": "object",
+      "required": [
+        "required"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "behaviorRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assertionRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generatedRefs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "db": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "custom": {
+      "$ref": "shared-definitions.schema.json#/$defs/custom"
+    },
+    "confirmationBaseline": {
+      "$ref": "shared-definitions.schema.json#/$defs/confirmationBaseline"
+    }
+  }
+}

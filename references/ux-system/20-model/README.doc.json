@@ -1,0 +1,128 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.README",
+  "title": "Model",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Index for the human-readable UX schema model and its file, artifact, requirement, and mapping concepts.",
+        "Audience: Agents and engineers authoring UX JSON, creating generators, or translating App Behavior docs into schema-compatible artifacts.",
+        "Keep In Sync With: JSON Schema files, examples, and authoring standards for App Behavior corpuses.",
+        "Update When: The schema model, folder layout, current/desired separation, or mapping behavior changes.",
+        "Does Not Cover: Machine-readable schema definitions in full detail.",
+        "-->"
+      ]
+    },
+    {
+      "id": "model",
+      "title": "Model",
+      "depth": 1,
+      "body": [
+        "This folder explains the UX schema system in human terms. Use it before writing or revising production UX JSON.",
+        "",
+        "Files are prefixed in recommended reading order.",
+        "",
+        "1. [File And Folder Structure](00-file-and-folder-structure.md)",
+        "2. [Artifact Envelope](01-artifact-envelope.md)",
+        "3. [UX Requirement Item](02-ux-requirement-item.md)",
+        "4. [Current Desired Separation](03-current-desired-separation.md)",
+        "5. [Current Desired Mappings](04-current-desired-mappings.md)",
+        "6. [Large Feature Hierarchy](05-large-feature-hierarchy.md)",
+        "7. [Spec Profiles And Depth](06-spec-profiles-and-depth.md)",
+        "8. [UX Modes And Transitions](07-ux-modes-and-transitions.md)",
+        "9. [Artifact Roles And Facets](08-artifact-roles-and-facets.md)",
+        "10. [Granularity And Coverage](09-granularity-and-coverage.md)",
+        "11. [UX Corpus Authoring Procedure](10-ux-corpus-authoring-procedure.md)",
+        "12. [Schema Example Conformance](11-schema-example-conformance.md)",
+        "13. [Reference Integrity](12-reference-integrity.md)",
+        "14. [Runtime Drift Ledger](14-runtime-drift-ledger.doc.json)",
+        "15. [Confirmation Baseline](15-confirmation-baseline.doc.json)",
+        "16. [Behavior Thread Parent Containers](16-behavior-thread-parent-containers.doc.json)",
+        "17. [Full App Behavior Coverage Taxonomy](17-full-app-behavior-coverage-taxonomy.doc.json)",
+        "18. [App Behavior Shared Specs](app-behavior-shared-specs/README.doc.json)",
+        "19. [Provisional Shared Spec Standard](app-behavior-shared-specs/07-provisional-shared-spec-standard.doc.json)",
+        "20. [App Behavior Defaults](app-behavior-defaults/README.doc.json)",
+        "21. [Row-Inline UX Quality Assessment](14-runtime-drift-ledger.doc.json)"
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this corpus when:",
+        "- understanding App Behavior schema concepts, file/folder shape, artifact envelopes, requirement items, current/desired separation, mappings, drift, baselines, and behavior threads",
+        "",
+        "Does not own:",
+        "- UX principle judgment",
+        "- machine schema details alone",
+        "- runtime implementation",
+        "",
+        "Read first:",
+        "- this README",
+        "- 00-file-and-folder-structure.md",
+        "- 01-artifact-envelope.md",
+        "",
+        "Route deeper to:",
+        "- 02 through 12 for core model concepts",
+        "- 14 through 17 for runtime drift, confirmation baselines, behavior threads, and full coverage taxonomy",
+        "- app-behavior-shared-specs/README.doc.json and app-behavior-defaults/README.doc.json for dense shared/default behavior models",
+        "",
+        "Common cross-routes:",
+        "- 10-schemas/README.doc.json for machine-readable schema",
+        "- 35-ux/README.doc.json for UX judgment",
+        "- tools/README.doc.json for validation",
+        "",
+        "Stop when:",
+        "- the agent can name the model concept, correct artifact role, relationship/mapping shape, and validation expectation"
+      ]
+    },
+    {
+      "id": "route-intent-guidance",
+      "title": "Route Intent Guidance",
+      "body": [
+        "Use child README routes before model leaf docs when the task belongs to defaults or shared specs.",
+        "",
+        "- For repeated low-risk behavior defaults, maturity rules, or frontend default catalogs, read `app-behavior-defaults/README.doc.json` first.",
+        "- For shared App Behavior homes, route references, provisional shared specs, participating-route indexes, or shared-spec maturity, read `app-behavior-shared-specs/README.doc.json` first.",
+        "- For core model lifecycle, confirmation baseline model, or behavior lifecycle model, stay in this README and follow its direct model routes.",
+        "",
+        "Stop when the agent can state whether the task is core model, defaults, or shared-spec work, which child README or leaf doc owns the next route, and what behavior authority is still required."
+      ]
+    },
+    {
+      "id": "confirmation-baseline-model",
+      "title": "Confirmation Baseline Model",
+      "body": [
+        "- `15-confirmation-baseline.doc.json` defines row-level commit provenance for UX behavior/spec rows.",
+        "- Confirmation baselines answer when a row was last audited against a repo commit; they do not replace product confirmation or runtime alignment records.",
+        "- When runtime evidence promotes or reconfirms behavior, record the confirmation baseline plus any staleness or re-verification trigger that would force a future re-check."
+      ]
+    },
+    {
+      "id": "behavior-lifecycle-model",
+      "title": "Behavior Lifecycle Model",
+      "body": [
+        "App Behavior rows and behavior-thread containers may record observed/current, intended/target, ideal/future, drift, pending, and verified/proven behavior, but the status and authority role must be explicit.",
+        "Source/runtime evidence discovered during investigation should be captured in the App Behavior corpus or routed to a bounded gap, not left only in route inventories, proof notes, audit notes, or chat.",
+        "Runtime drift ledgers are routing and triage surfaces. They are not the final behavior authority.",
+        "Ideal/future behavior discovered during planning should be recorded as non-current and out of scope unless explicit product/user authority expands the current mission."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ss-job-match-notification">
+  <style>
+    .ss-job-match-notification {
+      --plum: #421A31;
+      --plum-soft: #6b3a52;
+      --open-air: #F9F2E8;
+      --lavender: #BBAFEF;
+      --clear-sky: #82ABF4;
+      --morning-dew: #CEDBFE;
+      --cloud: #FFFFFF;
+      --ink: #2c1320;
+      --muted: #8a7480;
+      --good: #6fc78a;
+
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(110% 80% at 50% -10%, rgba(187,175,239,0.20), transparent 55%),
+        radial-gradient(90% 70% at 100% 110%, rgba(130,171,244,0.16), transparent 50%),
+        var(--open-air);
+      padding: 36px 18px 44px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .ss-job-match-notification *,
+    .ss-job-match-notification *::before,
+    .ss-job-match-notification *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ---------- intro ---------- */
+    .ss-job-match-notification .intro {
+      max-width: 1180px; margin: 0 auto 30px; text-align: center;
+    }
+    .ss-job-match-notification .intro .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--plum-soft); margin-bottom: 8px;
+    }
+    .ss-job-match-notification .intro h2 {
+      font-size: 27px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .ss-job-match-notification .intro p {
+      font-size: 14px; font-weight: 300; color: var(--muted);
+      margin-top: 8px; line-height: 1.5;
+    }
+
+    /* ---------- rail ---------- */
+    .ss-job-match-notification .rail {
+      display: flex; gap: 30px; justify-content: center;
+      flex-wrap: wrap; max-width: 1180px; margin: 0 auto;
+    }
+    .ss-job-match-notification .step { display: flex; flex-direction: column; align-items: center; }
+    .ss-job-match-notification .step .caption {
+      margin-top: 16px; text-align: center;
+    }
+    .ss-job-match-notification .step .caption .n {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--lavender);
+    }
+    .ss-job-match-notification .step .caption .t {
+      font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 2px;
+    }
+
+    /* ---------- phone frame ---------- */
+    .ss-job-match-notification .phone {
+      width: 330px; max-width: 100%;
+      background: var(--plum);
+      border-radius: 44px; padding: 11px;
+      box-shadow: 0 2px 4px rgba(66,26,49,0.18), 0 22px 50px rgba(66,26,49,0.40),
+        inset 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .ss-job-match-notification .screen {
+      border-radius: 34px; overflow: hidden; position: relative;
+      height: 700px; display: flex; flex-direction: column;
+    }
+    .ss-job-match-notification .notch {
+      position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+      width: 108px; height: 25px; background: var(--plum); border-radius: 14px; z-index: 40;
+    }
+    .ss-job-match-notification .home-ind {
+      position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%);
+      width: 116px; height: 5px; border-radius: 999px; z-index: 40;
+    }
+
+    /* ===== FRAME 1 — lock screen ===== */
+    .ss-job-match-notification .lock {
+      background:
+        linear-gradient(180deg, rgba(66,26,49,0.0) 30%, rgba(66,26,49,0.55) 100%),
+        radial-gradient(130% 80% at 30% 10%, #6b3a52, #2c1320 70%);
+      color: var(--open-air);
+    }
+    .ss-job-match-notification .lock .home-ind { background: rgba(249,242,232,0.5); }
+    .ss-job-match-notification .lock .lock-status {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px 0; font-size: 13px; font-weight: 600; color: var(--open-air);
+    }
+    .ss-job-match-notification .lock .lock-status svg { display:block; }
+    .ss-job-match-notification .lock .clock {
+      text-align: center; margin-top: 26px;
+    }
+    .ss-job-match-notification .lock .clock .date {
+      font-size: 14px; font-weight: 400; letter-spacing: 0.02em; opacity: 0.85;
+    }
+    .ss-job-match-notification .lock .clock .time {
+      font-size: 62px; font-weight: 300; line-height: 1; margin-top: 2px; letter-spacing: -0.02em;
+    }
+    .ss-job-match-notification .lock .push {
+      margin: auto 14px 16px; /* pushes card to bottom area */
+    }
+    .ss-job-match-notification .push-card {
+      background: rgba(249,242,232,0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 20px; padding: 14px;
+      color: var(--ink);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+      animation: ss-slide-down 0.7s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes ss-slide-down {
+      from { opacity: 0; transform: translateY(-14px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .ss-job-match-notification .push-card .pc-head {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+    }
+    .ss-job-match-notification .push-card .app-ic {
+      width: 22px; height: 22px; border-radius: 6px; background: var(--plum);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-job-match-notification .push-card .app-ic svg { width: 14px; height: 15px; }
+    .ss-job-match-notification .push-card .app-name {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--plum); flex: 1;
+    }
+    .ss-job-match-notification .push-card .when { font-size: 11px; color: var(--muted); }
+    .ss-job-match-notification .push-card .pc-title {
+      font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3;
+    }
+    .ss-job-match-notification .push-card .pc-body {
+      font-size: 13px; font-weight: 300; color: var(--plum-soft); margin-top: 3px; line-height: 1.4;
+    }
+    .ss-job-match-notification .push-card .pc-body b { font-weight: 600; color: var(--clear-sky); }
+
+    /* ===== FRAMES 2 & 3 — in-app ===== */
+    .ss-job-match-notification .app { background: var(--open-air); }
+    .ss-job-match-notification .app .home-ind { background: rgba(66,26,49,0.22); }
+    .ss-job-match-notification .statusbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px 6px; font-size: 13px; font-weight: 600; color: var(--plum);
+    }
+    .ss-job-match-notification .statusbar svg { display:block; }
+    .ss-job-match-notification .app-head {
+      display: flex; align-items: center; gap: 9px; padding: 6px 20px 14px;
+    }
+    .ss-job-match-notification .smark { width: 22px; height: 26px; display: block; }
+    .ss-job-match-notification .app-head .wm { font-size: 15px; font-weight: 600; color: var(--plum); }
+    .ss-job-match-notification .app-body { flex: 1; overflow: hidden; padding: 0 16px; }
+
+    /* erin banner */
+    .ss-job-match-notification .erin-banner {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--morning-dew); border-radius: 16px; padding: 11px 13px; margin-bottom: 14px;
+    }
+    .ss-job-match-notification .erin-av {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--clear-sky), var(--lavender));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-job-match-notification .erin-av svg { width: 16px; height: 16px; stroke: var(--cloud); }
+    .ss-job-match-notification .erin-banner .eb-t { font-size: 13px; font-weight: 500; color: var(--plum); }
+    .ss-job-match-notification .erin-banner .eb-s { font-size: 11px; font-weight: 300; color: var(--plum-soft); }
+
+    /* match card */
+    .ss-job-match-notification .match-card {
+      background: var(--cloud); border-radius: 22px; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(66,26,49,0.10);
+    }
+    .ss-job-match-notification .mc-top {
+      background:
+        radial-gradient(120% 130% at 85% 0%, rgba(187,175,239,0.34), transparent 60%),
+        var(--plum);
+      padding: 18px 18px 16px; color: var(--open-air); position: relative;
+    }
+    .ss-job-match-notification .mc-score {
+      position: absolute; top: 16px; right: 16px;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(249,242,232,0.10);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 2px solid var(--lavender);
+    }
+    .ss-job-match-notification .mc-score .v { font-size: 22px; font-weight: 600; line-height: 1; }
+    .ss-job-match-notification .mc-score .v span { font-size: 11px; opacity: 0.7; }
+    .ss-job-match-notification .mc-score .l {
+      font-size: 8px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lavender); margin-top: 2px;
+    }
+    .ss-job-match-notification .mc-tag {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 7px;
+    }
+    .ss-job-match-notification .mc-role { font-size: 18px; font-weight: 500; line-height: 1.2; max-width: 200px; }
+    .ss-job-match-notification .mc-fac {
+      font-size: 12.5px; font-weight: 300; color: rgba(249,242,232,0.78); margin-top: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .ss-job-match-notification .mc-fac svg { width: 12px; height: 12px; stroke: var(--lavender); }
+
+    .ss-job-match-notification .mc-pay {
+      display: flex; gap: 16px; padding: 14px 18px; border-bottom: 1px solid #f0e8de;
+    }
+    .ss-job-match-notification .mc-pay .pi .pl {
+      font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    }
+    .ss-job-match-notification .mc-pay .pi .pv { font-size: 15px; font-weight: 600; color: var(--plum); margin-top: 2px; }
+    .ss-job-match-notification .mc-pay .pi .pv small { font-size: 11px; font-weight: 400; color: var(--muted); }
+
+    /* why matched */
+    .ss-job-match-notification .why { padding: 14px 18px 4px; }
+    .ss-job-match-notification .why .wh {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .ss-job-match-notification .reason {
+      display: flex; align-items: center; gap: 9px; margin-bottom: 9px;
+    }
+    .ss-job-match-notification .reason .rc {
+      width: 22px; height: 22px; border-radius: 7px; flex-shrink: 0;
+      background: rgba(111,199,138,0.18);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-job-match-notification .reason .rc svg { width: 13px; height: 13px; stroke: var(--good); }
+    .ss-job-match-notification .reason .rt { font-size: 12.5px; font-weight: 400; color: var(--ink); flex: 1; }
+
+    /* actions */
+    .ss-job-match-notification .mc-actions { padding: 14px 18px 18px; }
+    .ss-job-match-notification .apply-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--plum); color: var(--open-air);
+      padding: 14px; border-radius: 14px; font-size: 15px; font-weight: 500;
+      cursor: pointer; box-shadow: 0 8px 18px rgba(66,26,49,0.26);
+      transition: transform .15s ease;
+    }
+    .ss-job-match-notification .apply-btn:hover { transform: translateY(-2px); }
+    .ss-job-match-notification .apply-btn svg { width: 17px; height: 17px; stroke: var(--open-air); }
+    .ss-job-match-notification .sub-actions {
+      display: flex; gap: 10px; margin-top: 10px;
+    }
+    .ss-job-match-notification .sa {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 11px; border-radius: 12px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: background .15s ease;
+    }
+    .ss-job-match-notification .sa svg { width: 15px; height: 15px; }
+    .ss-job-match-notification .sa.save { background: var(--morning-dew); color: var(--plum); }
+    .ss-job-match-notification .sa.save svg { stroke: var(--plum); }
+    .ss-job-match-notification .sa.dismiss { background: #f1e9df; color: var(--muted); }
+    .ss-job-match-notification .sa.dismiss svg { stroke: var(--muted); }
+    .ss-job-match-notification .sa:hover { filter: brightness(0.97); }
+
+    .ss-job-match-notification .one-tap-note {
+      text-align: center; font-size: 10.5px; font-weight: 300; color: var(--muted);
+      margin-top: 12px; line-height: 1.4;
+    }
+    .ss-job-match-notification .one-tap-note b { font-weight: 600; color: var(--plum); }
+
+    /* ===== FRAME 3 — applied confirmation ===== */
+    .ss-job-match-notification .applied {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 30px; text-align: center;
+    }
+    .ss-job-match-notification .applied .seal {
+      width: 92px; height: 92px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--clear-sky), var(--lavender));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 30px rgba(130,171,244,0.4);
+      animation: ss-pop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes ss-pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .ss-job-match-notification .applied .seal svg { width: 44px; height: 44px; stroke: var(--cloud); stroke-width: 2.4; }
+    .ss-job-match-notification .applied h3 {
+      font-size: 22px; font-weight: 500; color: var(--ink); margin-top: 22px; line-height: 1.2;
+    }
+    .ss-job-match-notification .applied p {
+      font-size: 13.5px; font-weight: 300; color: var(--plum-soft); margin-top: 10px; line-height: 1.5;
+    }
+    .ss-job-match-notification .applied .recap {
+      background: var(--cloud); border-radius: 16px; padding: 14px 16px; margin-top: 24px;
+      width: 100%; box-shadow: 0 4px 16px rgba(66,26,49,0.08); text-align: left;
+      display: flex; align-items: center; gap: 11px;
+    }
+    .ss-job-match-notification .applied .recap .ri {
+      width: 38px; height: 38px; border-radius: 10px; background: var(--morning-dew); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ss-job-match-notification .applied .recap .ri svg { width: 19px; height: 19px; stroke: var(--clear-sky); }
+    .ss-job-match-notification .applied .recap .rr { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .ss-job-match-notification .applied .recap .rs { font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 1px; }
+    .ss-job-match-notification .applied .next {
+      margin-top: 22px; font-size: 13px; font-weight: 500; color: var(--plum);
+      display: flex; align-items: center; gap: 7px; cursor: pointer;
+    }
+    .ss-job-match-notification .applied .next svg { width: 16px; height: 16px; stroke: var(--plum); }
+
+    @media (max-width: 760px) {
+      .ss-job-match-notification .rail { gap: 40px; }
+    }
+  </style>
+
+  <div class="intro">
+    <div class="eyebrow">Erin &middot; Phase 2 prototype</div>
+    <h2>A match worth opening.</h2>
+    <p>Erin spots a strong fit, sends one clear notification, and apply takes a single tap.</p>
+  </div>
+
+  <div class="rail">
+
+    <!-- ================= FRAME 1: LOCK SCREEN PUSH ================= -->
+    <div class="step">
+      <div class="phone">
+        <div class="screen lock">
+          <div class="notch"></div>
+          <div class="lock-status">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#F9F2E8"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#F9F2E8" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#F9F2E8"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#F9F2E8"/></svg>
+            </span>
+          </div>
+          <div class="clock">
+            <div class="date">Tuesday, June 9</div>
+            <div class="time">9:41</div>
+          </div>
+          <div class="push">
+            <div class="push-card">
+              <div class="pc-head">
+                <span class="app-ic">
+                  <svg viewBox="0 0 68 80" fill="#F9F2E8"><rect x="18" y="0" width="22" height="46" rx="11" transform="rotate(32 29 23)"/><rect x="23" y="17" width="22" height="46" rx="11" transform="rotate(32 34 40)"/><rect x="0" y="48" width="22" height="38" rx="11" transform="rotate(32 11 67)"/></svg>
+                </span>
+                <span class="app-name">Scrub Society</span>
+                <span class="when">now</span>
+              </div>
+              <div class="pc-title">Erin found a 94% match for you</div>
+              <div class="pc-body">ICU Travel RN in Denver &mdash; <b>$2,980/wk</b>, starts in 3 weeks. Matches your specialty and pay target.</div>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 1</div>
+        <div class="t">Push notification</div>
+      </div>
+    </div>
+
+    <!-- ================= FRAME 2: IN-APP MATCH CARD ================= -->
+    <div class="step">
+      <div class="phone">
+        <div class="screen app">
+          <div class="notch"></div>
+          <div class="statusbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+            </span>
+          </div>
+          <div class="app-head">
+            <svg class="smark" viewBox="0 0 68 80" fill="#421A31"><rect x="18" y="0" width="22" height="46" rx="11" transform="rotate(32 29 23)"/><rect x="23" y="17" width="22" height="46" rx="11" transform="rotate(32 34 40)"/><rect x="0" y="48" width="22" height="38" rx="11" transform="rotate(32 11 67)"/></svg>
+            <span class="wm">Your matches</span>
+          </div>
+
+          <div class="app-body">
+            <div class="erin-banner">
+              <span class="erin-av">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4m0 0H8m4 0h4M5 12a7 7 0 0 1 14 0v4a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><circle cx="9" cy="13" r="1" fill="#FFFFFF" stroke="none"/><circle cx="15" cy="13" r="1" fill="#FFFFFF" stroke="none"/></svg>
+              </span>
+              <div>
+                <div class="eb-t">Erin picked this for you</div>
+                <div class="eb-s">Based on your profile and saved searches</div>
+              </div>
+            </div>
+
+            <div class="match-card">
+              <div class="mc-top">
+                <div class="mc-score">
+                  <div class="v">94<span>%</span></div>
+                  <div class="l">Match</div>
+                </div>
+                <div class="mc-tag">Strong match</div>
+                <div class="mc-role">ICU Travel RN</div>
+                <div class="mc-fac">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Rose Medical Center &middot; Denver, CO
+                </div>
+              </div>
+
+              <div class="mc-pay">
+                <div class="pi"><div class="pl">Weekly gross</div><div class="pv">$2,980<small>/wk</small></div></div>
+                <div class="pi"><div class="pl">Length</div><div class="pv">13<small> wks</small></div></div>
+                <div class="pi"><div class="pl">Shift</div><div class="pv">Nights</div></div>
+              </div>
+
+              <div class="why">
+                <div class="wh">Why Erin matched you</div>
+                <div class="reason">
+                  <span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  <span class="rt">ICU specialty &mdash; your primary credential</span>
+                </div>
+                <div class="reason">
+                  <span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  <span class="rt">Pay above your $2,800 target</span>
+                </div>
+                <div class="reason">
+                  <span class="rc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  <span class="rt">Start date fits your availability</span>
+                </div>
+              </div>
+
+              <div class="mc-actions">
+                <div class="apply-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  Apply in one tap
+                </div>
+                <div class="sub-actions">
+                  <div class="sa save">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    Save for later
+                  </div>
+                  <div class="sa dismiss">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    Dismiss
+                  </div>
+                </div>
+                <div class="one-tap-note">Your profile is <b>submission-ready</b> &mdash; no forms to fill.</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 2</div>
+        <div class="t">In-app match card</div>
+      </div>
+    </div>
+
+    <!-- ================= FRAME 3: APPLIED ================= -->
+    <div class="step">
+      <div class="phone">
+        <div class="screen app">
+          <div class="notch"></div>
+          <div class="statusbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="16" height="11" viewBox="0 0 17 12" fill="#421A31"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="21" height="11" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="17" height="10" rx="2.5" stroke="#421A31" stroke-width="1.2"/><rect x="2.6" y="2.6" width="12" height="6.8" rx="1.4" fill="#421A31"/><rect x="19.2" y="4" width="1.6" height="4" rx="0.8" fill="#421A31"/></svg>
+            </span>
+          </div>
+
+          <div class="applied">
+            <div class="seal">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3>You're in.</h3>
+            <p>Your application is on its way to Rose Medical Center. We'll let you know the moment a recruiter responds.</p>
+
+            <div class="recap">
+              <div class="ri">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+              </div>
+              <div>
+                <div class="rr">ICU Travel RN &middot; Denver</div>
+                <div class="rs">Applied 9:41 AM &middot; submission-ready profile sent</div>
+              </div>
+            </div>
+
+            <div class="next">
+              See more matches from Erin
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="caption">
+        <div class="n">Step 3</div>
+        <div class="t">Applied, one tap</div>
+      </div>
+    </div>
+
+  </div>
+</div>

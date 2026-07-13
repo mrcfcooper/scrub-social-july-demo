@@ -1,0 +1,51 @@
+{
+  "schema": "tgn.ux-behavior-thread.v1",
+  "itemType": "uxBehaviorThread",
+  "id": "jobs.filters.thread.modal-clear",
+  "behavior": {
+    "documentedCurrent": [
+      {
+        "schema": "tgn.ux-requirement.v1",
+        "itemType": "uxRequirement",
+        "id": "jobs.filters.current.modal-clear.thread-example",
+        "title": "Current modal clear behavior",
+        "mode": "current",
+        "status": "documented-current",
+        "authority": "documented-current",
+        "confidence": 90,
+        "owner": {
+          "module": "jobs",
+          "submodule": "filters"
+        },
+        "scope": {
+          "corpusId": "jobs.filters"
+        },
+        "requirementSource": {
+          "sourceType": "ux-audit",
+          "sourceRefs": [],
+          "confirmation": {
+            "required": false,
+            "status": "not-required"
+          }
+        },
+        "statement": "The Clear action in the filter modal clears local modal edits.",
+        "rationale": "This child row is copied into the parent thread as behavior truth; the parent does not redefine it.",
+        "acceptanceCriteriaRefs": [],
+        "evidenceRefs": [],
+        "openQuestions": [],
+        "generatedRefs": {},
+        "db": {
+          "collection": "uxRequirements",
+          "documentId": "jobs.filters.current.modal-clear.thread-example"
+        },
+        "custom": {},
+        "confirmationBaseline": {
+          "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+          "lastConfirmedAt": "2026-05-01",
+          "method": "bulk-backfill",
+          "scope": "one-pass-ux-spec-creation"
+        }
+      }
+    ]
+  }
+}

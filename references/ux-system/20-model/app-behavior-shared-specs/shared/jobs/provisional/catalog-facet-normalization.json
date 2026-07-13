@@ -1,0 +1,118 @@
+{
+  "schema": "tgn.app-behavior-shared-spec.v1",
+  "inventoryType": "provisionalSharedAppBehaviorSpec",
+  "id": "shared.jobs.provisional.catalog-facet-normalization",
+  "title": "Jobs Catalog And Facet Normalization",
+  "module": "jobs",
+  "proposedSubmodule": "catalog-facets",
+  "status": "provisional-shared-spec",
+  "ownerStatus": "owner-unconfirmed",
+  "intendedFinalHome": "agent/ux-system/20-model/app-behavior-shared-specs/shared/jobs/catalog-facets/",
+  "behaviorCompleteness": "route-complete-for-route.jobs",
+  "globalCompleteness": {
+    "status": "not-claimed",
+    "reason": "This provisional spec records /jobs usage only. Other routes may append route-complete slices later."
+  },
+  "behaviorSummary": "Catalog/facet behavior loads professions, specialties, vendors, facilities, keyword catalogs, compactStates, and facet counts with cache, stale, error, dependent option, and zero-count semantics.",
+  "behaviorSlices": [
+    {
+      "id": "slice:route.jobs.catalog-facet-normalization",
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "status": "route-complete",
+      "behavior": {
+        "catalogFacetContract": "The /jobs route consumes catalog state for modal options, dependent specialties, keyword matching, compact state behavior, vendor identity, and facet count/status. Facets are built from current filters and suppress stale results by request identity.",
+        "routeOwnedParticipation": "/jobs owns visible filter controls and option usage; shared catalog/facet spec should own DTO normalization, cache/in-flight reuse, completeness checks, error/stale semantics, and proof mapping."
+      },
+      "sourceRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/store.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/transitions.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.ts",
+        "frontend/modules/jobs/filters/facets/controller/useJobFacets.ts"
+      ],
+      "companionInventoryRefs": [
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/jobs-catalog-and-facet-boundaries.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/03-api-dto-inventory.json",
+        "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json"
+      ],
+      "proofRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/store.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/transitions.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts"
+      ],
+      "backendAuthorityRefs": [],
+      "routeSpecificOverrides": [],
+      "openGaps": [
+        "proof-gap:route.jobs.facets-hook-dedicated-proof"
+      ],
+      "proofStatus": "catalog proof mapped; facet hook proof still should be added or accepted when facet behavior changes"
+    }
+  ],
+  "participatingRoutes": [
+    {
+      "routeRef": "route:jobs",
+      "packetRef": "packet:jobs",
+      "routePacketPath": "frontend/app-behavior-docs/route-packets/jobs/index.packet.json",
+      "discoveredIn": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/reverification-history/2026-05-06-route-jobs-code-evidence-reverification.json",
+      "participationKind": "primary-consumer",
+      "routeSpecificRefs": [
+        "source-trace:route.jobs.filter-catalog",
+        "behavior-branch:route.jobs.catalog-facet",
+        "coverage:route.jobs.catalog-facets"
+      ],
+      "routeSpecificOverrides": [],
+      "proofRefs": [
+        "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/store.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/transitions.test.ts",
+        "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts"
+      ],
+      "status": "observed"
+    }
+  ],
+  "sourceRefs": [
+    "frontend/modules/jobs/filters/catalog/controller/internal/execution.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/store.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/transitions.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/selectors.ts",
+    "frontend/modules/jobs/filters/facets/controller/useJobFacets.ts"
+  ],
+  "companionInventoryRefs": [
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/dto-boundaries/jobs-catalog-and-facet-boundaries.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/03-api-dto-inventory.json",
+    "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/command-contracts/jobs-advanced-filter-and-saved-filter-commands.json"
+  ],
+  "proofRefs": [
+    "frontend/modules/jobs/filters/catalog/controller/internal/execution.test.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/store.test.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/transitions.test.ts",
+    "frontend/modules/jobs/filters/catalog/controller/internal/selectors.test.ts"
+  ],
+  "backendAuthorityRefs": [],
+  "routeSpecificOverrides": [],
+  "openGaps": [
+    "proof-gap:route.jobs.facets-hook-dedicated-proof"
+  ],
+  "reconciliation": {
+    "required": true,
+    "status": "needs-reconciliation",
+    "allowedOutcomes": [
+      "move-to-confirmed-home",
+      "merge-into-existing",
+      "split-by-owner",
+      "supersede",
+      "accept-gap"
+    ],
+    "notes": "Shared reconciliation must confirm final owner/home and move this spec out of shared/jobs/provisional when confirmed."
+  },
+  "createdFromRouteClosure": {
+    "routeRef": "route:jobs",
+    "verificationCommit": "50f622c6952c202d01740b7f1b5b6e48cb807d0d",
+    "createdAt": "2026-05-06",
+    "closureLedgerRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-implementation-readiness-closure.json",
+    "rebuildTrialRef": "frontend/app-behavior-docs/route-packets/jobs/companion-inventory/implementation-readiness/2026-05-06-route-jobs-rebuild-from-specs-trial.json"
+  }
+}

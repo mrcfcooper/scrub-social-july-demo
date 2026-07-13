@@ -1,0 +1,106 @@
+{
+  "schema": "tgn.ux-spec-package.v1",
+  "packageId": "jobs.filters.collection-example",
+  "corpusId": "jobs.filters",
+  "title": "Jobs Filters UX Collection Example",
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters",
+    "notesMd": "The collection demonstrates UX corpus shape, not runtime implementation authority."
+  },
+  "specProfile": "refactor-preservation-spec",
+  "depthTarget": "L4-acceptance-criteria-and-proof",
+  "uxModes": ["current", "confirmed-current", "desired", "pending-confirmation"],
+  "includedFacets": [
+    "features",
+    "subfeatures",
+    "journeys",
+    "flows",
+    "subflows",
+    "requirements",
+    "observableScenarios",
+    "validation",
+    "recovery",
+    "emptyLoadingError",
+    "copy",
+    "acceptanceCriteria",
+    "currentDesiredMappings",
+    "pendingDecisions"
+  ],
+  "excludedFacets": [
+    "implementationArchitecture",
+    "controllerOwnership",
+    "storeDesign",
+    "analytics",
+    "pixelLayout"
+  ],
+  "completionStandard": "refactor-ready",
+  "governingArtifacts": [
+    {
+      "artifactType": "features-and-subfeatures",
+      "path": "01-feature-and-subfeature.collection.example.json",
+      "mode": "desired",
+      "notesMd": "Defines the owning Jobs search and filters behavior surface."
+    },
+    {
+      "artifactType": "requirements",
+      "path": "03-requirements.collection.example.json",
+      "mode": "desired",
+      "notesMd": "Desired requirements are implementation targets when confirmed governing."
+    },
+    {
+      "artifactType": "current-desired-mappings",
+      "path": "06-current-desired-mappings.collection.example.json",
+      "mode": "pending-confirmation",
+      "notesMd": "Mappings distinguish preserved, changed, added, removed, and pending behavior."
+    }
+  ],
+  "rationale": {
+    "summary": "Jobs filters is behavior-critical enough to require explicit hierarchy, requirements, mappings, pending decisions, and proof rows.",
+    "whyThisProfile": "The example models existing behavior preservation plus desired UX decisions for refactor-safe implementation.",
+    "whyThisDepth": "Acceptance criteria are included so code can be judged against UX behavior rather than runtime habit.",
+    "riskNotesMd": "The main risks are silently changing clear/apply semantics or treating observed current behavior as desired behavior."
+  },
+  "allowedOmissions": [
+    {
+      "facet": "layoutSemantics",
+      "reason": "Pixel-level layout is not required for this refactor-preservation example.",
+      "revisitWhen": "Responsive ordering, modal hierarchy, or progressive disclosure becomes part of the behavior contract."
+    },
+    {
+      "facet": "accessibility",
+      "reason": "Only behavior-relevant accessibility should be included until a focused minute-detail pass is requested.",
+      "revisitWhen": "Focus, keyboard, screen-reader, or reduced-motion behavior changes."
+    }
+  ],
+  "blockedAreas": [
+    {
+      "area": "Clear Filters confirmation copy",
+      "reason": "Exact copy is behaviorally meaningful and remains pending confirmation.",
+      "unblocksWhen": "The user confirms whether exact Clear Filters copy should become governing."
+    }
+  ],
+  "pendingDecisions": [
+    {
+      "id": "jobs.filters.pending.clear-confirmation-copy",
+      "mode": "pending-confirmation",
+      "itemType": "uxPendingDecision",
+      "title": "Confirm exact Clear Filters confirmation copy"
+    }
+  ],
+  "generatedRefs": {
+    "markdown": "generated/jobs.filters.collection-example.manifest.md"
+  },
+  "db": {
+    "collection": "uxSpecPackages",
+    "documentId": "jobs.filters.collection-example",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "specProfile": "refactor-preservation-spec"
+    }
+  },
+  "custom": {}
+}

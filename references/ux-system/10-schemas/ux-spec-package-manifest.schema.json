@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tgn.local/schemas/ux/ux-spec-package-manifest.schema.json",
+  "title": "TGN UX Spec Package Manifest",
+  "type": "object",
+  "required": [
+    "schema",
+    "packageId",
+    "corpusId",
+    "title",
+    "owner",
+    "specProfile",
+    "depthTarget",
+    "uxModes",
+    "includedFacets",
+    "excludedFacets",
+    "completionStandard",
+    "governingArtifacts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "type": "string", "const": "tgn.ux-spec-package.v1" },
+    "packageId": { "type": "string", "minLength": 1 },
+    "corpusId": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "owner": { "$ref": "shared-definitions.schema.json#/$defs/owner" },
+    "specProfile": { "$ref": "shared-definitions.schema.json#/$defs/specProfile" },
+    "depthTarget": { "$ref": "shared-definitions.schema.json#/$defs/depthTarget" },
+    "uxModes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "shared-definitions.schema.json#/$defs/mode" }
+    },
+    "includedFacets": {
+      "type": "array",
+      "items": { "$ref": "shared-definitions.schema.json#/$defs/facet" }
+    },
+    "excludedFacets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "completionStandard": {
+      "type": "string",
+      "enum": ["seed", "usable", "implementation-ready", "refactor-ready", "test-ready", "minute-detail-complete", "audit-complete"]
+    },
+    "governingArtifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifactType", "path", "mode"],
+        "additionalProperties": false,
+        "properties": {
+          "artifactType": { "type": "string" },
+          "path": { "type": "string" },
+          "mode": { "$ref": "shared-definitions.schema.json#/$defs/mode" },
+          "notesMd": { "type": "string" }
+        }
+      }
+    },
+    "rationale": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "type": "string" },
+        "whyThisProfile": { "type": "string" },
+        "whyThisDepth": { "type": "string" },
+        "riskNotesMd": { "type": "string" }
+      }
+    },
+    "allowedOmissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["facet", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "facet": { "$ref": "shared-definitions.schema.json#/$defs/facet" },
+          "reason": { "type": "string" },
+          "revisitWhen": { "type": "string" }
+        }
+      }
+    },
+    "blockedAreas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["area", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "area": { "type": "string" },
+          "reason": { "type": "string" },
+          "unblocksWhen": { "type": "string" }
+        }
+      }
+    },
+    "pendingDecisions": {
+      "type": "array",
+      "items": { "$ref": "shared-definitions.schema.json#/$defs/ref" }
+    },
+    "generatedRefs": { "type": "object", "additionalProperties": true },
+    "db": { "type": "object", "additionalProperties": true },
+    "custom": { "$ref": "shared-definitions.schema.json#/$defs/custom" }
+  }
+}

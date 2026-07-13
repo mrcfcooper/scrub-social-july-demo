@@ -1,0 +1,123 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-shared-specs.README",
+  "title": "App Behavior Shared Specs",
+  "content": [
+    {
+      "id": "first-read-rule",
+      "title": "First Read Rule",
+      "body": [
+        "If this is the agent's first time reading this README for the current work mission, read the entire README before opening deeper docs, following local routes, or relying on this corpus.",
+        "",
+        "A first full pass is required once per current work mission, after a context reset, after a handoff or resume, or after the task materially changes. It is not required at every checkpoint in the same active mission.",
+        "",
+        "After the first full pass, use the routing sections below to decide which local docs to reread or inspect next. At later checkpoints, reread only route-relevant sections unless the active `.core.*` route, roadmap, audit, or local stop condition requires a broader reread.",
+        "",
+        "Do not treat this README as authority over App Behavior, architecture, implementation plans, proof, source, repo facts, product decisions, or explicit user instruction."
+      ]
+    },
+    {
+      "id": "body-1",
+      "body": [
+        "<!--",
+        "Living Document",
+        "Purpose: Defines shared frontend App Behavior spec homes that route packets should reference instead of duplicating shared authority.",
+        "Audience: Agents and engineers expanding App Behavior coverage across routes and shared frontend surfaces.",
+        "Keep In Sync With: Full App Behavior coverage taxonomy, route inventory templates, shared-surface inventory templates, and reusable defaults.",
+        "Update When: Shared App Behavior artifact homes, ownership boundaries, or route reference rules change.",
+        "Does Not Cover: Backend internals, runtime implementation, route-local packet content, or reusable default catalog details.",
+        "-->"
+      ]
+    },
+    {
+      "id": "app-behavior-shared-specs",
+      "title": "App Behavior Shared Specs",
+      "depth": 1,
+      "body": [
+        "This folder defines durable homes for shared frontend App Behavior specs. Shared specs govern behavior that is reused across routes, owned by shared frontend surfaces, or discovered repeatedly during route inventory.",
+        "",
+        "Route packets remain the route-local discovery spine. When route inventory finds shared behavior, the route packet should reference the shared spec and document only route-specific inputs, overrides, participation, proof, or closeout.",
+        "",
+        "Reusable defaults stay in [App Behavior Defaults](../app-behavior-defaults/README.doc.json). Backend internals stay out of frontend App Behavior authority and may only be referenced as backend/API authority evidence."
+      ]
+    },
+    {
+      "id": "routing",
+      "title": "Routing",
+      "body": [
+        "Use this area when behavior should be documented once in a shared App Behavior home and referenced by participating routes.",
+        "",
+        "Route by shared behavior family:",
+        "- API interaction shared behavior: use the shared API interaction spec home.",
+        "- Access/shared permission behavior: use the shared access spec home.",
+        "- State lifecycle behavior: use the shared state lifecycle spec home.",
+        "- Workflow behavior: use the shared workflow spec home.",
+        "- Integration behavior: use the shared integration spec home.",
+        "- Security/privacy behavior: use the shared security/privacy spec home.",
+        "- Provisional shared candidates: use provisional shared spec docs and maturity rules before promotion.",
+        "",
+        "Does not own behavior unless a shared spec home has authority from source/runtime evidence or explicit App Behavior decisions. Route references must point back to the shared home rather than duplicate behavior.",
+        "",
+        "Stop when the agent can name the shared behavior family, selected shared spec home, participating route references, source authority, and whether the shared spec is provisional or authoritative."
+      ]
+    },
+    {
+      "id": "shared-spec-homes",
+      "title": "Shared Spec Homes",
+      "body": [
+        "1. [Shared API Interaction](01-shared-api-interaction.doc.json)",
+        "2. [Shared Access](02-shared-access.doc.json)",
+        "3. [Shared State Lifecycle](03-shared-state-lifecycle.doc.json)",
+        "4. [Shared Workflow](04-shared-workflow.doc.json)",
+        "5. [Shared Integration](05-shared-integration.doc.json)",
+        "6. [Shared Security Privacy](06-shared-security-privacy.doc.json)",
+        "7. [Provisional Shared Spec Standard](07-provisional-shared-spec-standard.doc.json)"
+      ]
+    },
+    {
+      "id": "provisional-shared-specs",
+      "title": "Provisional Shared Specs",
+      "body": [
+        "`shared/{module}/provisional/` is the discovery home for suspected shared App Behavior discovered during route inventory when no confirmed shared spec is obvious. Provisional shared specs are not thin leads or vague candidates. They must preserve the full behavior needed by the discovering route's usage, with source evidence, companion refs, proof status, open gaps, and a route participation edge.",
+        "",
+        "A provisional shared spec is provisional only because the final shared owner/home is unresolved. The behavior slice for the discovering route must be route-complete. Route agents should not inspect every other route that may use the behavior, and they should not claim global completeness.",
+        "",
+        "Once ownership is confirmed, the shared reconciliation pass must move the spec out of `provisional/` into the correct shared module/submodule folder, merge it into an existing shared spec, split it by owner, supersede it, or accept it as a routed gap. Confirmed shared specs should not remain under `provisional/`."
+      ]
+    },
+    {
+      "id": "home-selection-rule",
+      "title": "Home Selection Rule",
+      "body": "Choose the smallest shared owner that can govern the behavior without duplication. If the behavior is route-specific, keep it in the route packet. If it is a repeated low-risk basic, use a reusable default. If it depends on backend contracts, reference backend/API authority without redefining backend behavior. If it cannot be discovered or safely derived, route it as a product decision."
+    },
+    {
+      "id": "route-reference-rule",
+      "title": "Route Reference Rule",
+      "body": "A route packet that consumes shared behavior should reference the shared spec by stable title or ID once such IDs exist, then record the route-specific trigger, input, output projection, copy meaning, override, proof row, or accepted gap. Route packets should not restate shared authority as if they own it."
+    },
+    {
+      "id": "participating-routes-reverse-index",
+      "title": "Participating Routes Reverse Index",
+      "body": [
+        "Every shared App Behavior item should carry a \\`participatingRoutes\\` array once route participation is known. This array is a reverse index for graph tracing, not behavior authority. Shared behavior rows remain the shared source of truth; route packets remain the source of truth for route-specific triggers, inputs, overrides, participation details, proof, accepted gaps, and closeout.",
+        "",
+        "A \\`participatingRoutes\\` entry should include \\`routeRef\\`, \\`packetRef\\`, \\`routePacketPath\\`, \\`participationKind\\`, \\`routeSpecificRefs\\`, \\`routeSpecificOverrides\\`, \\`proofRefs\\`, and \\`status\\`. Use arrays for refs and overrides even when empty so graph queries can be deterministic.",
+        "",
+        "Recommended \\`participationKind\\` values are \\`primary-consumer\\`, \\`secondary-consumer\\`, \\`delegated-consumer\\`, \\`entrypoint\\`, \\`producer\\`, \\`adapter-consumer\\`, \\`proof-only\\`, and \\`candidate\\`. Recommended \\`status\\` values are \\`observed\\`, \\`confirmed\\`, \\`stale\\`, \\`removed\\`, and \\`needs-reconciliation\\`.",
+        "",
+        "Route inventory agents should not hunt the whole shared graph. If a shared spec is already known, add or update only the current route's participation edge. If no shared spec is known, create or update a provisional shared spec with a route-complete behavior slice for the current route, reference it from the route companion inventory, and move on. Shared reconciliation passes own deduplication, final shared owner decisions, route-list normalization, stale edge cleanup, and duplicate route statement cleanup."
+      ]
+    },
+    {
+      "id": "shared-candidate-maturity",
+      "title": "Provisional Shared Spec Maturity",
+      "body": [
+        "A route pass may record `shared-candidate-unresolved` only as a lightweight companion finding when it does not yet have enough behavior detail to write a shared spec. When the current route depends on the shared behavior, the route pass should create or update a provisional shared spec instead. A provisional shared spec must be behavior-complete for the current route's usage.",
+        "",
+        "Route closeout may pass with provisional shared behavior when the current route's `behaviorSlices` entry is route-complete, has source/proof/gap status, and has a `participatingRoutes` edge. Route closeout should not fail merely because other routes have not contributed slices or because final shared owner/home is unresolved.",
+        "",
+        "Implementation-ready global shared closure requires each provisional spec to move into the confirmed shared home, merge into an existing shared spec/default, split by owner, be superseded, or be accepted as a routed gap with owner, risk, blocker status, and follow-up. Route packets continue to own only route-specific triggers, inputs, overrides, proof, accepted gaps, and closeout."
+      ]
+    }
+  ]
+}

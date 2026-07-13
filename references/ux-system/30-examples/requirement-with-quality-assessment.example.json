@@ -1,0 +1,238 @@
+{
+  "schema": "tgn.ux-requirement.v1",
+  "itemType": "uxRequirement",
+  "id": "jobs.filters.current.clear-feedback-quality",
+  "title": "Current clear feedback quality assessment",
+  "mode": "current",
+  "status": "observed-current",
+  "authority": "observed-current",
+  "confidence": 80,
+  "owner": {
+    "module": "jobs",
+    "submodule": "filters",
+    "impliedSubmodule": "advanced-filter-modal",
+    "surface": "filter-modal",
+    "primaryUxOwner": "jobs.filters"
+  },
+  "scope": {
+    "corpusId": "jobs.filters",
+    "journeyIds": [
+      "jobs.filters.author-filter-query"
+    ],
+    "flowIds": [
+      "advanced-filters"
+    ],
+    "subflowIds": [
+      "clear-filters"
+    ],
+    "surfaceIds": [
+      "filter-modal"
+    ],
+    "platforms": [
+      "web"
+    ],
+    "breakpoints": [
+      "mobile",
+      "desktop"
+    ]
+  },
+  "requirement": {
+    "summary": "The current clear action needs visible outcome feedback when the user removes filter edits.",
+    "detailsMd": "This example shows row-inline UX quality assessment. The assessment is the durable source; generated reports can surface it as quality debt.",
+    "userGoal": "Understand what changed after clearing filters.",
+    "productMeaning": "Clear actions should not leave the user guessing whether the action worked.",
+    "nonGoals": [
+      "Do not create a standalone quality-debt row for this assessment."
+    ]
+  },
+  "requirementSource": {
+    "origin": "current-ux-observation",
+    "confirmation": "unknown",
+    "confirmedBy": null,
+    "confirmedAt": null,
+    "notesMd": "Runtime/source evidence can support the observation, but UX docs remain the behavior authority."
+  },
+  "changeControl": {
+    "changePolicy": "non-governing-current",
+    "materialBehaviorChange": false,
+    "pendingChangeIds": [],
+    "supersedesRequirementIds": [],
+    "supersededByRequirementId": null
+  },
+  "conditions": {
+    "appliesWhen": [
+      "the advanced-filter modal is open"
+    ],
+    "doesNotApplyWhen": [],
+    "preconditions": [
+      "the user has filter edits that can be cleared"
+    ],
+    "blockedWhen": [],
+    "variants": []
+  },
+  "interaction": {
+    "specified": true,
+    "triggers": [
+      {
+        "type": "click",
+        "target": "Clear Filters"
+      }
+    ],
+    "primaryAction": "clear filter edits",
+    "interactionResult": "the user should be able to tell that filters were cleared"
+  },
+  "effects": {
+    "immediate": [
+      "filter edits are removed"
+    ],
+    "deferred": [],
+    "sideEffects": [],
+    "mustNot": [
+      "silently leave the user unsure whether the clear action worked"
+    ]
+  },
+  "observableScenarios": [
+    {
+      "scenario": "User clears edited filters",
+      "userSees": "The filter edit state changes or a clear result is otherwise visible.",
+      "userCanDo": [
+        "continue editing",
+        "apply or close the modal"
+      ],
+      "expectedOutcome": "The result of clearing is understandable."
+    }
+  ],
+  "relationships": {
+    "relatedRequirementIds": [],
+    "dependsOnRequirementIds": [],
+    "parentRequirementId": null,
+    "childRequirementIds": []
+  },
+  "implementationGate": {
+    "required": false,
+    "gateType": "soft",
+    "canImplement": true,
+    "blockedReason": "",
+    "acceptanceCriteria": []
+  },
+  "testGate": {
+    "required": false,
+    "proofLevel": "manual-or-targeted",
+    "assertions": [],
+    "manualProofAllowed": true,
+    "testRefs": []
+  },
+  "risk": {
+    "level": "medium",
+    "categories": [
+      "ux-quality"
+    ],
+    "failureModes": [
+      "The user may retry or abandon the flow if the clear result is ambiguous."
+    ]
+  },
+  "uxQualityAssessment": {
+    "status": "debt-recorded",
+    "severity": "moderate",
+    "category": "missing-feedback",
+    "blockerStatus": "non-blocking",
+    "observedIssue": "The clear action can be hard to verify when the visible state does not make the result obvious.",
+    "violatedUxPrinciples": [
+      "Progress Should Be Visible",
+      "Consequences Should Be Understandable"
+    ],
+    "userImpact": "Users may be unsure whether their filters changed.",
+    "evidenceRefs": [],
+    "recommendation": {
+      "summary": "Show a clear visible state change or result cue after the clear action.",
+      "confidence": 80,
+      "rationaleMd": "The issue is not a runtime drift item unless runtime differs from governing UX; it is quality debt attached to this row."
+    },
+    "productDecision": {
+      "required": false,
+      "reason": "The improvement follows existing UX principles and does not change the governing behavior in this example.",
+      "recommendedDecision": "Address when the Jobs filter UX is next touched.",
+      "alternativesMd": null,
+      "notesMd": null
+    },
+    "reportedToUser": {
+      "status": "not-reported",
+      "reportedAt": null,
+      "channel": null,
+      "notesMd": "Generated reports should surface this after the agent turn."
+    },
+    "followUp": {
+      "required": true,
+      "owner": "jobs.filters",
+      "nextStep": "Add this to the next Jobs filter UX improvement pass.",
+      "targetArtifact": "jobs.filters UX corpus",
+      "due": null,
+      "notesMd": null
+    },
+    "implementationGate": {
+      "canContinue": true,
+      "reason": "The quality debt is non-blocking and can be planned separately.",
+      "blockedBy": null
+    },
+    "notesMd": "Row-inline quality assessment replaces a standalone quality-debt ledger row."
+  },
+  "runtimeAlignment": {
+    "status": "unknown",
+    "observed": false,
+    "driftStatus": "none",
+    "driftTypes": [],
+    "severity": "none",
+    "blockerStatus": "non-blocking",
+    "evidenceRefs": [],
+    "summary": "No runtime drift is asserted by this example.",
+    "recommendation": {
+      "summary": "Inspect runtime only when this behavior is implemented, refactored, or audited.",
+      "confidence": 70,
+      "rationaleMd": "Quality assessment can exist without runtime drift."
+    },
+    "reportedToUser": {
+      "status": "not-required",
+      "reportedAt": null,
+      "channel": null,
+      "notesMd": null
+    },
+    "followUp": {
+      "required": false,
+      "owner": "jobs.filters",
+      "nextStep": "No runtime drift follow-up for this example.",
+      "targetArtifact": null,
+      "due": null,
+      "notesMd": null
+    }
+  },
+  "behaviorRelations": {
+    "observedCurrentRefs": [],
+    "intendedRefs": [],
+    "desiredRefs": [],
+    "governingRefs": [],
+    "mappingRefs": [],
+    "driftRefs": [],
+    "pendingDecisionRefs": [],
+    "notesMd": "Refs remain inline on the row so scripts can deterministically traverse behavior relationships."
+  },
+  "openQuestions": [],
+  "generatedRefs": {
+    "markdown": "generated/current/jobs.filters.current.clear-feedback-quality.md"
+  },
+  "db": {
+    "collection": "uxRequirements",
+    "documentId": "jobs.filters.current.clear-feedback-quality",
+    "partitionKeys": {
+      "corpusId": "jobs.filters",
+      "mode": "current"
+    }
+  },
+  "custom": {},
+  "confirmationBaseline": {
+    "lastConfirmedCommit": "a1a3a1580f6001b2c3be6b4c08c0abffba2467dd",
+    "lastConfirmedAt": "2026-05-01",
+    "method": "bulk-backfill",
+    "scope": "one-pass-ux-spec-creation",
+    "notesMd": "Backfilled as the audit baseline for the one-pass UX spec creation/update. This records provenance only; it does not replace UX authority, product confirmation, behavior mappings, or row-inline runtime alignment."
+  }
+}

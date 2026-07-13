@@ -1,0 +1,115 @@
+{
+  "schema": "tgn.agent-doc-db.v1",
+  "id": "agent.ux-system.20-model.app-behavior-defaults.00-default-behavior-maturity-model",
+  "title": "Default Behavior Maturity Model",
+  "content": [
+    {
+      "id": "default-behavior-maturity-model-body-1",
+      "body": "This document defines how repeated frontend behavior moves from principle-derived expectation to governed App Behavior authority."
+    },
+    {
+      "id": "mission",
+      "title": "Mission",
+      "body": "The goal is to avoid both ambiguity and row-level noise. Agents should not permanently rely on unstated assumptions for repeated basics, but they also should not duplicate the same loading, empty, error, validation, or responsive behavior in thousands of rows."
+    },
+    {
+      "id": "default-eligibility-rule",
+      "title": "Default Eligibility Rule",
+      "body": [
+        "Level 0 principle-derived stopgaps are allowed only for Reusable Default Eligible behavior: safe, ordinary, low-risk frontend basics where product meaning, ownership, contracts, permissions, persistence, side effects, security/privacy, and proof do not depend on exact existing runtime facts.",
+        "",
+        "Runtime Discovery Required, Backend Authority Reference, and True Product Decision items cannot be converted into principle-derived defaults. They must be inspected, referenced, or confirmed before implementation or testing relies on them.",
+        "",
+        "The mature target is to replace Level 0 stopgaps with reusable App Behavior defaults or explicit App Behavior rows. Principles remain authoring guidance, not the final behavior authority for runtime.",
+        "",
+        "Reusable defaults are valid finished authority only when they are named, governed, referenced, and overrideable. Derive while authoring; execute from authority. A principle-derived default may help an agent complete or repair specs during expansion, but implementation should rely on the explicit default, row, shared spec, or confirmed decision that results from that authoring work."
+      ]
+    },
+    {
+      "id": "derivable-basics-during-refactors",
+      "title": "Derivable Basics During Refactors",
+      "body": [
+        "Reusable defaults and principle-derived temporary defaults may satisfy derivable basics during refactor work when the behavior is safe, ordinary, low-risk, and backed by a cited authority chain. This avoids rediscovering expected basics from runtime while the mature target remains explicit default or row authority.",
+        "",
+        "- Allowed derivable basics include generic loading/empty/error, disabled or pending states, ordinary recovery affordances, standard focus/accessibility expectations, visual-only responsive containment, and obvious hydration/fetch implications from already-governed API-backed route behavior.",
+        "- Do not convert runtime-discovery-required facts into derivable basics: DTO/query/storage keys, command payloads/results, permissions, persistence, side effects, route/query semantics, security/privacy, platform branches that change execution, or surprising legacy behavior.",
+        "- During refactor work, agents should avoid UI-only and derivable documentation noise while preserving the long-term target that repeated basics become governed reusable defaults."
+      ]
+    },
+    {
+      "id": "refactor-time-defaulting-for-fragmented-basics",
+      "title": "Refactor-Time Defaulting For Fragmented Basics",
+      "body": [
+        "The ideal target remains full frontend behavior authority: every meaningful frontend behavior is eventually governed by an explicit App Behavior row, reusable default, explicit route/module override, backend/API authority reference, or confirmed product decision.",
+        "",
+        "During broad refactor or fragmentation cleanup work, agents do not need to preserve every old incidental variant of missing or inconsistent expected basics. They may normalize low-risk fragmented basics to a reusable App Behavior default or a justified principle-derived default when the behavior is Reusable Default Eligible and the old variants do not carry product meaning.",
+        "",
+        "Allowed default-normalization examples include loading acknowledgement, hydration acknowledgement, empty state, recoverable error, disabled or pending state, basic validation display, focus/accessibility baseline, safe retry, cancel/close for ephemeral UI, and responsive containment.",
+        "",
+        "Default-normalization must not change product intent, API calls, DTO interpretation, command payloads or result semantics, permissions, validation/admission rules, persistence/cache/storage, data transformations, side effects, external channels, security/privacy behavior, route/query semantics, cross-route workflow outcomes, or explicit governed behavior. Those remain Runtime Discovery Required or explicit authority work.",
+        "",
+        "When using refactor-time defaulting, record the default used, why the old behavior was incidental, proof impact, accepted old-variant gaps if any, and closeout note."
+      ]
+    },
+    {
+      "id": "maturity-levels",
+      "title": "Maturity Levels",
+      "body": ""
+    },
+    {
+      "id": "level-0-principle-derived-stopgap",
+      "title": "Level 0: Principle-Derived Stopgap",
+      "depth": 3,
+      "body": [
+        "A behavior is inferred from core reasoning and UX principles because no explicit App Behavior row or reusable default exists yet.",
+        "",
+        "Use this only during audits, planning, gap-filling, or implementation when the behavior is Reusable Default Eligible: safe, ordinary, low-risk, not product-specific, and not dependent on runtime-discovery-required facts. Record the derivation, confidence, and proof impact when it affects implementation planning or testing."
+      ]
+    },
+    {
+      "id": "level-1-route-or-feature-row",
+      "title": "Level 1: Route Or Feature Row",
+      "depth": 3,
+      "body": [
+        "A behavior is documented directly in a route, feature, workflow, or module row.",
+        "",
+        "Use this when behavior is product-specific, tied to a concrete route or workflow, or not repeated enough to justify a reusable default."
+      ]
+    },
+    {
+      "id": "level-2-reusable-default-spec",
+      "title": "Level 2: Reusable Default Spec",
+      "depth": 3,
+      "body": [
+        "A repeated behavior is governed once as a reusable App Behavior default.",
+        "",
+        "Use this when multiple rows should share the same expected behavior, such as default loading, empty, recoverable error, disabled-submit, required-field validation display, stale indication, retry, responsive containment, or focus/accessibility baseline behavior."
+      ]
+    },
+    {
+      "id": "level-3-explicit-route-or-module-override",
+      "title": "Level 3: Explicit Route Or Module Override",
+      "depth": 3,
+      "body": [
+        "A row references a reusable default but documents a deliberate difference.",
+        "",
+        "Use this when product meaning, risk, platform, role, workflow, copy, proof, or data behavior requires behavior different from the default."
+      ]
+    },
+    {
+      "id": "level-4-fully-governed-app-behavior",
+      "title": "Level 4: Fully Governed App Behavior",
+      "depth": 3,
+      "body": [
+        "Every meaningful frontend behavior is governed by either a specific row or a reusable default, and every exception is explicit.",
+        "",
+        "This is the mature target. Principles still guide authoring and conflict resolution, but implementation agents should not need unstated assumptions to decide runtime behavior."
+      ]
+    },
+    {
+      "id": "closeout-signal",
+      "title": "Closeout Signal",
+      "body": "A behavior is mature enough for implementation when the plan can identify one of these authority states: explicit App Behavior row, reusable default, explicit override, backend/API authority reference for frontend contract evidence, accepted temporary principle-derived gap, true product decision, or out-of-scope backend behavior."
+    }
+  ]
+}
