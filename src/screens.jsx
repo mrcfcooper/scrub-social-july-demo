@@ -2,9 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FEED, JOBS, FACILITY } from "./data";
 import { Attrib, Avatar, Headline, PhotoFrame, Post, ScoreRing, photoUrl } from "./ui";
-import { Icon } from "./icons";
+import { Icon, Logomark } from "./icons";
 
 const initialsOf = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("");
+
+function MetaTile({ label, value }) {
+  return (
+    <div className="meta-tile">
+      <div className="lbl">{label}</div>
+      <div className="val">{value}</div>
+    </div>
+  );
+}
 
 // ─── Feed ────────────────────────────────────────────────────────────────────
 export function Feed() {
@@ -29,7 +38,7 @@ export function Feed() {
         <div className="row">
           <Avatar initials="E" color="#BBAFEF" />
           <div className="grow">
-            <div className="small" style={{ fontWeight: 600 }}>Erin</div>
+            <div className="small">Erin</div>
             <div style={{ fontSize: 12, color: "var(--dew)" }}>Your AI assistant · suggestion</div>
           </div>
         </div>
@@ -46,7 +55,7 @@ export function Feed() {
       {/* Meetups board */}
       <div className="card dew">
         <div className="eyebrow">Meetups & events</div>
-        <div className="small" style={{ fontWeight: 600, marginTop: 6 }}>{FEED.meetup.title}</div>
+        <div className="small" style={{ marginTop: 6 }}>{FEED.meetup.title}</div>
         <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.detail}</div>
         <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.sub}</div>
         <button className="btn sm" style={{ marginTop: 10 }}>I'm going</button>
@@ -55,7 +64,7 @@ export function Feed() {
       {/* Roommate board */}
       <div className="card lav flip">
         <div className="eyebrow" style={{ color: "var(--plum-soft)" }}>Roommate board</div>
-        <div className="small" style={{ fontWeight: 600, marginTop: 6 }}>{FEED.roommate.title}</div>
+        <div className="small" style={{ marginTop: 6 }}>{FEED.roommate.title}</div>
         <div className="small" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.detail}</div>
         <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.sub}</div>
         <Attrib id="amberRoommate" />
@@ -205,30 +214,46 @@ export function Facility() {
   const [tab, setTab] = useState("qa");
   return (
     <div>
+      {/* Plum hero band — facility-intel reference */}
+      <div className="card plum">
+        <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
+        <div className="eyebrow" style={{ color: "var(--lavender)" }}>Facility intel</div>
+        <h2 style={{ fontSize: 26, marginTop: 6, paddingRight: 24 }}>{f.name}</h2>
+        <div className="wrap" style={{ marginTop: 10, gap: 12 }}>
+          <span className="hero-meta"><Icon name="map-pin" size={14} /> {f.city}</span>
+          <span className="hero-meta"><Icon name="building" size={14} /> {f.type}</span>
+        </div>
+        <div className="between" style={{ marginTop: 16, alignItems: "center" }}>
+          <div className="stack" style={{ minWidth: 0 }}>
+            <div className="hero-meta"><Icon name="users" size={14} /> {f.workedHere} members worked here</div>
+            <div className="hero-meta"><Icon name="user-check" size={14} /> {f.askable} open to questions</div>
+          </div>
+          <div style={{ textAlign: "center", flex: "none" }}>
+            <ScoreRing value={f.score} size={92} stroke={9} dark />
+            <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)", marginTop: 4 }}>
+              {f.scoreLabel}
+            </div>
+          </div>
+        </div>
+        <div className="meta-tiles">
+          <MetaTile label="beds" value={f.stats.beds} />
+          <MetaTile label="ratio" value={f.stats.ratio} />
+          <MetaTile label="parking" value={f.stats.parking} />
+          <MetaTile label="scrubs" value={f.stats.scrubs} />
+        </div>
+      </div>
+
+      <PhotoFrame photo="facility-pacific-view" icon="building" label="facility photo" height={140} />
+
+      {/* Member ratings — BreakdownBar grid */}
       <div className="card">
-        <div className="between">
-          <div>
-            <div className="eyebrow">Facility hub</div>
-            <h2 style={{ fontSize: 19, marginTop: 4 }}>{f.name}</h2>
-            <div className="muted">{f.city} · {f.type}</div>
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <div className="score" style={{ "--v": f.score }}><b>{f.score}</b></div>
-            <div className="muted" style={{ marginTop: 4 }}>{f.scoreLabel}</div>
-          </div>
-        </div>
-        <div className="wrap" style={{ marginTop: 12 }}>
-          <span className="pill"><Icon name="users" size={13} /> {f.workedHere} members worked here</span>
-          <span className="pill sky"><Icon name="user-check" size={13} /> {f.askable} open to questions</span>
-        </div>
-        <div className="stack" style={{ marginTop: 12 }}>
+        <div className="eyebrow">The vibe, from members</div>
+        <div className="bars">
           {f.vibe.map((v) => (
-            <div key={v.k} className="between small">
+            <div key={v.k} className="bar-row">
               <span>{v.k}</span>
-              <span className="row" style={{ gap: 8 }}>
-                <span className="meter" style={{ width: 90 }}><i style={{ width: `${(v.v / 5) * 100}%` }} /></span>
-                <b>{v.v}</b>
-              </span>
+              <span className="bar-track"><i style={{ width: `${(v.v / 5) * 100}%` }} /></span>
+              <span style={{ textAlign: "right" }}>{v.v}</span>
             </div>
           ))}
         </div>
@@ -253,7 +278,7 @@ function QATab({ f }) {
     <div>
       {f.qa.map((q) => (
         <div key={q.id} className="card">
-          <div className="small" style={{ fontWeight: 600 }}>{q.q}</div>
+          <div className="small">{q.q}</div>
           <div className="muted" style={{ marginTop: 2 }}>Asked by {q.askedBy}</div>
           {q.answers.map((a, i) => (
             <div key={i} className="answer">
@@ -294,7 +319,7 @@ function PayTab({ f }) {
       {f.payReports.map((p, i) => (
         <div key={i} className="card between">
           <div>
-            <div style={{ fontWeight: 700, fontSize: 17, color: "var(--plum)" }}>{p.rate}</div>
+            <div style={{ fontSize: 20, letterSpacing: "-0.02em", color: "var(--plum)" }}>{p.rate}</div>
             <div className="muted">{p.spec} · {p.agency} · {p.when}</div>
           </div>
           {p.verified
@@ -303,7 +328,7 @@ function PayTab({ f }) {
         </div>
       ))}
       <div className="card dew">
-        <div className="small" style={{ fontWeight: 600 }}>Reality check</div>
+        <div className="small">Reality check</div>
         <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
           Listed rates for this facility ranged $2,950–$3,600/wk over the last 90 days. If your quote is under $3,050, ask for the breakdown.
         </p>
@@ -336,7 +361,7 @@ function ReviewComposer() {
   const terms = ["Supportive charge nurses", "Heavy float", "Great orientation", "Parking is rough", "Traveler-friendly", "Short-staffed nights", "Fair scheduling", "Would return"];
   return (
     <div className="card">
-      <div className="small" style={{ fontWeight: 600 }}>How was your assignment here?</div>
+      <div className="small">How was your assignment here?</div>
       <div className="faces">
         {[["happy", "smile"], ["mid", "meh"], ["mad", "frown"]].map(([k, ico]) => (
           <button key={k} className={`face ${mood === k ? "on" : ""}`} onClick={() => setMood(k)} aria-label={k}>

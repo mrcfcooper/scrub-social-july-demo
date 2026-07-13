@@ -15,7 +15,7 @@ export function Diary() {
         <div className="row" style={{ marginTop: 8 }}>
           <Avatar initials="MC" color="#CEDBFE" size="lg" />
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{d.author} · {d.authorRole}</div>
+            <div className="small">{d.author} · {d.authorRole}</div>
             <div className="muted">{d.facility} · {d.city}</div>
             <div className="muted">{d.dates}</div>
           </div>
@@ -70,10 +70,10 @@ export function Diary() {
         <Link to={`/jobs/${job.id}`} className="linkless">
           <div className="card dew between">
             <div>
-              <div className="small" style={{ fontWeight: 600 }}>{job.title}</div>
+              <div className="small">{job.title}</div>
               <div className="muted" style={{ color: "var(--plum-soft)" }}>{job.facility} · starts {job.start}</div>
             </div>
-            <div style={{ fontWeight: 700, color: "var(--plum)" }}>{job.weekly}</div>
+            <div className="money" style={{ fontSize: 17 }}>{job.weekly}</div>
           </div>
         </Link>
       )}
@@ -95,7 +95,7 @@ export function Profile() {
           <div className="grow">
             <div className="between">
               <div>
-                <div style={{ fontWeight: 600, fontSize: 16 }}>{p.name}</div>
+                <div style={{ fontSize: 16 }}>{p.name}</div>
                 <div className="muted">{p.role} · {p.handle}</div>
               </div>
             </div>
@@ -162,7 +162,7 @@ export function Recruiter() {
         <div className="row">
           <Avatar initials="AH" color="#82ABF4" size="lg" />
           <div className="grow">
-            <div style={{ fontWeight: 600, fontSize: 16 }}>{r.name}</div>
+            <div style={{ fontSize: 16 }}>{r.name}</div>
             <div className="muted">{r.agency} · {r.years} years</div>
           </div>
           <div style={{ textAlign: "center" }}>
@@ -186,7 +186,7 @@ export function Recruiter() {
       {r.reviewsList.map((rv, i) => (
         <div key={i} className="card">
           <div className="between">
-            <span className="small" style={{ fontWeight: 600 }}>{rv.by}</span>
+            <span className="small">{rv.by}</span>
             <Stars n={rv.stars} />
           </div>
           <p className="small" style={{ marginTop: 6, lineHeight: 1.45 }}>{rv.text}</p>
@@ -198,17 +198,17 @@ export function Recruiter() {
       {r.hotJobs.map((h, i) => (
         <div key={i} className="card dew between">
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{h.title}</div>
+            <div className="small">{h.title}</div>
             <div className="muted row" style={{ gap: 5 }}><Icon name="flame" size={13} /> {h.tag}</div>
           </div>
-          <div style={{ fontWeight: 700, color: "var(--plum)" }}>{h.pay}</div>
+          <div className="money" style={{ fontSize: 17 }}>{h.pay}</div>
         </div>
       ))}
 
       <Sect title="Ambassador rewards" />
       <div className="card lav flip">
         <div className="between">
-          <div className="small" style={{ fontWeight: 600, color: "var(--plum)" }}>
+          <div className="small" style={{ color: "var(--plum)" }}>
             {r.ambassador.referred} referrals · {r.ambassador.booked} booked
           </div>
           <span className="pill" style={{ background: "var(--cloud)" }}>
@@ -222,7 +222,7 @@ export function Recruiter() {
       </div>
 
       <div className="card">
-        <div className="small" style={{ fontWeight: 600 }}>Answer as anonymous</div>
+        <div className="small">Answer as anonymous</div>
         <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
           Toggle on to answer community questions with your real thoughts — shown as “Recruiter · TravelMed” with no name.
         </p>
@@ -258,7 +258,7 @@ export function Mentor() {
       {m.history.map((h, i) => (
         <div key={i} className="card between">
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{h.text}</div>
+            <div className="small">{h.text}</div>
             <div className="muted">{h.where}</div>
           </div>
           <span className="muted">{h.when}</span>
@@ -283,7 +283,7 @@ export function Mentor() {
       <div className="stack"><Attrib id="brandyMod" /></div>
 
       <div className="card dew">
-        <div className="small" style={{ fontWeight: 600 }}>Ban from social, keep job access</div>
+        <div className="small">Ban from social, keep job access</div>
         <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
           Trolls lose posting and commenting — the troll badge is real — but they keep the app for job search. The community stays clean without losing the candidate.
         </p>
@@ -325,7 +325,7 @@ export function Graph() {
               <circle cx={n.x + 34} cy={n.y} r={onPath(n.id) ? 32 : 26}
                 fill={n.tone} stroke={active?.id === n.id ? "#421A31" : "white"} strokeWidth="3" />
               <text x={n.x + 34} y={n.y + 4} textAnchor="middle"
-                fontSize="11" fontWeight="600"
+                fontSize="11" fontWeight="400"
                 fill={n.tone === "#421A31" ? "#F9F2E8" : "#421A31"}>
                 {n.label.split(" ")[0]}
               </text>
@@ -337,7 +337,7 @@ export function Graph() {
         </svg>
       </div>
       <div className="card sky" style={{ background: "var(--dew)" }}>
-        <div className="small" style={{ fontWeight: 600 }}>
+        <div className="small">
           {active ? `${active.label}` : "You're 2 connections from Brandy"}
         </div>
         <p className="small" style={{ marginTop: 4, color: "var(--plum-soft)" }}>

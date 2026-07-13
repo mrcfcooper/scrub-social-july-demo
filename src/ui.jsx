@@ -136,13 +136,15 @@ export function Post({ p }) {
 }
 
 // Flat SVG donut, lavender fill — kit ScoreRing (renders final value, no count-up)
-export function ScoreRing({ value, size = 64, stroke = 8 }) {
+export function ScoreRing({ value, size = 64, stroke = 8, dark }) {
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const mid = size / 2;
+  const track = dark ? "rgba(255, 255, 255, 0.18)" : "rgba(66, 26, 49, 0.12)";
+  const ink = dark ? "var(--air)" : "var(--plum)";
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Score ${value} out of 100`}>
-      <circle cx={mid} cy={mid} r={r} fill="none" stroke="rgba(66, 26, 49, 0.12)" strokeWidth={stroke} />
+      <circle cx={mid} cy={mid} r={r} fill="none" stroke={track} strokeWidth={stroke} />
       <circle
         cx={mid} cy={mid} r={r} fill="none"
         stroke="var(--lavender)" strokeWidth={stroke} strokeLinecap="round"
@@ -151,7 +153,7 @@ export function ScoreRing({ value, size = 64, stroke = 8 }) {
       />
       <text
         x="50%" y="52%" dominantBaseline="central" textAnchor="middle"
-        fontSize={size * 0.3} fontWeight="400" letterSpacing="-0.02" fill="var(--plum)"
+        fontSize={size * 0.3} fontWeight="400" letterSpacing="-0.02" fill={ink}
       >
         {value}
       </text>
