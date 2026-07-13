@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ATTRIB } from "./data";
+import { Icon } from "./icons";
 
 // Attribution marker — the demo's thesis, kept unobtrusive: a small lavender
 // quote chip with the asker's name. Tapping opens a popover with the full
@@ -106,6 +107,40 @@ export function Post({ p }) {
       </div>
       {p.attrib && <Attrib id={p.attrib} />}
     </article>
+  );
+}
+
+// Flat SVG donut, lavender fill — kit ScoreRing (renders final value, no count-up)
+export function ScoreRing({ value, size = 64, stroke = 8 }) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const mid = size / 2;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Score ${value} out of 100`}>
+      <circle cx={mid} cy={mid} r={r} fill="none" stroke="rgba(66, 26, 49, 0.12)" strokeWidth={stroke} />
+      <circle
+        cx={mid} cy={mid} r={r} fill="none"
+        stroke="var(--lavender)" strokeWidth={stroke} strokeLinecap="round"
+        strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)}
+        transform={`rotate(-90 ${mid} ${mid})`}
+      />
+      <text
+        x="50%" y="52%" dominantBaseline="central" textAnchor="middle"
+        fontSize={size * 0.3} fontWeight="400" letterSpacing="-0.02" fill="var(--plum)"
+      >
+        {value}
+      </text>
+    </svg>
+  );
+}
+
+// Flat brand-wash placeholder in the speech-bubble photo frame
+export function PhotoFrame({ tone = "var(--dew)", icon = "camera", label, height = 120, style }) {
+  return (
+    <div className="photo-frame" style={{ background: tone, height, ...style }}>
+      <Icon name={icon} size={22} />
+      {label && <span className="subtext" style={{ color: "inherit" }}>{label}</span>}
+    </div>
   );
 }
 

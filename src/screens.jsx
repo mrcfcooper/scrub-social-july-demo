@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FEED, JOBS, FACILITY } from "./data";
-import { Attrib, Avatar, Post, Sect, Stars } from "./ui";
+import { Attrib, Avatar, PhotoFrame, Post, ScoreRing } from "./ui";
+import { Icon } from "./icons";
+
+const initialsOf = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("");
 
 // ─── Feed ────────────────────────────────────────────────────────────────────
 export function Feed() {
@@ -70,80 +73,125 @@ export function Feed() {
 export function Jobs() {
   return (
     <div>
-      <Sect title="Jobs with the inside story" sub={`${JOBS.length} matches`} />
-      <p className="muted" style={{ marginTop: 4 }}>
+      <div className="sect">
+        <h2>Jobs with the inside story</h2>
+        <span className="subtext">{JOBS.length} matches</span>
+      </div>
+      <p className="muted" style={{ marginTop: 6 }}>
         Every card shows what the community knows — not just what the feed says.
       </p>
-      {JOBS.map((j) => (
-        <Link key={j.id} to={`/jobs/${j.id}`} className="linkless">
-          <div className="card">
-            <div className="between">
-              <div>
-                <div className="small" style={{ fontWeight: 600 }}>{j.title}</div>
-                <div className="muted">{j.facility} · {j.city}</div>
-              </div>
-              <div style={{ textAlign: "right" }}>
-                <div style={{ fontWeight: 700, color: "var(--plum)" }}>{j.weekly}</div>
-                <div className="muted">{j.shift}</div>
-              </div>
-            </div>
-            <div className="wrap" style={{ marginTop: 10 }}>
-              <span className="pill sky">🏥 {j.social.score} traveler score</span>
-              <span className="pill">👥 {j.social.workedHere} worked here</span>
-              <span className="pill">📓 {j.social.diaries} diaries</span>
-              <span className="pill">💬 {j.social.answeredQs} questions answered</span>
-            </div>
+      {JOBS.map((j) => <JobCard key={j.id} j={j} />)}
+    </div>
+  );
+}
+
+function JobCard({ j }) {
+  const [saved, setSaved] = useState(false);
+  return (
+    <div className="card" style={{ position: "relative" }}>
+      <button
+        className={`save ${saved ? "on" : ""}`}
+        onClick={() => setSaved(!saved)}
+        aria-pressed={saved}
+        aria-label={saved ? "Saved" : "Save job"}
+      >
+        <Icon name="bookmark" size={17} style={saved ? { fill: "currentColor" } : undefined} />
+      </button>
+      <Link to={`/jobs/${j.id}`} className="linkless">
+        <div className="row" style={{ alignItems: "flex-start", gap: 12 }}>
+          <span className="thumb">{initialsOf(j.facility)}</span>
+          <div className="grow" style={{ paddingRight: 36 }}>
+            <div style={{ fontSize: 16, letterSpacing: "-0.01em", lineHeight: 1.2 }}>{j.title}</div>
+            <div className="muted" style={{ marginTop: 3 }}>{j.facility} · {j.city}</div>
           </div>
-        </Link>
-      ))}
+        </div>
+        <div className="wrap" style={{ marginTop: 12 }}>
+          <span className="pill acc"><Icon name="building" size={13} /> {j.social.score} traveler score</span>
+          <span className="pill"><Icon name="users" size={13} /> {j.social.workedHere} worked here</span>
+          <span className="pill"><Icon name="book-open" size={13} /> {j.social.diaries} diaries</span>
+          <span className="pill"><Icon name="message-circle" size={13} /> {j.social.answeredQs} answered</span>
+        </div>
+        <div className="between" style={{ marginTop: 14 }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+            <span className="money">{j.weekly.replace("/wk", "")}</span>
+            <span className="subtext">per wk · starts {j.start}</span>
+          </div>
+          <Icon name="chevron-right" size={16} style={{ color: "var(--fg3)" }} />
+        </div>
+      </Link>
     </div>
   );
 }
 
 // ─── Job detail ──────────────────────────────────────────────────────────────
+function Tile({ icon, label, value }) {
+  return (
+    <div className="tile">
+      <div className="row" style={{ gap: 6 }}>
+        <Icon name={icon} size={14} style={{ color: "var(--fg3)" }} />
+        <span className="eyebrow" style={{ fontSize: 10 }}>{label}</span>
+      </div>
+      <div className="tile-val">{value}</div>
+    </div>
+  );
+}
+
 export function JobDetail({ id }) {
   const nav = useNavigate();
   const j = JOBS.find((x) => x.id === id) || JOBS[0];
   return (
     <div>
-      <button className="btn ghost sm" style={{ marginTop: 14 }} onClick={() => nav(-1)}>← Jobs</button>
+      <button className="backlink" onClick={() => nav(-1)}>
+        <Icon name="arrow-left" size={16} /> Back to jobs
+      </button>
+
+      <PhotoFrame tone="var(--dew)" icon="building" label="facility photo" height={160} />
+
       <div className="card">
         <div className="eyebrow">Travel contract</div>
-        <h2 style={{ fontSize: 20, marginTop: 4 }}>{j.title}</h2>
-        <div className="muted">{j.facility} · {j.city}</div>
-        <div className="wrap" style={{ marginTop: 12 }}>
-          <span className="pill solid">{j.weekly}</span>
-          <span className="pill">{j.hourly} base</span>
-          <span className="pill">{j.shift}</span>
-          <span className="pill">Starts {j.start}</span>
-          <span className="pill">{j.length}</span>
+        <h2 style={{ fontSize: 22, marginTop: 6 }}>{j.title}</h2>
+        <div className="muted" style={{ marginTop: 4 }}>{j.facility} · {j.city}</div>
+        <div className="tiles">
+          <Tile icon="moon" label="shift" value={j.shift} />
+          <Tile icon="calendar" label="starts" value={j.start} />
+          <Tile icon="briefcase" label="length" value={j.length} />
+          <Tile icon="dollar" label="base rate" value={j.hourly} />
         </div>
-        <button className="btn block" style={{ marginTop: 14 }}>Quick apply</button>
-        <div className="muted" style={{ marginTop: 8, textAlign: "center" }}>
-          Recruiter: {j.recruiter} · replies in ~2h
+      </div>
+
+      {/* Pay + apply — plum block per the kit's mobile apply card */}
+      <div className="card plum">
+        <div className="eyebrow" style={{ color: "var(--lavender)" }}>Estimated weekly pay</div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: 8 }}>
+          <span style={{ fontSize: 30, letterSpacing: "-0.03em", lineHeight: 1 }}>{j.weekly.replace("/wk", "")}</span>
+          <span className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)" }}>per wk</span>
+        </div>
+        <button className="btn accent block bubble" style={{ marginTop: 16 }}>Quick apply</button>
+        <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)", marginTop: 10, textAlign: "center" }}>
+          recruiter {j.recruiter.toLowerCase()} · replies in ~2h
         </div>
       </div>
 
       {/* The social context column — the moat beat */}
       <div className="card dew">
-        <div className="between">
+        <div className="between" style={{ alignItems: "flex-start" }}>
           <div>
-            <div className="eyebrow" style={{ color: "var(--plum-soft)" }}>What the Society knows</div>
-            <div className="small" style={{ fontWeight: 600, marginTop: 4 }}>
+            <div className="eyebrow">What the Society knows</div>
+            <div className="small" style={{ marginTop: 6 }}>
               {j.social.workedHere} members have worked here
             </div>
-            <div className="small" style={{ color: "var(--plum-soft)" }}>
+            <div className="small" style={{ color: "var(--fg2)" }}>
               {j.social.diaries} assignment diaries · {j.social.answeredQs} questions answered
             </div>
           </div>
-          <div className="score" style={{ "--v": j.social.score }}><b>{j.social.score}</b></div>
+          <ScoreRing value={j.social.score} size={64} />
         </div>
         {j.facilityId ? (
           <Link to={`/facility/${j.facilityId}`} className="linkless">
-            <button className="btn block" style={{ marginTop: 12 }}>Open the facility hub</button>
+            <button className="btn block" style={{ marginTop: 14 }}>Open the facility hub</button>
           </Link>
         ) : (
-          <button className="btn block ghost" style={{ marginTop: 12 }}>Facility hub (demo: see Pacific View)</button>
+          <button className="btn block ghost" style={{ marginTop: 14 }}>Facility hub (demo: see Pacific View)</button>
         )}
         <button className="btn block ghost" style={{ marginTop: 8 }}>Ask someone who worked here</button>
         <Attrib id="jennyTrip" />

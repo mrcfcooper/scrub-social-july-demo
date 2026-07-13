@@ -284,6 +284,45 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 .meter { height: 8px; border-radius: var(--r-pill); background: rgba(66, 26, 49, 0.10); overflow: hidden; }
 .meter i { display: block; height: 100%; background: var(--plum); border-radius: var(--r-pill); transition: width 400ms ease; }
 
+/* Back link — plain text button, no chrome */
+.backlink {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px; padding: 4px 0;
+  border: none; background: none; cursor: pointer;
+  font-family: inherit; font-size: 14px; color: var(--fg2);
+}
+
+/* Facility-initials thumbnail — identity bubble */
+.thumb {
+  width: 46px; height: 46px; border-radius: 14px 14px 14px 0;
+  background: var(--dew); color: var(--plum);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; letter-spacing: -0.02em; flex: none;
+}
+
+/* Detail tiles (job facts grid) */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.tile { border-radius: var(--r-tile); box-shadow: var(--hairline); padding: 12px; }
+.tile-val { font-size: 17px; letter-spacing: -0.02em; margin-top: 6px; }
+
+/* Save/bookmark toggle on job cards */
+.save {
+  position: absolute; top: 14px; right: 14px; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: var(--cloud); box-shadow: var(--hairline); color: var(--fg3);
+  display: flex; align-items: center; justify-content: center;
+}
+.save.on { background: var(--lavender); color: var(--plum); box-shadow: none; }
+
+/* PhotoFrame — flat wash, speech-bubble corner, centered icon + caption */
+.photo-frame {
+  margin-top: 12px;
+  border-radius: var(--r-photo);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; color: var(--fg2);
+}
+
 /* Photo placeholder — flat brand wash in a speech-bubble frame */
 .photo {
   height: 110px; border-radius: var(--r-photo);
