@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { DIARY, JOBS, RECRUITER, MENTOR, GRAPH, BADGES, PINS, TOP8, GUIDE, PERSONAS } from "./data";
-import { Attrib, Avatar, Sect, Stars } from "./ui";
+import { Attrib, Avatar, PhotoFrame, Sect, Stars } from "./ui";
+import { Icon, Logomark } from "./icons";
 
 // ─── Assignment Diary (Rachel's dream, built to spec) ───────────────────────
 export function Diary() {
@@ -33,19 +34,24 @@ export function Diary() {
       <Sect title="The scrapbook" sub="tap to view" />
       <div className="wrap" style={{ marginTop: 4 }}>
         {d.photos.map((p) => (
-          <div key={p.label} className="photo" style={{ background: p.tone, flex: "1 1 45%" }}>
-            📸 {p.label}
-          </div>
+          <PhotoFrame
+            key={p.label}
+            photo={p.key}
+            tone={p.tone}
+            label={p.label}
+            height={110}
+            style={{ flex: "1 1 45%", marginTop: 0 }}
+          />
         ))}
       </div>
 
       <Sect title="The Yelp side of it" />
       {d.yelp.map((y) => (
-        <div key={y.k} className="card row" style={{ alignItems: "flex-start" }}>
-          <span style={{ fontSize: 20 }}>{y.emoji}</span>
+        <div key={y.k} className="card row" style={{ alignItems: "flex-start", gap: 12 }}>
+          <span className="icon-well"><Icon name={y.icon} size={17} /></span>
           <div>
-            <div className="small" style={{ fontWeight: 600 }}>{y.k}</div>
-            <div className="small" style={{ color: "var(--plum-soft)" }}>{y.v}</div>
+            <div className="small">{y.k}</div>
+            <div className="small" style={{ color: "var(--fg2)" }}>{y.v}</div>
           </div>
         </div>
       ))}
@@ -96,9 +102,9 @@ export function Profile() {
           </div>
         </div>
         <div className="wrap" style={{ marginTop: 10 }}>
-          <span className="pill solid">🟢 {p.status}</span>
-          <span className="pill sky">✓ {p.trust}% positive</span>
-          <span className="pill">👀 consumer mode ok</span>
+          <span className="pill solid"><span className="dot" aria-hidden="true" /> {p.status}</span>
+          <span className="pill sky"><Icon name="shield-check" size={13} /> {p.trust}% positive</span>
+          <span className="pill"><Icon name="eye" size={13} /> consumer mode ok</span>
         </div>
         <Attrib id="harpsterTrust" />
       </div>
@@ -106,7 +112,9 @@ export function Profile() {
       <Sect title="Badges" />
       <div className="wrap" style={{ marginTop: 4 }}>
         {BADGES.map((b) => (
-          <span key={b.label} className="pill" style={{ background: "var(--cloud)" }}>{b.emoji} {b.label}</span>
+          <span key={b.label} className="pill" style={{ background: "var(--cloud)" }}>
+            <Icon name={b.icon} size={13} /> {b.label}
+          </span>
         ))}
       </div>
       <div className="stack"><Attrib id="jennaBadges" /></div>
@@ -114,7 +122,7 @@ export function Profile() {
       <Sect title="Where I've been" sub={`${PINS.length} states`} />
       <div className="wrap" style={{ marginTop: 4 }}>
         {PINS.map((s) => (
-          <span key={s} className="pin">{s}<small>📍</small></span>
+          <span key={s} className="pin">{s}<Icon name="map-pin" size={11} /></span>
         ))}
       </div>
       <div className="stack"><Attrib id="jennyPins" /></div>
@@ -122,11 +130,11 @@ export function Profile() {
       <Sect title="My top 8" />
       <div className="card" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
         {TOP8.map((t) => (
-          <div key={t.k} className="row" style={{ alignItems: "flex-start" }}>
-            <span style={{ fontSize: 18 }}>{t.emoji}</span>
+          <div key={t.k} className="row" style={{ alignItems: "flex-start", gap: 10 }}>
+            <span className="icon-well sm"><Icon name={t.icon} size={14} /></span>
             <div>
               <div className="muted">{t.k}</div>
-              <div className="small" style={{ fontWeight: 600 }}>{t.v}</div>
+              <div className="small">{t.v}</div>
             </div>
           </div>
         ))}
@@ -158,14 +166,17 @@ export function Recruiter() {
             <div className="muted">{r.agency} · {r.years} years</div>
           </div>
           <div style={{ textAlign: "center" }}>
-            <div style={{ fontWeight: 700, fontSize: 18, color: "var(--plum)" }}>{r.rating}★</div>
+            <div className="row" style={{ gap: 3, justifyContent: "center", fontSize: 18, letterSpacing: "-0.02em", color: "var(--plum)" }}>
+              {r.rating}
+              <Icon name="star" size={14} style={{ fill: "var(--lavender)", stroke: "var(--lavender)" }} />
+            </div>
             <div className="muted">{r.reviews} reviews</div>
           </div>
         </div>
         <p className="small" style={{ marginTop: 10, lineHeight: 1.45 }}>“{r.bio}”</p>
         <div className="wrap" style={{ marginTop: 10 }}>
-          <span className="pill sky">👥 booked {r.booked} travelers</span>
-          <span className="pill">🧭 Recommended by {r.recommendedBy.join(", ")}</span>
+          <span className="pill sky"><Icon name="users" size={13} /> booked {r.booked} travelers</span>
+          <span className="pill"><Icon name="compass" size={13} /> Recommended by {r.recommendedBy.join(", ")}</span>
         </div>
         <Attrib id="ashleyHuman" />
         <Attrib id="ashleyRecs" />
@@ -188,7 +199,7 @@ export function Recruiter() {
         <div key={i} className="card dew between">
           <div>
             <div className="small" style={{ fontWeight: 600 }}>{h.title}</div>
-            <div className="muted" style={{ color: "var(--plum-soft)" }}>🔥 {h.tag}</div>
+            <div className="muted row" style={{ gap: 5 }}><Icon name="flame" size={13} /> {h.tag}</div>
           </div>
           <div style={{ fontWeight: 700, color: "var(--plum)" }}>{h.pay}</div>
         </div>
@@ -200,7 +211,9 @@ export function Recruiter() {
           <div className="small" style={{ fontWeight: 600, color: "var(--plum)" }}>
             {r.ambassador.referred} referrals · {r.ambassador.booked} booked
           </div>
-          <span className="pill" style={{ background: "var(--cloud)" }}>🧊 {r.ambassador.reward} at 5 booked</span>
+          <span className="pill" style={{ background: "var(--cloud)" }}>
+            <Icon name="award" size={13} /> {r.ambassador.reward} at 5 booked
+          </span>
         </div>
         <div className="meter" style={{ marginTop: 10, background: "rgba(255,255,255,0.6)" }}>
           <i style={{ width: `${r.ambassador.progress}%`, background: "var(--plum)" }} />
@@ -228,15 +241,15 @@ export function Mentor() {
         <div className="row">
           <Avatar initials="BP" color="#F9F2E8" size="lg" />
           <div className="grow">
-            <div style={{ fontWeight: 600, fontSize: 16 }}>{m.name} <span className="verified">✓</span></div>
+            <div style={{ fontSize: 16 }}>{m.name} <span className="verified"><Icon name="check" size={13} /></span></div>
             <div style={{ fontSize: 12, color: "var(--dew)" }}>{m.title} · {m.years}</div>
           </div>
         </div>
         <p className="small" style={{ marginTop: 10, lineHeight: 1.5 }}>“{m.bio}”</p>
         <div className="wrap" style={{ marginTop: 10 }}>
-          <span className="pill">💡 {m.answered} answers</span>
-          <span className="pill">🙌 {m.helpfulVotes.toLocaleString()} helpful votes</span>
-          <span className="pill">🧭 {m.mentees} mentees</span>
+          <span className="pill"><Icon name="message-circle" size={13} /> {m.answered} answers</span>
+          <span className="pill"><Icon name="heart" size={13} /> {m.helpfulVotes.toLocaleString()} helpful votes</span>
+          <span className="pill"><Icon name="compass" size={13} /> {m.mentees} mentees</span>
         </div>
         <Attrib id="brandyMentor" />
       </div>
@@ -257,12 +270,12 @@ export function Mentor() {
       {m.queue.map((q, i) => (
         <div key={i} className="card between">
           <span className="small grow" style={{ lineHeight: 1.4 }}>{q.text}</span>
-          {q.status === "approved" && <span className="pill sky">✓ approved</span>}
-          {q.status === "auto" && <span className="pill solid">🤖 auto</span>}
+          {q.status === "approved" && <span className="pill sky"><Icon name="check" size={13} /> approved</span>}
+          {q.status === "auto" && <span className="pill solid"><Icon name="bot" size={13} /> auto</span>}
           {q.status === "pending" && (
             <span className="row">
-              <button className="btn sm">✓</button>
-              <button className="btn sm ghost">✕</button>
+              <button className="btn sm" aria-label="Approve"><Icon name="check" size={14} /></button>
+              <button className="btn sm ghost" aria-label="Decline"><Icon name="x" size={14} /></button>
             </span>
           )}
         </div>
@@ -341,6 +354,7 @@ export function Guide() {
   return (
     <div>
       <div className="card plum">
+        <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
         <div className="eyebrow" style={{ color: "var(--lavender)" }}>The one-line demo script</div>
         <h2 style={{ fontSize: 18, marginTop: 6, lineHeight: 1.35 }}>
           “Everything you're about to see, you asked for on May 11.”

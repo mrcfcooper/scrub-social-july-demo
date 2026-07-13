@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FEED, JOBS, FACILITY } from "./data";
-import { Attrib, Avatar, PhotoFrame, Post, ScoreRing } from "./ui";
+import { Attrib, Avatar, Headline, PhotoFrame, Post, ScoreRing, photoUrl } from "./ui";
 import { Icon } from "./icons";
 
 const initialsOf = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("");
@@ -20,12 +20,7 @@ export function Feed() {
           The lounge
         </button>
       </div>
-      {tab === "questions" && (
-        <div className="attrib" style={{ marginTop: 10 }}>
-          <span className="mark">💬</span>
-          <span><b>Rachel asked for this</b> · May 11 — “I don't want real questions to get lost because a funny meme was in the feed.”</span>
-        </div>
-      )}
+      {tab === "questions" && <Attrib id="rachelSplit" />}
 
       <Post p={posts[0]} />
 
@@ -74,7 +69,7 @@ export function Jobs() {
   return (
     <div>
       <div className="sect">
-        <h2>Jobs with the inside story</h2>
+        <h2><Headline>Jobs with the inside story</Headline></h2>
         <span className="subtext">{JOBS.length} matches</span>
       </div>
       <p className="muted" style={{ marginTop: 6 }}>
@@ -99,7 +94,11 @@ function JobCard({ j }) {
       </button>
       <Link to={`/jobs/${j.id}`} className="linkless">
         <div className="row" style={{ alignItems: "flex-start", gap: 12 }}>
-          <span className="thumb">{initialsOf(j.facility)}</span>
+          <span className="thumb">
+            {photoUrl(j.photo)
+              ? <img src={photoUrl(j.photo)} alt="" />
+              : initialsOf(j.facility)}
+          </span>
           <div className="grow" style={{ paddingRight: 36 }}>
             <div style={{ fontSize: 16, letterSpacing: "-0.01em", lineHeight: 1.2 }}>{j.title}</div>
             <div className="muted" style={{ marginTop: 3 }}>{j.facility} · {j.city}</div>
@@ -145,7 +144,7 @@ export function JobDetail({ id }) {
         <Icon name="arrow-left" size={16} /> Back to jobs
       </button>
 
-      <PhotoFrame tone="var(--dew)" icon="building" label="facility photo" height={160} />
+      <PhotoFrame photo={j.photo} tone="var(--dew)" icon="building" label="facility photo" height={160} />
 
       <div className="card">
         <div className="eyebrow">Travel contract</div>
@@ -219,8 +218,8 @@ export function Facility() {
           </div>
         </div>
         <div className="wrap" style={{ marginTop: 12 }}>
-          <span className="pill">👥 {f.workedHere} members worked here</span>
-          <span className="pill sky">🙋 {f.askable} open to questions</span>
+          <span className="pill"><Icon name="users" size={13} /> {f.workedHere} members worked here</span>
+          <span className="pill sky"><Icon name="user-check" size={13} /> {f.askable} open to questions</span>
         </div>
         <div className="stack" style={{ marginTop: 12 }}>
           {f.vibe.map((v) => (
@@ -260,18 +259,24 @@ function QATab({ f }) {
             <div key={i} className="answer">
               <div className="row">
                 <Avatar
-                  initials={a.anon ? "🎭" : a.by.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                  initials={a.anon ? "?" : a.by.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                   color={a.verified ? "#421A31" : "#CEDBFE"}
                   dark={a.verified}
                 />
                 <div className="grow">
-                  <span className="small" style={{ fontWeight: 600 }}>{a.by}</span>{" "}
-                  {a.verified && <span className="verified small">✓ {a.badge}</span>}
+                  <span className="small">{a.by}</span>{" "}
+                  {a.verified && (
+                    <span className="verified small">
+                      <Icon name="check" size={12} /> {a.badge}
+                    </span>
+                  )}
                   {a.anon && <span className="pill sky" style={{ marginLeft: 4 }}>anonymous answer</span>}
                 </div>
               </div>
               <p className="small" style={{ marginTop: 8, lineHeight: 1.45 }}>{a.text}</p>
-              <div className="muted" style={{ marginTop: 6 }}>💡 Helpful · {a.helpful}</div>
+              <div className="muted row" style={{ marginTop: 6, gap: 5 }}>
+                <Icon name="thumbs-up" size={13} /> Helpful · {a.helpful}
+              </div>
             </div>
           ))}
           {q.id === "q1" && <Attrib id="brandyTesting" />}
@@ -292,7 +297,9 @@ function PayTab({ f }) {
             <div style={{ fontWeight: 700, fontSize: 17, color: "var(--plum)" }}>{p.rate}</div>
             <div className="muted">{p.spec} · {p.agency} · {p.when}</div>
           </div>
-          {p.verified ? <span className="pill sky">✓ contract-verified</span> : <span className="pill outline">self-reported</span>}
+          {p.verified
+            ? <span className="pill sky"><Icon name="shield-check" size={13} /> contract-verified</span>
+            : <span className="pill outline">self-reported</span>}
         </div>
       ))}
       <div className="card dew">
@@ -309,8 +316,8 @@ function NotesTab({ f }) {
   return (
     <div>
       {f.insiderNotes.map((n, i) => (
-        <div key={i} className="card row" style={{ alignItems: "flex-start" }}>
-          <span style={{ fontSize: 20 }}>{n.emoji}</span>
+        <div key={i} className="card row" style={{ alignItems: "flex-start", gap: 12 }}>
+          <span className="icon-well"><Icon name={n.icon} size={17} /></span>
           <p className="small" style={{ lineHeight: 1.45 }}>{n.text}</p>
         </div>
       ))}
@@ -331,8 +338,10 @@ function ReviewComposer() {
     <div className="card">
       <div className="small" style={{ fontWeight: 600 }}>How was your assignment here?</div>
       <div className="faces">
-        {[["happy", "😊"], ["mid", "😐"], ["mad", "😠"]].map(([k, e]) => (
-          <button key={k} className={`face ${mood === k ? "on" : ""}`} onClick={() => setMood(k)} aria-label={k}>{e}</button>
+        {[["happy", "smile"], ["mid", "meh"], ["mad", "frown"]].map(([k, ico]) => (
+          <button key={k} className={`face ${mood === k ? "on" : ""}`} onClick={() => setMood(k)} aria-label={k}>
+            <Icon name={ico} size={24} />
+          </button>
         ))}
       </div>
       {locked ? (

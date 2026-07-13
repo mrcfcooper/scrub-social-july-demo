@@ -3,6 +3,23 @@
 // named internal personas (swap in PERSONAS below if you want them fictional).
 // Content is seeded from the May 11 social workshop call.
 
+// ─── Photo manifest ──────────────────────────────────────────────────────────
+// Semantic key -> filename in src/assets/photos/. PhotoFrame renders the image
+// when the file exists (cover-fit, speech-bubble corner) and falls back to the
+// flat brand wash when it doesn't — so the demo works before art lands.
+// Shot list with generation prompts: see the restyle plan (commit 3 notes).
+export const PHOTOS = {
+  "job-pacific-view": "job-pacificview.jpg",
+  "job-sunrise-regional": "job-sunrise.jpg",
+  "job-gulf-coast": "job-gulfcoast.jpg",
+  "facility-pacific-view": "facility-pacificview.jpg",
+  "diary-sunset-cliffs": "diary-sunsetcliffs.jpg",
+  "diary-potluck": "diary-potluck.jpg",
+  "diary-dog-beach": "diary-dogbeach.jpg",
+  "feed-sunrise-parking": "feed-sunrise-parking.jpg",
+  "city-san-diego": "city-sandiego.jpg",
+};
+
 export const PERSONAS = {
   traveler: {
     id: "suzie",
@@ -136,9 +153,9 @@ export const FACILITY = {
     { rate: "$3,050/wk", spec: "Tele", agency: "Anonymous", when: "1 mo ago", verified: false },
   ],
   insiderNotes: [
-    { emoji: "🅿️", text: "Badge access to the parking structure takes ~3 days. Use Lot C with your orientation paper until then." },
-    { emoji: "☕", text: "Skip the cafeteria coffee. Bluebird Café across the street opens at 5:30 and knows the night shift order." },
-    { emoji: "🧾", text: "Timekeeping is UKG — submit by Sunday 10pm or your recruiter has to chase payroll." },
+    { icon: "car", text: "Badge access to the parking structure takes ~3 days. Use Lot C with your orientation paper until then." },
+    { icon: "coffee", text: "Skip the cafeteria coffee. Bluebird Café across the street opens at 5:30 and knows the night shift order." },
+    { icon: "clipboard-check", text: "Timekeeping is UKG — submit by Sunday 10pm or your recruiter has to chase payroll." },
   ],
 };
 
@@ -154,6 +171,7 @@ export const JOBS = [
     shift: "Nights · 3x12",
     start: "Aug 3",
     length: "13 weeks",
+    photo: "job-pacific-view",
     social: { workedHere: 42, diaries: 6, score: 88, answeredQs: 11 },
     recruiter: "Ashley H.",
   },
@@ -168,6 +186,7 @@ export const JOBS = [
     shift: "Days · 3x12",
     start: "Jul 27",
     length: "13 weeks",
+    photo: "job-sunrise-regional",
     social: { workedHere: 27, diaries: 3, score: 91, answeredQs: 7 },
     recruiter: "Maya Collins",
   },
@@ -182,6 +201,7 @@ export const JOBS = [
     shift: "Nights · 3x12",
     start: "Aug 10",
     length: "13 weeks",
+    photo: "job-gulf-coast",
     social: { workedHere: 19, diaries: 2, score: 84, answeredQs: 4 },
     recruiter: "Ashley H.",
   },
@@ -201,15 +221,15 @@ export const DIARY = {
     { k: "Housing", v: 4 },
   ],
   photos: [
-    { label: "Sunset Cliffs meetup", tone: "#82ABF4" },
-    { label: "Unit potluck, week 6", tone: "#BBAFEF" },
-    { label: "Dog beach Sundays", tone: "#CEDBFE" },
+    { key: "diary-sunset-cliffs", label: "Sunset Cliffs meetup", tone: "#82ABF4" },
+    { key: "diary-potluck", label: "Unit potluck, week 6", tone: "#BBAFEF" },
+    { key: "diary-dog-beach", label: "Dog beach Sundays", tone: "#CEDBFE" },
   ],
   yelp: [
-    { emoji: "💇", k: "Hair", v: "Luna Studio, Hillcrest — ask for Sam, traveler discount" },
-    { emoji: "🌮", k: "Ate here weekly", v: "Oscar's Mexican Seafood — $12 and unreasonable quality" },
-    { emoji: "🐕", k: "Pet friendly", v: "Seaside Flats, no breed limit, 15 min to unit" },
-    { emoji: "🧘", k: "Day off", v: "Torrey Pines hike, then La Jolla cove. Do it before June gloom" },
+    { icon: "scissors", k: "Hair", v: "Luna Studio, Hillcrest — ask for Sam, traveler discount" },
+    { icon: "utensils", k: "Ate here weekly", v: "Oscar's Mexican Seafood — $12 and unreasonable quality" },
+    { icon: "paw-print", k: "Pet friendly", v: "Seaside Flats, no breed limit, 15 min to unit" },
+    { icon: "map", k: "Day off", v: "Torrey Pines hike, then La Jolla cove. Do it before June gloom" },
   ],
   entries: [
     { week: "Week 1", text: "Orientation is two days and they actually pay you for both. Rhythm strip test on day one — see my answer on the facility Q&A." },
@@ -228,7 +248,10 @@ export const FEED = {
       community: "ICU Travelers",
       when: "2h",
       text: "Is 2 years of ICU experience really necessary before traveling? I see jobs listed with 1 year minimum. Which is real?",
-      reactions: { "💡 Helpful": 4, "🫡 Same shift": 2 },
+      reactions: [
+        { icon: "thumbs-up", label: "Helpful", n: 4 },
+        { icon: "users", label: "Same shift", n: 2 },
+      ],
       comments: 6,
       mentorAnswered: true,
     },
@@ -240,7 +263,10 @@ export const FEED = {
       when: "5h",
       anon: true,
       text: "Quoted $58/hr for tele at a facility publicly advertising $68/hr. Asked for the breakdown and the number moved. Always ask for the breakdown.",
-      reactions: { "💰 Pay intel": 9, "🚩 Red flag": 3 },
+      reactions: [
+        { icon: "dollar", label: "Pay intel", n: 9 },
+        { icon: "flag", label: "Red flag", n: 3 },
+      ],
       comments: 11,
     },
     {
@@ -250,7 +276,7 @@ export const FEED = {
       community: "New Travelers",
       when: "8h",
       text: "Staff for 3 years, tele/stepdown. What do I actually need to get ICU-ready before my first contract?",
-      reactions: { "💡 Helpful": 2 },
+      reactions: [{ icon: "thumbs-up", label: "Helpful", n: 2 }],
       comments: 4,
     },
   ],
@@ -261,9 +287,12 @@ export const FEED = {
       role: "Travel Nurse · Peds",
       community: "San Diego Travelers",
       when: "1h",
-      text: "Assignment selfie challenge: badge, sunrise, 0 patients in the background. Week 4 in San Diego and I get it now. ☀️",
-      photo: { label: "Sunrise over the parking structure", tone: "#82ABF4" },
-      reactions: { "🤝 Respect": 7, "📍 Been there": 5 },
+      text: "Assignment selfie challenge: badge, sunrise, 0 patients in the background. Week 4 in San Diego and I get it now.",
+      photo: { key: "feed-sunrise-parking", label: "Sunrise over the parking structure", tone: "#82ABF4" },
+      reactions: [
+        { icon: "heart", label: "Respect", n: 7 },
+        { icon: "map-pin", label: "Been there", n: 5 },
+      ],
       comments: 3,
       attrib: "harpsterSelfie",
     },
@@ -274,7 +303,10 @@ export const FEED = {
       community: "Las Vegas Travelers",
       when: "6h",
       text: "The no-state-income-tax difference is real. Same gross, $400/wk more take-home than my Florida contract. Do the math before you sign.",
-      reactions: { "💰 Pay intel": 12, "💡 Helpful": 6 },
+      reactions: [
+        { icon: "dollar", label: "Pay intel", n: 12 },
+        { icon: "thumbs-up", label: "Helpful", n: 6 },
+      ],
       comments: 8,
     },
   ],
@@ -328,7 +360,7 @@ export const MENTOR = {
     { where: "Pay Intel", text: "Commented: how agency margins actually work", when: "1w" },
   ],
   queue: [
-    { text: "Facility review · Sunrise Regional · 4★ 'Charge nurses actually help…'", status: "approved" },
+    { text: "Facility review · Sunrise Regional · 4/5 'Charge nurses actually help…'", status: "approved" },
     { text: "Comment · auto-rejected · profanity filter", status: "auto" },
     { text: "Pay report · $3,290/wk ER · awaiting verification", status: "pending" },
   ],
@@ -354,24 +386,24 @@ export const GRAPH = {
 };
 
 export const BADGES = [
-  { emoji: "🐕", label: "Dog mom" },
-  { emoji: "🧳", label: "18 contracts" },
-  { emoji: "🗺️", label: "12 states" },
-  { emoji: "🎤", label: "TravCon '25" },
-  { emoji: "🌙", label: "Night shift" },
+  { icon: "paw-print", label: "Dog mom" },
+  { icon: "briefcase", label: "18 contracts" },
+  { icon: "map", label: "12 states" },
+  { icon: "mic", label: "TravCon '25" },
+  { icon: "moon", label: "Night shift" },
 ];
 
 export const PINS = ["CA", "TX", "FL", "AZ", "NV", "WA", "CO", "TN", "NC", "OR", "NM", "UT"];
 
 export const TOP8 = [
-  { k: "Recruiter", v: "Ashley H.", emoji: "⭐" },
-  { k: "City", v: "San Diego", emoji: "🌊" },
-  { k: "Facility", v: "Pacific View", emoji: "🏥" },
-  { k: "Travel friend", v: "Maya C.", emoji: "🤝" },
-  { k: "Coffee", v: "Bluebird Café", emoji: "☕" },
-  { k: "Mentor", v: "Brandy P.", emoji: "🧭" },
-  { k: "Agency", v: "TravelMed", emoji: "🏢" },
-  { k: "Beach", v: "Ocean Beach", emoji: "🐕" },
+  { k: "Recruiter", v: "Ashley H.", icon: "star" },
+  { k: "City", v: "San Diego", icon: "map-pin" },
+  { k: "Facility", v: "Pacific View", icon: "building" },
+  { k: "Travel friend", v: "Maya C.", icon: "heart" },
+  { k: "Coffee", v: "Bluebird Café", icon: "coffee" },
+  { k: "Mentor", v: "Brandy P.", icon: "compass" },
+  { k: "Agency", v: "TravelMed", icon: "briefcase" },
+  { k: "Beach", v: "Ocean Beach", icon: "paw-print" },
 ];
 
 export const GUIDE = [

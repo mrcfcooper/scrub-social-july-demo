@@ -298,7 +298,9 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
   background: var(--dew); color: var(--plum);
   display: flex; align-items: center; justify-content: center;
   font-size: 14px; letter-spacing: -0.02em; flex: none;
+  overflow: hidden;
 }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Detail tiles (job facts grid) */
 .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
@@ -315,19 +317,35 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 }
 .save.on { background: var(--lavender); color: var(--plum); box-shadow: none; }
 
-/* PhotoFrame — flat wash, speech-bubble corner, centered icon + caption */
+/* PhotoFrame — flat wash, speech-bubble corner, centered icon + caption;
+   renders the real image (cover-fit) when the manifest file exists */
 .photo-frame {
   margin-top: 12px;
   border-radius: var(--r-photo);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 6px; color: var(--fg2);
 }
+.photo-frame.has-img { position: relative; overflow: hidden; display: block; }
+.photo-frame.has-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-cap {
+  position: absolute; left: 10px; bottom: 10px;
+  background: var(--cloud); color: var(--plum);
+  border-radius: 9999px 9999px 9999px 0;
+  padding: 4px 10px; font-size: 11px; font-weight: 400; text-transform: lowercase;
+}
 
-/* Photo placeholder — flat brand wash in a speech-bubble frame */
-.photo {
-  height: 110px; border-radius: var(--r-photo);
-  display: flex; align-items: flex-end; gap: 6px; padding: 10px;
-  color: var(--plum); font-size: 12px; font-weight: 400; text-transform: lowercase;
+/* Icon wells — tinted tiles, squared bottom-left */
+.icon-well {
+  width: 38px; height: 38px; border-radius: var(--r-well);
+  background: var(--dew); color: var(--plum);
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+}
+.icon-well.sm { width: 30px; height: 30px; border-radius: 10px 10px 10px 0; }
+
+/* Presence dot — lavender (brand has no green) */
+.dot {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  background: var(--lavender); display: inline-block;
 }
 
 /* Bottom nav — floating pill bar */

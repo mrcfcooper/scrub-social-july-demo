@@ -1,6 +1,18 @@
 import { useState } from "react";
-import { ATTRIB } from "./data";
+import { ATTRIB, PHOTOS } from "./data";
 import { Icon } from "./icons";
+
+// Every image in src/assets/photos/, resolved at build time. PhotoFrame falls
+// back to the flat brand wash for any manifest key whose file hasn't landed.
+const PHOTO_FILES = import.meta.glob("./assets/photos/*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+export const photoUrl = (key) => {
+  const file = key && PHOTOS[key];
+  return file ? PHOTO_FILES[`./assets/photos/${file}`] : undefined;
+};
 
 // Attribution marker — the demo's thesis, kept unobtrusive: a small lavender
 // quote chip with the asker's name. Tapping opens a popover with the full
@@ -83,27 +95,40 @@ export function Post({ p }) {
       <div className="row">
         <Avatar
           initials={p.anon ? "?" : p.author.split(" ").map((w) => w[0]).join("")}
-          color={p.anon ? "#CEDBFE" : "#CEDBFE"}
+          color="#CEDBFE"
         />
         <div className="grow">
-          <div className="small" style={{ fontWeight: 400 }}>
-            {p.author} {p.anon && <span className="pill tint" style={{ marginLeft: 4 }}>🎭 anonymous</span>}
+          <div className="small">
+            {p.author}{" "}
+            {p.anon && (
+              <span className="pill tint" style={{ marginLeft: 4 }}>
+                <Icon name="user" size={12} /> anonymous
+              </span>
+            )}
           </div>
           <div className="muted">{p.role} · {p.community} · {p.when}</div>
         </div>
-        {p.mentorAnswered && <span className="pill" title="A mentor answered">🧭 Mentor answered</span>}
+        {p.mentorAnswered && (
+          <span className="pill" title="A mentor answered">
+            <Icon name="compass" size={12} /> Mentor answered
+          </span>
+        )}
       </div>
       <p className="small" style={{ marginTop: 10, lineHeight: 1.45 }}>{p.text}</p>
       {p.photo && (
-        <div className="photo" style={{ background: p.photo.tone, marginTop: 10 }}>
-          📸 {p.photo.label}
-        </div>
+        <PhotoFrame
+          photo={p.photo.key}
+          tone={p.photo.tone}
+          label={p.photo.label}
+          height={140}
+          style={{ marginTop: 10 }}
+        />
       )}
       <div className="rxn">
-        {Object.entries(p.reactions).map(([k, v]) => (
-          <span key={k}>{k} {v}</span>
+        {p.reactions.map((r) => (
+          <span key={r.label}><Icon name={r.icon} size={13} /> {r.label} {r.n}</span>
         ))}
-        <span>💬 {p.comments}</span>
+        <span><Icon name="message-circle" size={13} /> {p.comments}</span>
       </div>
       {p.attrib && <Attrib id={p.attrib} />}
     </article>
@@ -134,13 +159,33 @@ export function ScoreRing({ value, size = 64, stroke = 8 }) {
   );
 }
 
-// Flat brand-wash placeholder in the speech-bubble photo frame
-export function PhotoFrame({ tone = "var(--dew)", icon = "camera", label, height = 120, style }) {
+// Photo in the speech-bubble frame when the file exists; flat brand-wash
+// placeholder (icon + lowercase caption) when it doesn't.
+export function PhotoFrame({ photo, tone = "var(--dew)", icon = "camera", label, height = 120, style }) {
+  const url = photoUrl(photo);
+  if (url) {
+    return (
+      <div className="photo-frame has-img" style={{ height, ...style }}>
+        <img src={url} alt={label || ""} />
+        {label && <span className="photo-cap">{label}</span>}
+      </div>
+    );
+  }
   return (
     <div className="photo-frame" style={{ background: tone, height, ...style }}>
       <Icon name={icon} size={22} />
       {label && <span className="subtext" style={{ color: "inherit" }}>{label}</span>}
     </div>
+  );
+}
+
+// Headline with the brand's lavender end-punctuation
+export function Headline({ children, mark = "." }) {
+  return (
+    <>
+      {children}
+      <span style={{ color: "var(--lavender)" }}>{mark}</span>
+    </>
   );
 }
 
