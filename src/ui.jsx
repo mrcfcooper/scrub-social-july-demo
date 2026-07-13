@@ -58,14 +58,14 @@ export function Attrib({ id, full }) {
   );
 }
 
-export function Avatar({ initials, color, size, dark }) {
+export function Avatar({ initials, icon, color, size, dark }) {
   return (
     <span
       className={`avatar ${size === "lg" ? "lg" : ""} ${dark ? "dark" : ""}`}
       style={{ background: color }}
       aria-hidden="true"
     >
-      {initials}
+      {icon ? <Icon name={icon} size={size === "lg" ? 22 : 15} /> : initials}
     </span>
   );
 }

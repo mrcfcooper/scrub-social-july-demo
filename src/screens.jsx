@@ -18,34 +18,35 @@ function MetaTile({ label, value }) {
 // ─── Feed ────────────────────────────────────────────────────────────────────
 export function Feed() {
   const [tab, setTab] = useState("questions");
+  const nav = useNavigate();
   const posts = tab === "questions" ? FEED.questions : FEED.lounge;
   return (
     <div>
-      <div className="tabs" role="tablist">
+      <div className="tabs" role="tablist" style={{ alignItems: "center" }}>
         <button className={`tab ${tab === "questions" ? "on" : ""}`} onClick={() => setTab("questions")}>
           Real questions
         </button>
         <button className={`tab ${tab === "lounge" ? "on" : ""}`} onClick={() => setTab("lounge")}>
           The lounge
         </button>
+        {tab === "questions" && <Attrib id="rachelSplit" />}
       </div>
-      {tab === "questions" && <Attrib id="rachelSplit" />}
 
       <Post p={posts[0]} />
 
-      {/* Erin prompt slot, injected between cards */}
+      {/* Erin prompt slot, injected between cards — her grammar: lavender + sparkles */}
       <div className="card plum">
         <div className="row">
-          <Avatar initials="E" color="#BBAFEF" />
+          <Avatar icon="sparkles" color="#BBAFEF" />
           <div className="grow">
             <div className="small">Erin</div>
-            <div style={{ fontSize: 12, color: "var(--dew)" }}>Your AI assistant · suggestion</div>
+            <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)" }}>your ai assistant · suggestion</div>
           </div>
         </div>
         <p className="small" style={{ marginTop: 10, lineHeight: 1.5 }}>{FEED.erin.text}</p>
-        <div className="wrap" style={{ marginTop: 10 }}>
+        <div className="wrap" style={{ marginTop: 12 }}>
           {FEED.erin.actions.map((a) => (
-            <button key={a} className="btn sky sm">{a}</button>
+            <button key={a} className="chip-btn" onClick={() => nav("/facility/pacific-view")}>{a}</button>
           ))}
         </div>
       </div>
@@ -55,18 +56,35 @@ export function Feed() {
       {/* Meetups board */}
       <div className="card dew">
         <div className="eyebrow">Meetups & events</div>
-        <div className="small" style={{ marginTop: 6 }}>{FEED.meetup.title}</div>
-        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.detail}</div>
-        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.meetup.sub}</div>
-        <button className="btn sm" style={{ marginTop: 10 }}>I'm going</button>
+        <div className="row" style={{ marginTop: 10, gap: 12, alignItems: "flex-start" }}>
+          <span className="date-tile" aria-hidden="true">
+            <span>{FEED.meetup.day}</span>
+            <b>{FEED.meetup.time}</b>
+          </span>
+          <div className="grow">
+            <div className="small">{FEED.meetup.title}</div>
+            <div className="muted" style={{ color: "var(--fg2)", marginTop: 2 }}>{FEED.meetup.detail}</div>
+            <div className="subtext" style={{ marginTop: 2 }}>{FEED.meetup.sub}</div>
+          </div>
+        </div>
+        <button className="btn sm" style={{ marginTop: 12 }}>
+          <Icon name="users" size={14} /> I'm going
+        </button>
       </div>
 
       {/* Roommate board */}
-      <div className="card lav flip">
-        <div className="eyebrow" style={{ color: "var(--plum-soft)" }}>Roommate board</div>
-        <div className="small" style={{ marginTop: 6 }}>{FEED.roommate.title}</div>
-        <div className="small" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.detail}</div>
-        <div className="muted" style={{ color: "var(--plum-soft)" }}>{FEED.roommate.sub}</div>
+      <div className="card lav">
+        <div className="eyebrow" style={{ color: "var(--fg2)" }}>Roommate board</div>
+        <PhotoFrame
+          photo="city-san-diego"
+          tone="rgba(255, 255, 255, 0.45)"
+          icon="map-pin"
+          label="san diego"
+          height={90}
+        />
+        <div className="small" style={{ marginTop: 10 }}>{FEED.roommate.title}</div>
+        <div className="small" style={{ color: "var(--fg2)" }}>{FEED.roommate.detail}</div>
+        <div className="subtext" style={{ marginTop: 2 }}>{FEED.roommate.sub}</div>
         <Attrib id="amberRoommate" />
       </div>
     </div>
@@ -329,7 +347,7 @@ function PayTab({ f }) {
       ))}
       <div className="card dew">
         <div className="small">Reality check</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
           Listed rates for this facility ranged $2,950–$3,600/wk over the last 90 days. If your quote is under $3,050, ask for the breakdown.
         </p>
       </div>

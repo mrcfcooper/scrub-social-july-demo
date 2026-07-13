@@ -198,7 +198,7 @@ function DiaryRead() {
           <div className="card dew between">
             <div>
               <div className="small">{job.title}</div>
-              <div className="muted" style={{ color: "var(--plum-soft)" }}>{job.facility} · starts {job.start}</div>
+              <div className="muted" style={{ color: "var(--fg2)" }}>{job.facility} · starts {job.start}</div>
             </div>
             <div className="money" style={{ fontSize: 17 }}>{job.weekly}</div>
           </div>
@@ -271,7 +271,7 @@ export function Profile() {
       <Sect title="Profile strength" sub={`${p.completion}%`} />
       <div className="card">
         <div className="meter"><i style={{ width: `${p.completion}%` }} /></div>
-        <p className="small" style={{ marginTop: 10, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 10, color: "var(--fg2)" }}>
           Add one professional reference to hit 100% and earn the <b>Society Founder</b> badge. Built from your resume — you've worked 8 cities, 12 hospitals, 7 states. We filled that in for you.
         </p>
         <Attrib id="jennyComplete" />
@@ -333,7 +333,7 @@ export function Recruiter() {
       ))}
 
       <Sect title="Ambassador rewards" />
-      <div className="card lav flip">
+      <div className="card lav">
         <div className="between">
           <div className="small" style={{ color: "var(--plum)" }}>
             {r.ambassador.referred} referrals · {r.ambassador.booked} booked
@@ -350,7 +350,7 @@ export function Recruiter() {
 
       <div className="card">
         <div className="small">Answer as anonymous</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
           Toggle on to answer community questions with your real thoughts — shown as “Recruiter · TravelMed” with no name.
         </p>
         <Attrib id="ashleyAnon" />
@@ -411,7 +411,7 @@ export function Mentor() {
 
       <div className="card dew">
         <div className="small">Ban from social, keep job access</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
           Trolls lose posting and commenting — the troll badge is real — but they keep the app for job search. The community stays clean without losing the candidate.
         </p>
         <Attrib id="harpsterBan" />
@@ -467,7 +467,7 @@ export function Graph() {
         <div className="small">
           {active ? `${active.label}` : "You're 2 connections from Brandy"}
         </div>
-        <p className="small" style={{ marginTop: 4, color: "var(--plum-soft)" }}>
+        <p className="small" style={{ marginTop: 4, color: "var(--fg2)" }}>
           {active ? active.sub : "You → Ashley H. (booked you, Feb '26) → Brandy P. Ashley staffed 57 travelers; every one is a path into the graph."}
         </p>
       </div>

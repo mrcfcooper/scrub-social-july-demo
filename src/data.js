@@ -312,7 +312,9 @@ export const FEED = {
   ],
   meetup: {
     title: "San Diego travelers happy hour",
-    detail: "Thu 7pm · Ocean Beach Brewery · 14 going",
+    day: "THU",
+    time: "7pm",
+    detail: "Ocean Beach Brewery · 14 going",
     sub: "Posted in San Diego Travelers · TravCon crew welcome",
   },
   roommate: {

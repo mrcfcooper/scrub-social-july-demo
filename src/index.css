@@ -258,8 +258,27 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 .btn.bubble { border-radius: 9999px 9999px 9999px 6px; }
 .btn:focus-visible, .tab:focus-visible, .persona-chip:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 
+/* Erin suggestion chips — white pills on her plum card */
+.chip-btn {
+  border: none; cursor: pointer; font-family: inherit;
+  font-size: 12.5px; font-weight: 400; color: var(--plum);
+  background: var(--cloud); border-radius: var(--r-pill);
+  padding: 8px 13px;
+}
+
+/* Event date tile — plum, squared bottom-left */
+.date-tile {
+  width: 52px; height: 52px; border-radius: 14px 14px 14px 0;
+  background: var(--plum); color: var(--air);
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1px; flex: none;
+}
+.date-tile span { font-size: 9px; letter-spacing: 0.1em; opacity: 0.75; }
+.date-tile b { font-size: 14px; font-weight: 400; letter-spacing: -0.01em; }
+
 /* Tabs — chip strip; active = plum-filled */
 .tabs { display: flex; gap: 6px; margin-top: 14px; overflow-x: auto; scrollbar-width: none; }
+.tabs .attrib-mini { margin-top: 0; margin-left: auto; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
   font-family: inherit; font-size: 13px; font-weight: 400; white-space: nowrap;
