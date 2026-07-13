@@ -12,7 +12,7 @@ export function Diary() {
       <div className="card">
         <div className="eyebrow">Assignment diary</div>
         <div className="row" style={{ marginTop: 8 }}>
-          <Avatar initials="MC" color="#82ABF4" size="lg" />
+          <Avatar initials="MC" color="#CEDBFE" size="lg" />
           <div>
             <div className="small" style={{ fontWeight: 600 }}>{d.author} · {d.authorRole}</div>
             <div className="muted">{d.facility} · {d.city}</div>
@@ -152,7 +152,7 @@ export function Recruiter() {
     <div>
       <div className="card">
         <div className="row">
-          <Avatar initials="AH" color="#BBAFEF" size="lg" />
+          <Avatar initials="AH" color="#82ABF4" size="lg" />
           <div className="grow">
             <div style={{ fontWeight: 600, fontSize: 16 }}>{r.name}</div>
             <div className="muted">{r.agency} · {r.years} years</div>
@@ -226,7 +226,7 @@ export function Mentor() {
     <div>
       <div className="card plum">
         <div className="row">
-          <Avatar initials="BP" color="#BBAFEF" size="lg" />
+          <Avatar initials="BP" color="#F9F2E8" size="lg" />
           <div className="grow">
             <div style={{ fontWeight: 600, fontSize: 16 }}>{m.name} <span className="verified">✓</span></div>
             <div style={{ fontSize: 12, color: "var(--dew)" }}>{m.title} · {m.years}</div>

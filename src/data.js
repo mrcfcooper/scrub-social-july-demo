@@ -5,12 +5,12 @@
 
 export const PERSONAS = {
   traveler: {
-    id: "charles",
-    name: "Charles Rivera",
-    handle: "@charles_icu",
+    id: "suzie",
+    name: "Suzie Marin",
+    handle: "@suzie_icu",
     role: "Travel Nurse · ICU",
-    initials: "CR",
-    color: "#82ABF4",
+    initials: "SM",
+    color: "#CEDBFE",
     status: "Traveling",
     trust: 96,
     completion: 80,
@@ -21,7 +21,7 @@ export const PERSONAS = {
     handle: "@ashley_recruits",
     role: "Recruiter · TravelMed Staffing",
     initials: "AH",
-    color: "#BBAFEF",
+    color: "#82ABF4",
     status: "Booking now",
     trust: 98,
     completion: 100,
@@ -123,7 +123,7 @@ export const FACILITY = {
       askedBy: "Jordan R. · ER Traveler",
       answers: [
         {
-          by: "Charles Rivera",
+          by: "Suzie Marin",
           text: "Ocean Beach — whole neighborhood is dog people. My complex (Seaside Flats) took my lab with no breed limit. Dog beach is 10 minutes from the unit.",
           helpful: 18,
         },
@@ -336,10 +336,10 @@ export const MENTOR = {
 
 export const GRAPH = {
   nodes: [
-    { id: "you", label: "You", sub: "Charles Rivera", x: 50, y: 320, tone: "#82ABF4" },
-    { id: "ashley", label: "Ashley H.", sub: "Recruiter · booked you, Feb '26", x: 165, y: 200, tone: "#BBAFEF" },
-    { id: "pv", label: "Pacific View", sub: "Facility · 42 members worked here", x: 175, y: 390, tone: "#CEDBFE" },
-    { id: "maya", label: "Maya C.", sub: "Traveler · same unit, spring '26", x: 290, y: 300, tone: "#82ABF4" },
+    { id: "you", label: "You", sub: "Suzie Marin", x: 50, y: 320, tone: "#CEDBFE" },
+    { id: "ashley", label: "Ashley H.", sub: "Recruiter · booked you, Feb '26", x: 165, y: 200, tone: "#82ABF4" },
+    { id: "pv", label: "Pacific View", sub: "Facility · 42 members worked here", x: 175, y: 390, tone: "#F9F2E8" },
+    { id: "maya", label: "Maya C.", sub: "Traveler · same unit, spring '26", x: 290, y: 300, tone: "#CEDBFE" },
     { id: "brandy", label: "Brandy P.", sub: "Founding Nurse Advisor", x: 395, y: 180, tone: "#421A31" },
   ],
   edges: [

@@ -29,7 +29,7 @@ export function Feed() {
       {/* Erin prompt slot, injected between cards */}
       <div className="card plum">
         <div className="row">
-          <Avatar initials="E" color="#82ABF4" />
+          <Avatar initials="E" color="#BBAFEF" />
           <div className="grow">
             <div className="small" style={{ fontWeight: 600 }}>Erin</div>
             <div style={{ fontSize: 12, color: "var(--dew)" }}>Your AI assistant · suggestion</div>

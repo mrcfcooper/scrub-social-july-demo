@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { PERSONAS } from "./data";
 import { Avatar } from "./ui";
+import { Icon, Logomark } from "./icons";
 import { Feed, Jobs, JobDetail, Facility } from "./screens";
 import { Diary, Profile, Recruiter, Mentor, Graph, Guide } from "./screens2";
 
@@ -22,10 +23,14 @@ function Header({ persona, setPersona }) {
   return (
     <header className="top">
       <div className="top-row">
-        <div className="wordmark">Scrub Society <span>Social</span></div>
+        <div className="wordmark">
+          <Logomark size={20} color="var(--air)" />
+          Scrub Society <span>Social</span>
+        </div>
         <button className="persona-chip" onClick={() => setOpen(!open)} aria-expanded={open}>
           <Avatar initials={p.initials} color={p.color} dark={p.color === "#421A31"} />
-          {p.name.split(" ")[0]} ▾
+          {p.name.split(" ")[0]}
+          <Icon name="chevron-down" size={14} />
         </button>
       </div>
       {open && (
@@ -48,15 +53,15 @@ function Header({ persona, setPersona }) {
 function Nav({ persona }) {
   const items =
     persona === "recruiter"
-      ? [["/recruiter", "👤", "My profile"], ["/", "🏠", "Feed"], ["/jobs", "💼", "Jobs"], ["/graph", "🕸️", "Graph"], ["/guide", "🎬", "Guide"]]
+      ? [["/recruiter", "user", "My profile"], ["/", "home", "Feed"], ["/jobs", "briefcase", "Jobs"], ["/graph", "share-2", "Graph"], ["/guide", "film", "Guide"]]
       : persona === "mentor"
-        ? [["/mentor", "🧭", "Mentor"], ["/", "🏠", "Feed"], ["/facility/pacific-view", "🏥", "Facilities"], ["/graph", "🕸️", "Graph"], ["/guide", "🎬", "Guide"]]
-        : [["/", "🏠", "Feed"], ["/jobs", "💼", "Jobs"], ["/diary", "📓", "Diary"], ["/profile", "👤", "Profile"], ["/guide", "🎬", "Guide"]];
+        ? [["/mentor", "compass", "Mentor"], ["/", "home", "Feed"], ["/facility/pacific-view", "building", "Facilities"], ["/graph", "share-2", "Graph"], ["/guide", "film", "Guide"]]
+        : [["/", "home", "Feed"], ["/jobs", "briefcase", "Jobs"], ["/diary", "book-open", "Diary"], ["/profile", "user", "Profile"], ["/guide", "film", "Guide"]];
   return (
     <nav className="nav">
       {items.map(([to, ico, label]) => (
         <NavLink key={to} to={to} className={({ isActive }) => (isActive ? "on" : "")} end={to === "/"}>
-          <span className="ico" aria-hidden="true">{ico}</span>
+          <Icon name={ico} size={20} />
           {label}
         </NavLink>
       ))}
@@ -70,7 +75,8 @@ function MentorFab() {
   if (loc.pathname === "/mentor") return null;
   return (
     <button className="mentor-fab" onClick={() => nav("/mentor")}>
-      🧭 Get a mentor
+      <Icon name="compass" size={16} />
+      Get a mentor
     </button>
   );
 }
