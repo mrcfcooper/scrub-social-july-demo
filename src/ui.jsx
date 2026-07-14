@@ -89,7 +89,23 @@ export function Stars({ n, size = 14 }) {
   );
 }
 
+// Bottom sheet — scrim + card pinned to the shell's width
+export function Sheet({ open, onClose, label, children }) {
+  if (!open) return null;
+  return (
+    <>
+      <div className="sheet-scrim" onClick={onClose} />
+      <div className="sheet" role="dialog" aria-modal="true" aria-label={label}>
+        {children}
+      </div>
+    </>
+  );
+}
+
 export function Post({ p }) {
+  const [reacted, setReacted] = useState([]);
+  const toggle = (label) =>
+    setReacted((r) => (r.includes(label) ? r.filter((x) => x !== label) : [...r, label]));
   return (
     <article className="card">
       <div className="row">
@@ -125,9 +141,14 @@ export function Post({ p }) {
         />
       )}
       <div className="rxn">
-        {p.reactions.map((r) => (
-          <span key={r.label}><Icon name={r.icon} size={13} /> {r.label} {r.n}</span>
-        ))}
+        {p.reactions.map((r) => {
+          const on = reacted.includes(r.label);
+          return (
+            <button key={r.label} className={on ? "on" : ""} aria-pressed={on} onClick={() => toggle(r.label)}>
+              <Icon name={r.icon} size={13} /> {r.label} {r.n + (on ? 1 : 0)}
+            </button>
+          );
+        })}
         <span><Icon name="message-circle" size={13} /> {p.comments}</span>
       </div>
       {p.attrib && <Attrib id={p.attrib} />}

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap');
+/* Outfit is self-hosted via @fontsource/outfit (imported in main.jsx) so the
+   demo's brand face doesn't depend on venue wifi. */
 
 /* ── Scrub Society tokens — matched to references/demo-designs/clean kit ──
    Paper-flat system: white cards on cream canvas, delineated by a 1px inset
@@ -60,7 +61,7 @@ body {
   box-shadow: 0 0 60px rgba(66, 26, 49, 0.18);
 }
 
-.screen { flex: 1; overflow-y: auto; padding: 0 16px 130px; }
+.screen { flex: 1; overflow-y: auto; padding: 0 16px 176px; }
 
 /* ── Type — headlines 400 with tight tracking, never bold ── */
 h1, h2, h3 { font-weight: 400; }
@@ -464,12 +465,65 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 }
 .mentor-fab svg { color: var(--lavender); }
 
-/* Reactions */
+/* Reactions — tappable, lavender selected state */
 .rxn { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.rxn span {
+.rxn span, .rxn button {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 12px; font-weight: 400; color: var(--plum);
   background: var(--air); border-radius: var(--r-pill); padding: 4px 10px;
+  border: none; font-family: inherit;
+}
+.rxn button { cursor: pointer; }
+.rxn button.on { background: #ece8fb; box-shadow: inset 0 0 0 1.5px var(--lavender); }
+
+/* Bottom sheet */
+.sheet-scrim { position: fixed; inset: 0; z-index: 50; background: rgba(43, 18, 32, 0.45); }
+.sheet {
+  position: fixed; z-index: 51; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  background: var(--cloud);
+  border-radius: 24px 24px 0 0;
+  box-shadow: var(--shadow-pop);
+  padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+}
+
+/* Scrapbook lightbox */
+.frame-btn { border: none; background: none; padding: 0; cursor: pointer; display: block; font-family: inherit; }
+.frame-btn .photo-frame { width: 100%; }
+.frame-btn:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; border-radius: var(--r-photo); }
+.lightbox {
+  position: fixed; inset: 0; z-index: 60;
+  background: rgba(43, 18, 32, 0.88);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; cursor: pointer;
+}
+
+/* Switch (anonymous-answer toggle) */
+.switch {
+  width: 44px; height: 26px; border-radius: var(--r-pill); flex: none;
+  border: none; cursor: pointer; padding: 3px;
+  background: rgba(66, 26, 49, 0.15);
+  display: flex; justify-content: flex-start;
+  transition: background 160ms ease;
+}
+.switch.on { background: var(--lavender); justify-content: flex-end; }
+.switch .knob {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--cloud); box-shadow: 0 1px 3px rgba(66, 26, 49, 0.3);
+}
+
+/* Demo-honest inline note (on plum cards) */
+.demo-note-inline {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 10px; padding: 10px 12px;
+  background: rgba(249, 242, 232, 0.12); border-radius: 12px;
+  font-size: 12.5px; color: var(--air); text-align: left;
+}
+.demo-note-inline svg { color: var(--lavender); flex: none; margin-top: 1px; }
+.demo-note-inline .dismiss {
+  border: none; background: none; cursor: pointer; padding: 0;
+  color: rgba(249, 242, 232, 0.7); flex: none;
 }
 
 /* Q&A — answers are voice: bubble squared toward the speaker */
@@ -543,7 +597,8 @@ textarea.compose:disabled { background: var(--air); color: var(--fg3); }
 /* Graph */
 .graph-wrap { margin-top: 12px; background: var(--cloud); border-radius: var(--r-card); box-shadow: var(--hairline); padding: 10px; }
 .graph-svg { width: 100%; height: auto; display: block; }
-.gnode { cursor: pointer; }
+.gnode { cursor: pointer; outline: none; }
+.gnode:focus-visible > circle:first-child { stroke: var(--sky); stroke-width: 2; }
 
 /* Pins — squared-bottom-left state tiles */
 .pin {

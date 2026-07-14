@@ -60,6 +60,7 @@ export const ATTRIB = {
   rachel: { who: "Rachel", quote: "My big, big dream… a diary for each assignment." },
   rachelSplit: { who: "Rachel", quote: "I don't want real questions to get lost because a funny meme was in the feed." },
   rachelTop8: { who: "Rachel", quote: "Like MySpace with their top eight, but it can be a recruiter or anything." },
+  rachelTopContrib: { who: "Rachel", quote: "There is like the top contributor of the week… group expert, points for commenting." },
   rachelMadFace: { who: "Rachel", quote: "If you put a mad face, it won't let you fill in the comment box." },
   brandyTesting: { who: "Brandy", quote: "I feel like I'm blindsided by testing at these facilities that no one told me about." },
   brandyMentor: { who: "Brandy", quote: "If they need a mentor, let's put it in their face. Don't make them search for it." },
@@ -364,7 +365,7 @@ export const MENTOR = {
   queue: [
     { text: "Facility review · Sunrise Regional · 4/5 'Charge nurses actually help…'", status: "approved" },
     { text: "Comment · auto-rejected · profanity filter", status: "auto" },
-    { text: "Pay report · $3,290/wk ER · awaiting verification", status: "pending" },
+    { text: "Pay report · $2,950/wk Tele · awaiting verification", status: "pending" },
   ],
 };
 
