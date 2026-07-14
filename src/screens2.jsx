@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DIARY, JOBS, RECRUITER, MENTOR, GRAPH, BADGES, PINS, TOP8, GUIDE, PERSONAS } from "./data";
 import { Attrib, Avatar, PhotoFrame, Sect, Stars } from "./ui";
 import { Icon, Logomark } from "./icons";
+import speechBubbleUrl from "./assets/speech-bubble.svg";
 
 // ─── Assignment Diary (Rachel's dream, built to spec) ───────────────────────
 export function Diary() {
@@ -322,8 +323,10 @@ export function Recruiter() {
           <span className="pill sky"><Icon name="users" size={13} /> booked {r.booked} travelers</span>
           <span className="pill"><Icon name="compass" size={13} /> Recommended by {r.recommendedBy.join(", ")}</span>
         </div>
-        <Attrib id="ashleyHuman" />
-        <Attrib id="ashleyRecs" />
+        <div className="attrib-row">
+          <Attrib id="ashleyHuman" />
+          <Attrib id="ashleyRecs" />
+        </div>
       </div>
 
       <Sect title="Reviews" />
@@ -479,7 +482,7 @@ export function Graph() {
                 fill={n.tone === "#421A31" ? "#F9F2E8" : "#421A31"}>
                 {n.label.split(" ")[0]}
               </text>
-              <text x={n.x + 34} y={n.y + 48} textAnchor="middle" fontSize="10" fill="#8a7383">
+              <text x={n.x + 34} y={n.y + 48} textAnchor="middle" fontSize="10" fill="rgba(66, 26, 49, 0.55)">
                 {n.label}
               </text>
             </g>
@@ -499,10 +502,10 @@ export function Graph() {
   );
 }
 
-// ─── Demo guide ──────────────────────────────────────────────────────────────
+// ─── Demo guide — the complete attribution reference, full quotes ────────────
 export function Guide() {
   return (
-    <div>
+    <div className="guide">
       <div className="card plum">
         <span className="watermark"><Logomark size={150} color="var(--lavender)" /></span>
         <div className="eyebrow" style={{ color: "var(--lavender)" }}>The one-line demo script</div>
@@ -513,18 +516,22 @@ export function Guide() {
           Every feature carries a chip citing who asked for it on the workshop call. Walk the loop: Feed → Job → Facility hub → Q&A → Diary → switch personas.
         </p>
       </div>
-      {GUIDE.map((g, i) => (
-        <Link key={i} to={g.route} className="linkless">
-          <div className="card">
-            <div className="between">
-              <span className="pill solid">{g.who}</span>
-              <span className="muted">{g.see} →</span>
-            </div>
-            <p className="small" style={{ marginTop: 8, lineHeight: 1.4 }}>{g.asked}</p>
-          </div>
-        </Link>
+
+      <img className="bubble-banner" src={speechBubbleUrl} alt="" />
+
+      {GUIDE.map((g) => (
+        <section key={g.who}>
+          <Sect title={g.who} sub={`${g.items.length} ask${g.items.length > 1 ? "s" : ""}`} />
+          {g.items.map((item) => (
+            <Link key={item.id} to={item.route} className="linkless">
+              <Attrib id={item.id} full />
+              <div className="subtext guide-see">see: {item.see} →</div>
+            </Link>
+          ))}
+        </section>
       ))}
-      <div className="muted" style={{ marginTop: 14, textAlign: "center" }}>
+
+      <div className="muted" style={{ marginTop: 16, textAlign: "center" }}>
         Prototype · seeded demo data · no real users, auth, or PHI
       </div>
     </div>

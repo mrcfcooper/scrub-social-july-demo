@@ -414,9 +414,11 @@ function ReviewComposer() {
       <button className="btn block" style={{ marginTop: 12 }} disabled={!mood}>
         Submit for review
       </button>
-      <Attrib id="rachelMadFace" />
-      <Attrib id="amberModRule" />
-      <Attrib id="cooperStructured" />
+      <div className="attrib-row">
+        <Attrib id="rachelMadFace" />
+        <Attrib id="amberModRule" />
+        <Attrib id="cooperStructured" />
+      </div>
     </div>
   );
 }

@@ -408,14 +408,48 @@ export const TOP8 = [
   { k: "Beach", v: "Ocean Beach", icon: "paw-print" },
 ];
 
+// The complete reference list: every attribution in the demo, grouped by
+// asker, with where to see it built. The Guide renders these as full quotes.
 export const GUIDE = [
-  { who: "Rachel", asked: "An assignment diary — facility, recruiter, agency ratings, the Yelp layer, photos, jobs at the bottom", see: "Diary tab", route: "/diary" },
-  { who: "Rachel", asked: "Keep real questions separate from fun content", see: "Feed → Questions / Lounge tabs", route: "/" },
-  { who: "Rachel", asked: "Mad face locks the comment box", see: "Facility → Write a review", route: "/facility/pacific-view" },
-  { who: "Brandy", asked: "Testing blindsides · mentor in their face", see: "Facility Q&A + Get a mentor button", route: "/facility/pacific-view" },
-  { who: "Ashley", asked: "Recruiters as real humans, reviews, hot jobs, anonymous answers", see: "Switch persona → Ashley", route: "/recruiter" },
-  { who: "Jenna", asked: "Dog mom / pet lover / years-traveling badges", see: "Profile badges", route: "/profile" },
-  { who: "Amber", asked: "Roommate board · no negative with a name attached", see: "Feed card + review composer rule", route: "/" },
-  { who: "Jenny", asked: "TripAdvisor for healthcare · state travel pins · completion gamification", see: "Facility hub + Profile", route: "/profile" },
-  { who: "Harpster", asked: "Trust scores, consumer mode, social ban keeps job access, 7 degrees of Brandy", see: "Profile + Graph tab", route: "/graph" },
+  { who: "Rachel", items: [
+    { id: "rachel", see: "Diary tab", route: "/diary" },
+    { id: "rachelSplit", see: "Feed → Questions / Lounge tabs", route: "/" },
+    { id: "rachelMadFace", see: "Facility → Write a review", route: "/facility/pacific-view" },
+    { id: "rachelTop8", see: "Profile → My top 8", route: "/profile" },
+  ]},
+  { who: "Brandy", items: [
+    { id: "brandyTesting", see: "Facility Q&A, first question", route: "/facility/pacific-view" },
+    { id: "brandyMentor", see: "The Get-a-mentor button, every screen", route: "/mentor" },
+    { id: "brandyMod", see: "Mentor → Moderation queue", route: "/mentor" },
+    { id: "brandyHistory", see: "Mentor → Contribution history", route: "/mentor" },
+  ]},
+  { who: "Ashley", items: [
+    { id: "ashleyHuman", see: "Switch persona → Ashley", route: "/recruiter" },
+    { id: "ashleyReviews", see: "Recruiter → Reviews + hottest jobs", route: "/recruiter" },
+    { id: "ashleyRecs", see: "Recruiter → Recommended by", route: "/recruiter" },
+    { id: "ashleyAnon", see: "Recruiter → Answer as anonymous + Facility Q&A", route: "/recruiter" },
+    { id: "ashleyYeti", see: "Recruiter → Ambassador rewards", route: "/recruiter" },
+  ]},
+  { who: "Jenna", items: [
+    { id: "jennaBadges", see: "Profile → Badges", route: "/profile" },
+  ]},
+  { who: "Amber", items: [
+    { id: "amberRoommate", see: "Feed → Roommate board", route: "/" },
+    { id: "amberModRule", see: "Facility → Write a review", route: "/facility/pacific-view" },
+  ]},
+  { who: "Jenny", items: [
+    { id: "jennyTrip", see: "Job detail → What the Society knows", route: "/jobs/j1" },
+    { id: "jennyPins", see: "Profile → Where I've been", route: "/profile" },
+    { id: "jennyComplete", see: "Profile → Profile strength", route: "/profile" },
+  ]},
+  { who: "Harpster", items: [
+    { id: "harpsterTrust", see: "Profile → trust chips", route: "/profile" },
+    { id: "harpsterCreeper", see: "Profile → consumer mode", route: "/profile" },
+    { id: "harpsterBan", see: "Mentor → Ban from social", route: "/mentor" },
+    { id: "harpsterGraph", see: "Graph tab", route: "/graph" },
+    { id: "harpsterSelfie", see: "Feed → The lounge, selfie challenge", route: "/" },
+  ]},
+  { who: "Cooper", items: [
+    { id: "cooperStructured", see: "Diary → Log this assignment + review composer", route: "/diary" },
+  ]},
 ];
