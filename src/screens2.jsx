@@ -44,8 +44,9 @@ function DiaryLog() {
         <span className="seal"><Icon name="check" size={38} strokeWidth={2.5} /></span>
         <h3 style={{ marginTop: 16 }}>Saved to your diary.</h3>
         <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
-          You're the 43rd member to log Pacific View — structured answers feed
-          the facility hub, so the next traveler isn't blindsided.
+          Your diary joins {JOBS[0].social.diaries} others for Pacific View —
+          structured answers feed the facility hub, so the next traveler isn't
+          blindsided.
         </p>
         <button className="btn ghost sm" style={{ marginTop: 16 }} onClick={() => setDone(false)}>
           Log another entry
@@ -136,6 +137,7 @@ function DiaryLog() {
 function DiaryRead() {
   const d = DIARY;
   const job = JOBS.find((j) => d.jobsBelow.includes(j.id));
+  const [lightbox, setLightbox] = useState(null);
   return (
     <div>
       <div className="card">
@@ -162,16 +164,37 @@ function DiaryRead() {
       <Sect title="The scrapbook" sub="tap to view" />
       <div className="wrap" style={{ marginTop: 4 }}>
         {d.photos.map((p) => (
-          <PhotoFrame
+          <button
             key={p.label}
-            photo={p.key}
-            tone={p.tone}
-            label={p.label}
-            height={110}
-            style={{ flex: "1 1 45%", marginTop: 0 }}
-          />
+            className="frame-btn"
+            style={{ flex: "1 1 45%" }}
+            onClick={() => setLightbox(p)}
+            aria-label={`View ${p.label}`}
+          >
+            <PhotoFrame photo={p.key} tone={p.tone} label={p.label} height={110} style={{ marginTop: 0 }} />
+          </button>
         ))}
       </div>
+      {lightbox && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.label}
+          onClick={() => setLightbox(null)}
+        >
+          <PhotoFrame
+            photo={lightbox.key}
+            tone={lightbox.tone}
+            label={lightbox.label}
+            height={300}
+            style={{ width: "100%", maxWidth: 380, marginTop: 0 }}
+          />
+          <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.85)", marginTop: 12 }}>
+            tap anywhere to close
+          </div>
+        </div>
+      )}
 
       <Sect title="The Yelp side of it" />
       {d.yelp.map((y) => (
@@ -273,7 +296,7 @@ export function Profile() {
       <div className="card">
         <div className="meter"><i style={{ width: `${p.completion}%` }} /></div>
         <p className="small" style={{ marginTop: 10, color: "var(--fg2)" }}>
-          Add one professional reference to hit 100% and earn the <b>Society Founder</b> badge. Built from your resume — you've worked 8 cities, 12 hospitals, 7 states. We filled that in for you.
+          Add one professional reference to hit 100% and earn the <b>Society Founder</b> badge. Built from your resume — you've worked 8 cities, 12 hospitals, {PINS.length} states. We filled that in for you.
         </p>
         <Attrib id="jennyComplete" />
       </div>
@@ -368,13 +391,38 @@ export function Recruiter() {
         <Attrib id="ashleyYeti" />
       </div>
 
-      <div className="card">
+      <AnonToggleCard />
+    </div>
+  );
+}
+
+function AnonToggleCard() {
+  const [anon, setAnon] = useState(false);
+  return (
+    <div className="card">
+      <div className="between">
         <div className="small">Answer as anonymous</div>
-        <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
-          Toggle on to answer community questions with your real thoughts — shown as “Recruiter · TravelMed” with no name.
-        </p>
-        <Attrib id="ashleyAnon" />
+        <button
+          className={`switch ${anon ? "on" : ""}`}
+          role="switch"
+          aria-checked={anon}
+          aria-label="Answer as anonymous"
+          onClick={() => setAnon(!anon)}
+        >
+          <span className="knob" />
+        </button>
       </div>
+      <p className="small" style={{ marginTop: 6, color: "var(--fg2)" }}>
+        Toggle on to answer community questions with your real thoughts — shown as “Recruiter · TravelMed” with no name.
+      </p>
+      <div className="row" style={{ marginTop: 12 }}>
+        <Avatar initials={anon ? "?" : "AH"} color={anon ? "#CEDBFE" : "#82ABF4"} />
+        <div>
+          <div className="small">{anon ? "Recruiter · TravelMed" : "Ashley H."}</div>
+          <div className="subtext">how your answers appear</div>
+        </div>
+      </div>
+      <Attrib id="ashleyAnon" />
     </div>
   );
 }
@@ -420,19 +468,7 @@ export function Mentor() {
       <div className="stack"><Attrib id="brandyHistory" /></div>
 
       <Sect title="Moderation queue" sub="bam, bam, bam" />
-      {m.queue.map((q, i) => (
-        <div key={i} className="card between">
-          <span className="small grow" style={{ lineHeight: 1.4 }}>{q.text}</span>
-          {q.status === "approved" && <span className="pill sky"><Icon name="check" size={13} /> approved</span>}
-          {q.status === "auto" && <span className="pill solid"><Icon name="bot" size={13} /> auto</span>}
-          {q.status === "pending" && (
-            <span className="row">
-              <button className="btn sm" aria-label="Approve"><Icon name="check" size={14} /></button>
-              <button className="btn sm ghost" aria-label="Decline"><Icon name="x" size={14} /></button>
-            </span>
-          )}
-        </div>
-      ))}
+      <ModQueue initial={m.queue} />
       <div className="stack"><Attrib id="brandyMod" /></div>
 
       <div className="card dew">
@@ -443,6 +479,35 @@ export function Mentor() {
         <Attrib id="harpsterBan" />
       </div>
     </div>
+  );
+}
+
+// Approve/Decline update the row locally — mock moderation, no persistence
+function ModQueue({ initial }) {
+  const [queue, setQueue] = useState(initial);
+  const setStatus = (i, status) =>
+    setQueue((q) => q.map((x, ix) => (ix === i ? { ...x, status } : x)));
+  return (
+    <>
+      {queue.map((q, i) => (
+        <div key={i} className="card between">
+          <span className="small grow" style={{ lineHeight: 1.4 }}>{q.text}</span>
+          {q.status === "approved" && <span className="pill sky"><Icon name="check" size={13} /> approved</span>}
+          {q.status === "declined" && <span className="pill outline"><Icon name="x" size={13} /> declined</span>}
+          {q.status === "auto" && <span className="pill solid"><Icon name="bot" size={13} /> auto</span>}
+          {q.status === "pending" && (
+            <span className="row">
+              <button className="btn sm" aria-label="Approve" onClick={() => setStatus(i, "approved")}>
+                <Icon name="check" size={14} />
+              </button>
+              <button className="btn sm ghost" aria-label="Decline" onClick={() => setStatus(i, "declined")}>
+                <Icon name="x" size={14} />
+              </button>
+            </span>
+          )}
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -474,7 +539,21 @@ export function Graph() {
             );
           })}
           {g.nodes.map((n) => (
-            <g key={n.id} className="gnode" onClick={() => setActive(n)}>
+            <g
+              key={n.id}
+              className="gnode"
+              role="button"
+              tabIndex={0}
+              aria-label={`${n.label} — ${n.sub}`}
+              onClick={() => setActive(n)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setActive(n);
+                }
+              }}
+            >
+              <circle cx={n.x + 34} cy={n.y} r={36} fill="transparent" />
               <circle cx={n.x + 34} cy={n.y} r={onPath(n.id) ? 32 : 26}
                 fill={n.tone} stroke={active?.id === n.id ? "#421A31" : "white"} strokeWidth="3" />
               <text x={n.x + 34} y={n.y + 4} textAnchor="middle"

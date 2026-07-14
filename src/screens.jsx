@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FEED, JOBS, FACILITY } from "./data";
-import { Attrib, Avatar, Headline, PhotoFrame, Post, ScoreRing, photoUrl } from "./ui";
+import { Attrib, Avatar, Headline, PhotoFrame, Post, ScoreRing, Sheet, photoUrl } from "./ui";
 import { Icon, Logomark } from "./icons";
 
 const initialsOf = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("");
@@ -15,9 +15,49 @@ function MetaTile({ label, value }) {
   );
 }
 
+// "Ask someone who worked here" — mock sheet; nothing is posted in the demo
+function AskSheet({ open, onClose, facility, askable }) {
+  const [sent, setSent] = useState(false);
+  const close = () => {
+    onClose();
+    setSent(false);
+  };
+  return (
+    <Sheet open={open} onClose={close} label="Ask someone who worked here">
+      {sent ? (
+        <div style={{ textAlign: "center", padding: "8px 0 4px" }}>
+          <span className="seal" style={{ width: 64, height: 64 }}>
+            <Icon name="check" size={26} strokeWidth={2.5} />
+          </span>
+          <h3 style={{ marginTop: 12 }}>Question posted.</h3>
+          <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
+            Answers usually land within a day — we'll nudge you when the first one does.
+          </p>
+          <button className="btn block" style={{ marginTop: 14 }} onClick={close}>Done</button>
+        </div>
+      ) : (
+        <>
+          <h3>Ask someone who worked here</h3>
+          <div className="subtext" style={{ marginTop: 4 }}>
+            {askable} members and 1 mentor can answer
+          </div>
+          <textarea
+            className="compose"
+            placeholder={`What do you want to know about ${facility}?`}
+          />
+          <button className="btn block bubble" style={{ marginTop: 12 }} onClick={() => setSent(true)}>
+            <Icon name="send" size={15} /> Post question
+          </button>
+        </>
+      )}
+    </Sheet>
+  );
+}
+
 // ─── Feed ────────────────────────────────────────────────────────────────────
 export function Feed() {
   const [tab, setTab] = useState("questions");
+  const [going, setGoing] = useState(false);
   const nav = useNavigate();
   const posts = tab === "questions" ? FEED.questions : FEED.lounge;
   return (
@@ -51,6 +91,21 @@ export function Feed() {
         </div>
       </div>
 
+      {/* Top contributor — Rachel's Facebook-group ask */}
+      <div className="card">
+        <Link to="/mentor" className="linkless">
+          <div className="row" style={{ gap: 12, alignItems: "center" }}>
+            <span className="icon-well sm"><Icon name="award" size={14} /></span>
+            <div className="grow">
+              <div className="small">Top contributor this week: Brandy P.</div>
+              <div className="subtext">14 helpful answers</div>
+            </div>
+            <Icon name="chevron-right" size={16} style={{ color: "var(--fg3)" }} />
+          </div>
+        </Link>
+        <Attrib id="rachelTopContrib" />
+      </div>
+
       {posts.slice(1).map((p) => <Post key={p.id} p={p} />)}
 
       {/* Meetups board */}
@@ -67,8 +122,8 @@ export function Feed() {
             <div className="subtext" style={{ marginTop: 2 }}>{FEED.meetup.sub}</div>
           </div>
         </div>
-        <button className="btn sm" style={{ marginTop: 12 }}>
-          <Icon name="users" size={14} /> I'm going
+        <button className={`btn sm ${going ? "accent" : ""}`} style={{ marginTop: 12 }} onClick={() => setGoing(!going)} aria-pressed={going}>
+          <Icon name={going ? "check" : "users"} size={14} /> {going ? "You're going · 15" : "I'm going"}
         </button>
       </div>
 
@@ -164,6 +219,8 @@ function Tile({ icon, label, value }) {
 
 export function JobDetail({ id }) {
   const nav = useNavigate();
+  const [applyNote, setApplyNote] = useState(false);
+  const [askOpen, setAskOpen] = useState(false);
   const j = JOBS.find((x) => x.id === id) || JOBS[0];
   return (
     <div>
@@ -192,7 +249,18 @@ export function JobDetail({ id }) {
           <span style={{ fontSize: 30, letterSpacing: "-0.03em", lineHeight: 1 }}>{j.weekly.replace("/wk", "")}</span>
           <span className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)" }}>per wk</span>
         </div>
-        <button className="btn accent block bubble" style={{ marginTop: 16 }}>Quick apply</button>
+        <button className="btn accent block bubble" style={{ marginTop: 16 }} onClick={() => setApplyNote(true)}>
+          Quick apply
+        </button>
+        {applyNote && (
+          <div className="demo-note-inline" role="status">
+            <Icon name="sparkles" size={14} />
+            <span className="grow">In production this hands off to the existing Scrub Society apply flow.</span>
+            <button className="dismiss" aria-label="Dismiss" onClick={() => setApplyNote(false)}>
+              <Icon name="x" size={14} />
+            </button>
+          </div>
+        )}
         <div className="subtext" style={{ color: "rgba(249, 242, 232, 0.72)", marginTop: 10, textAlign: "center" }}>
           recruiter {j.recruiter.toLowerCase()} · replies in ~2h
         </div>
@@ -217,11 +285,22 @@ export function JobDetail({ id }) {
             <button className="btn block" style={{ marginTop: 14 }}>Open the facility hub</button>
           </Link>
         ) : (
-          <button className="btn block ghost" style={{ marginTop: 14 }}>Facility hub (demo: see Pacific View)</button>
+          <Link to="/facility/pacific-view" className="linkless">
+            <button className="btn block ghost" style={{ marginTop: 14 }}>See a facility hub (demo shows Pacific View)</button>
+          </Link>
         )}
-        <button className="btn block ghost" style={{ marginTop: 8 }}>Ask someone who worked here</button>
+        <button className="btn block ghost" style={{ marginTop: 8 }} onClick={() => setAskOpen(true)}>
+          Ask someone who worked here
+        </button>
         <Attrib id="jennyTrip" />
       </div>
+
+      <AskSheet
+        open={askOpen}
+        onClose={() => setAskOpen(false)}
+        facility={j.facility}
+        askable={FACILITY.askable}
+      />
     </div>
   );
 }
@@ -229,6 +308,8 @@ export function JobDetail({ id }) {
 // ─── Facility hub ────────────────────────────────────────────────────────────
 export function Facility() {
   const f = FACILITY;
+  // Canonical facility totals live on the job record (j1.social)
+  const social = JOBS.find((j) => j.facilityId === f.id)?.social;
   const [tab, setTab] = useState("qa");
   return (
     <div>
@@ -244,6 +325,8 @@ export function Facility() {
         <div className="between" style={{ marginTop: 16, alignItems: "center" }}>
           <div className="stack" style={{ minWidth: 0 }}>
             <div className="hero-meta"><Icon name="users" size={14} /> {f.workedHere} members worked here</div>
+            <div className="hero-meta"><Icon name="book-open" size={14} /> {social.diaries} assignment diaries</div>
+            <div className="hero-meta"><Icon name="message-circle" size={14} /> {social.answeredQs} questions answered</div>
             <div className="hero-meta"><Icon name="user-check" size={14} /> {f.askable} open to questions</div>
           </div>
           <div style={{ textAlign: "center", flex: "none" }}>
@@ -283,7 +366,7 @@ export function Facility() {
         ))}
       </div>
 
-      {tab === "qa" && <QATab f={f} />}
+      {tab === "qa" && <QATab f={f} answeredTotal={social.answeredQs} />}
       {tab === "pay" && <PayTab f={f} />}
       {tab === "notes" && <NotesTab f={f} />}
       {tab === "review" && <ReviewComposer />}
@@ -291,9 +374,13 @@ export function Facility() {
   );
 }
 
-function QATab({ f }) {
+function QATab({ f, answeredTotal }) {
+  const [askOpen, setAskOpen] = useState(false);
   return (
     <div>
+      <div className="subtext" style={{ marginTop: 12 }}>
+        showing {f.qa.length} of {answeredTotal} answered questions
+      </div>
       {f.qa.map((q) => (
         <div key={q.id} className="card">
           <div className="small">{q.q}</div>
@@ -326,7 +413,10 @@ function QATab({ f }) {
           {q.id === "q2" && <Attrib id="ashleyAnon" />}
         </div>
       ))}
-      <button className="btn block" style={{ marginTop: 14 }}>Ask the {f.workedHere} people who worked here</button>
+      <button className="btn block" style={{ marginTop: 14 }} onClick={() => setAskOpen(true)}>
+        Ask the {f.workedHere} people who worked here
+      </button>
+      <AskSheet open={askOpen} onClose={() => setAskOpen(false)} facility={f.name} askable={f.askable} />
     </div>
   );
 }
@@ -364,9 +454,6 @@ function NotesTab({ f }) {
           <p className="small" style={{ lineHeight: 1.45 }}>{n.text}</p>
         </div>
       ))}
-      <div className="stack card" style={{ background: "transparent", boxShadow: "none", padding: 0 }}>
-        <Attrib id="rachel" />
-      </div>
     </div>
   );
 }
@@ -375,8 +462,36 @@ function NotesTab({ f }) {
 function ReviewComposer() {
   const [mood, setMood] = useState(null);
   const [chips, setChips] = useState([]);
+  const [done, setDone] = useState(false);
   const locked = mood === "mad";
+  const canSubmit = mood && (!locked || chips.length >= 1);
   const terms = ["Supportive charge nurses", "Heavy float", "Great orientation", "Parking is rough", "Traveler-friendly", "Short-staffed nights", "Fair scheduling", "Would return"];
+  if (done) {
+    return (
+      <div className="card" style={{ textAlign: "center", padding: "28px 16px 16px" }}>
+        <span className="seal" style={{ width: 64, height: 64 }}>
+          <Icon name="check" size={26} strokeWidth={2.5} />
+        </span>
+        <h3 style={{ marginTop: 12 }}>Submitted for review.</h3>
+        <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
+          It's in the moderation queue now — a mentor approves it before it
+          publishes. Negative with a name attached is never published.
+        </p>
+        <button
+          className="btn ghost sm"
+          style={{ marginTop: 14 }}
+          onClick={() => { setDone(false); setMood(null); setChips([]); }}
+        >
+          Write another
+        </button>
+        <div className="attrib-row">
+          <Attrib id="rachelMadFace" />
+          <Attrib id="amberModRule" />
+          <Attrib id="cooperStructured" />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="card">
       <div className="small">How was your assignment here?</div>
@@ -403,6 +518,9 @@ function ReviewComposer() {
               </button>
             ))}
           </div>
+          <div className="subtext" style={{ marginTop: 8 }}>
+            {terms.length} of 50 structured terms shown · pick at least one
+          </div>
         </>
       ) : (
         <textarea
@@ -411,7 +529,7 @@ function ReviewComposer() {
           disabled={!mood}
         />
       )}
-      <button className="btn block" style={{ marginTop: 12 }} disabled={!mood}>
+      <button className="btn block" style={{ marginTop: 12 }} disabled={!canSubmit} onClick={() => setDone(true)}>
         Submit for review
       </button>
       <div className="attrib-row">

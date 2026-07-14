@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { PERSONAS } from "./data";
-import { Avatar } from "./ui";
+import { Avatar, Sheet } from "./ui";
 import { Icon, Logotype } from "./icons";
 import { Feed, Jobs, JobDetail, Facility } from "./screens";
 import { Diary, Profile, Recruiter, Mentor, Graph, Guide } from "./screens2";
@@ -69,15 +69,65 @@ function Nav({ persona }) {
   );
 }
 
+// Traveler-facing "Get a mentor" sheet — Brandy's dashboard stays behind the
+// mentor persona's own nav; this is the member's side of the ask.
 function MentorFab() {
   const loc = useLocation();
   const nav = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [sent, setSent] = useState(false);
   if (loc.pathname === "/mentor") return null;
+  const close = () => {
+    setOpen(false);
+    setSent(false);
+  };
   return (
-    <button className="mentor-fab" onClick={() => nav("/mentor")}>
-      <Icon name="compass" size={16} />
-      Get a mentor
-    </button>
+    <>
+      <button className="mentor-fab" onClick={() => setOpen(true)}>
+        <Icon name="compass" size={16} />
+        Get a mentor
+      </button>
+      <Sheet open={open} onClose={close} label="Get a mentor">
+        {sent ? (
+          <div style={{ textAlign: "center", padding: "8px 0 4px" }}>
+            <span className="seal" style={{ width: 64, height: 64 }}>
+              <Icon name="check" size={26} strokeWidth={2.5} />
+            </span>
+            <h3 style={{ marginTop: 12 }}>Request sent.</h3>
+            <p className="small" style={{ marginTop: 8, color: "var(--fg2)" }}>
+              Brandy gets your profile and your first question — most mentees
+              hear back the same day.
+            </p>
+            <button className="btn block" style={{ marginTop: 14 }} onClick={close}>Done</button>
+          </div>
+        ) : (
+          <>
+            <div className="row" style={{ gap: 12 }}>
+              <Avatar initials="BP" color="#421A31" dark size="lg" />
+              <div className="grow">
+                <div style={{ fontSize: 16 }}>Brandy P.</div>
+                <div className="subtext">founding nurse advisor · answering questions today</div>
+              </div>
+              <span className="dot" aria-hidden="true" />
+            </div>
+            <p className="small" style={{ marginTop: 12, color: "var(--fg2)" }}>
+              18 years and 30+ contracts of been-there. Brandy walks new
+              travelers through their first contract — so nothing blindsides you.
+            </p>
+            <button className="btn block bubble" style={{ marginTop: 14 }} onClick={() => setSent(true)}>
+              Request Brandy as your mentor
+            </button>
+            <button
+              className="btn block ghost sm"
+              style={{ marginTop: 8 }}
+              onClick={() => { close(); nav("/facility/pacific-view"); }}
+            >
+              See Brandy's answers
+            </button>
+          </>
+        )}
+      </Sheet>
+    </>
   );
 }
 
