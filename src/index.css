@@ -173,6 +173,11 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 }
 .card.plum .attrib-chip { background: rgba(249, 242, 232, 0.12); color: rgba(249, 242, 232, 0.85); }
 .card.dew .attrib-chip, .card.lav .attrib-chip { background: rgba(255, 255, 255, 0.55); }
+.attrib-row {
+  display: flex; justify-content: flex-end; align-items: center;
+  flex-wrap: wrap; gap: 6px; margin-top: 10px;
+}
+.attrib-row .attrib-mini { margin-top: 0; }
 .attrib-scrim { position: fixed; inset: 0; z-index: 44; }
 .attrib-pop {
   position: absolute; bottom: calc(100% + 8px); right: 0; z-index: 45;
@@ -185,6 +190,11 @@ h3 { font-size: 18px; letter-spacing: -0.03em; line-height: 1.15; }
 }
 .attrib-pop .attrib-quote { font-size: 13px; }
 .attrib-pop .subtext { color: var(--fg2); }
+
+/* Guide page — full-quote reference list */
+.guide .attrib { background: var(--cloud); }
+.guide-see { text-align: right; margin: 6px 2px 4px; }
+.bubble-banner { display: block; width: 100%; height: auto; margin-top: 14px; }
 
 /* Attribution quote callout — full variant (Guide page) */
 .attrib {
